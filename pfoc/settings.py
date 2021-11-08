@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+
+DJANGO_APP_FOC = config("DJANGO_APP_FOC")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x2_h_of%*9-s7fk$=exs-nah*26y=%0d)tmfll3d(ng&auf%4e'
+SECRET_KEY = DJANGO_APP_FOC
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+#django-insecure-x2_h_of%*9-s7fk$=exs-nah*26y=%0d)tmfll3d(ng&auf%4e
 
 # Application definition
 
