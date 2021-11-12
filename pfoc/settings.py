@@ -36,7 +36,6 @@ ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost', ]
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'main_page',
     'django.contrib.admin',
     'django.contrib.auth',
