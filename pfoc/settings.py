@@ -13,12 +13,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import dj_database_url
 
 DJANGO_APP_FOC = config("DJANGO_APP_FOC")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -29,12 +29,14 @@ SECRET_KEY = DJANGO_APP_FOC
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1"]
-#django-insecure-x2_h_of%*9-s7fk$=exs-nah*26y=%0d)tmfll3d(ng&auf%4e
+ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost', ]
+# django-insecure-x2_h_of%*9-s7fk$=exs-nah*26y=%0d)tmfll3d(ng&auf%4e
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'main_page',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,7 +48,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pfoc.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -87,7 +87,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -118,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -132,21 +132,22 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-#PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-
+MEDIA_ROT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/images/'
 
-STATICFILES_DIR = [
-os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
 ]
 
-#SMTP Configuration
+# SMTP Configuration
 #
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 # EMAIL_HOST = 'smtp.gmail.com'
