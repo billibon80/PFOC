@@ -29,7 +29,7 @@ SECRET_KEY = DJANGO_APP_FOC
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://pfocby.herokuapp.com", "127.0.0.1"]
 #django-insecure-x2_h_of%*9-s7fk$=exs-nah*26y=%0d)tmfll3d(ng&auf%4e
 
 # Application definition
