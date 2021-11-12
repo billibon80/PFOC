@@ -1,1 +1,1 @@
-web: gunicorn pfoc:app
+web: gunicorn pfoc.wsgi --log-file -
