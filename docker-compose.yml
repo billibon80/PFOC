@@ -1,12 +1,35 @@
 version: '3'
 
-services:
-  db:
-    image: postgres
+#services:
+#  db:
+#    image: postgres
+#
+#  web:
+#    build: .
+#    volumes:
+#      - .:/usr/src/app
+#    ports:
+#      - "8000:8000"
 
-  web:
-    build: .
-    volumes:
-      - .:/usr/src/app
-    ports:
-      - "8000:8000"
+services:
+    web:
+      build: .
+#      command: python manage.py runserver 0.0.0.0:8000
+      volumes:
+        - .:/usr/src/app/
+      env_file:
+        - ./.env
+
+    db:
+      image: postgres
+      restart: always
+      ports:
+        - '5432'
+#      volumes:
+#        - postgress_data:/var/lib/postgressql/data/
+      environment:
+        POSTGRESS_USER: admin
+        POSTGRESS_PASSWORD: 123
+        POSTGRES_DB: pfoc
+
+
