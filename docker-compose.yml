@@ -19,17 +19,20 @@ services:
         - .:/usr/src/app/
       env_file:
         - ./.env
+      ports:
+        - '8000:8000'
 
     db:
       image: postgres
       restart: always
-      ports:
-        - '5432'
+#      ports:
+#        - '5432'
 #      volumes:
 #        - postgress_data:/var/lib/postgressql/data/
       environment:
-        POSTGRESS_USER: admin
-        POSTGRESS_PASSWORD: 123
-        POSTGRES_DB: pfoc
+#        POSTGRESS_USER: 'admin'
+#        POSTGRESS_PASSWORD: '123'
+#        POSTGRES_DB: 'pfoc'
+        POSTGRES_HOST_AUTH_METHOD: 'trust'
 
 

@@ -100,7 +100,7 @@ DATABASES = {
         'NAME': config('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
         'USER': config("SQL_USER", "user"),
         'PASSWORD': config("SQL_PASSWORD", "password"),
-        'HOST': config("DATABASE_URL", "localhost"),
+        'HOST': config("SQL_HOST", "DATABASE_URL"),
         'PORT': config("SQL_PORT", "5432"),
     }
 }
@@ -143,16 +143,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/assets/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'assets'),
+    os.path.join(BASE_DIR, 'assets/css'),
+    os.path.join(BASE_DIR, 'assets/images'),
+    os.path.join(BASE_DIR, 'assets/js'),
+]
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-MEDIA_ROT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/images/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
 
 # SMTP Configuration
 #
