@@ -36,7 +36,7 @@ SECRET_KEY = DJANGO_APP_FOC
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost', "zdwyxuediemljo:27115a2c0735f3c2898f981d898ac5bb7d68b8bb4499f9ec6cc6c3ba6efeaa29@ec2-54-160-103-135.compute-1.amazonaws.com:5432/de5gpneokat4ji"]
+ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
 # django-insecure-x2_h_of%*9-s7fk$=exs-nah*26y=%0d)tmfll3d(ng&auf%4e
 
 # Application definition
@@ -100,7 +100,7 @@ DATABASES = {
         'NAME': config('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
         'USER': config("SQL_USER", "user"),
         'PASSWORD': config("SQL_PASSWORD", "password"),
-        'HOST': config("SQL_HOST", "DATABASE_URL"),
+        'HOST': config("SQL_HOST", "localhost"),
         'PORT': config("SQL_PORT", "5432"),
     }
 }
