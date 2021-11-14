@@ -36,7 +36,7 @@ SECRET_KEY = DJANGO_APP_FOC
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost', ]
+ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost', "postgres://zdwyxuediemljo:27115a2c0735f3c2898f981d898ac5bb7d68b8bb4499f9ec6cc6c3ba6efeaa29@ec2-54-160-103-135.compute-1.amazonaws.com:5432/de5gpneokat4ji"]
 # django-insecure-x2_h_of%*9-s7fk$=exs-nah*26y=%0d)tmfll3d(ng&auf%4e
 
 # Application definition
