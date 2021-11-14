@@ -100,7 +100,7 @@ DATABASES = {
         'NAME': config('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
         'USER': config("SQL_USER", "user"),
         'PASSWORD': config("SQL_PASSWORD", "password"),
-        'HOST': config("SQL_HOST", "localhost"),
+        'HOST': config("DATABASE_URL", "localhost"),
         'PORT': config("SQL_PORT", "5432"),
     }
 }
