@@ -8,6 +8,13 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
+
+heroku
+heroku login # loggen in heroku
+git init # initialize in that directory
+heroku git:remote -a pfocby # get app pfocby
+git remote #show current initialize directory
+heroku logs --tail #show logs when deploy app
 """
 
 from pathlib import Path
