@@ -111,8 +111,8 @@ DATABASE_URL = config('DATABASE_URL')
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 db_from_env = dj_database_url.config()
-DATABASES['default'] = db_from_env
-#DATABASES['default'].update(db_from_env)
+#DATABASES['default'] = db_from_env
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
