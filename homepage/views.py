@@ -3,5 +3,9 @@ from django.http import HttpResponse
 
 
 # Create your views here.
-def index(request):
+from django.views.generic import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+def home(request):
     return render(request, "homepage/index.html")
+

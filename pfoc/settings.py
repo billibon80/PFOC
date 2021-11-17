@@ -36,8 +36,8 @@ SECRET_KEY = DJANGO_APP_FOC
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost', config("SQL_HOST")]
-
+ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
+#
 
 # Application definition
 
@@ -69,7 +69,7 @@ ROOT_URLCONF = 'pfoc.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -154,7 +157,7 @@ STATIC_URL = '/assets/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # SMTP Configuration
 #
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
