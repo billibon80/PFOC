@@ -18,6 +18,8 @@ heroku logs --tail #show logs when deploy app
 """
 
 from pathlib import Path
+
+import psycopg2
 from decouple import config
 import os
 import dj_database_url
@@ -34,7 +36,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = DJANGO_APP_FOC
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
 #
@@ -105,7 +107,9 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config()
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
 
 # Password validation
