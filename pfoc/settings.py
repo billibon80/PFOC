@@ -18,13 +18,13 @@ heroku logs --tail #show logs when deploy app
 """
 
 from pathlib import Path
-
 import psycopg2
 from decouple import config
 import os
 import dj_database_url
 
 DJANGO_APP_FOC = config("DJANGO_APP_FOC")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -110,7 +110,7 @@ DATABASES = {
 
 DATABASE_URL = config('DATABASE_URL')
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 db_from_env = dj_database_url.config()
 #DATABASES['default'] = db_from_env
 DATABASES['default'].update(db_from_env)
