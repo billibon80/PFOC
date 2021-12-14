@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    Google fonts-->
+
     {% block title %} <title>Партизанский ФОЦ</title> {% endblock %}
 <!--    load static files from Django project -->
     {% load static %}
@@ -12,7 +14,7 @@
     <header class="header">
         <div class="header__left-block">
             <div class="header__logo">
-                <img src="{% static 'icons/logo.svg' %}" alt="Логотип">
+                <img src="{% static 'img/pfoc-logo.png' %}" alt="Логотип">
             </div>
             {% block navbar %}
             <nav class="header__links">
