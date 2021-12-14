@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--    Google fonts-->
 
     {% block title %} <title>Партизанский ФОЦ</title> {% endblock %}
 <!--    load static files from Django project -->
@@ -43,36 +42,36 @@
         <div class="container">
             <div class="tabcontainer">
                 <div class="tabcontent">
-                    <img src="{% static 'img/tabs/vegy.jpg' %}" alt="vegy">
+                    <img src="{% static 'img/tabs/box.jpg' %}" alt="box">
                     <div class="tabcontent__descr">
-                        "Фитнес" - легкое и здоровое направление в спорте
+                        "Бокс" - быть мужчиной по духу, помогает не только время, но и тренажерный зал.
                     </div>
                 </div>
                 <div class="tabcontent">
-                    <img src="{% static 'img/tabs/elite.jpg'%}" alt="elite">
+                    <img src="{% static 'img/tabs/workout.jpg'%}" alt="workout">
                     <div class="tabcontent__descr">
-                        “Пилатес” - если хочешь посгонять жирок то тебе срочно к нам
+                        “WorkOut” - работа с телом трудное дело, иногда побеждает лень, иногда красота.
                     </div>
                 </div>
                 <div class="tabcontent">
-                    <img src="{% static 'img/tabs/post.jpg'%}" alt="post">
+                    <img src="{% static 'img/tabs/soccer.jpg'%}" alt="soccer">
                     <div class="tabcontent__descr">
-                        Мини-футбол нет ничего лучше, чем пару минут занудливой игры
+                        "Мини-футбол" - игра не для слабаков, возьми волю в кулак, ощути драйв и свободу победы.
                     </div>
                 </div>
                 <div class="tabcontent">
-                    <img src="{% static 'img/tabs/vegy.jpg'%}" alt="vegy">
+                    <img src="{% static 'img/tabs/joga.jpg'%}" alt="joga">
                     <div class="tabcontent__descr">
-                        Хоккей с шайбой - только трус не играет в хоккей.
+                        "Йога" - обрети покой тела и души. Насыть себя дзэном и спокойствием.
                     </div>
                 </div>
                 <div class="tabheader">
                     <h3>Выберите вид спорта</h3>
                     <div class="tabheader__items">
-                        <div class="tabheader__item tabheader__item_active">Фитнес</div>
-                        <div class="tabheader__item">Пилатес</div>
+                        <div class="tabheader__item tabheader__item_active">Бокс</div>
+                        <div class="tabheader__item">Workout</div>
                         <div class="tabheader__item">Мини-футбол</div>
-                        <div class="tabheader__item">Хоккей с шайбой</div>
+                        <div class="tabheader__item">Йога</div>
                     </div>
                 </div>
             </div>
@@ -86,9 +85,9 @@
         <div class="bgc_y"></div>
         <div class="container">
             <div class="offer__text">
-                <h2 class="title">Что мы можем вам предложить?</h2>
+                <h2 class="title">Наши новости</h2>
                 <div class="offer__descr">
-                    Наша основная идея - это правильное питание. Оно может быть простым и вкусным. Мы не просто доставка, мы сервис! Мы взяли на себя все расчеты БЖУ, калорийности, объемов порций и прочие важные, но скучные аспекты. Вам остается только полезная, сытная и правильная еда, которую мы привозим прямо под дверь.
+                    Принимать здоровый образ жизни за основу всего существования есть наилучший метод получения удовольствия от окружающей суеты.
                 </div>
             </div>
             <div class="offer__action">
@@ -97,13 +96,13 @@
         </div>
         <div class="container">
             <div class="offer__advantages">
-                <h2>Быстро и полезно</h2>
+                <h2>В предвкушении зимы</h2>
                 <div class="offer__advantages-text">
-                    Готовка дома занимает много сил, времени и нервов. Мы привозим еду сразу на целый день, и ты можешь действовать так, как тебе удобно, не подстраиваясь ни под кого и будучи уверенным в качестве продукта!
+                    Уже снег скрипит под ногами и мы вместе открываем двери новой зиме, очень хочется понимать, что морозный хруст проходит не только под ногами, но и отдается отголоском в каждой нотки души
                 </div>
-                <h2>Правильный рацион</h2>
+                <h2>Лыжня зовет</h2>
                 <div class="offer__advantages-text">
-                    Мы разработали специальное меню, где учтены все нюансы правильного питания, от баланса БЖУ до их приготовления и дробления рациона.
+                    Мы открылись и уже сегодня вас радостно приветсвует лыжероллерная трасса в дражне.
                 </div>
             </div>
             <div class="offer__slider">
@@ -120,7 +119,7 @@
                 </div>
                 <div class="offer__slider-wrapper">
                     <div class="offer__slide">
-                        <img src="{% static 'img/slider/pepper.jpg'%}" alt="pepper">
+                        <img src="{% static 'img/slider/skying.jpg'%}" alt="skying">
                     </div>
                     <!-- <div class="offer__slide">
                         <img src="{% static 'img/slider/food-12.jpg'%}" alt="food">
@@ -187,38 +186,48 @@
     <div class="divider"></div>
 
     <div class="menu">
-        <h2 class="title">Наша команда</h2>
+        <h2 class="title">Руководство</h2>
 
         <div class="menu__field">
             <div class="container">
                 <div class="menu__item">
-                    <img src="{% static 'img/tabs/vegy.jpg'%}" alt="vegy">
-                    <h3 class="menu__item-subtitle">Меню "Фитнес"</h3>
-                    <div class="menu__item-descr">Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!</div>
+                    <img src="{% static 'img/man-space.png'%}" alt="vegy">
+                    <h3 class="menu__item-subtitle">Жолудев Михаил Владимирович<br>заместитель директора</h3>
+                    <div class="menu__item-descr">Административно-хозяйственная работа (техническое состояние объектов)</div>
                     <div class="menu__item-divider"></div>
                     <div class="menu__item-price">
-                        <div class="menu__item-cost">Цена:</div>
-                        <div class="menu__item-total"><span>229</span> грн/день</div>
+                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                        <div class="menu__item-total"><span>340 00 00</span></div>
                     </div>
                 </div>
                 <div class="menu__item">
-                    <img src="{% static 'img/tabs/elite.jpg'%}" alt="elite">
-                    <h3 class="menu__item-subtitle">Меню “Премиум”</h3>
-                    <div class="menu__item-descr">В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!</div>
+                    <img src="{% static 'img/man-space.png'%}" alt="vegy">
+                    <h3 class="menu__item-subtitle">Новиков Алексей Сергеевич<br>директор</h3>
+                    <div class="menu__item-descr">Общее руководство центром</div>
                     <div class="menu__item-divider"></div>
                     <div class="menu__item-price">
-                        <div class="menu__item-cost">Цена:</div>
-                        <div class="menu__item-total"><span>550</span> грн/день</div>
+                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                        <div class="menu__item-total"><span>340 00 00</span></div>
                     </div>
                 </div>
                 <div class="menu__item">
-                    <img src="{% static 'img/tabs/post.jpg'%}" alt="post">
-                    <h3 class="menu__item-subtitle">Меню "Постное"</h3>
-                    <div class="menu__item-descr">Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков. </div>
+                    <img src="{% static 'img/woman-space.png'%}" alt="vegy">
+                    <h3 class="menu__item-subtitle">Белозерцева Наталья Михайловна<br>заместитель директора</h3>
+                    <div class="menu__item-descr">По основной деятельности (спорт)</div>
                     <div class="menu__item-divider"></div>
                     <div class="menu__item-price">
-                        <div class="menu__item-cost">Цена:</div>
-                        <div class="menu__item-total"><span>430</span> грн/день</div>
+                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                        <div class="menu__item-total"><span>340 00 00</span></div>
+                    </div>
+                </div>
+                <div class="menu__item">
+                    <img src="{% static 'img/woman-space.png'%}" alt="vegy">
+                    <h3 class="menu__item-subtitle">Белохвостик Инга Ивановна<br>главный бухгалтер</h3>
+                    <div class="menu__item-descr">финансовая деятельность</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                        <div class="menu__item-total"><span>340 00 00</span></div>
                     </div>
                 </div>
             </div>
@@ -282,8 +291,8 @@
                 <a href="#" class="link">instagram</a>
                 <a href="#" class="link">facebook</a>
             </div>
-            <div class="pepper">
-                <img src="{% static 'icons/veg.svg'%}" alt="pepper">
+            <div class="header__logo">
+                <img src="{% static 'img/pfoc-logo.png'%}" alt="pepper">
             </div>
             <div class="call">
                 <div class="subtitle">Или позвоните нам</div>
@@ -309,5 +318,7 @@
 
 <!-- Place for JS -->
     <script src="{% static 'js/script.js' %}"></script>
+<!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@ from decouple import config
 import os
 import dj_database_url
 
+
 DJANGO_APP_FOC = config("DJANGO_APP_FOC")
 
 
