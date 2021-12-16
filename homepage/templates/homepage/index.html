@@ -5,26 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% block title %} <title>Партизанский ФОЦ</title> {% endblock %}
-<!--    load static files from Django project -->
+    <!-- Bootstrap 5.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--    load static files from Django project -->
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
 </head>
 <body>
+
     <header class="header">
-        <div class="header__left-block">
-            <div class="header__logo">
-                <img src="{% static 'img/pfoc-logo.png' %}" alt="Логотип">
+        {% block navbar %}
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <div class="header__logo">
+                    <img src="{% static 'img/pfoc-logo.png' %}" alt="Логотип">
+                </div>
             </div>
-            {% block navbar %}
-            <nav class="header__links">
-                <a href="#" class="header__link">Расписание</a>
-                <a href="#" class="header__link">Контакты</a>
-            </nav>
-            {% endblock %}
+            <div class="col-6 col-md-4">
+                <nav class="header__links">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <a href="#" class="header__link">Расписание</a>
+                        </div>
+                        <div class="col-12 col-md-6">
+                           <a href="#" class="header__link">Контакты</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-0 col-md-4">
+                <button class="btn btn_white">Связаться с нами</button>
+            </div>
         </div>
-        <div class="header__right-block">
-            <button class="btn btn_white">Связаться с нами</button>
-        </div>
+        {% endblock %}
     </header>
     <div class="sidepanel">
         <div class="sidepanel__text"><span>Социальные сети</span></div>
@@ -40,42 +53,48 @@
     <div class="preview">
         <div class="bgc_blue"></div>
         <div class="container">
-            <div class="tabcontainer">
-                <div class="tabcontent">
-                    <img src="{% static 'img/tabs/box.jpg' %}" alt="box">
-                    <div class="tabcontent__descr">
-                        "Бокс" - быть мужчиной по духу, помогает не только время, но и тренажерный зал.
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="tabcontent">
+                            <img src="{% static 'img/tabs/box.jpg' %}" alt="box">
+                            <div class="tabcontent__descr">
+                                "Бокс" - быть мужчиной по духу, помогает не только время, но и тренажерный зал.
+                            </div>
+                        </div>
+                        <div class="tabcontent">
+                            <img src="{% static 'img/tabs/workout.jpg'%}" alt="workout">
+                            <div class="tabcontent__descr">
+                                “WorkOut” - работа с телом трудное дело, иногда побеждает лень, иногда красота.
+                            </div>
+                        </div>
+                        <div class="tabcontent">
+                            <img src="{% static 'img/tabs/soccer.jpg'%}" alt="soccer">
+                            <div class="tabcontent__descr">
+                                "Мини-футбол" - игра не для слабаков, возьми волю в кулак, ощути драйв и свободу победы.
+                            </div>
+                        </div>
+                        <div class="tabcontent">
+                        <img src="{% static 'img/tabs/joga.jpg'%}" alt="joga">
+                        <div class="tabcontent__descr">
+                            "Йога" - обрети покой тела и души. Насыть себя дзэном и спокойствием.
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="tabheader">
+                            <h3>Выберите вид спорта</h3>
+                            <div class="tabheader__items">
+                                <div class="tabheader__item tabheader__item_active">Бокс</div>
+                                <div class="tabheader__item">Workout</div>
+                                <div class="tabheader__item">Мини-футбол</div>
+                                <div class="tabheader__item">Йога</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="preview__life">Живи здоровой жизнью!</div>
                     </div>
                 </div>
-                <div class="tabcontent">
-                    <img src="{% static 'img/tabs/workout.jpg'%}" alt="workout">
-                    <div class="tabcontent__descr">
-                        “WorkOut” - работа с телом трудное дело, иногда побеждает лень, иногда красота.
-                    </div>
-                </div>
-                <div class="tabcontent">
-                    <img src="{% static 'img/tabs/soccer.jpg'%}" alt="soccer">
-                    <div class="tabcontent__descr">
-                        "Мини-футбол" - игра не для слабаков, возьми волю в кулак, ощути драйв и свободу победы.
-                    </div>
-                </div>
-                <div class="tabcontent">
-                    <img src="{% static 'img/tabs/joga.jpg'%}" alt="joga">
-                    <div class="tabcontent__descr">
-                        "Йога" - обрети покой тела и души. Насыть себя дзэном и спокойствием.
-                    </div>
-                </div>
-                <div class="tabheader">
-                    <h3>Выберите вид спорта</h3>
-                    <div class="tabheader__items">
-                        <div class="tabheader__item tabheader__item_active">Бокс</div>
-                        <div class="tabheader__item">Workout</div>
-                        <div class="tabheader__item">Мини-футбол</div>
-                        <div class="tabheader__item">Йога</div>
-                    </div>
-                </div>
-            </div>
-            <div class="preview__life">Живи здоровой жизнью!</div>
         </div>
     </div>
 
@@ -83,53 +102,71 @@
 
     <div class="offer">
         <div class="bgc_y"></div>
-        <div class="container">
-            <div class="offer__text">
-                <h2 class="title">Наши новости</h2>
-                <div class="offer__descr">
-                    Принимать здоровый образ жизни за основу всего существования есть наилучший метод получения удовольствия от окружающей суеты.
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="offer__text">
+                                <h2 class="title">Наши новости</h2>
+                                <div class="offer__descr">
+                                    Принимать здоровый образ жизни за основу всего существования есть наилучший метод получения удовольствия от окружающей суеты.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="offer__action">
+                                <button class="btn btn_dark">Связаться с нами</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="offer__action">
-                <button class="btn btn_dark">Связаться с нами</button>
-            </div>
-        </div>
-        <div class="container">
-            <div class="offer__advantages">
-                <h2>В предвкушении зимы</h2>
-                <div class="offer__advantages-text">
-                    Уже снег скрипит под ногами и мы вместе открываем двери новой зиме, очень хочется понимать, что морозный хруст проходит не только под ногами, но и отдается отголоском в каждой нотки души
-                </div>
-                <h2>Лыжня зовет</h2>
-                <div class="offer__advantages-text">
-                    Мы открылись и уже сегодня вас радостно приветсвует лыжероллерная трасса в дражне.
-                </div>
-            </div>
-            <div class="offer__slider">
-                <div class="offer__slider-counter">
-                    <div class="offer__slider-prev">
-                        <img src="{% static 'icons/left.svg'%}" alt="prev">
+            <div class="col-12">
+                <div class="container">
+                    <div class="div row">
+                        <div class="col-12 col-xl-4">
+                            <div class="offer__advantages">
+                        <h2>В предвкушении зимы</h2>
+                        <div class="offer__advantages-text">
+                            Уже снег скрипит под ногами и мы вместе открываем двери новой зиме, очень хочется понимать, что морозный хруст проходит не только под ногами, но и отдается отголоском в каждой нотки души
+                        </div>
+                        <h2>Лыжня зовет</h2>
+                        <div class="offer__advantages-text">
+                            Мы открылись и уже сегодня вас радостно приветсвует лыжероллерная трасса в дражне.
+                        </div>
                     </div>
-                    <span id="current">03</span>
-                    /
-                    <span id="total">04</span>
-                    <div class="offer__slider-next">
-                        <img src="{% static 'icons/right.svg'%}" alt="next">
+                        </div>
+                        <div class="col-12 col-xl-8 flex-end">
+                            <div class="offer__slider">
+                                <div class="offer__slider-counter">
+                                    <div class="offer__slider-prev">
+                                        <img src="{% static 'icons/left.svg'%}" alt="prev">
+                                    </div>
+                                    <span id="current">03</span>
+                                    /
+                                    <span id="total">04</span>
+                                    <div class="offer__slider-next">
+                                        <img src="{% static 'icons/right.svg'%}" alt="next">
+                                    </div>
+                                </div>
+                                <div class="offer__slider-wrapper">
+                                    <div class="offer__slide">
+                                        <img src="{% static 'img/slider/skying.jpg'%}" alt="skying">
+                                    </div>
+                                    <!-- <div class="offer__slide">
+                                        <img src="{% static 'img/slider/food-12.jpg'%}" alt="food">
+                                    </div>
+                                    <div class="offer__slide">
+                                        <img src="{% static 'img/slider/olive-oil.jpg'%}" alt="oil">
+                                    </div>
+                                    <div class="offer__slide">
+                                        <img src="{% static 'img/slider/paprika.jpg'%}" alt="paprika">
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="offer__slider-wrapper">
-                    <div class="offer__slide">
-                        <img src="{% static 'img/slider/skying.jpg'%}" alt="skying">
-                    </div>
-                    <!-- <div class="offer__slide">
-                        <img src="{% static 'img/slider/food-12.jpg'%}" alt="food">
-                    </div>
-                    <div class="offer__slide">
-                        <img src="{% static 'img/slider/olive-oil.jpg'%}" alt="oil">
-                    </div>
-                    <div class="offer__slide">
-                        <img src="{% static 'img/slider/paprika.jpg'%}" alt="paprika">
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -154,30 +191,56 @@
                     Ваша конституция
                 </div>
                 <div class="calculating__choose calculating__choose_medium">
-                    <input type="text" id="height" placeholder="Введите рост" class="calculating__choose-item">
-                    <input type="text" id="weight" placeholder="Введите вес"  class="calculating__choose-item">
-                    <input type="text" id="age" placeholder="Введите возраст" class="calculating__choose-item">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                            <input type="text" id="height" placeholder="Введите рост" class="calculating__choose-item">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                            <input type="text" id="weight" placeholder="Введите вес"  class="calculating__choose-item">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                            <input type="text" id="age" placeholder="Введите возраст" class="calculating__choose-item">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="calculating__subtitle">
                     Выберите вашу физическая активность
                 </div>
                 <div class="calculating__choose calculating__choose_big">
-                    <div id="low" class="calculating__choose-item">Низкая активность </div>
-                    <div id="small"  class="calculating__choose-item calculating__choose-item_active">Невысокая активность</div>
-                    <div id="medium" class="calculating__choose-item">Умеренная активность</div>
-                    <div id="high" class="calculating__choose-item">Высокая активность</div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6  col-md-12 col-lg-3">
+                            <div id="low" class="calculating__choose-item">Низкая активность </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div id="small"  class="calculating__choose-item calculating__choose-item_active">Невысокая активность</div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div id="medium" class="calculating__choose-item">Умеренная активность</div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div id="high" class="calculating__choose-item">Высокая активность</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="calculating__divider"></div>
 
                 <div class="calculating__total">
-                    <div class="calculating__subtitle">
-                        Ваша суточная норма калорий:
+                    <div class="row">
+                        <dic class="col-12">
+                            <div class="calculating__subtitle">
+                                Ваша суточная норма калорий:
+                            </div>
+                        </dic>
+                        <dic class="col-12">
+                           <div class="calculating__result">
+                                <span>2700</span> ккал
+                           </div>
+                        </dic>
                     </div>
-                    <div class="calculating__result">
-                        <span>2700</span> ккал
-                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -189,48 +252,58 @@
         <h2 class="title">Руководство</h2>
 
         <div class="menu__field">
-            <div class="container">
-                <div class="menu__item">
-                    <img src="{% static 'img/man-space.png'%}" alt="vegy">
-                    <h3 class="menu__item-subtitle">Жолудев Михаил Владимирович<br>заместитель директора</h3>
-                    <div class="menu__item-descr">Административно-хозяйственная работа (техническое состояние объектов)</div>
-                    <div class="menu__item-divider"></div>
-                    <div class="menu__item-price">
-                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                        <div class="menu__item-total"><span>340 00 00</span></div>
-                    </div>
-                </div>
-                <div class="menu__item">
-                    <img src="{% static 'img/man-space.png'%}" alt="vegy">
-                    <h3 class="menu__item-subtitle">Новиков Алексей Сергеевич<br>директор</h3>
-                    <div class="menu__item-descr">Общее руководство центром</div>
-                    <div class="menu__item-divider"></div>
-                    <div class="menu__item-price">
-                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                        <div class="menu__item-total"><span>340 00 00</span></div>
-                    </div>
-                </div>
-                <div class="menu__item">
-                    <img src="{% static 'img/woman-space.png'%}" alt="vegy">
-                    <h3 class="menu__item-subtitle">Белозерцева Наталья Михайловна<br>заместитель директора</h3>
-                    <div class="menu__item-descr">По основной деятельности (спорт)</div>
-                    <div class="menu__item-divider"></div>
-                    <div class="menu__item-price">
-                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                        <div class="menu__item-total"><span>340 00 00</span></div>
-                    </div>
-                </div>
-                <div class="menu__item">
-                    <img src="{% static 'img/woman-space.png'%}" alt="vegy">
-                    <h3 class="menu__item-subtitle">Белохвостик Инга Ивановна<br>главный бухгалтер</h3>
-                    <div class="menu__item-descr">финансовая деятельность</div>
-                    <div class="menu__item-divider"></div>
-                    <div class="menu__item-price">
-                        <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                        <div class="menu__item-total"><span>340 00 00</span></div>
-                    </div>
+          <div class="container">
+      <div class="row">
+          <div class="col-12 col-sm-6 col-md-12 col-lg-3">
+            <div class="menu__item">
+                <img src="{% static 'img/man-space.png'%}" alt="vegy">
+                <h3 class="menu__item-subtitle">Новиков Алексей Сергеевич<br>директор</h3>
+                <div class="menu__item-descr">Общее руководство центром</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                    <div class="menu__item-total"><span>340 00 00</span></div>
                 </div>
             </div>
+          </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="menu__item " >
+                <img src="{% static 'img/man-space.png'%}" alt="vegy">
+                <h3 class="menu__item-subtitle">Жолудев Михаил Владимирович<br>заместитель директора</h3>
+                <div class="menu__item-descr">Административно-хозяйственная работа (техническое состояние объектов)</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                    <div class="menu__item-total"><span>340 00 00</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="menu__item ">
+                <img src="{% static 'img/woman-space.png'%}" alt="vegy">
+                <h3 class="menu__item-subtitle">Белозерцева Наталья Михайловна<br>заместитель директора</h3>
+                <div class="menu__item-descr">По основной деятельности (спорт)</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                    <div class="menu__item-total"><span>340 00 00</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="menu__item">
+                <img src="{% static 'img/woman-space.png'%}" alt="vegy">
+                <h3 class="menu__item-subtitle">Белохвостик Инга Ивановна<br>главный бухгалтер</h3>
+                <div class="menu__item-descr">финансовая деятельность</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                    <div class="menu__item-total"><span>340 00 00</span></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
         </div>
     </div>
 
@@ -245,7 +318,6 @@
             </form>
         </div>
     </div>
-
     <div class="divider"></div>
 
     <div class="promotion">
