@@ -59,9 +59,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function hideNewsContent(...rest) {
         rest.forEach(db => {
-                db.forEach(item => {
+                db.forEach((item, i) => {
                 item.classList.add('hide');
-                item.classList.remove('show', 'fade');
+                item.classList.remove('show');
+                if (db == imgNews) {
+                    item.classList.remove('fade');
+                }
             });
         });
        
@@ -70,6 +73,9 @@ window.addEventListener("DOMContentLoaded", () => {
  
     function showNewsContent(c, t, p, ...rest) {
         rest.forEach(db => {
+            if (db == imgNews) {
+                db[c-1].classList.add('fade');
+            }
             db[c-1].classList.add('show');
             db[c-1].classList.remove('hide');
         });
@@ -107,9 +113,10 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     /// button slideer next
+    let isPaused = false;
 
     parentNews.querySelector('.offer__slider-next').addEventListener('click', () => {     
-        clearInterval(timeSlide_5);
+        isPaused = true;
         upSlider(+current.textContent, +total.textContent, news, imgNews);
     });
 
@@ -128,13 +135,35 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     
-    // Time for slider
+    // Timer for slider
+   
 
-    const timeSlide = () => {
-        upSlider(+current.textContent, +total.textContent, news, imgNews);
+    const timeSlide = function() {
+        if (!isPaused) {
+         upSlider(+current.textContent, +total.textContent, news, imgNews);
+         timerSlide_5 = setTimeout(timeSlide, 5000);   
+        }
     }
          
-    const timeSlide_5 = setInterval(timeSlide, 5000);
+    let timerSlide_5 = setTimeout(timeSlide, 5000);
+    // const timeSlide_5 = setInterval(timeSlide, 5000);
+
+    // hover stop Timer Slider
+
+    parentNews.querySelectorAll('img').forEach(img => {
+        img.addEventListener('mouseenter', () => { 
+            isPaused = true;
+            console.log('mouseenter');
+        });
+        img.addEventListener('mouseleave', () => {
+            isPaused = false;
+            timeSlide_5 = setTimeout(timeSlide, 5000);
+            // const timeSlide_5 = setInterval(timeSlide, 5000);
+            console.log('mouseleave');
+        });
+    });
+    
+    
        
           
 });
