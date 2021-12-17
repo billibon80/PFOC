@@ -91,22 +91,32 @@ window.addEventListener("DOMContentLoaded", () => {
 
     p = +prev.textContent;
 
+    /// function Up slider add one slider for current, loop work around of all db items
+
+    function upSlider (current, total, ...db) {
+        let prev = current;
+
+        current = total;
+        total++; 
+
+        if (current + 1 > db[0].length || current + 1 > db[1].length)  {
+            total = 1;
+        }
+        hideNewsContent(db[0], db[1]);
+        showNewsContent(current, total, prev, db[0], db[1]);
+    }
+
     /// button slideer next
 
     parentNews.querySelector('.offer__slider-next').addEventListener('click', () => {     
-        p = c;
-        c = t;
-        t++;  
-        if (c + 1 > news.length || c + 1 > imgNews.length)  {
-            t = 1;
-        }
-        hideNewsContent(news, imgNews);
-        showNewsContent(c, t, p, news, imgNews); 
+        clearInterval(timeSlide_5);
+        upSlider(+current.textContent, +total.textContent, news, imgNews);
     });
 
     // button slider previous
 
     parentNews.querySelector('.offer__slider-prev').addEventListener('click', () => {
+        clearInterval(timeSlide_5);
         t = c;
         c = p;
         p--; 
@@ -118,8 +128,13 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     
-    
-           
+    // Time for slider
+
+    const timeSlide = () => {
+        upSlider(+current.textContent, +total.textContent, news, imgNews);
+    }
+         
+    const timeSlide_5 = setInterval(timeSlide, 5000);
        
           
 });
