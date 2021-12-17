@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
 </head>
 <body>
-
+<!--Block Header (logo & NavBar)-->
     <header class="header">
         {% block navbar %}
         <div class="row">
@@ -49,12 +49,13 @@
             <img src="{% static 'icons/facebook.svg' %}" alt="facebook">
         </a>
     </div>
-
+<!--Block Preview (Type of Sports)-->
     <div class="preview">
         <div class="bgc_blue"></div>
         <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-8">
+                    <!-- Block Content for Tab (blockContent) Content for Type of Sports    -->
                         <div class="tabcontent">
                             <img src="{% static 'img/tabs/box.jpg' %}" alt="box">
                             <div class="tabcontent__descr">
@@ -83,6 +84,7 @@
                     <div class="col-12 col-md-4">
                         <div class="tabheader">
                             <h3>Выберите вид спорта</h3>
+                            <!-- Block Tabs (blockTab) name Tab for Type of Sports-->
                             <div class="tabheader__items">
                                 <div class="tabheader__item tabheader__item_active">Бокс</div>
                                 <div class="tabheader__item">Workout</div>
@@ -99,7 +101,7 @@
     </div>
 
     <div class="divider"></div>
-
+<!-- Block offer (News) -->
     <div class="offer">
         <div class="bgc_y"></div>
         <div class="row">
@@ -126,43 +128,68 @@
                 <div class="container">
                     <div class="div row">
                         <div class="col-12 col-xl-4">
-                            <div class="offer__advantages">
-                        <h2>В предвкушении зимы</h2>
-                        <div class="offer__advantages-text">
-                            Уже снег скрипит под ногами и мы вместе открываем двери новой зиме, очень хочется понимать, что морозный хруст проходит не только под ногами, но и отдается отголоском в каждой нотки души
-                        </div>
-                        <h2>Лыжня зовет</h2>
-                        <div class="offer__advantages-text">
-                            Мы открылись и уже сегодня вас радостно приветсвует лыжероллерная трасса в Дражне.
-                        </div>
-                    </div>
+                            <!-- Block Content (Text and Title for news)-->
+                            <div class="offer__content">
+                                <div class="offer__advantages">
+                                    <h2>В предвкушении зимы</h2>
+                                    <div class="offer__advantages-text">
+                                        Уже снег скрипит под ногами и мы вместе открываем двери новой зиме, очень хочется понимать, что морозный хруст проходит не только под ногами, но и отдается отголоском в каждой нотки души
+                                    </div>
+                                    <h2>Лыжня зовет</h2>
+                                    <div class="offer__advantages-text">
+                                        Мы открылись и уже сегодня вас радостно приветсвует лыжероллерная трасса в Дражне.
+                                    </div>
+                                </div>
+                                <div class="offer__advantages">
+                                    <h2>Баталии уже совсем скоро, битва района</h2>
+                                    <div class="offer__advantages-text">
+                                        Клюшки скрестились на льду, суровый взгляд, почти у юных взрослых
+                                    </div>
+                                    <h2>Районные соревнования 19 декабря 2021 года</h2>
+                                    <div class="offer__advantages-text">
+                                        Ледовая арена Минск-Юность открыла свои двери для грандиозного матча. Минута тишина, свисток.. и дальше просто неизвестность
+                                    </div>
+                                </div>
+                                <div class="offer__advantages">
+                                    <h2>Протяни руку ближнему</h2>
+                                    <div class="offer__advantages-text">
+                                        Помочь ближнему может каждый, давай вернем улыбку на лица наших маленьких героев
+                                    </div>
+                                    <h2>Сбор средств 22 декабря 2021 года</h2>
+                                    <div class="offer__advantages-text">
+                                        Каждый из нас, сам по себе меценат. Достучаться до тепла маленьких сердец, можно очень просто. Благотворительный марафон. Начало.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12 col-xl-8 flex-end">
+                            <!-- Block counter (for News Block)-->
                             <div class="offer__slider">
                                 <div class="offer__slider-counter">
-                                    <div class="offer__slider-prev">
+                                    <button class="offer__slider-prev">
                                         <img src="{% static 'icons/left.svg'%}" alt="prev">
-                                    </div>
+                                    </button>
+                                    <span id="previous">02</span>
+                                    /
                                     <span id="current">03</span>
                                     /
                                     <span id="total">04</span>
-                                    <div class="offer__slider-next">
+                                    <button class="offer__slider-next">
                                         <img src="{% static 'icons/right.svg'%}" alt="next">
-                                    </div>
+                                    </button>
                                 </div>
+                                <!-- Block Slider (Images for News) -->
                                 <div class="offer__slider-wrapper">
                                     <div class="offer__slide">
                                         <img src="{% static 'img/slider/skying.jpg'%}" alt="skying">
                                     </div>
-                                    <!-- <div class="offer__slide">
-                                        <img src="{% static 'img/slider/food-12.jpg'%}" alt="food">
+                                    <div class="offer__slide">
+                                        <img src="{% static 'img/slider/hockey.jpg'%}" alt="food">
                                     </div>
                                     <div class="offer__slide">
-                                        <img src="{% static 'img/slider/olive-oil.jpg'%}" alt="oil">
+                                        <img src="{% static 'img/slider/helping.png'%}" alt="oil">
                                     </div>
-                                    <div class="offer__slide">
-                                        <img src="{% static 'img/slider/paprika.jpg'%}" alt="paprika">
-                                    </div> -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -239,8 +266,6 @@
                            </div>
                         </dic>
                     </div>
-
-
                 </div>
             </div>
         </div>
