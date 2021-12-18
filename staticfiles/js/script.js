@@ -113,17 +113,21 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     /// button slideer next
-    let isPaused = false;
+     let isFalse = false;
+
+     function clearTimeSlider(id){
+        clearInterval(id);
+        id = null;
+     }
 
     parentNews.querySelector('.offer__slider-next').addEventListener('click', () => {     
-        isPaused = true;
+        clearTimeSlider(timeoutSldr);
         upSlider(+current.textContent, +total.textContent, news, imgNews);
     });
 
     // button slider previous
-
     parentNews.querySelector('.offer__slider-prev').addEventListener('click', () => {
-        clearInterval(timeSlide_5);
+        clearTimeSlider(timeoutSldr);
         t = c;
         c = p;
         p--; 
@@ -134,37 +138,41 @@ window.addEventListener("DOMContentLoaded", () => {
         showNewsContent(c, t, p, news, imgNews); 
     });
 
-    
     // Timer for slider
-   
-
-    const timeSlide = function() {
-        if (!isPaused) {
-         upSlider(+current.textContent, +total.textContent, news, imgNews);
-         timerSlide_5 = setTimeout(timeSlide, 5000);   
+    function timeSlider() {    
+        if (!isFalse) {
+            upSlider(+current.textContent, +total.textContent, news, imgNews);  
         }
     }
          
-    let timerSlide_5 = setTimeout(timeSlide, 5000);
-    // const timeSlide_5 = setInterval(timeSlide, 5000);
+  let timeoutSldr = setInterval(timeSlider, 5000);
 
-    // hover stop Timer Slider
+    //news img hover stop Timer Slider
 
     parentNews.querySelectorAll('img').forEach(img => {
-        img.addEventListener('mouseenter', () => { 
-            isPaused = true;
-            console.log('mouseenter');
+ 
+        img.addEventListener('mouseenter', () => {
+           isFalse = true;
         });
         img.addEventListener('mouseleave', () => {
-            isPaused = false;
-            timeSlide_5 = setTimeout(timeSlide, 5000);
-            // const timeSlide_5 = setInterval(timeSlide, 5000);
-            console.log('mouseleave');
+            isFalse = false;
         });
     });
+
+    // NavBar Link (hashTag) create scroll (link navbar) to hash (title of block)
+
+    const allLinks = document.querySelectorAll('.header__links .header__link'),
+          allHash = document.querySelectorAll('.title');
+
+    allLinks.forEach((item, i) => {
+        item.addEventListener('click', (e)=> {
+            e.preventDefault();
+            allHash[i].scrollIntoView({block: 'center', behavior: 'smooth'});
+        });
+    });
+    console.log(allLinks);
+    console.log(allHash);
     
-    
-       
-          
+         
 });
 

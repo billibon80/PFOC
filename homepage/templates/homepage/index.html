@@ -15,24 +15,33 @@
 <!--Block Header (logo & NavBar)-->
     <header class="header">
         {% block navbar %}
-        <div class="row">
+        <div class="row" style="width: 100%">
+            <!-- logo -->
             <div class="col-6 col-md-4">
                 <div class="header__logo">
                     <img src="{% static 'img/pfoc-logo.png' %}" alt="Логотип">
                 </div>
             </div>
+            <!--NavBar -->
             <div class="col-6 col-md-8 col-lg-4">
                 <nav class="header__links">
                     <div class="row">
-                        <div class="col-12 col-md-6">
-                            <a href="#" class="header__link">Расписание</a>
+                        <div class="col-12 col-md-3">
+                            <a href="#" class="header__link">Новости</a>
                         </div>
-                        <div class="col-12 col-md-6">
-                           <a href="#" class="header__link">Контакты</a>
+                        <div class="col-12 col-md-3">
+                           <a href="#" class="header__link">Калькулятор</a>
+                        </div>
+                        <div class="col-12 col-md-3">
+                           <a href="#" class="header__link">Руководство</a>
+                        </div>
+                        <div class="col-12 col-md-3">
+                           <a href="#" class="header__link">Наши достижения</a>
                         </div>
                     </div>
                 </nav>
             </div>
+            <!-- Button Connect Us-->
             <div class="col-0 col-md-0 col-lg-4">
                 <button class="btn btn_white">Связаться с нами</button>
             </div>
@@ -419,3 +428,4 @@
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
