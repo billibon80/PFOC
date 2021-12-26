@@ -1,6 +1,6 @@
 .footer {
     min-height: 180px;
-    background-color: $dark;
+    background-color: #22577E;
     padding: 45px 0 50px 0;
     color: #fff;
     .container {
@@ -8,6 +8,9 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        div {
+            margin: auto 0;
+        }
     }
     .subtitle {
         font-size: 20px;

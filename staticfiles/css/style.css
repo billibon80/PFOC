@@ -355,7 +355,6 @@ a {
 .offer__slider-next {
     margin-left: 10px;
     cursor: pointer;
-    z-index: 10
 }
 
 .offer__slider #current {
@@ -979,19 +978,22 @@ a {
         width: 400px
     }
 
-    .typesport .tabbed>label {
-        display: none
+    /* .typesport .tabbed>label {
+         display: none 
+    } */
+    .typesport .container {
+        margin-top: 0;
     }
 
     .typesport .tabs>div {
         width: 400px;
         border: none;
-        padding: 0;
-        opacity: 1;
+        padding: 5px;
+        /* opacity: 1;
         position: relative;
         -webkit-transform: none;
         transform: none;
-        margin-bottom: 60px
+        margin-bottom: 60px */
     }
 
     .typesport .tabs>div h2 {
