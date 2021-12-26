@@ -128,7 +128,7 @@ window.addEventListener("DOMContentLoaded", () => {
     allLinks.forEach((item, i) => {
         item.addEventListener('click', (e)=> {
             e.preventDefault();
-            allHash[i].scrollIntoView({block: 'center', behavior: 'smooth'});
+            allHash[i].scrollIntoView({block: 'start', behavior: 'smooth'});
         });
     });
     

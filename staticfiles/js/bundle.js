@@ -340,7 +340,7 @@ window.addEventListener("DOMContentLoaded", () => {
     item.addEventListener('click', e => {
       e.preventDefault();
       allHash[i].scrollIntoView({
-        block: 'center',
+        block: 'start',
         behavior: 'smooth'
       });
     });
