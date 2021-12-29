@@ -1,10 +1,12 @@
 import tabs from './modules/tabs';
 import calc from './modules/calc';
+import veloSlider from './modules/velo-slider';
 
 window.addEventListener("DOMContentLoaded", () => {
       
     tabs();
     calc();
+    veloSlider();
 
     
 

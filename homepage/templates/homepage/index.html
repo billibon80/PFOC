@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% block title %} <title>Партизанский ФОЦ</title> {% endblock %}
     <!-- Bootstrap 5.0 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!--    load static files from Django project -->
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/style.min.css' %}">
 </head>
+
 <body>
-<!--Block Header (logo & NavBar)-->
+    <!--Block Header (logo & NavBar)-->
     <header class="header">
         {% block navbar %}
         <div class="row" style="width: 100%">
@@ -30,13 +33,13 @@
                             <a href="#" class="header__link">Новости</a>
                         </div>
                         <div class="col-12 col-md-3">
-                           <a href="#" class="header__link">Калькулятор</a>
+                            <a href="#" class="header__link">Калькулятор</a>
                         </div>
                         <div class="col-12 col-md-3">
-                           <a href="#" class="header__link">Руководство</a>
+                            <a href="#" class="header__link">Руководство</a>
                         </div>
                         <div class="col-12 col-md-3">
-                           <a href="#" class="header__link">Наши достижения</a>
+                            <a href="#" class="header__link">Наши достижения</a>
                         </div>
                     </div>
                 </nav>
@@ -58,85 +61,194 @@
             <img src="{% static 'icons/facebook.svg' %}" alt="facebook">
         </a>
     </div>
-<!--Block Preview (Type of Sports)-->
+    <!--Block Preview (Type of Sports)-->
     <div class="preview">
         <div class="bgc_blue"></div>
         <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-8">
+            <div class="row">
+                <div class="col-12 col-md-8">
                     <!-- Block Content for Tab (blockContent) Content for Type of Sports    -->
-                        <div class="tabcontent">
-                            <img src="{% static 'img/tabs/box.jpg' %}" alt="box">
-                            <div class="tabcontent__descr">
-                                "Бокс" - быть мужчиной по духу, помогает не только время, но и тренажерный зал.
-                            </div>
+                    <div class="tabcontent">
+                        <img src="{% static 'img/tabs/box.jpg' %}" alt="box">
+                        <div class="tabcontent__descr">
+                            "Бокс" - быть мужчиной по духу, помогает не только время, но и тренажерный зал.
                         </div>
-                        <div class="tabcontent">
-                            <img src="{% static 'img/tabs/workout.jpg'%}" alt="workout">
-                            <div class="tabcontent__descr">
-                                “WorkOut” - работа с телом трудное дело, иногда побеждает лень, иногда красота.
-                            </div>
+                    </div>
+                    <div class="tabcontent">
+                        <img src="{% static 'img/tabs/workout.jpg'%}" alt="workout">
+                        <div class="tabcontent__descr">
+                            “WorkOut” - работа с телом трудное дело, иногда побеждает лень, иногда красота.
                         </div>
-                        <div class="tabcontent">
-                            <img src="{% static 'img/tabs/soccer.jpg'%}" alt="soccer">
-                            <div class="tabcontent__descr">
-                                "Мини-футбол" - игра не для слабаков, возьми волю в кулак, ощути драйв и свободу победы.
-                            </div>
+                    </div>
+                    <div class="tabcontent">
+                        <img src="{% static 'img/tabs/soccer.jpg'%}" alt="soccer">
+                        <div class="tabcontent__descr">
+                            "Мини-футбол" - игра не для слабаков, возьми волю в кулак, ощути драйв и свободу победы.
                         </div>
-                        <div class="tabcontent">
+                    </div>
+                    <div class="tabcontent">
                         <img src="{% static 'img/tabs/joga.jpg'%}" alt="joga">
                         <div class="tabcontent__descr">
                             "Йога" - обрети покой тела и души. Насыть себя дзэном и спокойствием.
                         </div>
                     </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="tabheader">
-                            <h3>Выберите вид спорта</h3>
-                            <!-- Block Tabs (blockTab) name Tab for Type of Sports-->
-                            <div class="tabheader__items">
-                                <div class="tabheader__item tabheader__item_active">Бокс</div>
-                                <div class="tabheader__item">Workout</div>
-                                <div class="tabheader__item">Мини-футбол</div>
-                                <div class="tabheader__item">Йога</div>
-                            </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="tabheader">
+                        <h3>Выберите вид спорта</h3>
+                        <!-- Block Tabs (blockTab) name Tab for Type of Sports-->
+                        <div class="tabheader__items">
+                            <div class="tabheader__item tabheader__item_active">Бокс</div>
+                            <div class="tabheader__item">Workout</div>
+                            <div class="tabheader__item">Мини-футбол</div>
+                            <div class="tabheader__item">Йога</div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="preview__life">Живи здоровой жизнью!</div>
-                    </div>
                 </div>
+                <div class="col-12">
+                    <div class="preview__life">Живи здоровой жизнью!</div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    
-<!-- Tabs (content type of sport)-->
+
+
+    <!-- Tabs (content type of sport)-->
     <div class="typesport">
         <div class="container">
             <div class="tabbed">
-                <input type="radio" name="tabs" id="tab-nav-1" checked>
+                <input type="radio" name="tabs" id="tab-nav-1" >
                 <label for="tab-nav-1">Группы</label>
                 <input type="radio" name="tabs" id="tab-nav-2">
                 <label for="tab-nav-2">Залы</label>
-                <input type="radio" name="tabs" id="tab-nav-3">
+                <input type="radio" name="tabs" id="tab-nav-3" checked>
                 <label for="tab-nav-3">Фото</label>
                 <input type="radio" name="tabs" id="tab-nav-4">
                 <label for="tab-nav-4">Как доехать</label>
                 <div class="tabs">
-                  <div><h2>Группы</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla tortor, a posuere urna. Praesent urna quam, semper ut ultricies et, mollis ac elit. </p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla tortor, a posuere urna. Praesent urna quam, semper ut ultricies et, mollis ac elit. Suspendisse tempor, lacus id consectetur sagittis, lorem odio dignissim nulla, a condimentum sem neque sed ligula. Maecenas id risus eros, eget porttitor metus. Quisque pellentesque neque dignissim nisl pellentesque vitae tempus urna eleifend. Nullam egestas, neque id placerat luctus, nibh velit pharetra nulla, vel pretium justo massa ut elit. Vivamus nec auctor nunc.</p></div>
-                  <div><h2>Расписание залов</h2><p>Maecenas dictum, urna ut consequat condimentum, est dui commodo diam, ac pretium dui ante eu quam. Curabitur posuere metus nec tellus venenatis placerat. Ut egestas neque in odio vulputate gravida. In at justo ac est laoreet eleifend vel quis arcu. Aliquam erat volutpat. Proin vitae vehicula neque. Nam tempus erat ac ante tincidunt tincidunt. Pellentesque eu nibh sapien. Nunc augue magna, lacinia eget congue eget, mattis id tortor. Fusce id vestibulum neque. Proin tincidunt tellus ut risus lobortis cursus. Duis sit amet urna vel sapien ullamcorper varius.</p></div>
-                  <div><h2>Фото объекта</h2><p>Duis luctus dolor ac erat luctus hendrerit. Aenean id congue magna. Proin sit amet elit vel lacus ornare dignissim imperdiet nec odio. Maecenas condimentum egestas lorem et laoreet. Donec ut leo non purus rutrum euismod vel faucibus nunc. Curabitur vel mauris nisi, vitae laoreet erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas ipsum odio, iaculis id vulputate vitae, vestibulum at nunc. Integer non nisl lorem. Quisque lobortis congue semper. Nunc neque nisi, consequat id egestas vitae, porta vel sem.</p></div>
-                  <div><h2>Как доехать</h2><p>Fusce vel eros eu lectus ultricies fermentum vestibulum adipiscing odio. Suspendisse ultricies, metus nec dapibus pharetra, quam arcu vulputate nisl, a pretium nisi velit id ante. Nunc auctor augue sit amet orci vestibulum id placerat nulla pellentesque. Duis vel quam velit. Ut auctor ipsum quis lacus semper non pretium mi dignissim. Morbi ultrices augue eget nisi hendrerit placerat. Mauris rhoncus urna quis metus congue quis condimentum risus interdum. Nam lobortis lectus et enim laoreet mattis. Integer faucibus ullamcorper erat, at rhoncus leo bibendum sed. Mauris libero urna, placerat non pretium ac, elementum et arcu. Aliquam non tellus diam, vel scelerisque odio. Etiam a quam et enim vehicula feugiat posuere at dui. Phasellus at nisl quam. Integer nisi mi, varius vitae placerat viverra, dapibus vitae massa. Nullam ut orci vitae nisi ornare aliquam in eget orci.</p></div>
+                    <!--Group-->
+                    <div>
+                        <h2>Группы</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla tortor, a posuere
+                            urna. Praesent urna quam, semper ut ultricies et, mollis ac elit. </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla tortor, a posuere
+                            urna. Praesent urna quam, semper ut ultricies et, mollis ac elit. Suspendisse tempor, lacus
+                            id consectetur sagittis, lorem odio dignissim nulla, a condimentum sem neque sed ligula.
+                            Maecenas id risus eros, eget porttitor metus. Quisque pellentesque neque dignissim nisl
+                            pellentesque vitae tempus urna eleifend. Nullam egestas, neque id placerat luctus, nibh
+                            velit pharetra nulla, vel pretium justo massa ut elit. Vivamus nec auctor nunc.</p>
+                    </div>
+                    <!--List of Time-->
+                    <div>
+                        <h2>Расписание залов</h2>
+                        <p>Maecenas dictum, urna ut consequat condimentum, est dui commodo diam, ac pretium dui ante eu
+                            quam. Curabitur posuere metus nec tellus venenatis placerat. Ut egestas neque in odio
+                            vulputate gravida. In at justo ac est laoreet eleifend vel quis arcu. Aliquam erat volutpat.
+                            Proin vitae vehicula neque. Nam tempus erat ac ante tincidunt tincidunt. Pellentesque eu
+                            nibh sapien. Nunc augue magna, lacinia eget congue eget, mattis id tortor. Fusce id
+                            vestibulum neque. Proin tincidunt tellus ut risus lobortis cursus. Duis sit amet urna vel
+                            sapien ullamcorper varius.</p>
+                    </div>
+                    <!-- Sliders -->
+                        <div class="container p-0 m-0">
+                            <main role="main">
+                                <!-- Slider -->
+                                <section class="velo-slides" data-velo-slider="on" data-velo-theme="light">
+                                  
+                                    <!-- Slide -->
+                                  <section class="velo-slide">
+                                    <!-- Pretitle Hint -->
+                                    <span class="velo-slider__hint"><span><span>+375 (29) 139 00 00</span></span></span> <!-- Slide BG -->
+                                    <div class="velo-slide__bg">
+                                      <!-- Borders -->
+                                      <span class="border"><span></span></span> <!-- Img -->
+                                      <figure class="velo-slide__figure" style="background-image: url(https://source.unsplash.com/VsBl5PwVZpY/2000x1200)"></figure>
+                                    </div>
+                                    <!-- Header -->
+                                    <header class="velo-slide__header">
+                                      <h3 class="velo-slide__title"><span class="oh"><span>Бокс</span></span><span class="oh"><span>Семен Иванов</span></span></h3>
+                                      <p class="velo-slide__text"><span class="oh"><span>Я стараюсь быть честным и справедливым, но добро должно быть с кулаками</span></span></p>
+                                      <span class="velo-slide__btn"><a class="btn-draw btn--white" href="#"><span class="btn-draw__text"><span>позвоните нам</span></span></a></span>
+                                    </header>
+                                  </section>
+                            
+                                  <!-- Slide -->
+                                  <section class="velo-slide">
+                                    <!-- Pretitle Hint -->
+                                    <span class="velo-slider__hint"><span><span>пер. Уральский, 9</span></span></span> 
+                                    <!-- Slide BG -->
+                                    <div class="velo-slide__bg">
+                                      <!-- Borders -->
+                                      <span class="border"><span></span></span> <!-- Img -->
+                                      <figure class="velo-slide__figure" style="background-image: url(https://source.unsplash.com/D8GFCYxyJj8/2000x1200)"></figure>
+                                    </div>
+                                    <!-- Header -->
+                                    <header class="velo-slide__header">
+                                      <h3 class="velo-slide__title"><span class="oh"><span>Небольшая разминка</span></span><span class="oh"><span>Зал поможет расслабиться</span></span></h3>
+                                      <p class="velo-slide__text"><span class="oh"><span>Чувствовать запах пота, силу удара. Всегда помогает быть в тонусе, груша тренер и адреналин.</span></span></p>
+                                    </header>
+                                  </section>
+                                  
+                                  <!-- Slide - with Video -->
+                                  <section class="velo-slide">
+                                    <!-- Pretitle Hint -->
+                                    <span class="velo-slider__hint"><span><span>Urban Influence</span></span></span> 
+                                    <!-- Slide BG -->
+                                    <div class="velo-slide__bg">
+                                      <!-- Borders -->
+                                      <span class="border"><span></span></span> <!-- Img -->
+                                      <figure class="velo-slide__figure" style="background-image: url()"></figure>
+                                      <div class="velo-slide__vid-wrap">
+                                        <video autoplay="" class="velo-slide__vid" loop="" poster="">
+                                          <source src="http://uiclients.com/assets/videos/ui-chaun.mp4" type="video/mp4"> Wait, are you still using IE? Bruv. Go get Chrome, or kick rocks.</video>
+                                      </div>
+                                    </div><!-- Header -->
+                                    <header class="velo-slide__header">
+                                      <h3 class="velo-slide__title"><span class="oh"><span>Pigeon Wisdom</span></span><span class="oh"><span>Agency Site</span></span></h3>
+                                      <p class="velo-slide__text"><span class="oh"><span>Live from the Coop, SOTD rocking, folio and storytelling joint for the Pigeon Wizzy squad. Coo Coo Mfers.</span></span></p>
+                                      <span class="velo-slide__btn"><a class="btn-draw btn--white" href="#"><span class="btn-draw__text"><span>View Project</span></span></a></span>
+                                    </header>
+                                  </section>
+                                  
+                                 
+                                  <!-- Slides Nav -->
+                                  <nav class="velo-slides-nav">
+                                    <ul class="velo-slides-nav__list">
+                                      <li>
+                                        <a class="js-velo-slides-prev velo-slides-nav__prev inactive" href="#0"><i class="icon-up-arrow"></i></a>
+                                      </li>
+                                      <li>
+                                        <a class="js-velo-slides-next velo-slides-nav__next" href="#0"><i class="icon-down-arrow"></i></a>
+                                      </li>
+                                    </ul>
+                                  </nav>
+                                </section>
+                              </main>
+                        </div>
+                    <!-- Map -->
+                    <div>
+                        <h2>Как доехать</h2>
+                        <p>Fusce vel eros eu lectus ultricies fermentum vestibulum adipiscing odio. Suspendisse
+                            ultricies, metus nec dapibus pharetra, quam arcu vulputate nisl, a pretium nisi velit id
+                            ante. Nunc auctor augue sit amet orci vestibulum id placerat nulla pellentesque. Duis vel
+                            quam velit. Ut auctor ipsum quis lacus semper non pretium mi dignissim. Morbi ultrices augue
+                            eget nisi hendrerit placerat. Mauris rhoncus urna quis metus congue quis condimentum risus
+                            interdum. Nam lobortis lectus et enim laoreet mattis. Integer faucibus ullamcorper erat, at
+                            rhoncus leo bibendum sed. Mauris libero urna, placerat non pretium ac, elementum et arcu.
+                            Aliquam non tellus diam, vel scelerisque odio. Etiam a quam et enim vehicula feugiat posuere
+                            at dui. Phasellus at nisl quam. Integer nisi mi, varius vitae placerat viverra, dapibus
+                            vitae massa. Nullam ut orci vitae nisi ornare aliquam in eget orci.</p>
+                    </div>
                 </div>
-              </div>
-    
+            </div>
+
         </div>
     </div>
-    
+
 
     <div class="divider"></div>
 
-<!-- Block offer (News) -->
+    <!-- Block offer (News) -->
     <div class="offer">
         <div class="bgc_y"></div>
         <div class="row" style="max-width: 100%;">
@@ -147,7 +259,8 @@
                             <div class="offer__text">
                                 <h2 class="title">Наши новости</h2>
                                 <div class="offer__descr">
-                                    Принимать здоровый образ жизни за основу всего существования есть наилучший метод получения удовольствия от окружающей суеты.
+                                    Принимать здоровый образ жизни за основу всего существования есть наилучший метод
+                                    получения удовольствия от окружающей суеты.
                                 </div>
                             </div>
                         </div>
@@ -168,11 +281,14 @@
                                 <div class="offer__advantages">
                                     <h2>В предвкушении зимы</h2>
                                     <div class="offer__advantages-text">
-                                        Уже снег скрипит под ногами и мы вместе открываем двери новой зиме, очень хочется понимать, что морозный хруст проходит не только под ногами, но и отдается отголоском в каждой нотки души
+                                        Уже снег скрипит под ногами и мы вместе открываем двери новой зиме, очень
+                                        хочется понимать, что морозный хруст проходит не только под ногами, но и
+                                        отдается отголоском в каждой нотки души
                                     </div>
                                     <h2>Лыжня зовет</h2>
                                     <div class="offer__advantages-text">
-                                        Мы открылись и уже сегодня вас радостно приветсвует лыжероллерная трасса в Дражне.
+                                        Мы открылись и уже сегодня вас радостно приветсвует лыжероллерная трасса в
+                                        Дражне.
                                     </div>
                                 </div>
                                 <div class="offer__advantages">
@@ -182,7 +298,8 @@
                                     </div>
                                     <h2>Районные соревнования 19 декабря 2021 года</h2>
                                     <div class="offer__advantages-text">
-                                        Ледовая арена Минск-Юность открыла свои двери для грандиозного матча. Минута тишина, свисток.. и дальше просто неизвестность
+                                        Ледовая арена Минск-Юность открыла свои двери для грандиозного матча. Минута
+                                        тишина, свисток.. и дальше просто неизвестность
                                     </div>
                                 </div>
                                 <div class="offer__advantages">
@@ -192,7 +309,8 @@
                                     </div>
                                     <h2>Сбор средств 22 декабря 2021 года</h2>
                                     <div class="offer__advantages-text">
-                                        Каждый из нас, сам по себе меценат. Достучаться до тепла маленьких сердец, можно очень просто. Благотворительный марафон. Начало.
+                                        Каждый из нас, сам по себе меценат. Достучаться до тепла маленьких сердец, можно
+                                        очень просто. Благотворительный марафон. Начало.
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +342,7 @@
                                     <div class="offer__slide">
                                         <img src="{% static 'img/slider/helping.png'%}" alt="oil">
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -258,7 +376,7 @@
                             <input type="text" id="height" placeholder="Введите рост" class="calculating__choose-item">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                            <input type="text" id="weight" placeholder="Введите вес"  class="calculating__choose-item">
+                            <input type="text" id="weight" placeholder="Введите вес" class="calculating__choose-item">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                             <input type="text" id="age" placeholder="Введите возраст" class="calculating__choose-item">
@@ -275,10 +393,12 @@
                             <div data-ratio="1.2" id="low" class="calculating__choose-item">Низкая активность </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div data-ratio="1.375" id="small"  class="calculating__choose-item ">Невысокая активность</div>
+                            <div data-ratio="1.375" id="small" class="calculating__choose-item ">Невысокая активность
+                            </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div data-ratio="1.55" id="medium" class="calculating__choose-item">Умеренная активность</div>
+                            <div data-ratio="1.55" id="medium" class="calculating__choose-item">Умеренная активность
+                            </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                             <div data-ratio="1.725" id="high" class="calculating__choose-item">Высокая активность</div>
@@ -296,9 +416,9 @@
                             </div>
                         </dic>
                         <dic class="col-12">
-                           <div class="calculating__result">
+                            <div class="calculating__result">
                                 <span></span> ккал
-                           </div>
+                            </div>
                         </dic>
                     </div>
                 </div>
@@ -312,72 +432,73 @@
         <h2 class="title">Руководство</h2>
 
         <div class="menu__field">
-          <div class="container">
-      <div class="row">
-          <div class="col-12 col-sm-6 col-md-12 col-lg-3">
-            <div class="menu__item">
-                <img src="{% static 'img/man-space.png'%}" alt="vegy">
-                <h3 class="menu__item-subtitle">Новиков Алексей Сергеевич<br>директор</h3>
-                <div class="menu__item-descr">Общее руководство центром</div>
-                <div class="menu__item-divider"></div>
-                <div class="menu__item-price">
-                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                    <div class="menu__item-total"><span>340 00 00</span></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-12 col-lg-3">
+                        <div class="menu__item">
+                            <img src="{% static 'img/man-space.png'%}" alt="vegy">
+                            <h3 class="menu__item-subtitle">Новиков Алексей Сергеевич<br>директор</h3>
+                            <div class="menu__item-descr">Общее руководство центром</div>
+                            <div class="menu__item-divider"></div>
+                            <div class="menu__item-price">
+                                <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                                <div class="menu__item-total"><span>340 00 00</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="menu__item ">
+                            <img src="{% static 'img/man-space.png'%}" alt="vegy">
+                            <h3 class="menu__item-subtitle">Жолудев Михаил Владимирович<br>заместитель директора</h3>
+                            <div class="menu__item-descr">Административно-хозяйственная работа (техническое состояние
+                                объектов)</div>
+                            <div class="menu__item-divider"></div>
+                            <div class="menu__item-price">
+                                <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                                <div class="menu__item-total"><span>340 00 00</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="menu__item ">
+                            <img src="{% static 'img/woman-space.png'%}" alt="vegy">
+                            <h3 class="menu__item-subtitle">Белозерцева Наталья Михайловна<br>заместитель директора</h3>
+                            <div class="menu__item-descr">По основной деятельности (спорт)</div>
+                            <div class="menu__item-divider"></div>
+                            <div class="menu__item-price">
+                                <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                                <div class="menu__item-total"><span>340 00 00</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="menu__item">
+                            <img src="{% static 'img/woman-space.png'%}" alt="vegy">
+                            <h3 class="menu__item-subtitle">Белохвостик Инга Ивановна<br>главный бухгалтер</h3>
+                            <div class="menu__item-descr">финансовая деятельность</div>
+                            <div class="menu__item-divider"></div>
+                            <div class="menu__item-price">
+                                <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
+                                <div class="menu__item-total"><span>340 00 00</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-          </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="menu__item " >
-                <img src="{% static 'img/man-space.png'%}" alt="vegy">
-                <h3 class="menu__item-subtitle">Жолудев Михаил Владимирович<br>заместитель директора</h3>
-                <div class="menu__item-descr">Административно-хозяйственная работа (техническое состояние объектов)</div>
-                <div class="menu__item-divider"></div>
-                <div class="menu__item-price">
-                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                    <div class="menu__item-total"><span>340 00 00</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="menu__item ">
-                <img src="{% static 'img/woman-space.png'%}" alt="vegy">
-                <h3 class="menu__item-subtitle">Белозерцева Наталья Михайловна<br>заместитель директора</h3>
-                <div class="menu__item-descr">По основной деятельности (спорт)</div>
-                <div class="menu__item-divider"></div>
-                <div class="menu__item-price">
-                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                    <div class="menu__item-total"><span>340 00 00</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="menu__item">
-                <img src="{% static 'img/woman-space.png'%}" alt="vegy">
-                <h3 class="menu__item-subtitle">Белохвостик Инга Ивановна<br>главный бухгалтер</h3>
-                <div class="menu__item-descr">финансовая деятельность</div>
-                <div class="menu__item-divider"></div>
-                <div class="menu__item-price">
-                    <div class="menu__item-cost"><i class="fas fa-phone-alt"></i></div>
-                    <div class="menu__item-total"><span>340 00 00</span></div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
         </div>
     </div>
 
-<!--    <div class="order">-->
-<!--        <div class="container">-->
-<!--            <div class="title">Заказывай пробный день прямо сейчас!</div>-->
-<!--            <form action="#" class="order__form">-->
-<!--                <input required placeholder="Ваше имя" name="name" type="text" class="order__input">-->
-<!--                <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="order__input">-->
-<!--                <img src="{% static 'icons/right.svg'%}" alt="right">-->
-<!--                <button class="btn btn_dark btn_min">Перезвонить мне</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    <div class="order">-->
+    <!--        <div class="container">-->
+    <!--            <div class="title">Заказывай пробный день прямо сейчас!</div>-->
+    <!--            <form action="#" class="order__form">-->
+    <!--                <input required placeholder="Ваше имя" name="name" type="text" class="order__input">-->
+    <!--                <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="order__input">-->
+    <!--                <img src="{% static 'icons/right.svg'%}" alt="right">-->
+    <!--                <button class="btn btn_dark btn_min">Перезвонить мне</button>-->
+    <!--            </form>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <div class="divider"></div>
     <div class="promotion">
@@ -386,33 +507,34 @@
             <div class="promotion__text">
                 <div class="title">Наши достижения</div>
                 <div class="promotion__descr">
-                    Мы ценим каждого клиента и предлагаем вам стать одним из них на очень выгодных условиях. 
-                    Каждому, кто закажет доставку питание на неделю, будет предоставлена скидка в размере <span>20%!</span>
+                    Мы ценим каждого клиента и предлагаем вам стать одним из них на очень выгодных условиях.
+                    Каждому, кто закажет доставку питание на неделю, будет предоставлена скидка в размере
+                    <span>20%!</span>
                     <br><br>
                     Акция закончится 20 мая в 00:00
                 </div>
             </div>
-<!--            <div class="promotion__timer">-->
-<!--                <div class="title">Осталось до конца акции:</div>-->
-<!--                <div class="timer">-->
-<!--                    <div class="timer__block">-->
-<!--                        <span id="days">12</span>-->
-<!--                        дней-->
-<!--                    </div>-->
-<!--                    <div class="timer__block">-->
-<!--                        <span id="hours">20</span>-->
-<!--                        часов-->
-<!--                    </div>-->
-<!--                    <div class="timer__block">-->
-<!--                        <span id="minutes">56</span>-->
-<!--                        минут-->
-<!--                    </div>-->
-<!--                    <div class="timer__block">-->
-<!--                        <span id="seconds">20</span>-->
-<!--                        секунд-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="promotion__timer">-->
+            <!--                <div class="title">Осталось до конца акции:</div>-->
+            <!--                <div class="timer">-->
+            <!--                    <div class="timer__block">-->
+            <!--                        <span id="days">12</span>-->
+            <!--                        дней-->
+            <!--                    </div>-->
+            <!--                    <div class="timer__block">-->
+            <!--                        <span id="hours">20</span>-->
+            <!--                        часов-->
+            <!--                    </div>-->
+            <!--                    <div class="timer__block">-->
+            <!--                        <span id="minutes">56</span>-->
+            <!--                        минут-->
+            <!--                    </div>-->
+            <!--                    <div class="timer__block">-->
+            <!--                        <span id="seconds">20</span>-->
+            <!--                        секунд-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
     </div>
 
@@ -448,10 +570,17 @@
         </div>
     </div>
 
-<!-- Place for JS -->
-    <script src="{% static 'js/bundle.js' %}"></script>
-<!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-</body>
-</html>
+    <!-- Script slide velocity-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/velocity/1.3.0/velocity.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/velocity/1.3.0/velocity.ui.js'></script>
 
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+    <!-- Place for JS -->
+    <script src="{% static 'js/bundle.js' %}"></script>
+    
+</body>
+
+</html>
