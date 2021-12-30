@@ -349,7 +349,7 @@ $btn-draw-size: 1px;
 //  The single slide instances
 //----------------------------------------------
 .velo-slide{
-  height: 100vh;
+  height: 60vh;
   z-index: 4;
 
   @media (min-width: $mq-med) and (max-width: $mq-large){
