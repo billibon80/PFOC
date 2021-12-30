@@ -99,6 +99,7 @@ $font-paragraph: "Montserrat", Georgia, serif;
 .container main {
   margin: 0;
   width: 100%;
+  height: 100%;
   font-weight: 400;
   font-style: normal;
   -ms-text-size-adjust: 100%;
@@ -334,7 +335,7 @@ $btn-draw-size: 1px;
 .velo-slides{
   z-index: 8;
   position: relative;
-  height: 52.5vh; // 100vh
+  height: 100%; // 100vh
   background-color: #111;
 
   // Might need to do above $mq-large
