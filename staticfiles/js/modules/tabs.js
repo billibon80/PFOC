@@ -10,7 +10,7 @@ function hideTabContent(blockContent, blockTab, selector) {
     });
 }
 
-function showTabContent(i = 0, blockContent, blockTab, selector) {
+function showTabContent(blockContent, blockTab, selector, i = 0) {
     blockContent[i].classList.add('show', 'fade');
     blockContent[i].classList.remove('hide');
     blockTab[i].classList.add(selector);
@@ -26,7 +26,7 @@ function tabs() {
 
 
     hideTabContent(tabsContent, tabs, selector);
-    showTabContent(0, tabsContent, tabs, selector);
+    showTabContent(tabsContent, tabs, selector);
 
     tabsParent.addEventListener('click', (e) => {
         const target = e.target;
@@ -36,7 +36,7 @@ function tabs() {
                 
                 if (target == item) {
                     hideTabContent(tabsContent, tabs, selector);
-                    showTabContent(i, tabsContent, tabs, selector);
+                    showTabContent( tabsContent, tabs, selector, i);
                 }
             });
         }

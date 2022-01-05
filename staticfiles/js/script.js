@@ -1,12 +1,14 @@
 import tabs from './modules/tabs';
 import calc from './modules/calc';
 import veloSlider from './modules/velo-slider';
+import modalSport from './modules/modal_sport';
 
 window.addEventListener("DOMContentLoaded", () => {
       
     tabs();
     calc();
     veloSlider();
+    modalSport();
 
     
 

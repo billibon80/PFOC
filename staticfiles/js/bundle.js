@@ -116,6 +116,64 @@ function calc() {
 
 /***/ }),
 
+/***/ "./staticfiles/js/modules/modal_sport.js":
+/*!***********************************************!*\
+  !*** ./staticfiles/js/modules/modal_sport.js ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+function modalSport() {
+  let num = 15;
+  const modalBtn = document.querySelectorAll('.tabheader__item'),
+        modalContainer = document.querySelectorAll('.modals'),
+        imgTabCont = document.querySelectorAll('.tabcontent img'); // for (let i = 0; i < num; i++) {
+  //     const div = document.createElement('div');
+  //     div.classList.add('modal-drop');
+  //     div.style.top = Math.floor((Math.random() * 100)) + 'vh';
+  //     div.style.left = Math.floor((Math.random() * 100)) + 'vw';
+  //     div.style.transitionDelay = Math.random() + 's';
+  //     holdModals.appendChild(div);
+  // }
+
+  modalBtn.forEach((btn, i) => {
+    const holdModals = document.createDocumentFragment();
+
+    for (let i = 0; i < num; i++) {
+      const div = document.createElement('div');
+      div.classList.add('modal-drop');
+      div.style.top = Math.floor(Math.random() * 100) + 'vh';
+      div.style.left = Math.floor(Math.random() * 100) + 'vw';
+      div.style.transitionDelay = Math.random() + 's';
+      holdModals.appendChild(div);
+    }
+
+    btn.addEventListener('click', function () {
+      modalContainer[i].appendChild(holdModals);
+      modalContainer[i].style.display = 'block';
+      window.setTimeout(function () {
+        modalContainer[i].classList.add('active');
+        document.querySelector('body').style.overflow = 'hidden';
+      }, 0.4);
+      modalContainer[i].querySelector('.modal-content').style.cssText = `background: url(${imgTabCont[i].getAttribute('src')})
+                no-repeat center center fixed; background-size: cover; z-index: 6`;
+      const closeBtn = modalContainer[i].querySelector('.close');
+      closeBtn.addEventListener('click', function () {
+        modalContainer[i].classList.remove('active');
+        document.querySelector('body').style.overflow = 'auto';
+        window.setTimeout(function () {
+          modalContainer[i].style.display = 'none';
+        }, 3000);
+      });
+    });
+    console.log();
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (modalSport);
+
+/***/ }),
+
 /***/ "./staticfiles/js/modules/tabs.js":
 /*!****************************************!*\
   !*** ./staticfiles/js/modules/tabs.js ***!
@@ -134,11 +192,8 @@ function hideTabContent(blockContent, blockTab, selector) {
   });
 }
 
-function showTabContent() {
-  let i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-  let blockContent = arguments.length > 1 ? arguments[1] : undefined;
-  let blockTab = arguments.length > 2 ? arguments[2] : undefined;
-  let selector = arguments.length > 3 ? arguments[3] : undefined;
+function showTabContent(blockContent, blockTab, selector) {
+  let i = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
   blockContent[i].classList.add('show', 'fade');
   blockContent[i].classList.remove('hide');
   blockTab[i].classList.add(selector);
@@ -150,7 +205,7 @@ function tabs() {
         tabsContent = document.querySelectorAll('.tabcontent'),
         selector = 'tabheader__item_active';
   hideTabContent(tabsContent, tabs, selector);
-  showTabContent(0, tabsContent, tabs, selector);
+  showTabContent(tabsContent, tabs, selector);
   tabsParent.addEventListener('click', e => {
     const target = e.target;
 
@@ -158,7 +213,7 @@ function tabs() {
       tabs.forEach((item, i) => {
         if (target == item) {
           hideTabContent(tabsContent, tabs, selector);
-          showTabContent(i, tabsContent, tabs, selector);
+          showTabContent(tabsContent, tabs, selector, i);
         }
       });
     }
@@ -574,13 +629,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/tabs */ "./staticfiles/js/modules/tabs.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/calc */ "./staticfiles/js/modules/calc.js");
 /* harmony import */ var _modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/velo-slider */ "./staticfiles/js/modules/velo-slider.js");
+/* harmony import */ var _modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal_sport */ "./staticfiles/js/modules/modal_sport.js");
+
 
 
 
 window.addEventListener("DOMContentLoaded", () => {
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])();
   (0,_modules_calc__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  (0,_modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__["default"])(); // News
+  (0,_modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  (0,_modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__["default"])(); // News
 
   const parentNews = document.querySelector('.offer'),
         news = parentNews.querySelectorAll('.offer__advantages'),

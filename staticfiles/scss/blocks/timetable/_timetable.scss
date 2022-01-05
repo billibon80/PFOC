@@ -1,0 +1,52 @@
+  
+.responsive-table {
+  overflow: auto;
+  max-height: 25rem;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    }
+  .table {
+    &-header {
+      background-color: #95A5A6;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      position: sticky;
+      top: 0;
+      }
+    &-row {
+      background-color: #ffffff;
+      box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+      .row {
+        text-align: center;
+      }
+      }
+  }
+  
+  @media all and (max-width: 576px) {
+    text-align: left;
+    .table-header {
+      display: none;
+    }
+    li {
+      display: block;
+      width: 90%;
+    }
+    .row {
+      &:before {
+        color: #6C7A89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 20%;
+        text-align: right;
+      }
+    }
+  }
+}
