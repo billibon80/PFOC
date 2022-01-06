@@ -10,6 +10,9 @@ $bg: #ffffff91;
   .container {
     margin-top: 9rem;
     height: 31rem;
+    @media (max-width: 576px) {
+      margin-top: 1rem;
+    }
   }
 
   .tabbed {
