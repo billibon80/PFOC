@@ -260,14 +260,8 @@ function tabs() {
 
 __webpack_require__.r(__webpack_exports__);
 function veloSlider() {
-  /**
-   * Velocity Effects
-   *
-   * First, A few Registered effects for velocity's ui kit.
-   * Actual slider stuff below
-   */
-  var scaleDownAmnt = 0.7;
-  var boxShadowAmnt = '40px';
+  const scaleDownAmnt = 0.7;
+  const boxShadowAmnt = '40px';
   $.Velocity.RegisterEffect("translateUp", {
     defaultDuration: 1,
     calls: [[{
@@ -383,225 +377,233 @@ function veloSlider() {
 
     }, 0.20]]
   });
-  /**
-   * Velo Slider
-   * A Custom Slider using Velocity and Velocity UI effects
-   */
+  const sectionSlide = document.querySelectorAll('section.velo-slides');
+  sectionSlide.forEach((section, i) => {
+    const sectionId = section.getAttribute('id');
 
-  var VeloSlider = function () {
-    /**
-     * Global Settings 
-     */
-    var settings = {
-      veloInit: $('.velo-slides').data('velo-slider'),
-      $veloSlide: $('.velo-slide'),
-      veloSlideBg: '.velo-slide__bg',
-      navPrev: $('.velo-slides-nav').find('a.js-velo-slides-prev'),
-      navNext: $('.velo-slides-nav').find('a.js-velo-slides-next'),
-      veloBtn: $('.velo-slide__btn'),
-      delta: 0,
-      scrollThreshold: 7,
-      currentSlide: 1,
-      animating: false,
-      animationDuration: 2000
-    }; // Flags
-
-    var delta = 0,
-        animating = false;
-    return {
+    const VeloSlider = function () {
       /**
-       * Init 
+       * Global Settings 
        */
-      init: function () {
-        this.bind();
-      },
+      var settings = {
+        veloInit: $(`#${sectionId}.velo-slides`).data('velo-slider'),
+        $veloSlide: $(`#${sectionId} .velo-slide`),
+        veloSlideBg: `#${sectionId} .velo-slide__bg`,
+        navPrev: $(`#${sectionId} .velo-slides-nav`).find('a.js-velo-slides-prev'),
+        navNext: $(`#${sectionId} .velo-slides-nav`).find('a.js-velo-slides-next'),
+        veloBtn: $(`#${sectionId} .velo-slide__btn`),
+        delta: 0,
+        scrollThreshold: 7,
+        currentSlide: 1,
+        animating: false,
+        animationDuration: 2000
+      }; // Flags
 
-      /**
-       * Bind our click, scroll, key events
-       */
-      bind: function () {
-        //  Add active to first slide to set it off
-        settings.$veloSlide.first().addClass('is-active'); //  Init with a data attribute, 
-        //  Binding the animation to scroll, arrows, keys
+      let delta = 0,
+          animating = false;
+      return {
+        /**
+         * Init 
+         */
+        init: function () {
+          this.bind();
+        },
 
-        if (settings.veloInit == 'on') {
-          VeloSlider.initScrollJack();
-          $(window).on('DOMMouseScroll mousewheel', VeloSlider.scrollJacking);
-        } // Arrow / Click Nav
+        /**
+         * Bind our click, scroll, key events
+         */
+        bind: function () {
+          //  Add active to first slide to set it off
+          settings.$veloSlide.first().addClass('is-active'); //  Init with a data attribute, 
+          //  Binding the animation to scroll, arrows, keys
+
+          if (settings.veloInit == 'on') {
+            VeloSlider.initScrollJack();
+            $(window).on('DOMMouseScroll mousewheel', VeloSlider.scrollJacking);
+          } // Arrow / Click Nav
 
 
-        settings.navPrev.on('click', VeloSlider.prevSlide);
-        settings.navNext.on('click', VeloSlider.nextSlide); // Key Nav
+          settings.navPrev.on('click', VeloSlider.prevSlide);
+          settings.navNext.on('click', VeloSlider.nextSlide); // Key Nav
 
-        $(document).on('keydown', function (e) {
-          var keyNext = e.which == 39 || e.which == 40,
-              keyPrev = e.which == 37 || e.which == 38;
+          $(document).on('keydown', function (e) {
+            var keyNext = e.which == 39 || e.which == 40,
+                keyPrev = e.which == 37 || e.which == 38;
 
-          if (keyNext && !settings.navNext.hasClass('inactive')) {
-            e.preventDefault();
-            VeloSlider.nextSlide();
-          } else if (keyPrev && !settings.navPrev.hasClass('inactive')) {
-            e.preventDefault();
-            VeloSlider.prevSlide();
+            if (keyNext && !settings.navNext.hasClass('inactive')) {
+              e.preventDefault();
+              VeloSlider.nextSlide();
+            } else if (keyPrev && !settings.navPrev.hasClass('inactive')) {
+              e.preventDefault();
+              VeloSlider.prevSlide();
+            }
+          }); // // Swipes
+          // $(window).swipe(function( direction, offset ) {
+          //   //if (offset < 100) { return; }
+          //   if (direction == "up") { 
+          //     VeloSlider.prevSlide(); 
+          //     console.log('swipe up');
+          //   }
+          //   if (direction == "down") { VeloSlider.nextSlide(); } 
+          // });
+          //set navigation arrows visibility
+
+          VeloSlider.checkNavigation(); // Call Button Hover animation
+
+          VeloSlider.hoverAnimation();
+        },
+
+        /**
+         * Hover Animation
+         * Adds 'is-hovering' class to the current slide
+         * when hovering over the button.
+         */
+        hoverAnimation: function () {
+          settings.veloBtn.hover(function () {
+            $(this).closest(settings.$veloSlide).toggleClass('is-hovering');
+          });
+        },
+
+        /** 
+         * Set Animation
+         * Defines the animation sequence, calling our registered velocity effects
+         * @see js/components/_velocity-effects.js
+         */
+        setAnimation: function (midStep, direction) {
+          // Vars for our velocity effects
+          var animationVisible = 'translateNone',
+              animationTop = 'translateUp',
+              animationBottom = 'translateDown',
+              easing = 'ease',
+              animDuration = settings.animationDuration; // Middle Step
+
+          if (midStep) {
+            animationVisible = 'scaleUp.moveUp.scroll';
+            animationTop = 'scaleDown.moveUp.scroll';
+            animationBottom = 'scaleDown.moveDown.scroll';
+          } else {
+            animationVisible = direction == 'next' ? 'scaleUp.moveUp' : 'scaleUp.moveDown';
+            animationTop = 'scaleDown.moveUp';
+            animationBottom = 'scaleDown.moveDown';
           }
-        }); // // Swipes
-        // $(window).swipe(function( direction, offset ) {
-        //   //if (offset < 100) { return; }
-        //   if (direction == "up") { 
-        //     VeloSlider.prevSlide(); 
-        //     console.log('swipe up');
-        //   }
-        //   if (direction == "down") { VeloSlider.nextSlide(); } 
-        // });
-        //set navigation arrows visibility
 
-        VeloSlider.checkNavigation(); // Call Button Hover animation
+          return [animationVisible, animationTop, animationBottom, animDuration, easing];
+        },
 
-        VeloSlider.hoverAnimation();
-      },
-
-      /**
-       * Hover Animation
-       * Adds 'is-hovering' class to the current slide
-       * when hovering over the button.
-       */
-      hoverAnimation: function () {
-        settings.veloBtn.hover(function () {
-          $(this).closest(settings.$veloSlide).toggleClass('is-hovering');
-        });
-      },
-
-      /** 
-       * Set Animation
-       * Defines the animation sequence, calling our registered velocity effects
-       * @see js/components/_velocity-effects.js
-       */
-      setAnimation: function (midStep, direction) {
-        // Vars for our velocity effects
-        var animationVisible = 'translateNone',
-            animationTop = 'translateUp',
-            animationBottom = 'translateDown',
-            easing = 'ease',
-            animDuration = settings.animationDuration; // Middle Step
-
-        if (midStep) {
-          animationVisible = 'scaleUp.moveUp.scroll';
-          animationTop = 'scaleDown.moveUp.scroll';
-          animationBottom = 'scaleDown.moveDown.scroll';
-        } else {
-          animationVisible = direction == 'next' ? 'scaleUp.moveUp' : 'scaleUp.moveDown';
-          animationTop = 'scaleDown.moveUp';
-          animationBottom = 'scaleDown.moveDown';
-        }
-
-        return [animationVisible, animationTop, animationBottom, animDuration, easing];
-      },
-
-      /** 
-       * Init Scroll Jaclk
-       */
-      initScrollJack: function () {
-        var visibleSlide = settings.$veloSlide.filter('.is-active'),
-            topSection = visibleSlide.prevAll(settings.$veloSlide),
-            bottomSection = visibleSlide.nextAll(settings.$veloSlide),
-            animationParams = VeloSlider.setAnimation(false),
-            animationVisible = animationParams[0],
-            animationTop = animationParams[1],
-            animationBottom = animationParams[2];
-        console.log(animationParams);
-        console.log(animationParams[4]);
-        visibleSlide.children('div').velocity(animationVisible, 1, function () {
-          visibleSlide.css('opacity', 1);
-          topSection.css('opacity', 1);
-          bottomSection.css('opacity', 1);
-        });
-        topSection.children('div').velocity(animationTop, 0);
-        bottomSection.children('div').velocity(animationBottom, 0);
-      },
-
-      /**
-       * Scroll Jack
-       * On Mouse Scroll
-       */
-      scrollJacking: function (e) {
-        if (e.originalEvent.detail < 0 || e.originalEvent.wheelDelta > 0) {
-          delta--;
-          Math.abs(delta) >= settings.scrollThreshold && VeloSlider.prevSlide();
-        } else {
-          delta++;
-          delta >= settings.scrollThreshold && VeloSlider.nextSlide();
-        }
-
-        return false;
-      },
-
-      /**
-       * Previous Slide
-       */
-      prevSlide: function (e) {
-        //go to previous section
-        typeof e !== 'undefined' && e.preventDefault();
-        var visibleSlide = settings.$veloSlide.filter('.is-active'),
-            animationParams = VeloSlider.setAnimation(midStep, 'prev'),
-            midStep = false;
-        visibleSlide = midStep ? visibleSlide.next(settings.$veloSlide) : visibleSlide;
-        console.log(midStep);
-
-        if (!animating && !visibleSlide.is(":first-child")) {
-          animating = true;
-          visibleSlide.removeClass('is-active').children(settings.veloSlideBg).velocity(animationParams[2], animationParams[3], animationParams[4]).end().prev(settings.$veloSlide).addClass('is-active').children(settings.veloSlideBg).velocity(animationParams[0], animationParams[3], animationParams[4], function () {
-            animating = false;
+        /** 
+         * Init Scroll Jaclk
+         */
+        initScrollJack: function () {
+          var visibleSlide = settings.$veloSlide.filter('.is-active'),
+              topSection = visibleSlide.prevAll(settings.$veloSlide),
+              bottomSection = visibleSlide.nextAll(settings.$veloSlide),
+              animationParams = VeloSlider.setAnimation(false),
+              animationVisible = animationParams[0],
+              animationTop = animationParams[1],
+              animationBottom = animationParams[2];
+          visibleSlide.children('div').velocity(animationVisible, 1, function () {
+            visibleSlide.css('opacity', 1);
+            topSection.css('opacity', 1);
+            bottomSection.css('opacity', 1);
           });
-          currentSlide = settings.currentSlide - 1;
+          topSection.children('div').velocity(animationTop, 0);
+          bottomSection.children('div').velocity(animationBottom, 0);
+        },
+
+        /**
+         * Scroll Jack
+         * On Mouse Scroll
+         */
+        scrollJacking: function (e) {
+          if (e.originalEvent.detail < 0 || e.originalEvent.wheelDelta > 0) {
+            delta--;
+            Math.abs(delta) >= settings.scrollThreshold && VeloSlider.prevSlide();
+          } else {
+            delta++;
+            delta >= settings.scrollThreshold && VeloSlider.nextSlide();
+          }
+
+          return false;
+        },
+
+        /**
+         * Previous Slide
+         */
+        prevSlide: function (e) {
+          //go to previous section
+          typeof e !== 'undefined' && e.preventDefault();
+          var visibleSlide = settings.$veloSlide.filter('.is-active'),
+              animationParams = VeloSlider.setAnimation(midStep, 'prev'),
+              midStep = false;
+          visibleSlide = midStep ? visibleSlide.next(settings.$veloSlide) : visibleSlide;
+
+          if (!animating && !visibleSlide.is(":first-child")) {
+            animating = true;
+            visibleSlide.removeClass('is-active').children(settings.veloSlideBg).velocity(animationParams[2], animationParams[3], animationParams[4]).end().prev(settings.$veloSlide).addClass('is-active').children(settings.veloSlideBg).velocity(animationParams[0], animationParams[3], animationParams[4], function () {
+              animating = false;
+            });
+            settings.currentSlide = settings.currentSlide - 1;
+          }
+
+          VeloSlider.resetScroll();
+        },
+
+        /** 
+         * Next Slide
+         */
+        nextSlide: function (e) {
+          //go to next section
+          typeof e !== 'undefined' && e.preventDefault();
+          var visibleSlide = settings.$veloSlide.filter('.is-active'),
+              animationParams = VeloSlider.setAnimation(midStep, 'next'),
+              midStep = false;
+
+          if (!animating && !visibleSlide.is(":last-of-type")) {
+            animating = true;
+            visibleSlide.removeClass('is-active').children(settings.veloSlideBg).velocity(animationParams[1], animationParams[3]).end().next(settings.$veloSlide).addClass('is-active').children(settings.veloSlideBg).velocity(animationParams[0], animationParams[3], function () {
+              animating = false;
+            });
+            settings.currentSlide = settings.currentSlide + 1;
+          }
+
+          VeloSlider.resetScroll();
+        },
+
+        /**
+         * Reset SCroll
+         */
+        resetScroll: function () {
+          delta = 0;
+          VeloSlider.checkNavigation();
+        },
+
+        /**
+         * Check Nav
+         * Adds / hides nav based on first/last slide
+         * @todo - loop slides, without cloning if possible
+         */
+        checkNavigation: function () {
+          //update navigation arrows visibility
+          settings.$veloSlide.filter('.is-active').is(':first-of-type') ? settings.navPrev.addClass('inactive') : settings.navPrev.removeClass('inactive');
+          settings.$veloSlide.filter('.is-active').is(':last-of-type') ? settings.navNext.addClass('inactive') : settings.navNext.removeClass('inactive');
         }
-
-        VeloSlider.resetScroll();
-      },
-
-      /** 
-       * Next Slide
-       */
-      nextSlide: function (e) {
-        //go to next section
-        typeof e !== 'undefined' && e.preventDefault();
-        var visibleSlide = settings.$veloSlide.filter('.is-active'),
-            animationParams = VeloSlider.setAnimation(midStep, 'next'),
-            midStep = false;
-
-        if (!animating && !visibleSlide.is(":last-of-type")) {
-          animating = true;
-          visibleSlide.removeClass('is-active').children(settings.veloSlideBg).velocity(animationParams[1], animationParams[3]).end().next(settings.$veloSlide).addClass('is-active').children(settings.veloSlideBg).velocity(animationParams[0], animationParams[3], function () {
-            animating = false;
-          });
-          currentSlide = settings.currentSlide + 1;
-        }
-
-        VeloSlider.resetScroll();
-      },
-
-      /**
-       * Reset SCroll
-       */
-      resetScroll: function () {
-        delta = 0;
-        VeloSlider.checkNavigation();
-      },
-
-      /**
-       * Check Nav
-       * Adds / hides nav based on first/last slide
-       * @todo - loop slides, without cloning if possible
-       */
-      checkNavigation: function () {
-        //update navigation arrows visibility
-        settings.$veloSlide.filter('.is-active').is(':first-of-type') ? settings.navPrev.addClass('inactive') : settings.navPrev.removeClass('inactive');
-        settings.$veloSlide.filter('.is-active').is(':last-of-type') ? settings.navNext.addClass('inactive') : settings.navNext.removeClass('inactive');
-      }
-    };
-  }(); // INIT
+      };
+    }();
+    /**
+     * Velo Slider
+     * A Custom Slider using Velocity and Velocity UI effects
+     */
+    // INIT
 
 
-  VeloSlider.init();
+    VeloSlider.init();
+    section.addEventListener('mouseleave', () => {
+      $(window).off('DOMMouseScroll mousewheel', VeloSlider.scrollJacking);
+    });
+    section.addEventListener('mouseenter', () => {
+      $(window).on('DOMMouseScroll mousewheel', VeloSlider.scrollJacking);
+    });
+  });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (veloSlider);
