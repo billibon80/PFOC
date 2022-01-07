@@ -391,7 +391,7 @@ $btn-draw-size: 1px;
     overflow: hidden;
     @include bg_overlay(#111, 0.4);
     @media (max-width: 576px) {
-      height: 80%;
+      height: 100%;
     }
   }
 
