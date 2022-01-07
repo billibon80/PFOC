@@ -390,6 +390,9 @@ $btn-draw-size: 1px;
     //box-shadow: 0 0 0 rgba(25, 30, 46, 0.4);
     overflow: hidden;
     @include bg_overlay(#111, 0.4);
+    @media (max-width: 576px) {
+      height: 80%;
+    }
   }
 
   // Apply Colors to our backgrounds and set currentColor
