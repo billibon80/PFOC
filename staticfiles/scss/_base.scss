@@ -13,6 +13,12 @@ a {
     };
 }
 
+li img {
+    height: 25rem;
+    min-height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 .btn {
     width: 220px;
     height: 65px;
