@@ -2,7 +2,7 @@ import tabs from './modules/tabs';
 import calc from './modules/calc';
 import veloSlider from './modules/velo-slider';
 import modalSport from './modules/modal_sport';
-import Glide, {Autoplay, Controls, Breakpoints, Images} from '../../node_modules/@glidejs/glide/dist/glide.modular.esm';
+import glideSlide from './modules/glide';
 
 window.addEventListener("DOMContentLoaded", () => {
       
@@ -10,32 +10,9 @@ window.addEventListener("DOMContentLoaded", () => {
     calc();
     veloSlider();
     modalSport();
-    const glide = new Glide('.glide', {
-        srartAt: 0,
-        // autoplay: 5000,
-        transition: '1ms',
-        type: 'carousel',
-        perView: 3,
-        focusAt: "center",
-        breakpoints: {
-            800: {
-                perView: 2
-            },
-            480: {
-                perView: 1
-            }
-        }
-    });
-
-    
-    glide.mount({Autoplay, Controls, Breakpoints, Images});
-
+    glideSlide();
     
 
-
-    
-
-    
     // News
 
     const parentNews = document.querySelector('.offer'),

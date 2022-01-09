@@ -3,11 +3,12 @@
     position: relative;
     .container {
         display: flex;
+        margin-top: 7rem;
     }
     .bgc_y {
         position: absolute;
         width: 50%;
-        height: 32.7rem;
+        height: 100%;
         background: rgba(149, 209, 204, 0.35);
         z-index: -1;
         top: 8.9rem;

@@ -3994,6 +3994,71 @@ function calc() {
 
 /***/ }),
 
+/***/ "./staticfiles/js/modules/glide.js":
+/*!*****************************************!*\
+  !*** ./staticfiles/js/modules/glide.js ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/@glidejs/glide/dist/glide.modular.esm */ "./node_modules/@glidejs/glide/dist/glide.modular.esm.js");
+
+
+
+function glideSlide() {
+  const glide = new _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__["default"]('.glide', {
+    srartAt: 0,
+    // autoplay: 4000,
+    hoverpause: true,
+    animationTimingFunc: 'ease-in',
+    animationDuration: 3000,
+    type: 'carousel',
+    perView: 3,
+    focusAt: "center",
+    breakpoints: {
+      800: {
+        perView: 3
+      },
+      480: {
+        perView: 1
+      }
+    }
+  });
+  const buttons = document.querySelectorAll('.glide__arrow');
+  buttons.forEach(button => {
+    button.addEventListener('click', e => {});
+  });
+  const lengthListLi = document.querySelectorAll('.glide__slide');
+  glide.on('move', e => {
+    const listItem = document.querySelectorAll('.glide__slide');
+    listItem.forEach(li => {
+      li.classList.add('smoke');
+    });
+
+    if (lengthListLi.length == listItem.length) {
+      listItem[0].classList.remove('smoke');
+    }
+
+    let index = Math.round(e.movement / listItem[0].getBoundingClientRect().width);
+    listItem[index].classList.remove('smoke');
+
+    if (listItem.length == lengthListLi.length * 3) {
+      listItem[index + lengthListLi.length].classList.remove('smoke');
+      listItem[index + lengthListLi.length * 2].classList.remove('smoke');
+    }
+  });
+  glide.mount({
+    Autoplay: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__.Autoplay,
+    Controls: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__.Controls,
+    Breakpoints: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__.Breakpoints,
+    Images: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__.Images
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (glideSlide);
+
+/***/ }),
+
 /***/ "./staticfiles/js/modules/modal_sport.js":
 /*!***********************************************!*\
   !*** ./staticfiles/js/modules/modal_sport.js ***!
@@ -4579,7 +4644,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/calc */ "./staticfiles/js/modules/calc.js");
 /* harmony import */ var _modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/velo-slider */ "./staticfiles/js/modules/velo-slider.js");
 /* harmony import */ var _modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal_sport */ "./staticfiles/js/modules/modal_sport.js");
-/* harmony import */ var _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../node_modules/@glidejs/glide/dist/glide.modular.esm */ "./node_modules/@glidejs/glide/dist/glide.modular.esm.js");
+/* harmony import */ var _modules_glide__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/glide */ "./staticfiles/js/modules/glide.js");
 
 
 
@@ -4590,28 +4655,7 @@ window.addEventListener("DOMContentLoaded", () => {
   (0,_modules_calc__WEBPACK_IMPORTED_MODULE_1__["default"])();
   (0,_modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__["default"])();
   (0,_modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  const glide = new _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_4__["default"]('.glide', {
-    srartAt: 0,
-    // autoplay: 5000,
-    transition: '1ms',
-    type: 'carousel',
-    perView: 3,
-    focusAt: "center",
-    breakpoints: {
-      800: {
-        perView: 2
-      },
-      480: {
-        perView: 1
-      }
-    }
-  });
-  glide.mount({
-    Autoplay: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_4__.Autoplay,
-    Controls: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_4__.Controls,
-    Breakpoints: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_4__.Breakpoints,
-    Images: _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_4__.Images
-  }); // News
+  (0,_modules_glide__WEBPACK_IMPORTED_MODULE_4__["default"])(); // News
 
   const parentNews = document.querySelector('.offer'),
         news = parentNews.querySelectorAll('.offer__advantages'),

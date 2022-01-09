@@ -1,0 +1,78 @@
+@import '../../../../node_modules/@glidejs/glide/src/assets/sass/glide.core';
+@import "../../../../node_modules/@glidejs/glide/src/assets/sass/glide.theme";
+
+$st: 1;
+$fns: 12;
+
+@keyframes scale {
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fade-in {
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes animate {
+    0% {
+      transform: rotate(0deg) translateY(0px);
+      opacity: 1;
+      filter: blur(1px);
+    }
+    100% {
+      transform: rotate(45deg) translateY(-200px);
+      opacity: 0;
+      filter: blur(20px);
+    }
+}
+
+.glide {
+    
+    &__bg {
+        height: 241px;
+        width: 100%;
+        background-size: cover;
+        padding: 40px 15px 15px 15px;
+        text-align: center;
+        h6 {
+            font-size: 1.2rem;
+            transform: scale(0.94);
+            animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1); 
+        }
+        span {
+            color: white;
+            opacity: 0;
+            display: inline-block;
+            filter: blur(4px);
+
+            @for $i from $st to $fns {
+                &:nth-child(#{$i}) {
+                    animation: fade-in 0.8s #{0.2*$i}s forwards cubic-bezier(0.11, 0, 0.5, 0);
+                }  
+            }
+              
+        }
+    }
+
+}
+
+
+.smoke {
+
+    & span{
+       animation: animate 2s linear forwards !important; 
+    }
+    
+
+    @for $i from $st to $fns {
+        & span:nth-child(#{$i}) {
+            animation-delay: #{0.8*(-1+$i)}s;
+        }
+    }
+
+}
+  
