@@ -4,7 +4,26 @@ function calc() {
           classActive = 'calculating__choose-item_active',
           selectorSex = '#gender div',
           selectorPhysActive = '.calculating__choose_big [data-ratio]';
+
+
+    const calcResult = document.querySelector('.calculating__result');
+
+    if(window.width <= 768) {
+        window.addEventListener('scroll', () => {
+            let start = Math.round(+document.querySelector('.calculating').getBoundingClientRect().y),
+                finish = Math.round(+document.querySelector('.calculating__total').getBoundingClientRect().y);
     
+            if(start < 0 && finish > 10){
+                calcResult.style.cssText = 'position: fixed; right: 4px; top: 20px; color:#00000061';
+            } else if (finish < 10 || start > 0) {
+                calcResult.style.cssText = '';
+            }  
+        }); 
+    }
+    
+          
+          
+
     let sex = localStorage.getItem('sex')? localStorage.getItem('sex'): localStorage.setItem('sex','male'), 
         height, weight, age, 
         ratio = localStorage.getItem('ratio')? localStorage.getItem('ratio'): localStorage.setItem('ratio',1.375);

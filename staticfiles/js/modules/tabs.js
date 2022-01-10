@@ -1,3 +1,5 @@
+
+
 function hideTabContent(blockContent, blockTab, selector) {
     blockContent.forEach(item => {
        // item.style.display = 'none'; // in-line style

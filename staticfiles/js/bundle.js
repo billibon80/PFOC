@@ -3892,6 +3892,21 @@ function calc() {
         classActive = 'calculating__choose-item_active',
         selectorSex = '#gender div',
         selectorPhysActive = '.calculating__choose_big [data-ratio]';
+  const calcResult = document.querySelector('.calculating__result');
+
+  if (window.width <= 768) {
+    window.addEventListener('scroll', () => {
+      let start = Math.round(+document.querySelector('.calculating').getBoundingClientRect().y),
+          finish = Math.round(+document.querySelector('.calculating__total').getBoundingClientRect().y);
+
+      if (start < 0 && finish > 10) {
+        calcResult.style.cssText = 'position: fixed; right: 4px; top: 20px; color:#00000061';
+      } else if (finish < 10 || start > 0) {
+        calcResult.style.cssText = '';
+      }
+    });
+  }
+
   let sex = localStorage.getItem('sex') ? localStorage.getItem('sex') : localStorage.setItem('sex', 'male'),
       height,
       weight,
@@ -4008,7 +4023,7 @@ __webpack_require__.r(__webpack_exports__);
 function glideSlide() {
   const glide = new _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__["default"]('.glide', {
     srartAt: 0,
-    // autoplay: 4000,
+    autoplay: 4000,
     hoverpause: true,
     animationTimingFunc: 'ease-in',
     animationDuration: 3000,
@@ -4220,6 +4235,58 @@ function tabs() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (tabs);
+
+/***/ }),
+
+/***/ "./staticfiles/js/modules/timetable.js":
+/*!*********************************************!*\
+  !*** ./staticfiles/js/modules/timetable.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+function timetable() {
+  function selection(array, attrSelection) {
+    const tabbed = document.querySelectorAll('.tabbed'); // div class timetable
+
+    array.forEach((item, i) => {
+      item.addEventListener('input', e => {
+        const filter = e.target.value.toUpperCase();
+        const tableRows = tabbed[i].querySelectorAll('.table-row');
+
+        for (let ir = 0; ir < tableRows.length; ir++) {
+          const div = tableRows[ir].querySelector(attrSelection);
+
+          if (div) {
+            const txtValue = div.textContent || div.innerText;
+
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tableRows[ir].style.display = '';
+            } else {
+              tableRows[ir].style.display = 'none';
+            }
+          }
+        }
+      });
+    });
+  }
+
+  const allCoachs = document.querySelectorAll('[data-coach]'),
+        // input with attr for selection
+  allGroups = document.querySelectorAll('[data-group]'),
+        allAdressGroup = document.querySelectorAll('[data-address-group]'),
+        allAdressOrg = document.querySelectorAll('[data-address-org]'),
+        allOrganization = document.querySelectorAll('[data-organization]'),
+        allPlace = document.querySelectorAll('[data-place]');
+  selection(allCoachs, '[data-label="Тренер: "]');
+  selection(allGroups, '[data-label="Группа: "]');
+  selection(allAdressGroup, '[data-label="Адрес: "]');
+  selection(allAdressOrg, '[data-label="Адрес: "]');
+  selection(allOrganization, '[data-label="Организация: "]');
+  selection(allPlace, '[data-label="Площадка: "]');
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (timetable);
 
 /***/ }),
 
@@ -4649,6 +4716,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/velo-slider */ "./staticfiles/js/modules/velo-slider.js");
 /* harmony import */ var _modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal_sport */ "./staticfiles/js/modules/modal_sport.js");
 /* harmony import */ var _modules_glide__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/glide */ "./staticfiles/js/modules/glide.js");
+/* harmony import */ var _modules_timetable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timetable */ "./staticfiles/js/modules/timetable.js");
+
 
 
 
@@ -4659,7 +4728,8 @@ window.addEventListener("DOMContentLoaded", () => {
   (0,_modules_calc__WEBPACK_IMPORTED_MODULE_1__["default"])();
   (0,_modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__["default"])();
   (0,_modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  (0,_modules_glide__WEBPACK_IMPORTED_MODULE_4__["default"])(); // News
+  (0,_modules_glide__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  (0,_modules_timetable__WEBPACK_IMPORTED_MODULE_5__["default"])(); // News
 
   const parentNews = document.querySelector('.offer'),
         news = parentNews.querySelectorAll('.offer__advantages'),
