@@ -4021,7 +4021,7 @@ __webpack_require__.r(__webpack_exports__);
 function glideSlide() {
   const glide = new _node_modules_glidejs_glide_dist_glide_modular_esm__WEBPACK_IMPORTED_MODULE_0__["default"]('.glide', {
     srartAt: 0,
-    autoplay: 4000,
+    // autoplay: 4000,
     hoverpause: true,
     animationTimingFunc: 'ease-in',
     animationDuration: 3000,
@@ -4249,9 +4249,9 @@ function timetable() {
 
     function filterValue(evt, i, item) {
       item.addEventListener(evt, e => {
-        console.log(e.key);
         const filter = e.target.value.toUpperCase();
         const tableRows = tabbed[i].querySelectorAll('.table-row');
+        let totalRowF = [];
 
         for (let ir = 0; ir < tableRows.length; ir++) {
           const div = tableRows[ir].querySelector(attrSelection);
@@ -4261,17 +4261,19 @@ function timetable() {
 
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
               tableRows[ir].style.display = '';
+              totalRowF.push(1);
             } else {
               tableRows[ir].style.display = 'none';
             }
           }
         }
+
+        console.log(totalRowF.length);
       });
     }
 
     array.forEach((item, i) => {
-      ['input', 'ontouchstart'].forEach(evt => {
-        console.log(evt.key);
+      ['input'].forEach(evt => {
         filterValue(evt, i, item);
       });
     });

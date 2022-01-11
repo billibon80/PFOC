@@ -6,7 +6,7 @@ function glideSlide() {
 
     const glide = new Glide('.glide', {
         srartAt: 0,
-        autoplay: 4000,
+        // autoplay: 4000,
         hoverpause: true,
         animationTimingFunc: 'ease-in',
         animationDuration: 3000,

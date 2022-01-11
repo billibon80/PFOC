@@ -6,25 +6,30 @@ function timetable() {
         
         function filterValue(evt, i, item) {
             item.addEventListener(evt, (e) => {
-                console.log(e.key);
+               
                 const filter = e.target.value.toUpperCase();
                 const tableRows = tabbed[i].querySelectorAll('.table-row');
+                let totalRowF = [];
                 for (let ir = 0; ir < tableRows.length; ir++) {
                     const div = tableRows[ir].querySelector(attrSelection);
+                    
                     if(div){
-                    const txtValue = div.textContent || div.innerText;
+                        const txtValue = div.textContent || div.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
                             tableRows[ir].style.display = '';
+                            totalRowF.push(1);
                         } else {
                             tableRows[ir].style.display = 'none';
-                        } 
+                        }   
                     }
                 }
+                console.log(totalRowF.length);
             });
         }
+
+       
         array.forEach((item, i) => {
-            ['input', 'ontouchstart'].forEach(evt => {
-                    console.log(evt.key);
+            ['input'].forEach(evt => {
                     filterValue(evt, i, item);
             });
         });
