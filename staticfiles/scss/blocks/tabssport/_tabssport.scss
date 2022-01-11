@@ -76,7 +76,21 @@ $bg: #ffffff91;
     }
   }
 
+  @keyframes showTabSearch {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.9;
+    }
+  }
+
+  .showSearch {
+    animation: showTabSearch 0.35s ease-in;
+  }
+    
   .totalSearch {
+    display: none;
     position: absolute;
     top: 0;
     right: 0;

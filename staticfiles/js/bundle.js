@@ -4270,6 +4270,8 @@ function timetable() {
 
         let t = document.querySelector('.checked .totalSearch');
         t.innerText = totalRowF.length > 0 ? `отобрано: ${totalRowF.length} эл.` : "нет элементов";
+        t.classList.add('showSearch');
+        t.style.display = 'block';
       });
     }
 

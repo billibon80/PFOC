@@ -568,14 +568,20 @@ $btn-draw-size: 1px;
   display: block;
   overflow-y: hidden;
   padding: 0.02em 0;
+  span{
+    display: inline-block;
+    transform:translate3d(0,140%,0);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.8s ease;
+  }
 }
-  
-.oh span{
-  display: inline-block;
-  transform:translate3d(0,140%,0);
-  opacity: 0;
-  transition: transform 0.4s ease, opacity 0.8s ease;
+
+.coach{
+  font-size: 1rem;
+  text-align: right;
+  margin-top: 0.3rem;  
 }
+
 
 .is-active .oh span{
   transform:translate3d(0,0%,0);

@@ -12,7 +12,6 @@ function timetable() {
                 let totalRowF = [];
                 for (let ir = 0; ir < tableRows.length; ir++) {
                     const div = tableRows[ir].querySelector(attrSelection);
-                    
                     if(div){
                         const txtValue = div.textContent;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -24,9 +23,10 @@ function timetable() {
                     }
                 }
                 
-
                 let t = document.querySelector('.checked .totalSearch');
                 t.innerText = totalRowF.length > 0 ? `отобрано: ${totalRowF.length} эл.` : "нет элементов"; 
+                t.classList.add('showSearch');
+                t.style.display = 'block';
             });
         }
 
