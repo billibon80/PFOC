@@ -24,10 +24,16 @@
     &-row {
       background-color: #ffffff;
       box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+      @media (max-width: 576px) {
+        &:last-of-type {
+              margin: 10px auto 5.6rem;
+            }
+      }
       .row {
         text-align: center;
       }
       }
+    
   }
   
   @media all and (max-width: 576px) {
