@@ -3,14 +3,16 @@ function timetable() {
           
     function selection(array, attrSelection) {
         const tabbed = document.querySelectorAll('.tabbed'); // div class timetable
-        array.forEach((item, i) => {
-            item.addEventListener('input', (e) => {
+        
+        function filterValue(evt, i, item) {
+            item.addEventListener(evt, (e) => {
+                console.log(e.key);
                 const filter = e.target.value.toUpperCase();
                 const tableRows = tabbed[i].querySelectorAll('.table-row');
                 for (let ir = 0; ir < tableRows.length; ir++) {
                     const div = tableRows[ir].querySelector(attrSelection);
                     if(div){
-                       const txtValue = div.textContent || div.innerText;
+                    const txtValue = div.textContent || div.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
                             tableRows[ir].style.display = '';
                         } else {
@@ -19,8 +21,16 @@ function timetable() {
                     }
                 }
             });
+        }
+        array.forEach((item, i) => {
+            ['input', 'ontouchstart'].forEach(evt => {
+                    console.log(evt.key);
+                    filterValue(evt, i, item);
+            });
         });
+        
     }
+       
 
     const allCoachs = document.querySelectorAll('[data-coach]'), // input with attr for selection
           allGroups = document.querySelectorAll('[data-group]'),

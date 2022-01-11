@@ -393,6 +393,12 @@ $btn-draw-size: 1px;
     @media (max-width: 576px) {
       height: 100%;
     }
+    @media(max-height: 400px) {
+      height: calc(100% + 120px) !important;
+    }
+    @media (max-height: 830px) {
+      height: calc(100% + 40px);
+    }
   }
 
   // Apply Colors to our backgrounds and set currentColor

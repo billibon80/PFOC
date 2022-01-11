@@ -3893,9 +3893,8 @@ function calc() {
         selectorSex = '#gender div',
         selectorPhysActive = '.calculating__choose_big [data-ratio]';
   const calcResult = document.querySelector('.calculating__result');
-
-  if (window.width <= 768) {
-    window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) {
       let start = Math.round(+document.querySelector('.calculating').getBoundingClientRect().y),
           finish = Math.round(+document.querySelector('.calculating__total').getBoundingClientRect().y);
 
@@ -3904,9 +3903,8 @@ function calc() {
       } else if (finish < 10 || start > 0) {
         calcResult.style.cssText = '';
       }
-    });
-  }
-
+    }
+  });
   let sex = localStorage.getItem('sex') ? localStorage.getItem('sex') : localStorage.setItem('sex', 'male'),
       height,
       weight,
@@ -4249,8 +4247,9 @@ function timetable() {
   function selection(array, attrSelection) {
     const tabbed = document.querySelectorAll('.tabbed'); // div class timetable
 
-    array.forEach((item, i) => {
-      item.addEventListener('input', e => {
+    function filterValue(evt, i, item) {
+      item.addEventListener(evt, e => {
+        console.log(e.key);
         const filter = e.target.value.toUpperCase();
         const tableRows = tabbed[i].querySelectorAll('.table-row');
 
@@ -4267,6 +4266,13 @@ function timetable() {
             }
           }
         }
+      });
+    }
+
+    array.forEach((item, i) => {
+      ['input', 'ontouchstart'].forEach(evt => {
+        console.log(evt.key);
+        filterValue(evt, i, item);
       });
     });
   }
