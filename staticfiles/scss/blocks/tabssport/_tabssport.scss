@@ -54,6 +54,7 @@ $bg: #ffffff91;
       transform-origin: top center;
       transition: opacity .3s, transform 1s;
       z-index: 0;
+      height: 37rem;
       @media (max-height: 800px) {
         height: calc(100% + 24rem);
       }

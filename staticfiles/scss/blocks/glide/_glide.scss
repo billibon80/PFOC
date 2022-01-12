@@ -78,6 +78,9 @@ $fns: 12;
         &:hover {
             opacity: 0;
         }
+        @media (max-width: 480px) {
+             align-content: flex-start;
+        }
     }
 
 }
