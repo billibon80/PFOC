@@ -1,6 +1,8 @@
 .header {
     height: 150px;
-    padding: 0 100px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 15px 0 0;
     &__left-block {
         display: flex;
         justify-content: space-between;
@@ -14,9 +16,8 @@
     }
     &__links {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         justify-content: flex-end;
-        padding: 20px 20px 0 0;
     }
     &__link {
         position: relative;
@@ -24,16 +25,23 @@
         font-weight: bold;
         font-size: 18px;
         color: $dark;
+        &:hover {
+            color: #1c1d1e73;
+            &:after {
+                width: 110%;
+            }
+        }
         &:after {
             content: '';
             position: absolute;
             display: block;
-            width: 110%;
+            width: 0%;
             left: -5%;
             bottom: -1px;
             z-index: -1;
             height: 8px;
             background: $primary;
+            transition: width 2s ease-in-out;
         }
         &:last-child {
             margin-right: 0;
@@ -42,6 +50,7 @@
     @media(max-width: 768px) {
         padding: 10px 10px 0 0;
         &__links {
+            flex-direction: column;
             text-align: right;
             padding-right: 10px;
         }

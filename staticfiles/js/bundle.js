@@ -3929,7 +3929,7 @@ function calc() {
 
   function calcTotal() {
     if (!sex || !height || !weight || !age || !ratio) {
-      result.textContent = "    ";
+      result.textContent = "0";
       return;
     }
 
@@ -4244,38 +4244,59 @@ function tabs() {
 
 __webpack_require__.r(__webpack_exports__);
 function timetable() {
-  function selection(array, attrSelection) {
+  function selection() {
+    for (var _len = arguments.length, attrSelection = new Array(_len), _key = 0; _key < _len; _key++) {
+      attrSelection[_key] = arguments[_key];
+    }
+
     const tabbed = document.querySelectorAll('.tabbed'); // div class timetable
 
     function filterValue(evt, i, item) {
-      item.addEventListener(evt, e => {
-        const filter = e.target.value.toUpperCase();
-        const tableRows = tabbed[i].querySelectorAll('.checked .table-row');
-        let totalRowF = [];
+      item.querySelectorAll('.tabs input').forEach(inputTab => {
+        inputTab.addEventListener(evt, e => {
+          const input = tabbed[i].querySelectorAll('.checked input'); // input.forEach(attr => {
 
-        for (let ir = 0; ir < tableRows.length; ir++) {
-          const div = tableRows[ir].querySelector(attrSelection);
+          const filter = e.target.value.toUpperCase();
+          const selection = attrSelection[0][e.target.attributes[2].name.replaceAll('-', '')];
+          const tableRows = tabbed[i].querySelectorAll('.checked .table-row');
+          let totalRowF = [];
 
-          if (div) {
-            const txtValue = div.textContent;
+          for (let ir = 0; ir < tableRows.length; ir++) {
+            const div = tableRows[ir].querySelector(`${selection}`);
 
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tableRows[ir].style.display = '';
-              totalRowF.push(1);
-            } else {
-              tableRows[ir].style.display = 'none';
+            const checkWord = () => {
+              const txtValue = div.textContent;
+
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tableRows[ir].style.display = '';
+                totalRowF.push(1);
+                div.classList.remove('error');
+              } else {
+                tableRows[ir].style.display = 'none';
+                div.classList.add('error');
+              }
+            };
+
+            if (tableRows[ir].style.display != 'none') {
+              if (div) {
+                checkWord();
+              }
+            } else if (div.classList.contains('error')) {
+              if (div) {
+                checkWord();
+              }
             }
           }
-        }
 
-        let t = document.querySelector('.checked .totalSearch');
-        t.innerText = totalRowF.length > 0 ? `отобрано: ${totalRowF.length} эл.` : "нет элементов";
-        t.classList.add('showSearch');
-        t.style.display = 'block';
+          let t = document.querySelector('.checked .totalSearch');
+          t.innerText = totalRowF.length > 0 ? `отобрано: ${totalRowF.length} эл.` : "нет элементов";
+          t.classList.add('showSearch');
+          t.style.display = 'block'; // });  
+        });
       });
     }
 
-    array.forEach((item, i) => {
+    tabbed.forEach((item, i) => {
       ['input'].forEach(evt => {
         filterValue(evt, i, item);
       });
@@ -4289,12 +4310,20 @@ function timetable() {
         allAdressOrg = document.querySelectorAll('[data-address-org]'),
         allOrganization = document.querySelectorAll('[data-organization]'),
         allPlace = document.querySelectorAll('[data-place]');
-  selection(allCoachs, '[data-label="Тренер: "]');
-  selection(allGroups, '[data-label="Группа: "]');
-  selection(allAdressGroup, '[data-label="Адрес: "]');
-  selection(allAdressOrg, '[data-label="Адрес объекта: "]');
-  selection(allOrganization, '[data-label="Организация: "]');
-  selection(allPlace, '[data-label="Площадка: "]');
+  selection({
+    dataorganization: '[data-label="Организация: "]',
+    dataplace: '[data-label="Площадка: "]',
+    dataaddressorg: '[data-label="Адрес объекта: "]',
+    datacoach: '[data-label="Тренер: "]',
+    datagroup: '[data-label="Группа: "]',
+    dataaddressgroup: '[data-label="Адрес: "]'
+  }); //   selection(allCoachs, );
+  //   selection(allGroups, );
+  //   selection(allAdressGroup, );
+  //   selection(allAdressOrg, );
+  //   selection(allOrganization, );
+  //   selection(allPlace, );
+
   document.querySelectorAll('.tabs .responsive-table').forEach(table => {
     const t = document.createElement('div');
     t.setAttribute('class', 'totalSearch');

@@ -20,6 +20,9 @@
       letter-spacing: 0.03em;
       position: sticky;
       top: 0;
+      @media (max-height: 800px) {
+        top: -10px;        
+      }
       }
     &-row {
       background-color: #ffffff;
@@ -55,5 +58,8 @@
         text-align: right;
       }
     }
+  }
+  @media (max-height: 800px) {
+    height: calc(100% + -5rem);
   }
 }

@@ -51,7 +51,7 @@ function calc() {
 
         
         if (!sex || !height || !weight || !age || !ratio) {
-            result.textContent = "    ";
+            result.textContent = "0";
             return;
         }
 

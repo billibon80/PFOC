@@ -22,37 +22,17 @@
     <!--Block Header (logo & NavBar)-->
     <header class="header">
         {% block navbar %}
-        <div class="row" style="width: 100%">
             <!-- logo -->
-            <div class="col-6 col-md-2 col-lg-2">
-                <div class="header__logo">
-                    <img src="{% static 'img/pfoc-logo.png' %}" alt="Логотип">
-                </div>
+            <div class="header__logo">
+                <img src="{% static 'img/pfoc-logo.png' %}" alt="Логотип">
             </div>
             <!--NavBar -->
-            <div class="col-6 col-md-10 col-lg-8">
-                <nav class="header__links">
-                    <div class="row">
-                        <div class="col-12 col-md-3">
-                            <a href="#" class="header__link">Новости</a>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <a href="#" class="header__link">Калькулятор</a>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <a href="#" class="header__link">Руководство</a>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <a href="#" class="header__link">Наши достижения</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <!-- Button Connect Us-->
-            <div class="col-0 col-md-0 col-lg-2">
-                <button class="btn btn_white">Связаться с нами</button>
-            </div>
-        </div>
+            <nav class="header__links">
+                <a href="#" class="header__link">Новости</a>
+                <a href="#" class="header__link">Калькулятор</a>
+                <a href="#" class="header__link">Руководство</a>
+                <a href="#" class="header__link">Наши достижения</a>
+            </nav>
         {% endblock %}
     </header>
     <div class="sidepanel">
@@ -72,25 +52,25 @@
             <div class="row"> 
                 <div class="col-12 col-md-8">
                     <!-- Block Content for Tab (blockContent) Content for Type of Sports    -->
-                    <div class="tabcontent">
+                    <div class="tabcontent hide">
                         <img src="{% static 'img/tabs/box.jpg' %}" alt="box">
                         <div class="tabcontent__descr">
                             "Бокс" - быть мужчиной по духу, помогает не только время, но и тренажерный зал.
                         </div>
                     </div>
-                    <div class="tabcontent">
+                    <div class="tabcontent hide">
                         <img src="{% static 'img/tabs/workout.jpg'%}" alt="workout">
                         <div class="tabcontent__descr">
                             “WorkOut” - работа с телом трудное дело, иногда побеждает лень, иногда красота.
                         </div>
                     </div>
-                    <div class="tabcontent">
+                    <div class="tabcontent hide">
                         <img src="{% static 'img/tabs/soccer.jpg'%}" alt="soccer">
                         <div class="tabcontent__descr">
                             "Мини-футбол" - игра не для слабаков, возьми волю в кулак, ощути драйв и свободу победы.
                         </div>
                     </div>
-                    <div class="tabcontent">
+                    <div class="tabcontent hide">
                         <img src="{% static 'img/tabs/joga.jpg'%}" alt="joga">
                         <div class="tabcontent__descr">
                             "Йога" - обрети покой тела и души. Насыть себя дзэном и спокойствием.
@@ -1098,7 +1078,7 @@
                         </dic>
                         <dic class="col-12">
                             <div class="calculating__result">
-                                <span></span> ккал
+                                <span>0</span> ккал
                             </div>
                         </dic>
                     </div>
@@ -1193,7 +1173,24 @@
                     <ul class="glide__slides">
                       <li class="glide__slide smoke">
                         <div class="glide__bg" style="background-image: url({% static 'img/object-photo/girl-soccer.jpg'%})">
+                            <div class="glide__bgc">
+                              <span class="oh fw-bold">Чемпион</span>
+                              <span class="oh fw-bold">республики</span>
+                              <span class="oh fw-bold">беларусь</span>
+                              <span class="oh fw-bold">в</span>
+                              <span class="oh fw-bold">турнире</span>
+                              <span class="oh fw-bold">"Золотая</span>
+                              <span class="oh fw-bold">шайба"</span>
+                              <span class="oh fw-bold">2021</span>
+                              <span class="oh fw-bold">года</span>
+                            </div>
+                        </div>
                           
+                      </li>
+                      <li class="glide__slide smoke">
+                        
+                        <div class="glide__bg" style="background-image: url({% static 'img/object-photo/child-soccer.jpg'%})">
+                          <div class="glide__bgc">
                             <span class="oh fw-bold">Чемпион</span>
                             <span class="oh fw-bold">республики</span>
                             <span class="oh fw-bold">беларусь</span>
@@ -1203,44 +1200,37 @@
                             <span class="oh fw-bold">шайба"</span>
                             <span class="oh fw-bold">2021</span>
                             <span class="oh fw-bold">года</span>
-                         
-                        </div>
-                          
-                      </li>
-                      <li class="glide__slide smoke">
-                        <div class="glide__bg" style="background-image: url({% static 'img/object-photo/child-soccer.jpg'%})">
-                          <span class="oh fw-bold">Чемпион</span>
-                          <span class="oh fw-bold">республики</span>
-                          <span class="oh fw-bold">беларусь</span>
-                          <span class="oh fw-bold">в</span>
-                          <span class="oh fw-bold">турнире</span>
-                          <span class="oh fw-bold">"Золотая шайба"</span>
-                          <span class="oh fw-bold">2021</span>
-                          <span class="oh fw-bold">года</span>
+                          </div>
                         </div>
                       </li>
                       <li class="glide__slide smoke">
                         <div class="glide__bg" style="background-image: url({% static 'img/object-photo/box-face.jpg'%})">
-                          <span class="oh fw-bold">Чемпион</span>
-                          <span class="oh fw-bold">республики</span>
-                          <span class="oh fw-bold">беларусь</span>
-                          <span class="oh fw-bold">в</span>
-                          <span class="oh fw-bold">турнире</span>
-                          <span class="oh fw-bold">"Золотая шайба"</span>
-                          <span class="oh fw-bold">2021</span>
-                          <span class="oh fw-bold">года</span>
+                          <div class="glide__bgc">
+                            <span class="oh fw-bold">Чемпион</span>
+                            <span class="oh fw-bold">республики</span>
+                            <span class="oh fw-bold">беларусь</span>
+                            <span class="oh fw-bold">в</span>
+                            <span class="oh fw-bold">турнире</span>
+                            <span class="oh fw-bold">"Золотая</span>
+                            <span class="oh fw-bold">шайба"</span>
+                            <span class="oh fw-bold">2021</span>
+                            <span class="oh fw-bold">года</span>
+                          </div>
                         </div>
                        </li>
                       <li class="glide__slide smoke">
                         <div class="glide__bg" style="background-image: url({% static 'img/object-photo/box-girl.jpg'%})">
-                          <span class="oh fw-bold">Чемпион</span>
-                          <span class="oh fw-bold">республики</span>
-                          <span class="oh fw-bold">беларусь</span>
-                          <span class="oh fw-bold">в</span>
-                          <span class="oh fw-bold">турнире</span>
-                          <span class="oh fw-bold">"Золотая шайба"</span>
-                          <span class="oh fw-bold">2021</span>
-                          <span class="oh fw-bold">года</span>
+                          <div class="glide__bgc">
+                            <span class="oh fw-bold">Чемпион</span>
+                            <span class="oh fw-bold">республики</span>
+                            <span class="oh fw-bold">беларусь</span>
+                            <span class="oh fw-bold">в</span>
+                            <span class="oh fw-bold">турнире</span>
+                            <span class="oh fw-bold">"Золотая</span>
+                            <span class="oh fw-bold">шайба"</span>
+                            <span class="oh fw-bold">2021</span>
+                            <span class="oh fw-bold">года</span>
+                          </div>
                         </div>
                       </li>
                     </ul>

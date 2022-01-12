@@ -42,21 +42,25 @@ $bg: #ffffff91;
   .tabs {
     clear: both;
     perspective: 600px;
+    > div {
+      width: 700px;
+      position: absolute;
+      border: 2px solid #4EC6DE;
+      background: $bg;
+      padding: 10px 30px 40px;
+      line-height: 1.4em;
+      opacity: 0;
+      transform: rotateX(-20deg);
+      transform-origin: top center;
+      transition: opacity .3s, transform 1s;
+      z-index: 0;
+      @media (max-height: 800px) {
+        height: calc(100% + 24rem);
+      }
+    }
+
   }
   
-  .tabs > div {
-    width: 700px;
-    position: absolute;
-    border: 2px solid #4EC6DE;
-    background: $bg;
-    padding: 10px 30px 40px;
-    line-height: 1.4em;
-    opacity: 0;
-    transform: rotateX(-20deg);
-    transform-origin: top center;
-    transition: opacity .3s, transform 1s;
-    z-index: 0;
-  }
   
   // #tab-nav-1:checked ~ .tabs > div:nth-of-type(1),
   // #tab-nav-2:checked ~ .tabs > div:nth-of-type(2),

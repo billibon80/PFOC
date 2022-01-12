@@ -25,12 +25,12 @@
     position: absolute;
     right: 0;
     top: -155px;
-    width: 50vw;
+    width: 70vw;
     height: 900px;
     background: rgba(34, 87, 125, 0.15);
     z-index: -1;
     @media(max-width: 425px) {
-        width: 8rem !important;
+        width: 12rem !important;
         height: 100%;
     }
     @media(max-width:768px) {
