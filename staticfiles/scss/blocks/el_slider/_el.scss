@@ -54,6 +54,9 @@
     @media (max-height: 800px) {
         height: 100vh;
     }
+    @media (max-width: 768px) {
+      padding: 0;
+    }
     div, p, h2 {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     }
@@ -197,6 +200,9 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.1s;
+      @media (max-width: 768px) {
+        padding-top: 65px;
+      }
       
       @include elActive {
         z-index: 2;
@@ -210,6 +216,9 @@
       text-transform: uppercase;
       font-size: 40px;
       color: #fff;
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
     }
     &__text {
         color: #fff;
@@ -286,6 +295,9 @@
       font-weight: bold;
       transition: transform $indexHoverAT, opacity $moveAT/2 $expandAT + $expandDelay + $moveAT;
       transform: translate3d(0,1vw,0);
+      @media (max-width: 768px) {
+        display: none;
+      }
       
       @include elHover {
         transform: translate3d(0,0,0);
