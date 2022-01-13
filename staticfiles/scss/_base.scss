@@ -74,6 +74,9 @@ li img {
     font-size: 34px;
     font-weight: 400;
     margin-left: 15rem;
+    @media (max-width: 576px) {
+        margin: 0;
+    }
 }
 
 .show {

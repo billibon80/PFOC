@@ -77,9 +77,10 @@
   
   
   .close {
-    position: absolute;
-    bottom: 35rem;
-    right: inherit;
+    position: absolute !important;
+    right: 0;
+    top: -6px;
+    min-height: 41px;
     background: linear-gradient(hsl(10,95%,59%),hsl(360,95%,59%));
     border: 1px solid hsl(360,95%,59%);
     border-bottom: 4px solid hsl(360,95%,43%);
@@ -99,11 +100,6 @@
     &:focus {
       box-shadow: 0 0 10px hsl(10,95%,59%);
       outline: none;
-    }
-    @media (max-height: 800px) {
-      position: absolute;
-      top: 39px;
-      right: 16px;
     }
   }
 }
