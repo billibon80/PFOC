@@ -50,10 +50,15 @@ $fns: 12;
             display: inline-block;
             padding: 3px;
             filter: blur(4px);
-            font-family: 'Orelega One', cursive;
-            line-height: 2;
-            text-shadow: -1px -2px #1e2618;
-            font-size: 22px;
+            // font-family: 'Orelega One', cursive;
+            // line-height: 2;
+            // text-shadow: -1px -2px #1e2618;
+            // font-size: 22px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 19px;
+            text-transform: uppercase;
+            color: #f5f1f1;
+            font-weight: 400 !important;
 
             @for $i from $st to $fns {
                 &:nth-child(#{$i}) {
