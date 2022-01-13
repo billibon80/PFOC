@@ -51,9 +51,6 @@
     padding: $vertPad $sidePad;
     width: 100%;
     margin: 0 auto;
-    @media (max-height: 800px) {
-        height: 100vh;
-    }
     @media (max-width: 768px) {
       padding: 0;
     }
@@ -62,6 +59,11 @@
     }
     h2 {
       font-weight: bold;
+      @media (max-width: 768px) {
+        writing-mode: tb-rl;
+        transform: rotate(180deg);
+        font-size: 20px;
+      }
     }
     &__inner {
       position: relative;

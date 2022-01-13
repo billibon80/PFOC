@@ -25,6 +25,9 @@
         font-weight: bold;
         font-size: 18px;
         color: $dark;
+        @media (max-width: 768px) {
+            margin: 0;
+        }
         &:hover {
             color: #1c1d1e73;
             &:after {
