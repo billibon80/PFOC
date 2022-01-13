@@ -2,6 +2,7 @@
     padding: 50px 0;
     .title {
         text-align: center;
+        margin: 0;
     }
     &__field {
         width: 100%;
@@ -50,7 +51,7 @@
             transition: 0.3s all;
             &_active {
                 color: #fff;
-                background-color: $primary;
+                background-color: #54ED39;;
             }
         }
         &_medium {

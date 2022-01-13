@@ -3903,6 +3903,8 @@ function calc() {
       } else if (finish < 10 || start > 0) {
         calcResult.style.cssText = '';
       }
+    } else {
+      calcResult.style.cssText = '';
     }
   });
   let sex = localStorage.getItem('sex') ? localStorage.getItem('sex') : localStorage.setItem('sex', 'male'),
@@ -4007,6 +4009,49 @@ function calc() {
 
 /***/ }),
 
+/***/ "./staticfiles/js/modules/el_slider.js":
+/*!*********************************************!*\
+  !*** ./staticfiles/js/modules/el_slider.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+function el() {
+  const cont = document.querySelector('.cont');
+  const elsArr = document.querySelectorAll('.el');
+  const closeBtnsArr = [].slice.call(document.querySelectorAll('.el__close-btn'));
+  window.addEventListener('scroll', () => {
+    const start = Math.round(+document.querySelector('.offer').getBoundingClientRect().y);
+    let once = true;
+
+    if (start - 150 < 0 && once) {
+      once = false;
+      setTimeout(function () {
+        cont.classList.remove('s--inactive');
+      }, 200);
+      elsArr.forEach(el => {
+        el.addEventListener('click', () => {
+          if (!el.classList.contains('s--active')) {
+            cont.classList.add('s--el-active');
+            el.classList.add('s--active');
+          }
+        });
+      });
+      closeBtnsArr.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          cont.classList.remove('s--el-active');
+          document.querySelector('.el.s--active').classList.remove('s--active');
+        });
+      });
+    }
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (el);
+
+/***/ }),
+
 /***/ "./staticfiles/js/modules/glide.js":
 /*!*****************************************!*\
   !*** ./staticfiles/js/modules/glide.js ***!
@@ -4024,7 +4069,7 @@ function glideSlide() {
     // autoplay: 4000,
     hoverpause: true,
     animationTimingFunc: 'ease-in',
-    animationDuration: 3000,
+    animationDuration: 1000,
     type: 'carousel',
     perView: 3,
     focusAt: "center",
@@ -4762,6 +4807,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal_sport */ "./staticfiles/js/modules/modal_sport.js");
 /* harmony import */ var _modules_glide__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/glide */ "./staticfiles/js/modules/glide.js");
 /* harmony import */ var _modules_timetable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timetable */ "./staticfiles/js/modules/timetable.js");
+/* harmony import */ var _modules_el_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/el_slider */ "./staticfiles/js/modules/el_slider.js");
+
 
 
 
@@ -4774,7 +4821,8 @@ window.addEventListener("DOMContentLoaded", () => {
   (0,_modules_velo_slider__WEBPACK_IMPORTED_MODULE_2__["default"])();
   (0,_modules_modal_sport__WEBPACK_IMPORTED_MODULE_3__["default"])();
   (0,_modules_glide__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  (0,_modules_timetable__WEBPACK_IMPORTED_MODULE_5__["default"])(); // News
+  (0,_modules_timetable__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  (0,_modules_el_slider__WEBPACK_IMPORTED_MODULE_6__["default"])(); // News
 
   const parentNews = document.querySelector('.offer'),
         news = parentNews.querySelectorAll('.offer__advantages'),
@@ -4798,94 +4846,8 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
-  }
+  } // NavBar Link (hashTag) create scroll (link navbar) to hash (title of block)
 
-  function showNewsContent(c, t, p) {
-    for (var _len2 = arguments.length, rest = new Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
-      rest[_key2 - 3] = arguments[_key2];
-    }
-
-    rest.forEach(db => {
-      if (db == imgNews) {
-        db[c - 1].classList.add('fade');
-      }
-
-      db[c - 1].classList.add('show');
-      db[c - 1].classList.remove('hide');
-    });
-    current.innerHTML = c;
-    total.innerHTML = t;
-    prev.innerHTML = p;
-  } // Start Slider
-
-
-  let p = imgNews.length > news.length ? news.length : imgNews.length;
-  hideNewsContent(news, imgNews);
-  showNewsContent(1, 2, p, news, imgNews);
-  let c = +current.textContent,
-      t = +total.textContent;
-  p = +prev.textContent; /// function Up slider add one slider for current, loop work around of all db items
-
-  function upSlider(current, total) {
-    let prev = current;
-    current = total;
-    total++;
-
-    for (var _len3 = arguments.length, db = new Array(_len3 > 2 ? _len3 - 2 : 0), _key3 = 2; _key3 < _len3; _key3++) {
-      db[_key3 - 2] = arguments[_key3];
-    }
-
-    if (current + 1 > db[0].length || current + 1 > db[1].length) {
-      total = 1;
-    }
-
-    hideNewsContent(db[0], db[1]);
-    showNewsContent(current, total, prev, db[0], db[1]);
-  } /// button slideer next
-
-
-  let isFalse = false;
-
-  function clearTimeSlider(id) {
-    clearInterval(id);
-    id = null;
-  }
-
-  parentNews.querySelector('.offer__slider-next').addEventListener('click', () => {
-    clearTimeSlider(timeoutSldr);
-    upSlider(+current.textContent, +total.textContent, news, imgNews);
-  }); // button slider previous
-
-  parentNews.querySelector('.offer__slider-prev').addEventListener('click', () => {
-    clearTimeSlider(timeoutSldr);
-    t = c;
-    c = p;
-    p--;
-
-    if (c - 1 == 0) {
-      p = imgNews.length > news.length ? news.length : imgNews.length;
-    }
-
-    hideNewsContent(news, imgNews);
-    showNewsContent(c, t, p, news, imgNews);
-  }); // Timer for slider
-
-  function timeSlider() {
-    if (!isFalse) {
-      upSlider(+current.textContent, +total.textContent, news, imgNews);
-    }
-  }
-
-  let timeoutSldr = setInterval(timeSlider, 5000); //news img hover stop Timer Slider
-
-  parentNews.querySelectorAll('img').forEach(img => {
-    img.addEventListener('mouseenter', () => {
-      isFalse = true;
-    });
-    img.addEventListener('mouseleave', () => {
-      isFalse = false;
-    });
-  }); // NavBar Link (hashTag) create scroll (link navbar) to hash (title of block)
 
   const allLinks = document.querySelectorAll('.header__links .header__link'),
         allHash = document.querySelectorAll('.title');

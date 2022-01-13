@@ -1,5 +1,7 @@
 
 @import url(https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Ubuntu+Condensed&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orelega+One&display=swap');
 @import './variables/_variables';
 @import './_base.scss';
 @import './blocks/header/_header.scss';
@@ -17,3 +19,4 @@
 @import './blocks/timetable/_timetable';
 @import './blocks/timetable/_modal';
 @import './blocks/glide/_glide';
+@import './blocks/el_slider/el';

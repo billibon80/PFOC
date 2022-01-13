@@ -77,6 +77,9 @@
   
   
   .close {
+    position: absolute;
+    bottom: 35rem;
+    right: inherit;
     background: linear-gradient(hsl(10,95%,59%),hsl(360,95%,59%));
     border: 1px solid hsl(360,95%,59%);
     border-bottom: 4px solid hsl(360,95%,43%);

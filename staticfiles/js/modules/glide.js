@@ -9,7 +9,7 @@ function glideSlide() {
         // autoplay: 4000,
         hoverpause: true,
         animationTimingFunc: 'ease-in',
-        animationDuration: 3000,
+        animationDuration: 1000,
         type: 'carousel',
         perView: 3,
         focusAt: "center",

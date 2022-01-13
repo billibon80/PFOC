@@ -16,8 +16,10 @@ function calc() {
                     calcResult.style.cssText = 'position: fixed; right: 4px; top: 20px; color:#00000061';
                 } else if (finish < 10 || start > 0) {
                     calcResult.style.cssText = '';
-                }  
-            }   
+                } 
+            } else {
+                calcResult.style.cssText = '';
+            }  
         }); 
     
     

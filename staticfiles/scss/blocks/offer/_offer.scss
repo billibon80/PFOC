@@ -1,15 +1,18 @@
 .offer {
     padding: 70px 0 100px 0;
     position: relative;
-    z-index: -1;
+    .container {
+        background: linear-gradient(
+            70deg, #fff, #6d7474);
+    }
     .bgc_y {
         position: absolute;
         width: 100%;
         max-width: 1338px;
-        height: 780px;
+        height: 640px;
         background: rgba(246, 242, 212, .45);
         z-index: -1;
-        top: 8rem;
+        top: 10rem;
     }
     .divider {
         margin-top: 9rem;
