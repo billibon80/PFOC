@@ -62,4 +62,8 @@
   @media (max-height: 800px) {
     height: calc(100% + -5rem);
   }
+  @media (max-height: 800px) and (max-width: 576px) {
+    height: calc(100% + -9.5rem);
+  }
+
 }
