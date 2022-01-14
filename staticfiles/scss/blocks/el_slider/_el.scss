@@ -49,10 +49,11 @@
     overflow: hidden;
     height: 68vh;
     padding: $vertPad $sidePad;
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     @media (max-width: 768px) {
       padding: 0;
+      width: 100%;
     }
     div, p, h2 {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
