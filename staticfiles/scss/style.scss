@@ -3,6 +3,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&display=swap');
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
+@font-face {
+    font-family: 'Antanella';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Antanella'),
+        url('../font/Antonella/Antonella.woff2') format('woff2'),
+        url('../font/Antonella/Antonella-Bold.woff') format('woff'),
+        url('../font/Antonella/Antonella.ttf') format('ttf'),
+        url('../font/Antonella/Antonella.eot') format('eot');
+}
+@font-face {
+    font-family: 'SpriteGraffitiShadow';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Antanella'),
+        url('../font/SpriteGraffitiShadow/SpriteGraffitiShadow.woff2') format('woff2'),
+        url('../font/SpriteGraffitiShadow/SpriteGraffitiShadow.woff') format('woff'),
+        url('../font/SpriteGraffitiShadow/SpriteGraffitiShadow.ttf') format('ttf'),
+        url('../font/SpriteGraffitiShadow/SpriteGraffitiShadow.eot') format('eot');
+}
 @import './variables/_variables';
 @import './_base.scss';
 @import './blocks/header/_header.scss';
