@@ -4041,7 +4041,10 @@ function el() {
         btn.addEventListener('click', function (e) {
           e.stopPropagation();
           cont.classList.remove('s--el-active');
-          document.querySelector('.el.s--active').classList.remove('s--active');
+
+          if (document.querySelector('.el.s--active')) {
+            document.querySelector('.el.s--active').classList.remove('s--active');
+          }
         });
       });
     }
