@@ -24,12 +24,12 @@
         margin-right: 45px;
         font-weight: bold;
         font-size: 18px;
-        color: $dark;
+        color: #605b5b;
         @media (max-width: 768px) {
             margin: 0;
         }
         &:hover {
-            color: #1c1d1e73;
+            color: #000;
             &:after {
                 width: 110%;
             }
