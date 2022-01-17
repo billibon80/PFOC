@@ -9,7 +9,7 @@ function calc() {
     const calcResult = document.querySelector('.calculating__result');
         window.addEventListener('scroll', () => {
             if(window.innerWidth <= 768) {
-                let start = Math.round(+document.querySelector('.calculating').getBoundingClientRect().y),
+                let start = Math.round(+document.querySelector('.calculating').getBoundingClientRect().y + 150),
                     finish = Math.round(+document.querySelector('.calculating__total').getBoundingClientRect().y);
 
                 if(start < 0 && finish > 10){

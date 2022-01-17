@@ -25,7 +25,7 @@
 	height: 100%;
 	width: 100%;
 	background: rgba(255,255,255,.3);
-	z-index: 1;
+	z-index: 2;
 	transform: skew(45deg);
 	transition: .5s;
 }
@@ -64,6 +64,7 @@
 	transform: perspective(400px) rotateY(90deg);
 	transform-origin: right;
 	transition: 1s;
+	z-index: 1;
 }
 
 
@@ -79,8 +80,7 @@
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	opacity: 1;
-	transition: opacity 0.5s ease-in-out;
+	transition: padding 1s ease-in-out;
 }
 
 .img-wrapper:hover h2
@@ -89,7 +89,7 @@
 }
 
 .img-wrapper:hover > span{
-	opacity: 0;
+	padding-bottom: 5em;
 }
 
 .img-wrapper ul
