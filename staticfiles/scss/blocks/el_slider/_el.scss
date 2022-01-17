@@ -69,10 +69,6 @@
     &__inner {
       position: relative;
       height: 100%;
-      
-      &:hover .el__bg:after {
-        opacity: 1;
-      }
     }
   }
   
@@ -85,7 +81,7 @@
     top: 0;
     width: $elW;
     height: 100%;
-    background: #252525;
+    background: #22577e52;
     transition: transform $moveAT $expandAT, width $expandAT, opacity $moveAT $expandAT, z-index 0s $moveAT + $expandAT;
     will-change: transform, width, opacity;
   
@@ -112,7 +108,7 @@
   
     &__bg {
       position: relative;
-      width: calc(100% - #{$sidePad * 2});
+      width: 104%;
       height: 100%;
       transition: transform $moveAT $expandAT;
       will-change: transform;
@@ -149,7 +145,7 @@
         width: calc(100% + 14rem);
         height: 100%;
         background: #08080887;
-        opacity: 0;
+        opacity: 1;
         transition: opacity $opacityAT;
         
         
@@ -203,9 +199,7 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.1s;
-      @media (max-width: 768px) {
-        padding-top: 65px;
-      }
+      padding-top: 65px;
       
       @include elActive {
         z-index: 2;
@@ -347,6 +341,7 @@
           color: #fff;
           transform: translate3d(0,-100%,0);
           transition: transform $indexHoverAT 0.1s;
+         
         }
         
         @include elHover {
@@ -380,11 +375,11 @@
   
         .el__bg {
           transform: translate3d($elW * $i * -1,0,0);
-  
+          right: #{-1 * ($i*20%)};
+          transition: right 0s;
           &:before {
             transition-delay: 0.1s * $i;
             background-image: url('/assets/img/news/newsmsg-#{$i + 1}.jpg');
-            width: calc(100% + (10em * #{$i + 1}))
           }
         }
       }

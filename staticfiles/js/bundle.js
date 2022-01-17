@@ -4032,6 +4032,7 @@ function el() {
       elsArr.forEach(el => {
         el.addEventListener('click', () => {
           if (!el.classList.contains('s--active')) {
+            el.querySelector('.el__bg').style.right = 0;
             cont.classList.add('s--el-active');
             el.classList.add('s--active');
           }
@@ -4040,6 +4041,7 @@ function el() {
       closeBtnsArr.forEach(function (btn) {
         btn.addEventListener('click', function (e) {
           e.stopPropagation();
+          document.querySelector('.s--active .el__bg').style = "";
           cont.classList.remove('s--el-active');
 
           if (document.querySelector('.el.s--active')) {
@@ -4047,6 +4049,11 @@ function el() {
           }
         });
       });
+      setTimeout(() => {
+        document.querySelectorAll('.el').forEach(el => {
+          el.style.background = 'none';
+        });
+      }, 3000);
     }
   });
 }
