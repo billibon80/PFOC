@@ -1,6 +1,10 @@
 .offer {
     padding: 70px 0 100px 0;
     position: relative;
+    min-height: 54em;
+    @media (max-width: 768px) {
+        min-height: 43em;
+    }
     .container {
         background: linear-gradient(
             70deg, #ffffff47, #08080814);

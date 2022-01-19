@@ -78,7 +78,7 @@ function modalSport() {
             },0.4);
             modalContainer[i].querySelector('.modal-content')
             .style.cssText =  `background: url(${imgTabCont[i].getAttribute('src')})
-            no-repeat center center fixed; background-size: cover; z-index: 6`;
+            no-repeat center center fixed; background-size: cover;`;
 
             const closeBtn = modalContainer[i].querySelector('.close');
             closeBtn.addEventListener('click',function(){

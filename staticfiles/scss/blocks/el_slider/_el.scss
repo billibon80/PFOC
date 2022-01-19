@@ -47,10 +47,11 @@
   .cont {
     position: relative;
     overflow: hidden;
-    height: 68vh;
-    padding: $vertPad $sidePad;
+    height: 500px;
     width: 80%;
+    padding: 2em;
     margin: 0 auto;
+    max-width: 47em;
     @media (max-width: 768px) {
       padding: 0;
       width: 100%;
@@ -200,6 +201,7 @@
       pointer-events: none;
       transition: all 0.1s;
       padding-top: 65px;
+      overflow: auto;
       
       @include elActive {
         z-index: 2;
@@ -224,7 +226,7 @@
     &__close-btn {
       
       z-index: -1;
-      position: absolute;
+      position: fixed;
       right: 10px;
       top: 10px;
       width: 60px;
@@ -282,7 +284,7 @@
       overflow: hidden;
       position: absolute;
       left: 0;
-      bottom: $vertPad * -1;
+      bottom: -17px;
       width: 100%;
       height: 100%;
       min-height: 250px;

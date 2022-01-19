@@ -1,7 +1,10 @@
 .preview {
     padding: 28px 0 100px 0;
     position: relative;
-    height: 100vh;
+    height: 670px;
+    @media (max-width: 576px) {
+        height: 540px; 
+    }
     .container {
         background-color:#fff;
     }
