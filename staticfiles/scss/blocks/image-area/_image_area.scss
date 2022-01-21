@@ -124,10 +124,11 @@
 	left: 40px;
 	color: white;
 	background: #333333;
-	transition: opacity 1s ease-out;
+	transform: translateX(-250px);
 	width: 200px;
 	opacity: 0;
-	cursor: default;
+	transition: opacity 1s ease-out;
+	z-index: -1;
 }
 
 .img-wrapper:hover ul li
@@ -160,21 +161,26 @@
 // 	opacity: 1;
 // }
 
-.img-wrapper ul li i
+.img-wrapper ul li .icon
 {
 	color: tomato;
-	background: rgba(255,255,255,0);
+	background: #333333;
+	width: 100%;
+	height: 100%;
 }
 
-.img-wrapper ul li svg:hover
+.img-wrapper ul li .icon:hover
 {
 	color: #fff;
-	background: rgba(255,255,255,0);
-
 }
 
-.img-wrapper ul li svg:hover ~ span
+.img-wrapper ul li .icon:hover ~ span
 {
-	display: block;
 	opacity: 1;
+	transform: translateX(0);
+}
+.img-wrapper ul li span:hover
+{
+	opacity: 1;
+	transform: translateX(0);
 }
