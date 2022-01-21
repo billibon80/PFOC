@@ -53,6 +53,11 @@ $fns: 50;
             color: #f55299;
         }
     }
+    &__bullets {
+        @media (max-height: 450px) {
+            bottom: 6em;
+        }
+    }
     &__bullet {
         background-color: white;
         border-radius: 0;

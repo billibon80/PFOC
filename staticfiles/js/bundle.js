@@ -229,6 +229,7 @@ function glideSlide() {
   curSlider = totalWidth;
   addSmoke(0);
   transformFrame(1);
+  bullet(0);
 
   function bullet(id) {
     bullets.forEach(bullet => {
@@ -237,9 +238,13 @@ function glideSlide() {
     bullets[id].style.opacity = 1;
   }
 
+  function cleanTransform(id) {
+    slideItems[id].querySelector('.glide__bg').style.transform = ``;
+  }
+
   function transformFrame(id) {
     if (id - 1 >= 0) {
-      slideItems[id - 1].querySelector('.glide__bg').style.transform = ``;
+      cleanTransform(id - 1);
     }
 
     if (curSlider < totalWidth) {
@@ -249,13 +254,13 @@ function glideSlide() {
     }
 
     if (id + 1 < slideItems.length - 1) {
-      slideItems[id + 1].querySelector('.glide__bg').style.transform = ``;
+      cleanTransform(id + 1);
     }
 
     if (id + 2 <= slideItems.length - 1) {
       slideItems[id + 2].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${-40}deg)`;
     } else if (id + 2 <= slideItems.length) {
-      slideItems[slideItems.length - 1].querySelector('.glide__bg').style.transform = ``;
+      cleanTransform(slideItems.length - 1);
     }
   }
 
@@ -288,6 +293,7 @@ function glideSlide() {
           bullet(0);
           slideItems[1].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${-40}deg)`;
           slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
+          cleanTransform(1);
         } else {
           const curId = Math.abs(curSlider) / totalWidth;
           addSmoke(curId + 1);
@@ -303,7 +309,7 @@ function glideSlide() {
           addSmoke(slideItems.length - 1);
           bullet(slideItems.length - 1);
           slideItems[slideItems.length - 2].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${40}deg)`;
-          slideItems[slideItems.length - 1].querySelector('.glide__bg').style.transform = ``;
+          cleanTransform(slideItems.length - 1);
           slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
         } else {
           let curId = Math.abs(curSlider) / totalWidth;
