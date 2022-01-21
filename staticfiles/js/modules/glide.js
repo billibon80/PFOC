@@ -142,11 +142,13 @@ function glideSlide() {
                     bullet(slideItems.length - 1);
                     slideItems[slideItems.length - 2].querySelector('.glide__bg').style
                     .transform = `perspective(1000px) rotateY(${40}deg)`;
-                    slider.style.cssText = `transform: translateX(${curSlider + correctSlide}px)`;
+                    slideItems[slideItems.length - 1].querySelector('.glide__bg').style
+                    .transform = ``;
+                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
                 } else {
                     let curId = Math.abs(curSlider) / totalWidth;
                     transformFrame (curId); 
-                    slider.style.cssText = `transform: translateX(${curSlider + correctSlide}px)`;
+                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
                     
                     if(curSlider < totalWidth) {
                         curId += 1;
