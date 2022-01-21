@@ -39,6 +39,10 @@ $fns: 50;
         li {
             margin: 20px;
             width: 352px;
+            @media (max-width: 768px) {
+                width: 100%;
+                margin: 0;
+            }
         }
     }
     &__arrow {
@@ -72,6 +76,13 @@ $fns: 50;
         transform-style: preserve-3d;
         //transform: perspective(1000px) rotateY(0deg);
         transition: transform 2s;
+        @media (max-width: 768px) {
+            width: 352px;
+            margin: 0 auto;
+        }
+        @media (max-width: 350px) {
+            width: 100%;
+        }
         h6 {
             font-size: 1.2rem;
             transform: scale(0.94);

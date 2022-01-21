@@ -1,6 +1,3 @@
-import glideModularEsm from '../../../node_modules/@glidejs/glide/dist/glide.modular.esm';
-import Glide, {Autoplay, Controls, Breakpoints, Images} from '../../../node_modules/@glidejs/glide/dist/glide.modular.esm';
-
 
 function glideSlide() {
 
@@ -27,10 +24,22 @@ function glideSlide() {
 
     let curSlider = 0,
         marg = parseInt(style.marginLeft) + parseInt(style.marginRight),
-        totalWidth = marg + widthSlide;
+        totalWidth = marg + widthSlide,
+        start=0,
+        correctSlide = 0;
+        
 
-    slider.style.cssText = `transform: translateX(${totalWidth}px)`;
+        
+       if (window.innerWidth <= 768) {
+            correctSlide = totalWidth;
+        }else {
+            start = totalWidth;
+        }
+
+    slider.style.cssText = `transform: translateX(${start}px)`;
     curSlider = totalWidth;
+
+    
 
     addSmoke(0);
     transformFrame(1);
@@ -76,11 +85,6 @@ function glideSlide() {
         
     }
 
-    function cleanStyle() {
-        slideItems.forEach(slied => {
-            slied.querySelector('.glide__bg').style.transform = '';
-        });
-    }
 
     function addSmoke(id) {
         
@@ -89,45 +93,33 @@ function glideSlide() {
             li.querySelector('.caption').classList.remove('show');
             const img = li.querySelector('.prize');
             img.classList.remove('show');
-            // img.style = '';
         });
 
-        slideItems[id].classList.remove('smoke');
-        slideItems[id].querySelector('.caption').classList.add('show');
+        if(slideItems[id]) {
+            slideItems[id].classList.remove('smoke');
+            slideItems[id].querySelector('.caption').classList.add('show');
+            slideItems[id].querySelector('.prize').classList.add('show');
+        }
         
-        slideItems[id].querySelector('.prize').classList.add('show');
-
-        // if(slideItems[id-1] && slideItems[id+1]) {
-        //     slideItems[id-1].querySelector('.prize').style.transform = 'scale(1) translate(0)';
-        // }else{
-        //     console.log('yes');
-        //     if(!slideItems[id-1]) {
-        //         slideItems[0].querySelector('.prize').style.transform = 'scale(1) translate(0)';
-        //     } else {
-        //         slideItems[slideItems.length - 2].querySelector('.prize').style.transform = 'scale(1) translate(0)';
-        //     }   
-        // }
     }
    
-
     document.querySelectorAll('.glide__arrow').forEach(but => {
         but.addEventListener('click', () => {
+
             marg = parseInt(style.marginLeft) + parseInt(style.marginRight);
             totalWidth = marg + widthSlide;
             
+            
             if(but.classList.contains('glide__arrow--right')) {
-                
-               
                 curSlider -= totalWidth;
                 
                 if(Math.abs(curSlider)  >= (slideItems.length - 1) * totalWidth ) {
                     curSlider = totalWidth;
                     addSmoke(0);
                     bullet(0);
-                    cleanStyle();
                     slideItems[1].querySelector('.glide__bg').style
                     .transform = `perspective(1000px) rotateY(${-40}deg)`;
-                    slider.style.cssText = `transform: translateX(${curSlider}px)`;
+                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
                     
                 } else {
                     const curId = Math.abs(curSlider) / totalWidth;
@@ -136,26 +128,25 @@ function glideSlide() {
                     bullet(curId + 1);
                     transformFrame (curId);
 
-                    slider.style.cssText = `transform: translateX(${curSlider}px)`;
+                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
                 }
 
                 
                
             } else {
-                curSlider += marg + widthSlide;
+                curSlider += totalWidth;
                 
                 if(curSlider  > totalWidth ) {
                     curSlider = -1 * (slideItems.length - 2) * totalWidth;
                     addSmoke(slideItems.length - 1);
                     bullet(slideItems.length - 1);
-                    cleanStyle();
                     slideItems[slideItems.length - 2].querySelector('.glide__bg').style
                     .transform = `perspective(1000px) rotateY(${40}deg)`;
-                    slider.style.cssText = `transform: translateX(${curSlider}px)`;
+                    slider.style.cssText = `transform: translateX(${curSlider + correctSlide}px)`;
                 } else {
                     let curId = Math.abs(curSlider) / totalWidth;
                     transformFrame (curId); 
-                    slider.style.cssText = `transform: translateX(${curSlider}px)`;
+                    slider.style.cssText = `transform: translateX(${curSlider + correctSlide}px)`;
                     
                     if(curSlider < totalWidth) {
                         curId += 1;
@@ -163,13 +154,8 @@ function glideSlide() {
                         curId = 0;
                     }
                     addSmoke(curId);
-                    bullet(curId);
-                   
-                }
-
-                
-
-                
+                    bullet(curId);   
+                }  
             }
         });
     });

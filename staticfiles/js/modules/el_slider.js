@@ -32,11 +32,14 @@ function el() {
             closeBtnsArr.forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    document.querySelector('.s--active .el__bg').style = "";
                     cont.classList.remove('s--el-active');
+
+                    if(document.querySelector('.s--active .el__bg')){
+                        document.querySelector('.s--active .el__bg').style = "";
+                    }
                     
-                    if(document.querySelector('.el.s--active')) {
-                        document.querySelector('.el.s--active').classList.remove('s--active');
+                    if(document.querySelector('.el.s--active') ) {
+                        document.querySelector('.el.s--active').classList.remove('s--active');   
                     }
                 });
             });
