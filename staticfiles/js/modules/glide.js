@@ -50,26 +50,34 @@ function glideSlide() {
         bullets.forEach(bullet => {
             bullet.style.opacity = 0.5;
         });
-        bullets[id].style.opacity = 1;
+        if(bullets[id]) {
+            bullets[id].style.opacity = 1;
+        }
+        
 
     }
 
     function cleanTransform(id) {
-        slideItems[id].querySelector('.glide__bg').style
-            .transform = ``;
+        if(slideItems[id]){
+          slideItems[id].querySelector('.glide__bg').style
+          .transform = ``;  
+        }
+        
     }
 
     function transformFrame(id) {
-       
+        for (let i=0; i < slideItems.length; i++) {
+            cleanTransform(i);
+        }
 
         if(id - 1 >= 0) { 
             cleanTransform(id - 1);
         }
 
-        if(curSlider < totalWidth) {
+        if(curSlider < totalWidth && slideItems[id]) {
             slideItems[id].querySelector('.glide__bg').style
             .transform = `perspective(1000px) rotateY(${40}deg)`;
-        } else if (curSlider >= totalWidth) {
+        } else if (curSlider >= totalWidth && slideItems[id]) {
             slideItems[id].querySelector('.glide__bg').style
             .transform = `perspective(1000px) rotateY(${-40}deg)`;
         }
@@ -123,7 +131,7 @@ function glideSlide() {
                     slideItems[1].querySelector('.glide__bg').style
                     .transform = `perspective(1000px) rotateY(${-40}deg)`;
                     slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
-                    cleanTransform(1);
+                    cleanTransform(0);
                     
                 } else {
                     const curId = Math.abs(curSlider) / totalWidth;

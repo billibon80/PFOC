@@ -131,6 +131,71 @@ function calc() {
 
 /***/ }),
 
+/***/ "./staticfiles/js/modules/card-area.js":
+/*!*********************************************!*\
+  !*** ./staticfiles/js/modules/card-area.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+function cardArea() {
+  const blockPrice = document.querySelector('.price'),
+        cards = blockPrice.querySelectorAll('.card'),
+        flips = blockPrice.querySelectorAll('.flip-card__container'),
+        btnCard = blockPrice.querySelectorAll('.inside-page__btn'),
+        modals = blockPrice.querySelectorAll('.card-section__modal');
+  btnCard.forEach((btn, i) => {
+    const style = btn.currentStyle || window.getComputedStyle(btn);
+    const domBtn = btn.getBoundingClientRect();
+    modals[i].style.cssText = `
+                    top: ${Math.round(domBtn.top)}px;
+                    left: ${Math.round(domBtn.left)}px;
+                    height: ${Math.round(domBtn.height)}px;
+                    width: ${Math.round(domBtn.width)}px;
+                    z-index: -1;
+                    `;
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      cards[i].classList.add('card__hover');
+      flips[i].classList.add('flip-card__container__hover');
+      modals[i].style.cssText = `
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    border-radius: 0;
+                    background: ${style.borderBlockColor.replaceAll(',', ' ').replace(')', ' / 92%)')};
+                    opacity: 1;
+                `;
+      modals[i].querySelector('.card-section__close').style.cssText = `
+                    opacity: 1;
+                    `;
+      document.querySelector('body').style.overflow = 'hidden';
+      modals[i].querySelector('.card-section__close').addEventListener('click', () => {
+        modals[i].style.cssText = `
+                    top: ${Math.round(domBtn.top)}px;
+                    left: ${Math.round(domBtn.left)}px;
+                    height: ${Math.round(domBtn.height)}px;
+                    width: ${Math.round(domBtn.width)}px;
+                    z-index: -1;
+                    `;
+        modals[i].querySelector('.card-section__close').style = '';
+        document.querySelector('body').style.overflow = 'auto';
+        setTimeout(() => {
+          cards[i].classList.remove('card__hover');
+          flips[i].classList.remove('flip-card__container__hover');
+        }, 1000);
+      });
+    });
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (cardArea);
+
+/***/ }),
+
 /***/ "./staticfiles/js/modules/el_slider.js":
 /*!*********************************************!*\
   !*** ./staticfiles/js/modules/el_slider.js ***!
@@ -235,21 +300,30 @@ function glideSlide() {
     bullets.forEach(bullet => {
       bullet.style.opacity = 0.5;
     });
-    bullets[id].style.opacity = 1;
+
+    if (bullets[id]) {
+      bullets[id].style.opacity = 1;
+    }
   }
 
   function cleanTransform(id) {
-    slideItems[id].querySelector('.glide__bg').style.transform = ``;
+    if (slideItems[id]) {
+      slideItems[id].querySelector('.glide__bg').style.transform = ``;
+    }
   }
 
   function transformFrame(id) {
+    for (let i = 0; i < slideItems.length; i++) {
+      cleanTransform(i);
+    }
+
     if (id - 1 >= 0) {
       cleanTransform(id - 1);
     }
 
-    if (curSlider < totalWidth) {
+    if (curSlider < totalWidth && slideItems[id]) {
       slideItems[id].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${40}deg)`;
-    } else if (curSlider >= totalWidth) {
+    } else if (curSlider >= totalWidth && slideItems[id]) {
       slideItems[id].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${-40}deg)`;
     }
 
@@ -293,7 +367,7 @@ function glideSlide() {
           bullet(0);
           slideItems[1].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${-40}deg)`;
           slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
-          cleanTransform(1);
+          cleanTransform(0);
         } else {
           const curId = Math.abs(curSlider) / totalWidth;
           addSmoke(curId + 1);
@@ -1004,6 +1078,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_glide__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/glide */ "./staticfiles/js/modules/glide.js");
 /* harmony import */ var _modules_timetable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timetable */ "./staticfiles/js/modules/timetable.js");
 /* harmony import */ var _modules_el_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/el_slider */ "./staticfiles/js/modules/el_slider.js");
+/* harmony import */ var _modules_card_area__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/card-area */ "./staticfiles/js/modules/card-area.js");
+
 
 
 
@@ -1019,8 +1095,21 @@ window.addEventListener("DOMContentLoaded", () => {
   (0,_modules_glide__WEBPACK_IMPORTED_MODULE_4__["default"])();
   (0,_modules_timetable__WEBPACK_IMPORTED_MODULE_5__["default"])();
   (0,_modules_el_slider__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  (0,_modules_card_area__WEBPACK_IMPORTED_MODULE_7__["default"])();
   window.addEventListener('resize', () => {
     (0,_modules_glide__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  }); // NavBar Link (hashTag) create scroll (link navbar) to hash (title of block)
+
+  const allLinks = document.querySelectorAll('.header__links .header__link'),
+        allHash = document.querySelectorAll('.title');
+  allLinks.forEach((item, i) => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      allHash[i].scrollIntoView({
+        block: 'start',
+        behavior: 'smooth'
+      });
+    });
   });
 });
 }();

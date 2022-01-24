@@ -85,6 +85,10 @@
     background: #22577e52;
     transition: transform $moveAT $expandAT, width $expandAT, opacity $moveAT $expandAT, z-index 0s $moveAT + $expandAT;
     will-change: transform, width, opacity;
+    @media (max-height: 500px) {
+      height: 70%;
+      
+    }
   
     &:not(.s--active) {
       cursor: pointer;

@@ -34,9 +34,25 @@
       }
       .row {
         text-align: center;
+        
       }
+
+      [data-label='Тренер: '] {
+        justify-content: space-around;
       }
-    
+      
+    } 
+  }
+
+  .img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
   }
   
   @media all and (max-width: 576px) {
