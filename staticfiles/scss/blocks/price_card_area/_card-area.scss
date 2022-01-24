@@ -1,9 +1,11 @@
 /* Typography =======================*/
 
 /* Headings */
-.price {
-  
+.price { 
   margin-top: 30px;
+  &>.row {
+    max-width: 100%;
+  }
 }
 
 /* Main heading for card's front cover */
@@ -177,14 +179,22 @@
       position: fixed;
       z-index: 11;
       opacity: 0;
+      .content {
+        opacity: 0;
+        transition: 1.2s opacity ease-out;
+      }
       .text {
         border: white solid 2px;
         border-radius: 5px;
         width: 76%;
+        max-width: 1000px;
         margin: 20px;
         color: white;
         padding: 5px;
         line-height: 1.3;
+        @media (max-height: 535px) {
+          margin-bottom: 0;
+        }
       }
     }
     &__close {
@@ -408,34 +418,175 @@
 
  .style_prevu_kit
 {
-    display:inline-block;
+    overflow: auto;
+    padding: 20px;
     border:0;
     width:95%;
-    height:43%;
+    max-width: 1200px;
+    height:50%;
     position: absolute;
     transition: all 200ms ease-in;
-    transform: scale(1) translate(-50%, 12%);
+    transform: scale(1) translate(-50%, -22%);
     top: 50%;
-    left: 50%; 
+    left: 50%;
+    @media (max-height: 768px) {
+      transform: scale(1) translate(-50%, -13%);
+      height: 42%;
+    }
+    @media (max-height: 600px) {
+      transform: scale(1) translate(-50%, 26%);
+      height: 38%;
+    }
+
+    %display-flex-center {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+    }
+    $blue: #006699;
+    $orange: #f57902;
+    $bshGrey: 0px 1px 1px 1px #223c5033 inset;
+    
+    .wrapper {
+      width: 100%;
+      height: 7em;
+      border-radius: 2px;
+      box-shadow: 0 0 1px grey inset;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      position: relative;
+      @media (max-width: 768px) {
+        height: 11em;
+      }
+      .pref {
+        position: absolute;
+        bottom: 11px;
+        color: red;
+      }
+      .hour-price {
+        position: absolute;
+        right: -39px;
+        top: 0;
+        box-shadow: 0px 1px 1px 1px #223c5033;
+        height: 20px;
+        width: 36px;
+        text-align: center;
+        line-height: 1;
+        font-size: 12px;
+        padding: 2px;
+        cursor: pointer;
+        background: white;
+        &::before {
+          display: none;
+          content: "";
+          position: absolute;
+          top: 8px;
+          left: -12px;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid #05F2AE;
+          border-bottom: 10px solid transparent;
+        }
+        &::after {
+          display: none;
+          content: attr(data-price);
+          position: absolute;
+          width: 120px;
+          height: 44px;
+          line-height: 44px;
+          background: #05F2AE;
+          color: #af5683;
+          top: 8px;
+          left: -122px;
+          font-size: 20px;
+          border-radius: 10px;
+          z-index: 1;
+        }
+        &:hover {
+          
+          color: red;
+          &::after, &::before {
+            display: block;
+            opacity: 1;
+          }
+        }
+      }
+      &__price {
+        @extend %display-flex-center;
+        font-size: 10px;
+        height: 90px;
+        width: 105px;
+        margin: 10px auto;
+        padding: 5px;
+        background: linear-gradient(to bottom, #fffbfb, #efecec);
+        border-radius: 3px;
+        box-shadow: $bshGrey;
+        position: relative;
+        @for $i from 1 through 2 {
+          span:nth-of-type(#{$i + 4}) {
+          top: 22px * $i;
+        }
+        }
+        
+        &__u {
+          @extend %display-flex-center;
+          flex-direction: column;
+          font-weight: bold;
+          font-size: 27px;
+          text-align: center;
+          line-height: 1.1;
+          &--blue {
+            color: $blue;
+          }
+          &--orange {
+            color: $orange;
+          }
+        }
+        &__d {
+          @extend %display-flex-center;
+          flex-direction: column;
+          font-size: 10px;
+          margin-top: 10px;
+          font-weight: bold;
+          &--blue {
+            color: $blue;
+          }
+          &--orange {
+            color: $orange;
+          }
+        }
+      }
+     
+    }
+    &__title {
+      text-transform: capitalize;
+      font-weight: bold;
+      color: cornflowerblue;
+
+    }
+    
 
 }
 
-
-  @import url('https://fonts.googleapis.com/css?family=Montserrat:900i&display=swap');
-  .time-of-work__title {
-    font-family:'Montserrat', sans-serif;
+   .time-of-work__title {
     font-size: 60px;
-    letter-spacing: 0.1em;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: white;
-    text-shadow: 4px 4px #7ac912,
-    10px 10px #000000;
+    color: white;
+    font-weight: bold;
     margin-left: 20px;
+    text-shadow: .1em .1em 0 #265973;
+    @media (max-width: 425px) {
+      font-size: 40px;
+    }
     &+span {
+      margin-left: 20px;
       display: block;
       color: white;
       font-size: 20px;
+      
+      time {
+        font-weight: bold;
+      }
     }
+
   }
 

@@ -9,7 +9,7 @@ function el() {
         
         let once = true;
 
-        if (start - 150 < 0 && once) {
+        if (start - 300 < 0 && once) {
 
             once = false;
 

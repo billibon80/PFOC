@@ -166,27 +166,33 @@ function cardArea() {
                     bottom: 0;
                     right: 0;
                     border-radius: 0;
-                    background: ${style.borderBlockColor.replaceAll(',', ' ').replace(')', ' / 92%)')};
+                    background: ${style.borderBlockColor.replaceAll(',', ' ').replace(')', ' / 100%)')};
                     opacity: 1;
                 `;
       modals[i].querySelector('.card-section__close').style.cssText = `
                     opacity: 1;
                     `;
+      setTimeout(() => {
+        modals[i].querySelector('.content').style.opacity = 1;
+      }, 1000);
       document.querySelector('body').style.overflow = 'hidden';
       modals[i].querySelector('.card-section__close').addEventListener('click', () => {
-        modals[i].style.cssText = `
-                    top: ${Math.round(domBtn.top)}px;
-                    left: ${Math.round(domBtn.left)}px;
-                    height: ${Math.round(domBtn.height)}px;
-                    width: ${Math.round(domBtn.width)}px;
-                    z-index: -1;
-                    `;
-        modals[i].querySelector('.card-section__close').style = '';
-        document.querySelector('body').style.overflow = 'auto';
+        modals[i].querySelector('.content').style = '';
         setTimeout(() => {
-          cards[i].classList.remove('card__hover');
-          flips[i].classList.remove('flip-card__container__hover');
-        }, 1000);
+          modals[i].style.cssText = `
+                        top: ${Math.round(domBtn.top)}px;
+                        left: ${Math.round(domBtn.left)}px;
+                        height: ${Math.round(domBtn.height)}px;
+                        width: ${Math.round(domBtn.width)}px;
+                        z-index: -1;
+                        `;
+          modals[i].querySelector('.card-section__close').style = '';
+          document.querySelector('body').style.overflow = 'auto';
+          setTimeout(() => {
+            cards[i].classList.remove('card__hover');
+            flips[i].classList.remove('flip-card__container__hover');
+          }, 1000);
+        }, 500);
       });
     });
   });
@@ -211,7 +217,7 @@ function el() {
     const start = Math.round(+document.querySelector('.offer').getBoundingClientRect().y);
     let once = true;
 
-    if (start - 150 < 0 && once) {
+    if (start - 300 < 0 && once) {
       once = false;
       setTimeout(function () {
         cont.classList.remove('s--inactive');
