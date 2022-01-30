@@ -116,8 +116,7 @@ class TimeListCoach(models.Model):
 
     def __str__(self):
         d_week = {0: "Пн", 1: "Вт", 2: "Ср", 3: "Чт", 4: "Пт", 5: "Сб", 6: "Вс"}
-        return '{0} : гр.{5} {1} - ({2}) [{3} адрес: {4}]'.format(self.coach, d_week[int(self.d_week)], self.type_sport,
-                                                                  self.time_list, self.address, self.group)
+        return str(self.coach)
 
     class Meta:
         ordering = ["coach", "group", "d_week", "type_sport", "address"]
@@ -183,11 +182,22 @@ class CardsObject(models.Model):
     """
     Create card object in block Object & price
     """
+
+    COLOR = (
+        ("--city", "малиновый"),
+        ("--ski", "голубой"),
+        ("--beach", "оранжевый"),
+        ("--camping", "зеленый")
+    )
+
     obj = models.OneToOneField(ObjectAddres, on_delete=models.CASCADE, primary_key=True, verbose_name="Адрес Объекта")
     front_title = models.CharField("Лицевой заголовок", max_length=50, null=True)
     front_text = models.CharField("Лицевой текст", max_length=30, null=True)
     inside_title = models.CharField("Внутренний заголовок", max_length=35, null=True)
     inside_text = models.TextField("Внутренний текст", max_length=110, null=True)
+    icons = models.FilePathField("Иконка", blank=True, path="staticfiles/icons")
+    color = models.CharField("Цвет", max_length=15, choices=COLOR, default="--city")
+    link = models.CharField("Интернет ссылка", max_length=100, null=True, blank=True)
     imgAdd = models.ImageField("Добавить медиа", blank=True, upload_to="staticfiles/media/card_obj")
     imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="staticfiles/media/card_obj")
     t_work_wd = models.CharField("Рабочие дни", max_length=30, null=True)
@@ -196,7 +206,7 @@ class CardsObject(models.Model):
     t_work_hh = models.CharField("Время работы выходные дни", max_length=30, null=True)
 
     def __str__(self):
-        return '{0} '.format(self.obj)
+        return self.obj.address
 
     class Meta:
         ordering = ["obj"]
@@ -213,7 +223,7 @@ class CardsPrices(models.Model):
     title = models.CharField("Наименование услуги", max_length=50, null=True)
     description = models.TextField("Описание услуги", max_length=300, null=True,
                                    help_text="Например: что входит в стоимость услуги")
-    price_f_color = models.CharField("Особый текст", max_length=12, null=True, blank=True,
+    price_f_color = models.CharField("Особый текст", max_length=12, null=True, blank=True, default="",
                                      help_text="Текст под полной стоимостью будет выделен красным цветом")
     price_f = models.CharField("Полная стоимость", max_length=7, null=True, blank=True,
                                help_text="Полная стоимость услуги за одну единицу, например: за 1ч, 1д, 1с")

@@ -369,9 +369,13 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     height: 100%;
     text-align: center; 
     width: 100%;
+    @media (max-width: 576px) {
+      height: 50%;
+    }
     p {
       line-height: 1.1;
     }

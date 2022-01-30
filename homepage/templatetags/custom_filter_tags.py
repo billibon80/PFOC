@@ -16,6 +16,9 @@ def to_range(db):
     """
     return range value
     """
+    if isinstance(db, int):
+        return range(db)
+
     return range(len(db))
 
 
@@ -26,11 +29,14 @@ def set_d_week(value):
 
 
 @register.simple_tag
-def add_img_path(img_choice, img_add, text_replace):
+def add_img_path(img_choice, img_add=None, text_replace=None, link=None):
     """
     Replace text_replace in path ImageField or path FilePathField
-     and return one valid value (path img)
+     and return one valid value (path img) or link
     """
+    if link != '' and link is not None:
+        return link
+
     if img_choice != '':
         return str(img_choice).replace(text_replace, "")
 
