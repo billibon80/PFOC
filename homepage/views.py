@@ -5,8 +5,7 @@ import pandas as pd
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.http import HttpResponse
-from .models import ViewOfSport, TimeListCoach, TimeListOrganization, SliderViewsOfSport, ObjectAddres,\
-                    CardsObject, CardsPrices, News, Contact
+from .models import *
 
 
 def index(request):
@@ -62,7 +61,9 @@ def index(request):
                       'card_object': card_object,
                       'price_object': price_object,
                       'news': News.objects.filter(publish=True)[:5],
-                      'contact': Contact.objects.filter(publish=True)
+                      'contact': Contact.objects.filter(publish=True),
+                      'achieves': Achieves.objects.filter(publish=True),
+
 
                     }
                   )

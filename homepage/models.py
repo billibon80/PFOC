@@ -303,3 +303,26 @@ class Contact(models.Model):
         ordering = ["position"]
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
+
+
+class Achieves(models.Model):
+    """
+    Create  block our achieves
+    """
+
+    title = models.CharField("Заголовок", max_length=35, null=True)
+    description = models.TextField("Описание", max_length=100, null=True)
+    publish = models.BooleanField("Опубликовать")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/cup")
+    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/cup")
+    imgAdd_award = models.ImageField("Добавить фото награды", blank=True, upload_to="staticfiles/img/cup")
+    imgChoice_award = models.FilePathField("Выбрать фото награды", blank=True, path="staticfiles/img/cup")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = "Слайдер достижения"
+        verbose_name_plural = "Слайдеры достижения"
+

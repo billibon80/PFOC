@@ -137,106 +137,14 @@
 
     <div class="divider"></div>
 
-    
-    <div class="promotion">
-        <div class="title">Наши достижения</div>
-        <div class="bgc_y"></div>
-        <div class="container">
-            <div class="glide">
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides">
-                      <li class="glide__slide smoke">
-                        <div class="glide__bg frame" style="background-image: url({% static 'img/object-photo/girl-soccer.jpg'%})">
-                            <div class="glide__bgc">
-                              <span class="oh fw-bold">Чемпион республики 2021</span>
-                              <span class="caption">Турнир золотая шайба в группу 2002 - 2014 годы</span>
-                              <img class="prize" src="{% static 'img/cup/cup.jpg'%}" alt="prize">
-                            </div>
-                            <div></div>
-                            <div></div>
-                        </div>  
-                      </li>
-                      <li class="glide__slide smoke">
-                        
-                        <div class="glide__bg frame" style="background-image: url({% static 'img/object-photo/child-soccer.jpg'%})">
-                          <div class="glide__bgc">
-                            <span class="oh fw-bold">Шахматы 2021</span>
-                            <span class="caption">Второе место в соревнованиях по шашкам юнноши 2021 - 2022</span>
-                            <img class="prize" src="{% static 'img/cup/cup.jpg'%}" alt="prize">
-                          </div>
-                          <div></div>
-                            <div></div>
-                        </div>
-                      </li>
-                      <li class="glide__slide smoke">
-                        <div class="glide__bg frame" style="background-image: url({% static 'img/object-photo/box-face.jpg'%})">
-                          <div class="glide__bgc">
-                            <span class="oh fw-bold">Чемпион республики 2021</span>
-                            <span class="caption">Турнир золотая шайба в группу 2002 - 2014 годы</span>
-                            <img class="prize" src="{% static 'img/cup/cup.jpg'%}" alt="prize">
-                          </div>
-                          <div></div>
-                            <div></div>
-                        </div>
-                       </li>
-                      <li class="glide__slide smoke">
-                        <div class="glide__bg frame" style="background-image: url({% static 'img/object-photo/box-girl.jpg'%})">
-                          <div class="glide__bgc">
-                            <span class="oh fw-bold">Чемпион республики 2021</span>
-                            <span class="caption">Турнир золотая шайба в группу 2002 - 2014 годы</span>
-                            <img class="prize" src="{% static 'img/cup/cup.jpg'%}" alt="prize">
-                          </div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                <div class="glide__arrows" data-glide-el="controls">
-                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-angle-double-left"></i></button>
-                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-angle-double-right"></i></button>
-                </div>
-
-                <div class="glide__bullets" data-glide-el="controls[nav]">
-                    <button class="glide__bullet" data-glide-dir="=0"></button>
-                    <button class="glide__bullet" data-glide-dir="=1"></button>
-                    <button class="glide__bullet" data-glide-dir="=2"></button>
-                    <button class="glide__bullet" data-glide-dir="=3"></button>
-                </div>
-        
-            </div>        
-                
-        </div>
-            <!--            <div class="promotion__timer">-->
-            <!--                <div class="title">Осталось до конца акции:</div>-->
-            <!--                <div class="timer">-->
-            <!--                    <div class="timer__block">-->
-            <!--                        <span id="days">12</span>-->
-            <!--                        дней-->
-            <!--                    </div>-->
-            <!--                    <div class="timer__block">-->
-            <!--                        <span id="hours">20</span>-->
-            <!--                        часов-->
-            <!--                    </div>-->
-            <!--                    <div class="timer__block">-->
-            <!--                        <span id="minutes">56</span>-->
-            <!--                        минут-->
-            <!--                    </div>-->
-            <!--                    <div class="timer__block">-->
-            <!--                        <span id="seconds">20</span>-->
-            <!--                        секунд-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-        </div>
-    </div>
+    {% include 'homepage/achieves.html' %}
 
     <footer class="footer">
         <div class="container">
             <div class="social">
-                <div class="subtitle">Мы в социальных сетях:</div>
-                <a href="#" class="link">instagram</a>
-                <a href="#" class="link">facebook</a>
+                <div class="subtitle">Наш адрес:</div>
+                <span href="#" class="link"> 220037 г.Минск пер.Уральский, 9</span>
+                <a href="#" class="link"></a>
             </div>
             <div class="header__logo">
                 <img src="{% static 'img/pfoc-logo.png'%}" alt="pepper">
@@ -248,20 +156,6 @@
             </div>
         </div>
     </footer>
-
-    <div class="modal">
-        <div class="modal__dialog">
-            <div class="modal__content">
-                <form action="#">
-                    <div class="modal__close">&times;</div>
-                    <div class="modal__title">Мы свяжемся с вами как можно быстрее!</div>
-                    <input required placeholder="Ваше имя" name="name" type="text" class="modal__input">
-                    <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input">
-                    <button class="btn btn_dark btn_min">Перезвонить мне</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Script slide velocity-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>

@@ -1,0 +1,47 @@
+{% block achieves %}
+    {% load static %}
+    {% load custom_filter_tags %}
+
+    <div class="promotion">
+        <div class="title">Наши достижения</div>
+        <div class="bgc_y"></div>
+        <div class="container">
+            <div class="glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        {% for slide in achieves %}
+                            <li class="glide__slide smoke">
+                          {% add_img_path slide.imgChoice slide.imgAdd 'staticfiles/' as img %}
+                        <div class="glide__bg frame" style="background-image: url({% static img %})">
+                            <div class="glide__bgc">
+                              <span class="oh fw-bold">{{ slide.title }}</span>
+                              <span class="caption">{{ slide.description }}</span>
+                              {% add_img_path slide.imgChoice_award slide.imgAdd_award 'staticfiles/' as img %}
+                              <img class="prize" src="{% static img %}" alt="prize">
+                            </div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                      </li>
+                        {% endfor %}
+                    </ul>
+                  </div>
+
+
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-angle-double-left"></i></button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-angle-double-right"></i></button>
+                </div>
+
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    {% for slide in achieves %}
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

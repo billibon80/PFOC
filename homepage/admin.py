@@ -207,6 +207,50 @@ class ContactAdmin(admin.ModelAdmin):
     exclude_publish_event.short_description = "Изъять выбранные контакты"
 
 
+@admin.register(Achieves)
+class AchievesAdmin(admin.ModelAdmin):
+    list_display = ['title', 'description', 'publish']
+    ordering = ['id']
+    actions = ['publish_event', 'exclude_publish_event']
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                ('title', 'description'),
+                'publish',
+            )
+        }),
+        ('Фото', {
+            'fields': (
+                ('imgAdd', 'imgChoice'),
+            )
+        }),
+        ('Фото награды', {
+            'fields': (
+                ('imgAdd_award', 'imgChoice_award'),
+            )
+        }),
+    ]
+
+    def publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = True
+            obj.save()
+        self.message_user(request, f'Выбранные слайды успешно опубликованы')
+
+    publish_event.short_description = "Опубликовать выбранные слайды"
+
+    def exclude_publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = False
+            obj.save()
+        self.message_user(request, f'Выбранные слайды успешно изъяты')
+
+    exclude_publish_event.short_description = "Изъять выбранные слайды"
+
+
+
+
 admin.site.register(ViewOfSport)
 admin.site.register(Coach)
 admin.site.register(Organization)
