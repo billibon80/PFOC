@@ -237,7 +237,7 @@ function el() {
           cont.classList.remove('s--el-active');
 
           if (document.querySelector('.s--active .el__bg')) {
-            document.querySelector('.s--active .el__bg').style = "";
+            document.querySelector('.s--active .el__bg').style.right = "";
           }
 
           if (document.querySelector('.el.s--active')) {

@@ -146,8 +146,7 @@ class TimeListOrganization(models.Model):
 
     def __str__(self):
         d_week = {0: "Пн", 1: "Вт", 2: "Ср", 3: "Чт", 4: "Пт", 5: "Сб", 6: "Вс"}
-        return '{0} :  {1} - ({2}) [{3} адрес: {4}]'.format(self.organization, d_week[int(self.d_week)],
-                                                            self.type_sport, self.time_list, self.address)
+        return str(self.organization)
 
     class Meta:
         ordering = ["organization", "d_week", "type_sport", "address"]
@@ -259,3 +258,48 @@ class CardsPrices(models.Model):
         ordering = ["obj", "title"]
         verbose_name = "Стоимость услуги"
         verbose_name_plural = "Прайсы на услуги"
+
+
+class News(models.Model):
+    """
+    Create  block news
+    """
+
+    front_title = models.CharField("Фронтальный заголовок", max_length=50, null=True)
+    title = models.CharField("Заголовок", max_length=50, null=True)
+    content = models.TextField("Текст", max_length=765, null=True)
+    publish = models.BooleanField("Опубликовать")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/news")
+    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/news")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ["publish"]
+        verbose_name = "Новость"
+        verbose_name_plural = "Новости"
+
+
+class Contact(models.Model):
+    """
+    Create  block news
+    """
+
+    position = models.CharField("Должность", max_length=15, null=True)
+    name = models.CharField("ФИО", max_length=30, null=True)
+    phone = models.CharField("Телефон", max_length=20, null=True)
+    fax = models.CharField("Факс", max_length=20, null=True, blank=True)
+    email = models.EmailField(max_length=254, blank=True)
+    content = models.TextField("Примечания", max_length=100, null=True, blank=True)
+    publish = models.BooleanField("Опубликовать")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/managment")
+    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/managment")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["position"]
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"

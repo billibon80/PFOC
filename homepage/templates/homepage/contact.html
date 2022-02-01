@@ -1,0 +1,36 @@
+{% block contact %}
+    {% load static %}
+    {% load custom_filter_tags %}
+
+    <div class="menu">
+        <h2 class="title">Руководство</h2>
+
+        <div class="menu__field">
+            <div class="container">
+                <div class="row">
+                     {% for cont in contact %}
+                        <div class="col ">
+                          <div class="image-area">
+                            <div class="img-wrapper">
+                                {% add_img_path cont.imgChoice cont.imgAdd 'staticfiles/' as img %}
+                              <img src="{% static img %}" alt="{{ cont.name }}">
+                              <h2>{{ cont.position }}</h2>
+                              <span>{{ cont.name }}</span>
+                              <ul>
+                                <li><div class="icon"><i class="fas fa-phone-square-alt"></i></div><span>{{ cont.phone }}</span></li>
+                                <li><div class="icon"><i class="fas fa-fax"></i></div><span>{{ cont.fax }}</span></li>
+                                <li><div class="icon"><i class="fas fa-at"></i></div><span>{{ cont.email }}</span></li>
+                                <li><div class="icon"><i class="far fa-address-card"></i></div><span>{{ cont.content }}</span></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                     {% endfor %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

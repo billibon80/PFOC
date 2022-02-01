@@ -103,13 +103,114 @@ class TimeListCoachAdmin(admin.ModelAdmin):
     duplicate_event.short_description = "Копировать элемент"
 
 
+@admin.register(TimeListOrganization)
+class TimeListOrganizationAdmin(admin.ModelAdmin):
+    list_display = ['organization', 'd_week', 'type_sport', 'time_list', 'address']
+    list_filter = ['organization', 'type_sport', 'address']
+    ordering = ['organization']
+    actions = ['duplicate_event']
+
+    fieldsets = [
+        (None, {
+            'fields': ('d_week', ('organization', 'type_sport'),)
+        }),
+        ('Расписание', {
+            'fields': ('address', 'time_list',)}),
+    ]
+
+    def duplicate_event(self, request, queryset):
+        for obj in queryset:
+            obj.id = None
+            obj.save()
+        self.message_user(request, f'Расписание организации успешно скопирован')
+
+    duplicate_event.short_description = "Копировать расписание"
+
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'id', 'front_title', 'publish']
+    list_filter = ['publish']
+    ordering = ['-publish', '-id']
+    actions = ['publish_event', 'exclude_publish_event']
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                ('title', 'front_title'),
+                'content',
+                'publish',
+            )
+        }),
+        ('Фото', {
+            'fields': (
+                ('imgAdd', 'imgChoice'),
+            )
+        }),
+    ]
+
+    def publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = True
+            obj.save()
+        self.message_user(request, f'Выбранные статьи успешно опубликованы')
+
+    publish_event.short_description = "Опубликовать выбранные статьи"
+
+    def exclude_publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = False
+            obj.save()
+        self.message_user(request, f'Выбранные статьи успешно изъяты')
+
+    exclude_publish_event.short_description = "Изъять выбранные статьи"
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['name', 'position', 'phone', 'fax',
+                    'email', 'content', 'publish']
+    ordering = ['name']
+    actions = ['publish_event', 'exclude_publish_event']
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                ('name', 'position'),
+                ('phone', 'fax'),
+                'email',
+                'content',
+                'publish',
+            )
+        }),
+        ('Фото', {
+            'fields': (
+                ('imgAdd', 'imgChoice'),
+            )
+        }),
+    ]
+
+    def publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = True
+            obj.save()
+        self.message_user(request, f'Выбранные контакты успешно опубликованы')
+
+    publish_event.short_description = "Опубликовать выбранные контакты"
+
+    def exclude_publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = False
+            obj.save()
+        self.message_user(request, f'Выбранные контакты успешно изъяты')
+
+    exclude_publish_event.short_description = "Изъять выбранные контакты"
+
+
 admin.site.register(ViewOfSport)
 admin.site.register(Coach)
 admin.site.register(Organization)
-# admin.site.register(TimeListCoach)
-admin.site.register(TimeListOrganization)
 admin.site.register(ObjectAddres)
 admin.site.register(Group)
 admin.site.register(SliderViewsOfSport)
-# admin.site.register(CardsObject)
-# admin.site.register(CardsPrices, PriceAdmin)
+

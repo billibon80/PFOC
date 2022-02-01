@@ -1,0 +1,43 @@
+{% block news %}
+    {% load static %}
+    {% load custom_filter_tags %}
+
+    <div class="offer">
+        <div class="bgc_y"></div>
+        <h2 class="title">Наши Новости</h2>
+          <div class="container">
+            <div class="cont s--inactive">
+              <!-- cont inner start -->
+              <div class="cont__inner">
+                {% for cont in news %}
+                  <div class="el">
+                    <div class="el__overflow">
+                      <div class="el__inner">
+                        {% add_img_path cont.imgChoice cont.imgAdd 'staticfiles/' as img %}
+                        <div class="el__bg" style="background-image: url({% static img %})"></div>
+                        <div class="el__preview-cont">
+                          <h2 class="el__heading">{{ cont.front_title }}</h2>
+                        </div>
+                        <div class="el__content">
+                          <div class="el__title">{{ cont.title }}</div>
+                          <p class="el__text"> {{ cont.content }}</p>
+                          <div class="el__close-btn"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="el__index">
+                      <div class="el__index-back">{{ forloop.counter  }}</div>
+                      <div class="el__index-front">
+                        <div class="el__index-overlay" data-index="{{ forloop.counter }}">{{ forloop.counter }}</div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              <!-- cont inner end -->
+            </div>
+          </div>
+    </div>
+
+
+
+{% endblock %}

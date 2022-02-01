@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.http import HttpResponse
 from .models import ViewOfSport, TimeListCoach, TimeListOrganization, SliderViewsOfSport, ObjectAddres,\
-                    CardsObject, CardsPrices
+                    CardsObject, CardsPrices, News, Contact
 
 
 def index(request):
@@ -51,7 +51,7 @@ def index(request):
         price_object.append(
             CardsPrices.objects.filter(obj=id_obj)
         )
-    print(price_object)
+
     return render(request, "homepage/index.html",
                   context={
                       'views_sport': ViewOfSport.objects.all(),
@@ -61,5 +61,8 @@ def index(request):
                       'address_view': address_view,
                       'card_object': card_object,
                       'price_object': price_object,
+                      'news': News.objects.filter(publish=True)[:5],
+                      'contact': Contact.objects.filter(publish=True)
+
                     }
                   )
