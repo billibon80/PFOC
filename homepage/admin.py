@@ -170,13 +170,13 @@ class NewsAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['name', 'position', 'phone', 'fax',
                     'email', 'content', 'publish']
-    ordering = ['name']
+    ordering = ['rang']
     actions = ['publish_event', 'exclude_publish_event']
 
     fieldsets = [
         (None, {
             'fields': (
-                ('name', 'position'),
+                ('name', 'position', 'rang'),
                 ('phone', 'fax'),
                 'email',
                 'content',
@@ -249,12 +249,46 @@ class AchievesAdmin(admin.ModelAdmin):
     exclude_publish_event.short_description = "Изъять выбранные слайды"
 
 
+@admin.register(ObjectAddres)
+class ObjectAddresAdmin(admin.ModelAdmin):
+    list_display = ['address', 'phone', 'publish']
+    ordering = ['address']
+    actions = ['publish_event', 'exclude_publish_event']
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                ('address', 'data_map'),
+            )
+        }),
+        ('Телефон', {
+            'fields': (
+                ('phone', 'publish'),
+            )
+        }),
+    ]
+
+    def publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = True
+            obj.save()
+        self.message_user(request, f'Выбранные контакты успешно размещены в footer')
+
+    publish_event.short_description = "Разместить контакты в footer"
+
+    def exclude_publish_event(self, request, queryset):
+        for obj in queryset:
+            obj.publish = False
+            obj.save()
+        self.message_user(request, f'Выбранные контакты успешно изъяты')
+
+    exclude_publish_event.short_description = "Изъять выбранные контакты из footer"
+
 
 
 admin.site.register(ViewOfSport)
 admin.site.register(Coach)
 admin.site.register(Organization)
-admin.site.register(ObjectAddres)
 admin.site.register(Group)
 admin.site.register(SliderViewsOfSport)
 

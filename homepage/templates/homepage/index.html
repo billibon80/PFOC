@@ -150,9 +150,10 @@
                 <img src="{% static 'img/pfoc-logo.png'%}" alt="pepper">
             </div>
             <div class="call">
-                <div class="subtitle">Или позвоните нам</div>
-                <a href="#" class="link">+380678341034</a>
-                <a href="#" class="link">+380500941356</a>
+                <div class="subtitle">Или позвоните нам: </div>
+                {% for obj in footer_contact %}
+                    <span class="link">{{ obj.address}}: {{ obj.phone}}</span>
+                {% endfor %}
             </div>
         </div>
     </footer>

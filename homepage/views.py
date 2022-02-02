@@ -63,6 +63,7 @@ def index(request):
                       'news': News.objects.filter(publish=True)[:5],
                       'contact': Contact.objects.filter(publish=True),
                       'achieves': Achieves.objects.filter(publish=True),
+                      'footer_contact': ObjectAddres.objects.filter(publish=True),
 
 
                     }

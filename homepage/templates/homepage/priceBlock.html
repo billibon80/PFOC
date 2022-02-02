@@ -33,7 +33,6 @@
                                   </p>
                               </div>
                           </div>
-                          img
                           <div class="card-back">
                               {% add_img_path data.imgChoice data.imgAdd 'staticfiles/' as img %}
                               <video class="video__container" autoplay muted loop>
@@ -73,7 +72,7 @@
                             <div class="content">
                               <div class="text"> <i class="fas fa-exclamation-triangle"></i> Не является публичной офертой, более подробную информацию уточняйте по телефонам или в момент приобретения услуг!</div>
                               <span class="time-of-work__title">Время работы</span>
-                              <span> {{ data.t_work_wd }} <time> {{ data.t_work_wh }} </time> {{ data.t_work_hd }} <time>{{ data.t_work_hh }}</time></span>
+                              <span> {{ data.t_work_wd }} <time> {{ data.t_work_wh }} </time><br> {{ data.t_work_hd }} <time>{{ data.t_work_hh }}</time></span>
                               <span class="time-of-work__title">Прейскурант</span>
                               <div class="style_prevu_kit" style="background-color:#faf6f7;">
                                   {% get_db price_object i as db_price %}

@@ -8,6 +8,10 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        @media (max-width: 425px) {
+          flex-direction: column;
+          align-items: center;  
+        }
         div {
             margin: auto 0;
         }
@@ -21,7 +25,5 @@
         font-size: 16px;
         color: #fff;
     }
-    .call {
-        text-align: right;
-    }
+    
 }

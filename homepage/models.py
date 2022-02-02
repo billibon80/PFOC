@@ -29,7 +29,9 @@ class ObjectAddres(models.Model):
     Address of object
     """
     address = models.CharField("Адрес объекта", max_length=100)
-    data_map = models.CharField("data-map", max_length=40, blank=True)
+    data_map = models.CharField("data-map", max_length=40, blank=True, null=True)
+    phone = models.CharField("Телефон", max_length=20, null=True, blank=True)
+    publish = models.BooleanField("Опубликовать", help_text="разместить контакты в footer", default=False)
 
     class Meta:
         ordering = ["address"]
@@ -288,6 +290,7 @@ class Contact(models.Model):
 
     position = models.CharField("Должность", max_length=15, null=True)
     name = models.CharField("ФИО", max_length=30, null=True)
+    rang = models.IntegerField("Ранг", null=True, blank=True, help_text="Позиция в блоке контакты", default=99)
     phone = models.CharField("Телефон", max_length=20, null=True)
     fax = models.CharField("Факс", max_length=20, null=True, blank=True)
     email = models.EmailField(max_length=254, blank=True)
@@ -300,7 +303,7 @@ class Contact(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["position"]
+        ordering = ["rang"]
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
 
