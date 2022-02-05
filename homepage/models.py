@@ -31,7 +31,7 @@ class ObjectAddres(models.Model):
     address = models.CharField("Адрес объекта", max_length=100)
     data_map = models.CharField("data-map", max_length=40, blank=True, null=True)
     phone = models.CharField("Телефон", max_length=20, null=True, blank=True)
-    publish = models.BooleanField("Опубликовать", help_text="разместить контакты в footer", default=False)
+    publish = models.BooleanField("Опубликовать", help_text="разместить контакты в footer", default=True)
 
     class Meta:
         ordering = ["address"]
@@ -270,7 +270,7 @@ class News(models.Model):
     front_title = models.CharField("Фронтальный заголовок", max_length=50, null=True)
     title = models.CharField("Заголовок", max_length=50, null=True)
     content = models.TextField("Текст", max_length=765, null=True)
-    publish = models.BooleanField("Опубликовать")
+    publish = models.BooleanField("Опубликовать", default=True)
     imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/news")
     imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/news")
 
@@ -295,7 +295,7 @@ class Contact(models.Model):
     fax = models.CharField("Факс", max_length=20, null=True, blank=True)
     email = models.EmailField(max_length=254, blank=True)
     content = models.TextField("Примечания", max_length=100, null=True, blank=True)
-    publish = models.BooleanField("Опубликовать")
+    publish = models.BooleanField("Опубликовать", default=True)
     imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/managment")
     imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/managment")
 
@@ -315,7 +315,7 @@ class Achieves(models.Model):
 
     title = models.CharField("Заголовок", max_length=35, null=True)
     description = models.TextField("Описание", max_length=100, null=True)
-    publish = models.BooleanField("Опубликовать")
+    publish = models.BooleanField("Опубликовать", default=True)
     imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/cup")
     imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/cup")
     imgAdd_award = models.ImageField("Добавить фото награды", blank=True, upload_to="staticfiles/img/cup")

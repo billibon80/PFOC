@@ -1,4 +1,5 @@
 
+
 function glideSlide() {
 
     const slider = document.querySelector('.glide__slides'),
@@ -172,6 +173,8 @@ function glideSlide() {
             }
         });
     });
+
+    document.querySelector('.container__video').playbackRate = 2;
 }
 
 export default glideSlide;

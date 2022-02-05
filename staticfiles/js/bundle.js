@@ -408,6 +408,7 @@ function glideSlide() {
       }
     });
   });
+  document.querySelector('.container__video').playbackRate = 2;
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (glideSlide);

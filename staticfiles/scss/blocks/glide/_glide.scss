@@ -30,12 +30,39 @@ $fns: 50;
     }
 }
 
+@keyframes k-glow {
+    0% {
+        opacity: .5;
+    }
+    50% {
+        opacity: .7;
+    }
+    100% {
+        opacity: .5;
+    }
+    
+}
+
 .glide {
+    position: relative;
+    z-index: 1;
+    animation: k-glow 5s ease-in-out infinite;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url('/assets/img/cup/glow.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
     ul {
         height: 400px;
         overflow: initial;
-        transition: transform 2s;
+        transition: transform 2s cubic-bezier(.69,.09,.39,.99);
         li {
             margin: 20px;
             width: 352px;
@@ -80,10 +107,12 @@ $fns: 50;
         transform: translateY(0) scale(1);
         transform-style: preserve-3d;
         //transform: perspective(1000px) rotateY(0deg);
-        transition: transform 2s;
+        transition: transform 2s cubic-bezier(.69,.09,.39,.99);
+        margin-top: 65px;
         @media (max-width: 768px) {
             width: 352px;
             margin: 0 auto;
+            margin-top: 65px;
         }
         @media (max-width: 350px) {
             width: 100%;
@@ -95,7 +124,7 @@ $fns: 50;
         }
         .oh {
             display: unset;
-            color: #f5f1f1;;
+            color: #f5f1f1c4;
             opacity: 0;
             padding: 3px;
             filter: blur(4px);
@@ -103,6 +132,7 @@ $fns: 50;
             font-size: 1.6em;
             text-transform: capitalize;
             text-align: left;
+            text-shadow: rgba(30, 42, 46, .9) 0 4px 5px ;
 
             @for $i from $st to $fns {
                 &:nth-child(#{$i}) {
@@ -150,7 +180,7 @@ $fns: 50;
         }
     }
 
-    &__bgc {
+    &__bgc { 
         position: absolute;
         top: 0;
         left: 0;
@@ -188,6 +218,16 @@ $bgColor: #fdffff00;
 $brColor:  #733c54;
 
 .frame {
+    &::after {
+        content: '';
+        width: 358px;
+        height: 0;
+        position: absolute;
+        box-shadow: 0 0 45px 10px #213033;
+        bottom: 7px;
+        left: 0;
+        z-index: -1;
+    }
     &>div {
         position: absolute;
         width: 100%;
