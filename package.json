@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "@glidejs/glide": "^3.5.2"
+    "@glidejs/glide": "^3.5.2",
+    "swiper": "^8.0.3"
   },
   "keywords": [],
   "description": ""
