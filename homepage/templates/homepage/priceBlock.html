@@ -34,9 +34,13 @@
                               </div>
                           </div>
                           <div class="card-back">
-                              {% add_img_path data.imgChoice data.imgAdd 'staticfiles/' as img %}
+                              {% add_img_path data.imgChoice data.imgAdd 'staticfiles/' data.link as img %}
                               <video class="video__container" autoplay muted loop>
-                                  <source class="video__media" src="{% static img %}" type="video/mp4">
+                                  {% if data.link %}
+                                     <source class="video__media" src="{{ img }}" type="video/mp4">
+                                  {% else %}
+                                    <source class="video__media" src="{% static img %}" type="video/mp4">
+                                  {% endif %}
                               </video>
                           </div>
                       </div>

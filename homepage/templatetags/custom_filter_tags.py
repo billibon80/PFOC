@@ -34,7 +34,9 @@ def add_img_path(img_choice, img_add=None, text_replace=None, link=None):
     Replace text_replace in path ImageField or path FilePathField
      and return one valid value (path img) or link
     """
-    if link != '' and link is not None:
+    print(link)
+
+    if link is not None:
         return link
 
     if img_choice != '':
