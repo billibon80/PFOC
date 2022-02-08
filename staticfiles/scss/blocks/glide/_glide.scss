@@ -35,7 +35,7 @@ $fns: 50;
         opacity: .5;
     }
     50% {
-        opacity: .7;
+        opacity: 1;
     }
     100% {
         opacity: .5;
@@ -46,7 +46,7 @@ $fns: 50;
 .glide {
     position: relative;
     z-index: 1;
-    animation: k-glow 5s ease-in-out infinite;
+    
     &::before {
         content: '';
         position: absolute;
@@ -57,6 +57,8 @@ $fns: 50;
         background-image: url('/assets/img/cup/glow.png');
         background-repeat: no-repeat;
         background-size: cover;
+        animation: k-glow 2s ease-in-out infinite;
+        z-index: 2;
     }
 
     ul {

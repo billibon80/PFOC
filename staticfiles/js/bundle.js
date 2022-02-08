@@ -298,6 +298,12 @@ function glideSlide() {
 
   slider.style.cssText = `transform: translateX(${start}px)`;
   curSlider = totalWidth;
+
+  function transformLR(deg) {
+    return `scale(0.5) perspective(1000px) rotateY(${deg}deg)`;
+  }
+
+  console.log(transformLR(40));
   addSmoke(0);
   transformFrame(1);
   bullet(0);
@@ -328,9 +334,9 @@ function glideSlide() {
     }
 
     if (curSlider < totalWidth && slideItems[id]) {
-      slideItems[id].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${40}deg)`;
+      slideItems[id].querySelector('.glide__bg').style.transform = transformLR(40);
     } else if (curSlider >= totalWidth && slideItems[id]) {
-      slideItems[id].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${-40}deg)`;
+      slideItems[id].querySelector('.glide__bg').style.transform = transformLR(-40);
     }
 
     if (id + 1 < slideItems.length - 1) {
@@ -338,7 +344,7 @@ function glideSlide() {
     }
 
     if (id + 2 <= slideItems.length - 1) {
-      slideItems[id + 2].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${-40}deg)`;
+      slideItems[id + 2].querySelector('.glide__bg').style.transform = transformLR(-40);
     } else if (id + 2 <= slideItems.length) {
       cleanTransform(slideItems.length - 1);
     }
@@ -371,7 +377,7 @@ function glideSlide() {
           curSlider = totalWidth;
           addSmoke(0);
           bullet(0);
-          slideItems[1].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${-40}deg)`;
+          slideItems[1].querySelector('.glide__bg').style.transform = transformLR(-40);
           slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
           cleanTransform(0);
         } else {
@@ -388,7 +394,7 @@ function glideSlide() {
           curSlider = -1 * (slideItems.length - 2) * totalWidth;
           addSmoke(slideItems.length - 1);
           bullet(slideItems.length - 1);
-          slideItems[slideItems.length - 2].querySelector('.glide__bg').style.transform = `perspective(1000px) rotateY(${40}deg)`;
+          slideItems[slideItems.length - 2].querySelector('.glide__bg').style.transform = transformLR(40);
           cleanTransform(slideItems.length - 1);
           slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
         } else {
