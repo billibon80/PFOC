@@ -45,8 +45,9 @@ def index(request):
         address_view.append(map_key)
 
     for key in address_map.keys():
-        id_obj = ObjectAddres.objects.filter(address=key).first().id
-        if id_obj:
+        if ObjectAddres.objects.filter(address=key).first().id:
+            id_obj = ObjectAddres.objects.filter(address=key).first().id
+
             card_object.append(
                 CardsObject.objects.filter(obj=id_obj)
             )
