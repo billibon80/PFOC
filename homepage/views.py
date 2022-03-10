@@ -37,11 +37,14 @@ def index(request):
             )
         map_key = []
         for key in address_map.keys():
-            id_address = ObjectAddres.objects.filter(address=key).first().id
-            if id_address:
+            try:
+                id_address = ObjectAddres.objects.filter(address=key).first().id
                 if TimeListCoach.objects.filter(type_sport=sport.id, address=id_address).values('address').count() > 0:
                     if address_map[key] not in map_key:
                         map_key.append(address_map[key])
+            except AttributeError:
+                pass
+
         address_view.append(map_key)
 
     for key in address_map.keys():
