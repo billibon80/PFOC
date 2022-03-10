@@ -25,31 +25,34 @@ def index(request):
     }
 
     for sport in ViewOfSport.objects.all():
-        org_view.append(
-            TimeListOrganization.objects.filter(type_sport=sport.id)
-        )
-        coach_view.append(
-            TimeListCoach.objects.filter(type_sport=sport.id)
-        )
-        slider_view.append(
-            SliderViewsOfSport.objects.filter(type_sport=sport.id)
-        )
+        if sport.id:
+            org_view.append(
+                TimeListOrganization.objects.filter(type_sport=sport.id)
+            )
+            coach_view.append(
+                TimeListCoach.objects.filter(type_sport=sport.id)
+            )
+            slider_view.append(
+                SliderViewsOfSport.objects.filter(type_sport=sport.id)
+            )
         map_key = []
         for key in address_map.keys():
             id_address = ObjectAddres.objects.filter(address=key).first().id
-            if TimeListCoach.objects.filter(type_sport=sport.id, address=id_address).values('address').count() > 0:
-                if address_map[key] not in map_key:
-                    map_key.append(address_map[key])
+            if id_address:
+                if TimeListCoach.objects.filter(type_sport=sport.id, address=id_address).values('address').count() > 0:
+                    if address_map[key] not in map_key:
+                        map_key.append(address_map[key])
         address_view.append(map_key)
 
     for key in address_map.keys():
         id_obj = ObjectAddres.objects.filter(address=key).first().id
-        card_object.append(
-            CardsObject.objects.filter(obj=id_obj)
-        )
-        price_object.append(
-            CardsPrices.objects.filter(obj=id_obj)
-        )
+        if id_obj:
+            card_object.append(
+                CardsObject.objects.filter(obj=id_obj)
+            )
+            price_object.append(
+                CardsPrices.objects.filter(obj=id_obj)
+            )
 
     return render(request, "homepage/index.html",
                   context={
