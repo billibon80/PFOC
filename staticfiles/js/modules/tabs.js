@@ -13,10 +13,11 @@ function hideTabContent(blockContent, blockTab, selector) {
 }
 
 function showTabContent(blockContent, blockTab, selector, i = 0) {
-    blockContent[i].classList.add('show', 'fade');
-    blockContent[i].classList.remove('hide');
-    blockTab[i].classList.add(selector);
-
+    if (blockContent[i]) {
+        blockContent[i].classList.add('show', 'fade');
+        blockContent[i].classList.remove('hide');
+        blockTab[i].classList.add(selector);
+    }
 }
 
 

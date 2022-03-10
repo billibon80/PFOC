@@ -57,7 +57,6 @@ def index(request):
         except AttributeError:
             pass
 
-
     return render(request, "homepage/index.html",
                   context={
                       'views_sport': ViewOfSport.objects.all(),
