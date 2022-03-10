@@ -45,7 +45,7 @@ def index(request):
         address_view.append(map_key)
 
     for key in address_map.keys():
-        if ObjectAddres.objects.filter(address=key).first().id:
+        try:
             id_obj = ObjectAddres.objects.filter(address=key).first().id
 
             card_object.append(
@@ -54,6 +54,9 @@ def index(request):
             price_object.append(
                 CardsPrices.objects.filter(obj=id_obj)
             )
+        except AttributeError:
+            pass
+
 
     return render(request, "homepage/index.html",
                   context={
