@@ -39,7 +39,7 @@ SECRET_KEY = config('DJANGO_APP_FOC')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ["pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ["178.172.138.196","pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
 #
 
 # Application definition
