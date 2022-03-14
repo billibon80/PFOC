@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-14 14:46+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\homepage\index.html:32
+msgid "Объекты и услуги"
+msgstr "Object & services"
+
+#: .\templates\homepage\index.html:33
+msgid "Новости"
+msgstr "News"
+
+#: .\templates\homepage\index.html:34
+msgid "Калькулятор калорий"
+msgstr "Calc of calories"
+
+#: .\templates\homepage\index.html:35
+msgid "Руководство"
+msgstr "Management"
+
+#: .\templates\homepage\index.html:36
+msgid "Наши достижения"
+msgstr "Our achieves"

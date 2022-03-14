@@ -1,0 +1,10 @@
+# informantion for tranlater
+
+tag - {% trans <any_words> %} in html text  # !text <any_words> hase to be wrap in quot
+
+root directory need create directory - locale
+
+cmd:
+django-admin makemessages -l en -e html
+django-admin compilemessages
+
