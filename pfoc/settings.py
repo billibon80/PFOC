@@ -41,7 +41,7 @@ DEBUG = bool(config('DEBUG'))
 
 # ALLOWED_HOSTS = ["pfoc.by", "www.pfoc.by", "178.172.138.196","pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
 #
-ALLOWED_HOSTS = ["pfoc.by", "www.pfoc.by", "178.172.138.196","pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ["pfoc.by", "www.pfoc.by", "178.172.138.234","pfocby.herokuapp.com", "127.0.0.1", '0.0.0.0', 'localhost']
 
 # Application definition
 
