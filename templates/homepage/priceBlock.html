@@ -1,0 +1,121 @@
+{% block price %}
+    {% load custom_filter_tags %}
+
+
+    <div class="price">
+      <h2 class="title">Объекты и услуги</h2>
+        <div class="row" >
+          <!-- Cards Object -->
+            {% for i in card_object|to_range %}
+                {% get_db card_object i as db %}
+                    {% if db %}
+                        {% get_db db 0 as data %}
+                        <section class="col-12 col-lg-6 col-xl-3  card-section">
+              <div class="card">
+                  <div class="flip-card">
+                      <div class="flip-card__container">
+                          <div class="card-front">
+                              <div class="card-front__tp card-front__tp{{ data.color }}">
+                                  <iframe class="card-front__icon" src="{{ data.icons.url }}"></iframe>
+                                      <h2 class="card-front__heading">
+                                             {{ data.front_title }}
+                                      </h2>
+                                      <p class="card-front__text-price">
+                                          {{ data.front_text }}
+                                      </p>
+                              </div>
+
+                              <div class="card-front__bt">
+                                  <p class="card-front__text-view card-front__text-view{{ data.color }}">
+                                      Узнать больше
+                                  </p>
+                              </div>
+                          </div>
+                          <div class="card-back">
+                              <video class="video__container" autoplay muted loop>
+                                  {% if data.link %}
+                                     <source class="video__media" src="{{ data.link }}" type="video/mp4">
+                                  {% else %}
+                                    <source class="video__media" src="{{ data.imgAdd.url }}" type="video/mp4">
+                                  {% endif %}
+                              </video>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="inside-page">
+                      <div class="inside-page__container">
+                          <h3 class="inside-page__heading inside-page__heading{{ data.color }}">
+                              {{ data.inside_title }}
+                          </h3>
+                          <p class="inside-page__text">
+                              {{ data.inside_text }}
+                          </p>
+                          <a href="#" class="inside-page__btn inside-page__btn{{ data.color }}">Ещё</a>
+
+                      </div>
+                  </div>
+
+              </div>
+
+          </section>
+                    {% endif %}
+            {% endfor %}
+        </div>
+
+           <!-- Price Object-->
+            {% for i in card_object|to_range %}
+                {% get_db card_object i as db %}
+                    {% if db %}
+                      {% get_db db 0 as data %}
+
+                        <div class="card-section__modal">
+                            <div class="content">
+                              <div class="text"> <i class="fas fa-exclamation-triangle"></i> Не является публичной офертой, более подробную информацию уточняйте по телефонам или в момент приобретения услуг!</div>
+                              <span class="time-of-work__title">Время работы</span>
+                              <span> {{ data.t_work_wd }} <time> {{ data.t_work_wh }} </time><br> {{ data.t_work_hd }} <time>{{ data.t_work_hh }}</time></span>
+                              <span class="time-of-work__title">Прейскурант</span>
+                              <div class="style_prevu_kit" style="background-color:#faf6f7;">
+                                  {% get_db price_object i as db_price %}
+                                {% for pk in db_price|to_range %}
+                                  {% get_db db_price pk as price %}
+                                    <div class="row wrapper">
+                                    <div class="col-12 col-md-6">
+                                        <div class="img-price" style="background: center center url({{ price.imgAdd.url }});"></div>
+                                        <h2 class="style_prevu_kit__title">{{ price.title }}</h2>
+                                        <span class="description">{{ price.description }}</span>
+                                    </div>
+                                  <div class="col-6 col-md-3">
+                                    <div class="wrapper__price">
+                                      <span class="wrapper__price__u wrapper__price__u--blue">{{ price.price_f }}</span>
+                                      <span class="wrapper__price__d wrapper__price__d--blue">{{ price.price_f_label }}</span>
+                                      <span class="pref">{{ price.price_f_color|default_if_none:"" }}</span>
+                                      <span class="hour-price" data-price="{{ price.price_f_2 }}">{{ price.price_f_label_2 }}</span>
+                                      <span class="hour-price" data-price="{{ price.price_f_3 }}">{{ price.price_f_label_3 }}</span>
+                                      <span class="hour-price" data-price="{{ price.price_f_4 }}">{{ price.price_f_label_4 }}</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-6 col-md-3">
+                                    <div class="wrapper__price">
+                                      <span class="wrapper__price__u wrapper__price__u--orange">{{ price.price_l }}</span>
+                                      <span class="wrapper__price__d wrapper__price__d--orange">{{ price.price_l_label }}</span>
+                                      <span class="pref">{{ price.price_l_color|default_if_none:"" }}</span>
+                                      <span class="hour-price" data-price="{{ price.price_l_2 }}">{{ price.price_l_label_2 }}</span>
+                                      <span class="hour-price" data-price="{{ price.price_l_3 }}">{{ price.price_l_label_3 }}</span>
+                                      <span class="hour-price" data-price="{{ price.price_l_4 }}">{{ price.price_l_label_4 }}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                {% endfor %}
+                              </div>
+                            </div>
+                            <div class="card-section__close"></div>
+                          </div>
+                      {% endif %}
+            {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}

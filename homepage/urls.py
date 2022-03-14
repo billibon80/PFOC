@@ -5,7 +5,6 @@ from django.conf.urls import url
 app_name = "homepage"
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path("home/", views.index, name="home"),
+    path('', views.PfocView.as_view()),
 
 ]

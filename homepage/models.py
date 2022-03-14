@@ -12,8 +12,8 @@ class ViewOfSport(models.Model):
     """
     type_sport = models.CharField("Вид спорта/услуги", max_length=100)
     content = models.TextField("Описание", max_length=100, blank=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/tabs")
-    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/tabs")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="tabs/")
+    # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="tabs/")
 
     class Meta:
         ordering = ["type_sport"]
@@ -32,6 +32,7 @@ class ObjectAddres(models.Model):
     data_map = models.CharField("data-map", max_length=40, blank=True, null=True)
     phone = models.CharField("Телефон", max_length=20, null=True, blank=True)
     publish = models.BooleanField("Опубликовать", help_text="разместить контакты в footer", default=True)
+    description = models.TextField("Описание", blank=True)
 
     class Meta:
         ordering = ["address"]
@@ -64,8 +65,8 @@ class Coach(models.Model):
     coach_surname = models.CharField("Фамилия", max_length=100)
     coach_name = models.CharField("Имя", max_length=100)
     coach_second_name = models.CharField("Отчество", null=True, blank=True, max_length=100)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/coach_org")
-    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/coach_org")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="coach_org/")
+    # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="coach_org/")
 
     class Meta:
         ordering = ["coach_surname"]
@@ -83,8 +84,8 @@ class Organization(models.Model):
     """
     short_name = models.CharField("Краткое наименование", max_length=100)
     full_name = models.TextField("Полное наименование", null=True, blank=True, max_length=200)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/coach_org")
-    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/coach_org")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="coach_org/")
+    # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="coach_org/")
 
     class Meta:
         ordering = ["short_name"]
@@ -167,8 +168,8 @@ class SliderViewsOfSport(models.Model):
     sign = models.CharField("Подпись", max_length=50, null=True, blank=True)
     content = models.TextField("Текст", max_length=200, null=True)
     bottom_block = models.CharField("Нижний блок", max_length=20, null=True, blank=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/object-photo")
-    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/object-photo")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="object-photo/")
+    # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="object-photo/")
 
     def __str__(self):
         return '{0} :  {1} '.format(self.type_sport, self.title)
@@ -196,11 +197,11 @@ class CardsObject(models.Model):
     front_text = models.CharField("Лицевой текст", max_length=30, null=True)
     inside_title = models.CharField("Внутренний заголовок", max_length=35, null=True)
     inside_text = models.TextField("Внутренний текст", max_length=110, null=True)
-    icons = models.FilePathField("Иконка", blank=True, path="staticfiles/icons")
+    icons = models.FileField("Иконка", blank=True, upload_to="icons/")
     color = models.CharField("Цвет", max_length=15, choices=COLOR, default="--city")
-    link = models.CharField("Интернет ссылка", max_length=100, null=True, blank=True)
-    imgAdd = models.ImageField("Добавить медиа", blank=True, upload_to="staticfiles/media/card_obj")
-    imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="staticfiles/media/card_obj")
+    link = models.SlugField("Интернет ссылка", max_length=160, null=True, blank=True, unique=True)
+    imgAdd = models.FileField("Добавить медиа", blank=True, upload_to="video_obj/")
+    # imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="card_obj/")
     t_work_wd = models.CharField("Рабочие дни", max_length=30, null=True)
     t_work_wh = models.CharField("Время работы рабочие дни", max_length=30, null=True)
     t_work_hd = models.CharField("Выходные дни", max_length=30, null=True)
@@ -250,8 +251,8 @@ class CardsPrices(models.Model):
         exec(f'price_l_label_{i} = models.CharField("Стоим. льгот. {i} ед. изм.", max_length=5, null=True, blank=True, '
              f'help_text="Единица измерения оплачиваемого времени, например: р/ч, р/д")')
 
-    imgAdd = models.ImageField("Добавить медиа", blank=True, upload_to="staticfiles/img/prices")
-    imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="staticfiles/img/prices")
+    imgAdd = models.ImageField("Добавить медиа", blank=True, upload_to="prices/")
+    # imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="prices/")
 
     def __str__(self):
         return self.title.upper()
@@ -271,8 +272,8 @@ class News(models.Model):
     title = models.CharField("Заголовок", max_length=50, null=True)
     content = models.TextField("Текст", max_length=765, null=True)
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/news")
-    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/news")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="news/")
+    # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="news/")
 
     def __str__(self):
         return self.title
@@ -294,10 +295,10 @@ class Contact(models.Model):
     phone = models.CharField("Телефон", max_length=20, null=True)
     fax = models.CharField("Факс", max_length=20, null=True, blank=True)
     email = models.EmailField(max_length=254, blank=True)
-    content = models.TextField("Примечания", max_length=100, null=True, blank=True)
+    content = models.CharField("Примечания", max_length=100, null=True, blank=True)
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/managment")
-    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/managment")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="managment/")
+    # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="managment/")
 
     def __str__(self):
         return self.name
@@ -316,10 +317,10 @@ class Achieves(models.Model):
     title = models.CharField("Заголовок", max_length=35, null=True)
     description = models.TextField("Описание", max_length=100, null=True)
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="staticfiles/img/cup")
-    imgChoice = models.FilePathField("Выбрать фото", blank=True, path="staticfiles/img/cup")
-    imgAdd_award = models.ImageField("Добавить фото награды", blank=True, upload_to="staticfiles/img/cup")
-    imgChoice_award = models.FilePathField("Выбрать фото награды", blank=True, path="staticfiles/img/cup")
+    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="cup/")
+    # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="cup/")
+    imgAdd_award = models.ImageField("Добавить фото награды", blank=True, upload_to="cup_award/")
+    # imgChoice_award = models.FilePathField("Выбрать фото награды", blank=True, path="cup/")
 
     def __str__(self):
         return self.title

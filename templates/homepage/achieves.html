@@ -1,0 +1,45 @@
+{% block achieves %}
+    {% load custom_filter_tags %}
+
+    <div class="promotion">
+        <div class="title">Наши достижения</div>
+        <div class="bgc_y"></div>
+        <div class="container">
+            <div class="glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        {% for slide in achieves %}
+                            <li class="glide__slide smoke">
+                                <div class="glide__bg frame" style="background-image: url({{ slide.imgAdd.url }})">
+                                    <div class="glide__bgc">
+                                      <span class="oh fw-bold">{{ slide.title }}</span>
+                                      <span class="caption">{{ slide.description }}</span>
+                                      <img class="prize" src="{{ slide.imgAdd_award.url }}" alt="prize">
+                                    </div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                              </li>
+                        {% endfor %}
+                    </ul>
+                  </div>
+
+
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-angle-double-left"></i></button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-angle-double-right"></i></button>
+                </div>
+
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    {% for slide in achieves %}
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    {% endfor %}
+                </div>
+            </div>
+            <video class="container__video" src="https://elasticbeanstalk-us-east-2-152074614622.s3.us-east-2.amazonaws.com/smoke-background.mp4" autoplay loop muted></video>
+   
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

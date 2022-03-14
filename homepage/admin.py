@@ -1,19 +1,34 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from .models import *
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django import forms
+from modeltranslation.admin import TranslationAdmin
+
+
+class PostAdminForm(forms.ModelForm):
+    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = ObjectAddres
+        fields = '__all__'
 
 
 @admin.register(CardsPrices)
 class PriceAdmin(admin.ModelAdmin):
     list_display = ['title', 'obj', 'description', 'price_f', 'price_l']
+    search_fields = ['^title']
     list_filter = ['title', 'obj']
     ordering = ['obj']
     actions = ['duplicate_event']
+    save_as = True
 
     fieldsets = (
         (None, {
             'fields': (('obj', 'title'), 'description')
         }),
         ('Полная стоимость', {
+            'classes': ('collapse',),
             'fields': (
                 'price_f_color',
                 ('price_f', 'price_f_label'),
@@ -23,6 +38,7 @@ class PriceAdmin(admin.ModelAdmin):
             )
         }),
         ('Льготная стоимость', {
+            'classes': ('collapse',),
             'fields': (
                 'price_l_color',
                 ('price_l', 'price_l_label'),
@@ -33,7 +49,7 @@ class PriceAdmin(admin.ModelAdmin):
         }),
         ('Картинки', {
             'fields': (
-                ('imgAdd', 'imgChoice'),
+                'imgAdd',
             )
         }),
     )
@@ -63,7 +79,7 @@ class CardsObjectAdmin(admin.ModelAdmin):
         ('Медиа внутренняя сторона', {
             'fields': (
                 'link',
-                ('imgAdd', 'imgChoice'),
+                'imgAdd',
             )
         }),
         ('Время работы', {
@@ -77,14 +93,15 @@ class CardsObjectAdmin(admin.ModelAdmin):
 
 @admin.register(TimeListCoach)
 class TimeListCoachAdmin(admin.ModelAdmin):
-    list_display = ['coach', 'd_week', 'type_sport', 'group', 'time_list', 'address']
+    list_display = ['d_week', 'coach', 'type_sport', 'group', 'time_list', 'address']
+    list_display_links = ["coach"]
     list_filter = ['coach', 'group', 'type_sport']
     ordering = ['coach']
     actions = ['duplicate_event']
 
     fieldsets = (
         (None, {
-            'fields': (('coach', 'type_sport'), 'group')
+            'fields': (('coach', 'type_sport'), ('d_week', 'group'))
         }),
         ('Расписание', {
             'fields': (
@@ -128,11 +145,12 @@ class TimeListOrganizationAdmin(admin.ModelAdmin):
 
 
 @admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(TranslationAdmin):
     list_display = ['title', 'id', 'front_title', 'publish']
     list_filter = ['publish']
     ordering = ['-publish', '-id']
     actions = ['publish_event', 'exclude_publish_event']
+    list_editable = ['publish']
 
     fieldsets = [
         (None, {
@@ -144,26 +162,32 @@ class NewsAdmin(admin.ModelAdmin):
         }),
         ('Фото', {
             'fields': (
-                ('imgAdd', 'imgChoice'),
+                'imgAdd',
             )
         }),
     ]
 
     def publish_event(self, request, queryset):
-        for obj in queryset:
-            obj.publish = True
-            obj.save()
-        self.message_user(request, f'Выбранные статьи успешно опубликованы')
+        row_update = queryset.update(publish=True)
+        if row_update == 1:
+            message_bit = "Выбранная статья опубликована"
+        else:
+            message_bit = "Выбранные статьи опубликованы"
+        self.message_user(request, f'{message_bit}')
 
     publish_event.short_description = "Опубликовать выбранные статьи"
+    publish_event.allowed_permissions = ('change',)
 
     def exclude_publish_event(self, request, queryset):
-        for obj in queryset:
-            obj.publish = False
-            obj.save()
-        self.message_user(request, f'Выбранные статьи успешно изъяты')
+        row_update = queryset.update(publish=False)
+        if row_update == 1:
+            message_bit = "Выбранная статья снята с публикации"
+        else:
+            message_bit = "Выбранные статьи сняты с публикации"
+        self.message_user(request, f'{message_bit}')
 
-    exclude_publish_event.short_description = "Изъять выбранные статьи"
+    exclude_publish_event.short_description = "Снять с публикации"
+    exclude_publish_event.allowed_permissions = ('change',)
 
 
 @admin.register(Contact)
@@ -172,6 +196,8 @@ class ContactAdmin(admin.ModelAdmin):
                     'email', 'content', 'publish']
     ordering = ['rang']
     actions = ['publish_event', 'exclude_publish_event']
+    list_editable = ['phone', 'fax',
+                     'email', 'content', 'publish']
 
     fieldsets = [
         (None, {
@@ -185,7 +211,7 @@ class ContactAdmin(admin.ModelAdmin):
         }),
         ('Фото', {
             'fields': (
-                ('imgAdd', 'imgChoice'),
+                'imgAdd',
             )
         }),
     ]
@@ -222,12 +248,12 @@ class AchievesAdmin(admin.ModelAdmin):
         }),
         ('Фото', {
             'fields': (
-                ('imgAdd', 'imgChoice'),
+                'imgAdd',
             )
         }),
         ('Фото награды', {
             'fields': (
-                ('imgAdd_award', 'imgChoice_award'),
+                'imgAdd_award',
             )
         }),
     ]
@@ -254,6 +280,7 @@ class ObjectAddresAdmin(admin.ModelAdmin):
     list_display = ['address', 'phone', 'publish']
     ordering = ['address']
     actions = ['publish_event', 'exclude_publish_event']
+    form = PostAdminForm
 
     fieldsets = [
         (None, {
@@ -264,6 +291,11 @@ class ObjectAddresAdmin(admin.ModelAdmin):
         ('Телефон', {
             'fields': (
                 ('phone', 'publish'),
+            )
+        }),
+        ('Описание', {
+            'fields': (
+                'description',
             )
         }),
     ]
@@ -285,10 +317,50 @@ class ObjectAddresAdmin(admin.ModelAdmin):
     exclude_publish_event.short_description = "Изъять выбранные контакты из footer"
 
 
+class TimeListCoachInLine(admin.TabularInline):
+    model = TimeListCoach
+    extra = 1
+
+
+@admin.register(Coach)
+class CoachAdmin(admin.ModelAdmin):
+    list_display = ['coach_surname', 'get_image', ]
+    list_display_links = ['coach_surname']
+    search_fields = ['^coach_surname']
+    save_on_top = True
+    inlines = [TimeListCoachInLine]
+    readonly_fields = ["get_image"]
+    fieldsets = (
+        (None, {
+            "fields": (('coach_name', 'coach_surname', 'coach_second_name'),)
+        }),
+        ("Изображение да", {
+            "fields": (('imgAdd', 'get_image',),)
+        })
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
+
+
+class TimeListOrganizationInLine(admin.TabularInline):
+    model = TimeListOrganization
+    extra = 1
+
+
+@admin.register(Organization)
+class CoachAdmin(admin.ModelAdmin):
+    list_display = ['short_name']
+    search_fields = ['^short_name']
+    save_on_top = True
+    inlines = [TimeListOrganizationInLine]
+
 
 admin.site.register(ViewOfSport)
-admin.site.register(Coach)
-admin.site.register(Organization)
 admin.site.register(Group)
 admin.site.register(SliderViewsOfSport)
 
+admin.site.site_title = "Сайт Партизанский ФОЦ"
+admin.site.site_header = "Сайт Партизанский ФОЦ"
