@@ -234,10 +234,12 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 @admin.register(Achieves)
-class AchievesAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description', 'publish']
+class AchievesAdmin(TranslationAdmin):
+    list_display = ['title', 'description', 'get_image_com', 'get_image_award', 'publish']
+    readonly_fields = ['get_image_com', 'get_image_award']
     ordering = ['id']
     actions = ['publish_event', 'exclude_publish_event']
+    list_editable = ['publish']
 
     fieldsets = [
         (None, {
@@ -246,17 +248,27 @@ class AchievesAdmin(admin.ModelAdmin):
                 'publish',
             )
         }),
-        ('Фото', {
+        ('Фото команды', {
             'fields': (
-                'imgAdd',
+                ('imgAdd', 'get_image_com'),
             )
         }),
         ('Фото награды', {
             'fields': (
-                'imgAdd_award',
+                ('imgAdd_award', 'get_image_award'),
             )
         }),
     ]
+
+    def get_image_com(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image_com.short_description = "Фото команды"
+
+    def get_image_award(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd_award.url} width="50" height="50" ')
+
+    get_image_award.short_description = "Фото приза"
 
     def publish_event(self, request, queryset):
         for obj in queryset:
@@ -351,11 +363,18 @@ class TimeListOrganizationInLine(admin.TabularInline):
 
 
 @admin.register(Organization)
-class CoachAdmin(admin.ModelAdmin):
-    list_display = ['short_name']
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ['get_image', 'short_name']
+    list_display_links = ['short_name']
+    readonly_fields = ["get_image"]
     search_fields = ['^short_name']
     save_on_top = True
     inlines = [TimeListOrganizationInLine]
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
 
 
 admin.site.register(ViewOfSport)

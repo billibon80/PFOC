@@ -314,10 +314,10 @@ class Achieves(models.Model):
     Create  block our achieves
     """
 
-    title = models.CharField("Заголовок", max_length=35, null=True)
-    description = models.TextField("Описание", max_length=100, null=True)
+    title = models.CharField("Заголовок", max_length=35, null=True, default="-")
+    description = models.TextField("Описание", max_length=100, null=True, default='-')
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="cup/")
+    imgAdd = models.ImageField("Добавить фото команды", blank=True, upload_to="cup/")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="cup/")
     imgAdd_award = models.ImageField("Добавить фото награды", blank=True, upload_to="cup_award/")
     # imgChoice_award = models.FilePathField("Выбрать фото награды", blank=True, path="cup/")

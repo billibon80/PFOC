@@ -99,23 +99,25 @@ WSGI_APPLICATION = 'pfoc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+             'ENGINE': 'django.db.backends.sqlite3',
+             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': config('SQL_ENGINE', 'django.db.backends.sqlite3'),
+            'NAME': config('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
+            'USER': config("SQL_USER", "user"),
+            'PASSWORD': config("SQL_PASSWORD", "password"),
+            'HOST': config("SQL_HOST", "DATABASE_URL"),
+            'PORT': config("SQL_PORT", "5432"),
+        }
+    }
 
-DATABASES = {
-    'default': {
-        'ENGINE': config('SQL_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': config('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
-        'USER': config("SQL_USER", "user"),
-        'PASSWORD': config("SQL_PASSWORD", "password"),
-        'HOST': config("SQL_HOST", "DATABASE_URL"),
-        'PORT': config("SQL_PORT", "5432"),
-    }
-}
 
 # DATABASE_URL = config('DATABASE_URL')
 #
@@ -170,11 +172,13 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 # PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_URL = '/static/'
-# STATIC_DIR = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [
-#     STATIC_DIR,
-# ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+if DEBUG:
+    STATIC_DIR = os.path.join(BASE_DIR, 'static')
+    STATICFILES_DIRS = [
+        STATIC_DIR,
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -191,8 +195,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = "billibon80@gmail.com"
-# EMAIL_HOST_PASSWORD = "zM1392839"
+# EMAIL_HOST_USER = ""
+# EMAIL_HOST_PASSWORD = ""
 # #
 # LOGGING = {
 #     'version': 1,
