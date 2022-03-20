@@ -64,7 +64,7 @@ $fns: 50;
     ul {
         height: 400px;
         overflow: initial;
-        transition: transform 2s cubic-bezier(.69,.09,.39,.99);
+        transition: transform 1s ease-in;
         li {
             margin: 20px;
             width: 352px;
@@ -109,7 +109,7 @@ $fns: 50;
         transform: translateY(0) scale(1);
         transform-style: preserve-3d;
         //transform: perspective(1000px) rotateY(0deg);
-        transition: transform 2s cubic-bezier(.69,.09,.39,.99);
+        transition: transform 1s ease-in;
         margin-top: 65px;
         @media (max-width: 768px) {
             width: 352px;
@@ -122,7 +122,7 @@ $fns: 50;
         h6 {
             font-size: 1.2rem;
             transform: scale(0.94);
-            animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1); 
+            animation: scale 2s forwards cubic-bezier(0.5, 1, 0.89, 1); 
         }
         .oh {
             display: unset;
@@ -138,7 +138,7 @@ $fns: 50;
 
             @for $i from $st to $fns {
                 &:nth-child(#{$i}) {
-                    animation: fade-in 0.8s #{0.15*$i}s forwards cubic-bezier(0.11, 0, 0.5, 0);
+                    animation: fade-in 0.2s #{0.05*$i}s forwards cubic-bezier(0.11, 0, 0.5, 0);
                 }  
             }
               
@@ -174,10 +174,12 @@ $fns: 50;
             opacity: 1;
             transform: scale(1) translate(0);
             transition: transform 2s ease-out;
-
             &.show {
-                
-                transform: scale(2) translate(32px, 5px);
+                transform: scale(2) translate(33px, 5px);
+                @media (max-width: 425px) {
+                    transform: scale(1.5) translate(-16px, 0px);;
+                }
+
             }
         }
     }
@@ -210,7 +212,7 @@ $fns: 50;
 
     @for $i from $st to $fns {
         & span:nth-child(#{$i}) {
-            animation-delay: #{0.8*(-1+$i)}s;
+            animation-delay: #{0.2*(-1+$i)}s;
         }
     }
 
