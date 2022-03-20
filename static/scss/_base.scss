@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Play', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    font-family: Ubuntu Condensed, sans-serif;
+    :hover {
+        color: #9f9f9f
+    };
+}
+
+li img {
+    height: 15rem;
+    min-height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.btn {
+    width: 220px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    font-family: Ubuntu Condensed, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.3s all;
+    outline: none;
+    &_white {
+        background-color: #fff;
+    }
+    &_dark {
+        background-color: $dark;
+        color: #fff;
+        border: none;
+    }
+    &_min {
+        height: 50px;
+    }
+    &:hover {
+        color: white;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3); 
+    }
+    @media (max-width: 992px) {
+        &_white { 
+            display: none;
+        }
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.divider {
+    width: 50%;
+    max-width: 330px;
+    height: 1px;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, .0);
+    box-shadow: 1px 1px 4px 0px
+}
+
+.title {
+    font-size: 34px;
+    font-weight: 400;
+    margin-left: 15rem;
+    @media (max-width: 576px) {
+        margin: 0;
+    }
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 2.5s;
+}
+@keyframes fade {
+    from {
+        opacity: 0.1;
+    }
+
+    to {
+        opacity: 1 .15s ease-out
+    }
+}

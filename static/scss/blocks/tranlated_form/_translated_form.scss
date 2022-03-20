@@ -1,0 +1,13 @@
+.form-translate {
+    display: flex;
+    height: 42px;
+    margin-left: auto;
+    width: 162px;
+    & > input {
+        height: 42px;
+        width: 35px;
+    }
+    & select {
+        cursor: pointer;
+    }
+}
