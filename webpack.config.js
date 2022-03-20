@@ -1,13 +1,14 @@
 'use strict';
 
 let path = require('path');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
-    mode: 'development',
-    entry: './staticfiles/js/script.js',
+    mode: 'production',
+    entry: './static/js/script.js',
     output: {
         filename: 'bundle.js',
-        path: __dirname + '/staticfiles/js'
+        path: __dirname + '/static/js'
     },
     watch: true,
 
@@ -30,5 +31,9 @@ module.exports = {
               }
             }
           ]
-    }
+    },
+
+    plugins: [
+      new NodePolyfillPlugin()
+    ]
 };

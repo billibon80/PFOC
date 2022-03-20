@@ -20,6 +20,23 @@
 </head>
 
 <body>
+    <!-- Language switch-->
+    <form action="{% url 'set_language' %}" method="post" class="form-translate">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ redirect_to}}">
+        <select name="language" class="form-control" >
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
+                        selected {% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value=">" class="btn btn-outline-secondary">
+    </form>
     <!--Block Header (logo & NavBar)-->
     <header class="header">
         {% block navbar %}
@@ -35,27 +52,10 @@
                 <a href="#" class="header__link">{% trans 'Руководство' %}</a>
                 <a href="#" class="header__link">{% trans 'Наши достижения' %}</a>
             </nav>
-            <!-- Language switch-->
-        <form action="{% url 'set_language' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ redirect_to}}">
-            <select name="language" >
-                {% get_current_language as LANGUAGE_CODE %}
-                {% get_available_languages as LANGUAGES %}
-                {% get_language_info_list for LANGUAGES as languages %}
-                {% for language in languages %}
-                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
-                            selected {% endif %}>
-                        {{ language.name_local }} ({{ language.code }})
-                    </option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Go">
-        </form>
         {% endblock navbar %}
     </header>
     <div class="sidepanel">
-        <div class="sidepanel__text"><span>Социальные сети</span></div>
+        <div class="sidepanel__text"><span>{% trans 'Социальные сети' %}</span></div>
         <div class="sidepanel__divider"></div>
         <a href="#" class="sidepanel__icon">
             <img src="{% static 'icons/instagram.svg'%}" alt="instagram">
@@ -79,52 +79,56 @@
 
     <div class="calculating">
         <div class="container">
-            <h2 class="title">Рассчитаем вашу потребность в калориях?
+            <h2 class="title">{% trans 'Рассчитаем вашу потребность в калориях?' %}
             </h2>
             <div class="calculating__field">
                 <div class="calculating__subtitle">
-                    Ваш пол
+                    {% trans 'Ваш пол' %}
                 </div>
                 <div class="calculating__choose" id="gender">
-                    <div id="female" class="calculating__choose-item">Женщина</div>
-                    <div id="male" class="calculating__choose-item">Мужчина</div>
+                    <div id="female" class="calculating__choose-item">{% trans 'Женщина' %}</div>
+                    <div id="male" class="calculating__choose-item">{% trans 'Мужчина' %}</div>
                 </div>
 
                 <div class="calculating__subtitle">
-                    Ваша конституция
+                    {% trans 'Ваша конституция' %}
                 </div>
                 <div class="calculating__choose calculating__choose_medium">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                            <input type="text" id="height" placeholder="Введите рост" class="calculating__choose-item">
+                            <input type="text" id="height" placeholder="{% trans 'Введите рост' %}" class="calculating__choose-item">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                            <input type="text" id="weight" placeholder="Введите вес" class="calculating__choose-item">
+                            <input type="text" id="weight" placeholder="{% trans 'Введите вес' %}" class="calculating__choose-item">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                            <input type="text" id="age" placeholder="Введите возраст" class="calculating__choose-item">
+                            <input type="text" id="age" placeholder="{% trans 'Введите возраст' %}" class="calculating__choose-item">
                         </div>
                     </div>
                 </div>
 
                 <div class="calculating__subtitle">
-                    Выберите вашу физическая активность
+                    {% trans 'Выберите вашу физическая активность' %}
                 </div>
                 <div class="calculating__choose calculating__choose_big">
                     <div class="row">
                         <div class="col-12 col-sm-6  col-md-12 col-lg-3">
-                            <div data-ratio="1.2" id="low" class="calculating__choose-item">Низкая активность </div>
+                            <div data-ratio="1.2" id="low" class="calculating__choose-item">
+                                {% trans 'Низкая активность' %} </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div data-ratio="1.375" id="small" class="calculating__choose-item ">Невысокая активность
+                            <div data-ratio="1.375" id="small" class="calculating__choose-item ">
+                                {% trans 'Невысокая активность' %}
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div data-ratio="1.55" id="medium" class="calculating__choose-item">Умеренная активность
+                            <div data-ratio="1.55" id="medium" class="calculating__choose-item">
+                                {% trans 'Умеренная активность' %}
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div data-ratio="1.725" id="high" class="calculating__choose-item">Высокая активность</div>
+                            <div data-ratio="1.725" id="high" class="calculating__choose-item">
+                                {% trans 'Высокая активность' %}</div>
                         </div>
                     </div>
                 </div>
@@ -135,12 +139,12 @@
                     <div class="row">
                         <dic class="col-12">
                             <div class="calculating__subtitle">
-                                Ваша суточная норма калорий:
+                                {% trans 'Ваша суточная норма калорий' %}:
                             </div>
                         </dic>
                         <dic class="col-12" style="height: 42px;">
                             <div class="calculating__result">
-                                <span>0</span> ккал
+                                <span>0</span> {% trans 'ккал' %}
                             </div>
                         </dic>
                     </div>
@@ -160,15 +164,15 @@
     <footer class="footer">
         <div class="container">
             <div class="social">
-                <div class="subtitle">Наш адрес:</div>
-                <span href="#" class="link"> 220037 г.Минск пер.Уральский, 9</span>
+                <div class="subtitle">{% trans 'Наш адрес:' %}</div>
+                <span href="#" class="link"> {% trans '220037 г.Минск пер.Уральский, 9' %}</span>
                 <a href="#" class="link"></a>
             </div>
             <div class="header__logo">
                 <img src="{% static 'pfoc-logo.png'%}" alt="pepper">
             </div>
             <div class="call">
-                <div class="subtitle">Или позвоните нам: </div>
+                <div class="subtitle">{% trans 'Или позвоните нам:' %}</div>
                 {% for obj in footer_contact %}
                     <span class="link">{{ obj.address}}: {{ obj.phone}}</span>
                 {% endfor %}

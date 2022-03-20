@@ -39,9 +39,9 @@ class PfocView(View):
                     SliderViewsOfSport.objects.filter(type_sport=sport.id)
                 )
             map_key = []
-            for key in address_map.keys():
+            for key, value in address_map.items():
                 try:
-                    id_address = ObjectAddres.objects.filter(address=key).first().id
+                    id_address = ObjectAddres.objects.filter(data_map=value).first().id
                     if TimeListCoach.objects.filter(type_sport=sport.id, address=id_address).values('address').count() > 0:
                         if address_map[key] not in map_key:
                             map_key.append(address_map[key])
@@ -50,15 +50,13 @@ class PfocView(View):
 
             address_view.append(map_key)
 
-        for key in address_map.keys():
+        for key in CardsObject.objects.filter(publish=True):
             try:
-                id_obj = ObjectAddres.objects.filter(address=key).first().id
-
                 card_object.append(
-                    CardsObject.objects.filter(obj=id_obj)
+                    CardsObject.objects.filter(obj=key)
                 )
                 price_object.append(
-                    CardsPrices.objects.filter(obj=id_obj)
+                    CardsPrices.objects.filter(obj=CardsObject.objects.filter(obj=key).first().obj.id)
                 )
             except AttributeError:
                 pass

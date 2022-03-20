@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-14 14:46+0300\n"
+"POT-Creation-Date: 2022-03-20 15:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,22 +18,293 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\homepage\index.html:32
-msgid "Объекты и услуги"
-msgstr "Object & services"
+#: .\templates\homepage\achieves.html:5 .\templates\homepage\index.html:53
+msgid "Наши достижения"
+msgstr "Our achieves"
 
-#: .\templates\homepage\index.html:33
-msgid "Новости"
-msgstr "News"
-
-#: .\templates\homepage\index.html:34
-msgid "Калькулятор калорий"
-msgstr "Calc of calories"
-
-#: .\templates\homepage\index.html:35
+#: .\templates\homepage\contact.html:5 .\templates\homepage\index.html:52
 msgid "Руководство"
 msgstr "Management"
 
-#: .\templates\homepage\index.html:36
-msgid "Наши достижения"
-msgstr "Our achieves"
+#: .\templates\homepage\index.html:49 .\templates\homepage\priceBlock.html:6
+msgid "Объекты и услуги"
+msgstr "Object & services"
+
+#: .\templates\homepage\index.html:50
+msgid "Новости"
+msgstr "News"
+
+#: .\templates\homepage\index.html:51
+msgid "Калькулятор калорий"
+msgstr "Calc of calories"
+
+#: .\templates\homepage\index.html:58
+msgid "Социальные сети"
+msgstr "Social network"
+
+#: .\templates\homepage\index.html:82
+msgid "Рассчитаем вашу потребность в калориях?"
+msgstr "Calc your calories"
+
+#: .\templates\homepage\index.html:86
+msgid "Ваш пол"
+msgstr "Your gender"
+
+#: .\templates\homepage\index.html:89
+msgid "Женщина"
+msgstr "Female"
+
+#: .\templates\homepage\index.html:90
+msgid "Мужчина"
+msgstr "Male"
+
+#: .\templates\homepage\index.html:94
+msgid "Ваша конституция"
+msgstr "Body structure"
+
+#: .\templates\homepage\index.html:99
+msgid "Введите рост"
+msgstr "Enter height"
+
+#: .\templates\homepage\index.html:102
+msgid "Введите вес"
+msgstr "Enter weight"
+
+#: .\templates\homepage\index.html:105
+msgid "Введите возраст"
+msgstr "Enter age"
+
+#: .\templates\homepage\index.html:111
+msgid "Выберите вашу физическая активность"
+msgstr "Choice your physical activity"
+
+#: .\templates\homepage\index.html:117
+msgid "Низкая активность"
+msgstr "Low activity"
+
+#: .\templates\homepage\index.html:121
+msgid "Невысокая активность"
+msgstr "Middle activity"
+
+#: .\templates\homepage\index.html:126
+msgid "Умеренная активность"
+msgstr "Moderate activity"
+
+#: .\templates\homepage\index.html:131
+msgid "Высокая активность"
+msgstr "High activity"
+
+#: .\templates\homepage\index.html:142
+msgid "Ваша суточная норма калорий"
+msgstr "Daily calorie intake"
+
+#: .\templates\homepage\index.html:147
+msgid "ккал"
+msgstr "calories"
+
+#: .\templates\homepage\index.html:167
+msgid "Наш адрес:"
+msgstr "Our address"
+
+#: .\templates\homepage\index.html:168
+msgid "220037 г.Минск пер.Уральский, 9"
+msgstr "220037 t.Minsk len.Uralski, 9"
+
+#: .\templates\homepage\index.html:175
+msgid "Или позвоните нам:"
+msgstr "Give callback"
+
+#: .\templates\homepage\news.html:6
+msgid "Наши Новости"
+msgstr "News"
+
+#: .\templates\homepage\priceBlock.html:30
+msgid "Узнать больше"
+msgstr "Learn more"
+
+#: .\templates\homepage\priceBlock.html:54
+msgid "Ещё"
+msgstr "more"
+
+#: .\templates\homepage\priceBlock.html:74
+msgid ""
+"Не является публичной офертой, более подробную информацию уточняйте по "
+"телефонам или в момент приобретения услуг!"
+msgstr ""
+"It is not a public offer, more detailed information precise at the phones or "
+"at the time of receiving services!"
+
+#: .\templates\homepage\priceBlock.html:75
+msgid "Время работы"
+msgstr "Opening hours"
+
+#: .\templates\homepage\priceBlock.html:81
+msgid "Прейскурант"
+msgstr "Prices"
+
+#: .\templates\homepage\viewsOfSport.html:20
+msgid "Выберите вид спорта/услуги"
+msgstr "Choice kind of sport/services"
+
+#: .\templates\homepage\viewsOfSport.html:30
+msgid "Живи здоровой жизнью!"
+msgstr "Leave healthy life"
+
+#: .\templates\homepage\viewsOfSport.html:47
+msgid "Группы"
+msgstr "Group"
+
+#: .\templates\homepage\viewsOfSport.html:49
+msgid "Организации"
+msgstr "Organization"
+
+#: .\templates\homepage\viewsOfSport.html:51
+msgid "Фото"
+msgstr "Photo"
+
+#: .\templates\homepage\viewsOfSport.html:53
+#: .\templates\homepage\viewsOfSport.html:166
+msgid "Как доехать"
+msgstr "How to get"
+
+#: .\templates\homepage\viewsOfSport.html:58
+msgid "Расписание групп"
+msgstr "Schedule Of Group"
+
+#: .\templates\homepage\viewsOfSport.html:61
+msgid "Поиск тренера"
+msgstr "Find coach"
+
+#: .\templates\homepage\viewsOfSport.html:64
+msgid "Поиск группы"
+msgstr "Find group"
+
+#: .\templates\homepage\viewsOfSport.html:67
+#: .\templates\homepage\viewsOfSport.html:100
+msgid "Поиск адреса"
+msgstr "Our address"
+
+#: .\templates\homepage\viewsOfSport.html:73
+msgid "Тренер"
+msgstr "Coach"
+
+#: .\templates\homepage\viewsOfSport.html:74
+msgid "Время"
+msgstr "Time training"
+
+#: .\templates\homepage\viewsOfSport.html:75
+msgid "Группа"
+msgstr "Group"
+
+#: .\templates\homepage\viewsOfSport.html:76
+#: .\templates\homepage\viewsOfSport.html:108
+msgid "Адрес"
+msgstr "Address"
+
+#: .\templates\homepage\viewsOfSport.html:94
+msgid "Расписание организации"
+msgstr "Schedule of organization"
+
+#: .\templates\homepage\viewsOfSport.html:97
+msgid "Поиск организации"
+msgstr "Find organization"
+
+#: .\templates\homepage\viewsOfSport.html:106
+msgid "Организация"
+msgstr "Organization"
+
+#: .\templates\homepage\viewsOfSport.html:107
+msgid "Расписание"
+msgstr "Schedule"
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:5
+msgid "Select an image to embed"
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:27
+msgid "Browse for the image you want, then click 'Embed Image' to continue..."
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:29
+msgid ""
+"No images found. Upload images using the 'Image Button' dialog's 'Upload' "
+"tab."
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:50
+msgid "Images in: "
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:62
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:80
+msgid "Embed Image"
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:146
+msgid "Play Slideshow"
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:147
+msgid "Pause Slideshow"
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:148
+msgid "&lsaquo; Previous Photo"
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:149
+msgid "Next Photo &rsaquo;"
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:150
+msgid "Next &rsaquo;"
+msgstr ""
+
+#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:151
+msgid "&lsaquo; Prev"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:221
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:207
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:222
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
+"\">DEBUG=True</a> is in your settings file and you have not configured any "
+"URLs."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:230
+msgid "Django Documentation"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:231
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:239
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:240
+msgid "Get started with Django"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:248
+msgid "Django Community"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:249
+msgid "Connect, get help, or contribute"
+msgstr ""

@@ -28,11 +28,15 @@ class ObjectAddres(models.Model):
     """
     Address of object
     """
-    address = models.CharField("Адрес объекта", max_length=100)
-    data_map = models.CharField("data-map", max_length=40, blank=True, null=True)
+    address = models.CharField("Адрес объекта", max_length=100, default='-')
+    data_map = models.CharField("data-map", max_length=40, blank=True, null=True,
+                                help_text= """
+                                пер. Уральский, 9 - uralski, ул. Ваупшасова, 46 - vaupshasova,
+                                ул. Связистов, 6 - sviazistov, ул. Столетова, 1 - stoletova
+                                """)
     phone = models.CharField("Телефон", max_length=20, null=True, blank=True)
     publish = models.BooleanField("Опубликовать", help_text="разместить контакты в footer", default=True)
-    description = models.TextField("Описание", blank=True)
+    description = models.TextField("Описание", blank=True, default='-')
 
     class Meta:
         ordering = ["address"]
@@ -206,6 +210,7 @@ class CardsObject(models.Model):
     t_work_wh = models.CharField("Время работы рабочие дни", max_length=30, null=True)
     t_work_hd = models.CharField("Выходные дни", max_length=30, null=True)
     t_work_hh = models.CharField("Время работы выходные дни", max_length=30, null=True)
+    publish = models.BooleanField("Опубликовать", help_text="опубликовать карточку на сайте", default=True)
 
     def __str__(self):
         return self.obj.address
@@ -222,7 +227,7 @@ class CardsPrices(models.Model):
     """
 
     obj = models.ForeignKey(ObjectAddres, on_delete=models.SET_NULL, null=True, verbose_name="Объект")
-    title = models.CharField("Наименование услуги", max_length=50, null=True)
+    title = models.CharField("Наименование услуги", max_length=50, null=True, default='-')
     description = models.TextField("Описание услуги", max_length=300, null=True,
                                    help_text="Например: что входит в стоимость услуги")
     price_f_color = models.CharField("Особый текст", max_length=12, null=True, blank=True, default="",
@@ -231,6 +236,7 @@ class CardsPrices(models.Model):
                                help_text="Полная стоимость услуги за одну единицу, например: за 1ч, 1д, 1с")
     price_f_label = models.CharField("Ярлык полной стоимости", max_length=5, null=True, blank=True, default="р/ч",
                                      help_text="Единица измерения оплачиваемого времени, например: р/ч, р/д")
+
     for i in range(2, 5):
         exec(f'price_f_{i} = models.CharField("Стоимость полн. {i}", max_length=7, null=True, blank=True, '
              f'help_text="Полная стоимость услуги за одну единицу, например: за 1,5ч, 2ч, 3ч")')
@@ -244,6 +250,7 @@ class CardsPrices(models.Model):
                                help_text="Льготная стоимость услуги за одну единицу, например: за 1ч, 1д, 1с")
     price_l_label = models.CharField("Ярлык льготной стоимости", max_length=5, null=True, blank=True, default="р/ч",
                                      help_text="Единица измерения оплачиваемого времени, например: р/ч, р/д")
+    publish = models.BooleanField("Опубликовать", default=True)
 
     for i in range(2, 5):
         exec(f'price_l_{i} = models.CharField("Стоимость льгот. {i}", max_length=7, null=True, blank=True, '

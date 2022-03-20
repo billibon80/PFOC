@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -17,11 +18,13 @@
     "@babel/preset-typescript": "^7.16.5",
     "babel-loader": "^8.2.3",
     "core-js": "^3.20.1",
-    "webpack-cli": "^4.9.1"
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@glidejs/glide": "^3.5.2",
+    "node-polyfill-webpack-plugin": "^1.1.4",
     "swiper": "^8.0.3"
   },
   "keywords": [],

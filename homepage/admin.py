@@ -7,7 +7,8 @@ from modeltranslation.admin import TranslationAdmin
 
 
 class PostAdminForm(forms.ModelForm):
-    description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+    description_ru = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+    description_en = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
 
     class Meta:
         model = ObjectAddres
@@ -15,13 +16,21 @@ class PostAdminForm(forms.ModelForm):
 
 
 @admin.register(CardsPrices)
-class PriceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'obj', 'description', 'price_f', 'price_l']
+class PriceAdmin(TranslationAdmin):
+    list_display = ['title', 'obj', 'get_image', 'description', 'price_f', 'price_l', 'publish']
     search_fields = ['^title']
     list_filter = ['title', 'obj']
     ordering = ['obj']
     actions = ['duplicate_event']
     save_as = True
+    save_on_top = True
+    readonly_fields = ['get_image']
+    list_editable = ['publish']
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
 
     fieldsets = (
         (None, {
@@ -49,9 +58,14 @@ class PriceAdmin(admin.ModelAdmin):
         }),
         ('Картинки', {
             'fields': (
-                'imgAdd',
+                ('imgAdd', 'get_image'),
             )
         }),
+        ('None', {
+            'fields': (
+                ('publish'),
+            )
+        })
     )
 
     def duplicate_event(self, request, queryset):
@@ -64,8 +78,9 @@ class PriceAdmin(admin.ModelAdmin):
 
 
 @admin.register(CardsObject)
-class CardsObjectAdmin(admin.ModelAdmin):
-    list_display = ['obj', 't_work_wd', 't_work_wh', 't_work_hd', 't_work_hh']
+class CardsObjectAdmin(TranslationAdmin):
+    list_display = ['obj', 't_work_wd', 't_work_wh', 't_work_hd', 't_work_hh', 'publish']
+    list_editable = ['publish']
     ordering = ['obj']
 
     fieldsets = (
@@ -88,6 +103,9 @@ class CardsObjectAdmin(admin.ModelAdmin):
                 ('t_work_hd', 't_work_hh'),
             )
         }),
+        ('None', {
+            'fields': ('publish',)
+        })
     )
 
 
@@ -146,11 +164,18 @@ class TimeListOrganizationAdmin(admin.ModelAdmin):
 
 @admin.register(News)
 class NewsAdmin(TranslationAdmin):
-    list_display = ['title', 'id', 'front_title', 'publish']
+    list_display = ['title', 'get_image', 'front_title', 'publish']
     list_filter = ['publish']
     ordering = ['-publish', '-id']
     actions = ['publish_event', 'exclude_publish_event']
     list_editable = ['publish']
+    save_as = True
+    readonly_fields = ['get_image']
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
 
     fieldsets = [
         (None, {
@@ -162,7 +187,7 @@ class NewsAdmin(TranslationAdmin):
         }),
         ('Фото', {
             'fields': (
-                'imgAdd',
+                ('imgAdd', 'get_image'),
             )
         }),
     ]
@@ -191,13 +216,19 @@ class NewsAdmin(TranslationAdmin):
 
 
 @admin.register(Contact)
-class ContactAdmin(admin.ModelAdmin):
-    list_display = ['name', 'position', 'phone', 'fax',
+class ContactAdmin(TranslationAdmin):
+    list_display = ['name', 'get_image', 'position', 'phone', 'fax',
                     'email', 'content', 'publish']
     ordering = ['rang']
     actions = ['publish_event', 'exclude_publish_event']
     list_editable = ['phone', 'fax',
                      'email', 'content', 'publish']
+    readonly_fields = ['get_image']
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
 
     fieldsets = [
         (None, {
@@ -211,7 +242,7 @@ class ContactAdmin(admin.ModelAdmin):
         }),
         ('Фото', {
             'fields': (
-                'imgAdd',
+                ('imgAdd', 'get_image'),
             )
         }),
     ]
@@ -288,7 +319,7 @@ class AchievesAdmin(TranslationAdmin):
 
 
 @admin.register(ObjectAddres)
-class ObjectAddresAdmin(admin.ModelAdmin):
+class ObjectAddresAdmin(TranslationAdmin):
     list_display = ['address', 'phone', 'publish']
     ordering = ['address']
     actions = ['publish_event', 'exclude_publish_event']
@@ -346,7 +377,7 @@ class CoachAdmin(admin.ModelAdmin):
         (None, {
             "fields": (('coach_name', 'coach_surname', 'coach_second_name'),)
         }),
-        ("Изображение да", {
+        ("Изображение", {
             "fields": (('imgAdd', 'get_image',),)
         })
     )
@@ -377,9 +408,56 @@ class OrganizationAdmin(admin.ModelAdmin):
     get_image.short_description = "Фото"
 
 
-admin.site.register(ViewOfSport)
+class SliderViewsOfSportInLine(admin.StackedInline):
+    model = SliderViewsOfSport
+    extra = 1
+
+
+@admin.register(ViewOfSport)
+class ViewOfSportAdmin(TranslationAdmin):
+    list_display = ['type_sport', 'content']
+    list_display_links = ['type_sport']
+    readonly_fields = ["get_image"]
+    inlines = [SliderViewsOfSportInLine]
+    fieldsets = (
+        (None, {
+            "fields": (('type_sport', 'content', ),)
+        }),
+        ("Изображение", {
+            "fields": (('imgAdd', 'get_image',),)
+        })
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
+
+
+@admin.register(SliderViewsOfSport)
+class SliderViewsOfSportAdmin(TranslationAdmin):
+    list_display = ['type_sport', 'title', 'get_image']
+    readonly_fields = ["get_image"]
+
+    fieldsets = (
+        (None, {
+            "fields": ('type_sport', )
+        }),
+        ("Поля для перевода", {
+            "fields": (('title', 'left_block', 'sign', 'content', 'bottom_block'),)
+        }),
+        ("Изображение", {
+            "fields": (('imgAdd', 'get_image',),)
+        })
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
+
+
 admin.site.register(Group)
-admin.site.register(SliderViewsOfSport)
 
 admin.site.site_title = "Сайт Партизанский ФОЦ"
 admin.site.site_header = "Сайт Партизанский ФОЦ"
