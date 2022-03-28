@@ -312,8 +312,8 @@ class Contact(models.Model):
 
     class Meta:
         ordering = ["rang"]
-        verbose_name = "Контакт"
-        verbose_name_plural = "Контакты"
+        verbose_name = "Руководство контакт"
+        verbose_name_plural = "Руководство контакты"
 
 
 class Achieves(models.Model):

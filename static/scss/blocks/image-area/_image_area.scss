@@ -72,7 +72,8 @@
 .img-wrapper > span {
 	font-family: Poppins;
 	font-size: 1.3em;
-	color: #fff;
+	font-weight: 700;
+	color: tomato;
 	text-align: center;
 	text-transform: uppercase;
 	margin: 0;
@@ -90,7 +91,7 @@
 }
 
 .img-wrapper:hover > span{
-	padding-bottom: 5em;
+	padding-bottom: 3em;
 }
 
 .img-wrapper ul
