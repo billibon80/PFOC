@@ -27,7 +27,7 @@ class PfocView(View):
 
         }
 
-        for sport in ViewOfSport.objects.all():
+        for sport in ViewOfSport.objects.all().order_by('rang'):
             if sport.id:
                 org_view.append(
                     TimeListOrganization.objects.filter(type_sport=sport.id)
@@ -36,7 +36,7 @@ class PfocView(View):
                     TimeListCoach.objects.filter(type_sport=sport.id)
                 )
                 slider_view.append(
-                    SliderViewsOfSport.objects.filter(type_sport=sport.id)
+                    SliderViewsOfSport.objects.filter(type_sport=sport.id).order_by('rang')
                 )
             map_key = []
             for key, value in address_map.items():
@@ -56,7 +56,7 @@ class PfocView(View):
                     CardsObject.objects.filter(obj=key)
                 )
                 price_object.append(
-                    CardsPrices.objects.filter(obj=CardsObject.objects.filter(obj=key).first().obj.id)
+                    CardsPrices.objects.filter(obj=CardsObject.objects.filter(obj=key).first().obj.id).order_by('rang')
                 )
             except AttributeError:
                 pass
@@ -70,7 +70,7 @@ class PfocView(View):
                           'address_view': address_view,
                           'card_object': card_object,
                           'price_object': price_object,
-                          'news': News.objects.filter(publish=True)[:5],
+                          'news': News.objects.filter(publish=True).order_by('rang')[:5],
                           'contact': Contact.objects.filter(publish=True),
                           'achieves': Achieves.objects.filter(publish=True),
                           'footer_contact': ObjectAddres.objects.filter(publish=True),

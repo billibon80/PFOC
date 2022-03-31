@@ -13,6 +13,7 @@ class ViewOfSport(models.Model):
     type_sport = models.CharField("Вид спорта/услуги", max_length=100)
     content = models.TextField("Описание", max_length=100, blank=True)
     imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="tabs/")
+    rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция на странице", default=99)
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="tabs/")
 
     class Meta:
@@ -165,7 +166,7 @@ class SliderViewsOfSport(models.Model):
     """
     Create slider in the block views of sport
     """
-
+    rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция в слайдере объекта", default=99)
     type_sport = models.ForeignKey(ViewOfSport, on_delete=models.SET_NULL, null=True, verbose_name="Вид спорта")
     left_block = models.CharField("Левый блок", max_length=50, null=True, blank=True)
     title = models.CharField("Заголовок", max_length=50, null=True)
@@ -206,10 +207,10 @@ class CardsObject(models.Model):
     link = models.SlugField("Интернет ссылка", max_length=160, null=True, blank=True, unique=True)
     imgAdd = models.FileField("Добавить медиа", blank=True, upload_to="video_obj/")
     # imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="card_obj/")
-    t_work_wd = models.CharField("Рабочие дни", max_length=30, null=True)
-    t_work_wh = models.CharField("Время работы рабочие дни", max_length=30, null=True)
-    t_work_hd = models.CharField("Выходные дни", max_length=30, null=True)
-    t_work_hh = models.CharField("Время работы выходные дни", max_length=30, null=True)
+    t_work_wd = models.CharField("Рабочие дни", max_length=60, null=True)
+    t_work_wh = models.CharField("Время работы рабочие дни", max_length=60, null=True)
+    t_work_hd = models.CharField("Выходные дни", max_length=60, null=True)
+    t_work_hh = models.CharField("Время работы выходные дни", max_length=60, null=True)
     publish = models.BooleanField("Опубликовать", help_text="опубликовать карточку на сайте", default=True)
 
     def __str__(self):
@@ -259,6 +260,7 @@ class CardsPrices(models.Model):
              f'help_text="Единица измерения оплачиваемого времени, например: р/ч, р/д")')
 
     imgAdd = models.ImageField("Добавить медиа", blank=True, upload_to="prices/")
+    rang = models.IntegerField("Ранг", null=True, blank=True, help_text="Позиция в прайсе", default=99)
     # imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="prices/")
 
     def __str__(self):
@@ -280,6 +282,7 @@ class News(models.Model):
     content = models.TextField("Текст", max_length=765, null=True)
     publish = models.BooleanField("Опубликовать", default=True)
     imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="news/")
+    rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция в блоке новости", default=99)
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="news/")
 
     def __str__(self):

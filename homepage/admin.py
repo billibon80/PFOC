@@ -17,7 +17,7 @@ class PostAdminForm(forms.ModelForm):
 
 @admin.register(CardsPrices)
 class PriceAdmin(TranslationAdmin):
-    list_display = ['title', 'obj', 'get_image', 'description', 'price_f', 'price_l', 'publish']
+    list_display = ['title', 'obj', 'get_image', 'description', 'price_f', 'price_l', 'rang', 'publish']
     search_fields = ['^title']
     list_filter = ['title', 'obj']
     ordering = ['obj']
@@ -25,7 +25,7 @@ class PriceAdmin(TranslationAdmin):
     save_as = True
     save_on_top = True
     readonly_fields = ['get_image']
-    list_editable = ['publish']
+    list_editable = ['publish', 'rang']
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
@@ -34,7 +34,7 @@ class PriceAdmin(TranslationAdmin):
 
     fieldsets = (
         (None, {
-            'fields': (('obj', 'title'), 'description')
+            'fields': ('rang', ('obj', 'title'), 'description')
         }),
         ('Полная стоимость', {
             'classes': ('collapse',),
@@ -164,11 +164,11 @@ class TimeListOrganizationAdmin(admin.ModelAdmin):
 
 @admin.register(News)
 class NewsAdmin(TranslationAdmin):
-    list_display = ['title', 'get_image', 'front_title', 'publish']
+    list_display = ['title', 'get_image', 'front_title', 'rang', 'publish']
     list_filter = ['publish']
-    ordering = ['-publish', '-id']
+    ordering = ['rang', '-publish', '-id']
     actions = ['publish_event', 'exclude_publish_event']
-    list_editable = ['publish']
+    list_editable = ['rang', 'publish']
     save_as = True
     readonly_fields = ['get_image']
 
@@ -180,6 +180,7 @@ class NewsAdmin(TranslationAdmin):
     fieldsets = [
         (None, {
             'fields': (
+                'rang',
                 ('title', 'front_title'),
                 'content',
                 'publish',
@@ -411,17 +412,24 @@ class OrganizationAdmin(admin.ModelAdmin):
 class SliderViewsOfSportInLine(admin.StackedInline):
     model = SliderViewsOfSport
     extra = 1
+    readonly_fields = ["get_image"]
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
 
 
 @admin.register(ViewOfSport)
 class ViewOfSportAdmin(TranslationAdmin):
-    list_display = ['type_sport', 'content']
+    list_display = ['type_sport', 'content', 'rang']
     list_display_links = ['type_sport']
     readonly_fields = ["get_image"]
     inlines = [SliderViewsOfSportInLine]
+    list_editable = ['rang']
     fieldsets = (
         (None, {
-            "fields": (('type_sport', 'content', ),)
+            "fields": ('rang', ('type_sport', 'content', ),)
         }),
         ("Изображение", {
             "fields": (('imgAdd', 'get_image',),)
@@ -436,15 +444,16 @@ class ViewOfSportAdmin(TranslationAdmin):
 
 @admin.register(SliderViewsOfSport)
 class SliderViewsOfSportAdmin(TranslationAdmin):
-    list_display = ['type_sport', 'title', 'get_image']
+    list_display = ['type_sport', 'title', 'rang', 'get_image']
     readonly_fields = ["get_image"]
+    list_editable = ['rang']
 
     fieldsets = (
         (None, {
             "fields": ('type_sport', )
         }),
-        ("Поля для перевода", {
-            "fields": (('title', 'left_block', 'sign', 'content', 'bottom_block'),)
+        ("Поля слайдера", {
+            "fields": ('rang', ('title', 'left_block', 'sign', 'content', 'bottom_block'),)
         }),
         ("Изображение", {
             "fields": (('imgAdd', 'get_image',),)

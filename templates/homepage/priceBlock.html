@@ -83,7 +83,7 @@
                                   {% get_db price_object i as db_price %}
                                 {% for pk in db_price|to_range %}
                                   {% get_db db_price pk as price %}
-                                    <div class="row wrapper">
+                                    <div class="row wrapper shadow">
                                     <div class="col-12 col-md-6">
                                         <div class="img-price" style="background: center center url({{ price.imgAdd.url }});"></div>
                                         <h2 class="style_prevu_kit__title">{{ price.title }}</h2>
