@@ -168,11 +168,11 @@ class SliderViewsOfSport(models.Model):
     """
     rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция в слайдере объекта", default=99)
     type_sport = models.ForeignKey(ViewOfSport, on_delete=models.SET_NULL, null=True, verbose_name="Вид спорта")
-    left_block = models.CharField("Левый блок", max_length=50, null=True, blank=True)
-    title = models.CharField("Заголовок", max_length=50, null=True)
-    sign = models.CharField("Подпись", max_length=50, null=True, blank=True)
-    content = models.TextField("Текст", max_length=200, null=True)
-    bottom_block = models.CharField("Нижний блок", max_length=20, null=True, blank=True)
+    left_block = models.CharField("Левый блок", max_length=50, null=True, blank=True, default="")
+    title = models.CharField("Заголовок", max_length=50, null=True, blank=True, default="")
+    sign = models.CharField("Подпись", max_length=50, null=True, blank=True, default="")
+    content = models.TextField("Текст", max_length=200, null=True, blank=True, default="")
+    bottom_block = models.CharField("Нижний блок", max_length=20, null=True, blank=True, default="")
     imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="object-photo/")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="object-photo/")
 
