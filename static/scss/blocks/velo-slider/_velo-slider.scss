@@ -573,7 +573,7 @@ $btn-draw-size: 1px;
     transform:translate3d(0,140%,0);
     opacity: 0;
     transition: transform 0.4s ease, opacity 0.8s ease;
-    @media (min-width: 425px) {
+    @media (max-width: 425px) {
       line-height: 1.2;
     }
     
