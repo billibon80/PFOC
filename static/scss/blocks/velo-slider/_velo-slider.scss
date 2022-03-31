@@ -782,6 +782,9 @@ $border-hovering: 0vw;
 
   &__list{
     list-style: none;
+    margin: 4px;
+    padding: 4px;
+    background-color: #0000004a;
   }
 
   li:first-child{

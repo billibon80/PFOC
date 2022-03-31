@@ -444,7 +444,8 @@ class ViewOfSportAdmin(TranslationAdmin):
 
 @admin.register(SliderViewsOfSport)
 class SliderViewsOfSportAdmin(TranslationAdmin):
-    list_display = ['type_sport', 'title', 'rang', 'get_image']
+    list_display = ['type_sport', 'title', 'sign', 'left_block', 'bottom_block', 'rang', 'get_image']
+    list_filter = ['type_sport']
     readonly_fields = ["get_image"]
     list_editable = ['rang']
 
