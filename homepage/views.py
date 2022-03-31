@@ -13,6 +13,7 @@ class PfocView(View):
 
     def get(self, request):
 
+        viewOfSport = ViewOfSport.objects.all().order_by('rang')
         org_view = []
         coach_view = []
         slider_view = []
@@ -27,7 +28,7 @@ class PfocView(View):
 
         }
 
-        for sport in ViewOfSport.objects.all().order_by('rang'):
+        for sport in viewOfSport:
             if sport.id:
                 org_view.append(
                     TimeListOrganization.objects.filter(type_sport=sport.id)
@@ -63,7 +64,7 @@ class PfocView(View):
 
         return render(request, "homepage/index.html",
                       context={
-                          'views_sport': ViewOfSport.objects.all(),
+                          'views_sport': viewOfSport,
                           'coach_view': coach_view,
                           'org_view': org_view,
                           'slider_view': slider_view,
@@ -74,7 +75,5 @@ class PfocView(View):
                           'contact': Contact.objects.filter(publish=True),
                           'achieves': Achieves.objects.filter(publish=True),
                           'footer_contact': ObjectAddres.objects.filter(publish=True),
-
-
                         }
                       )
