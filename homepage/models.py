@@ -17,7 +17,7 @@ class ViewOfSport(models.Model):
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="tabs/")
 
     class Meta:
-        ordering = ["type_sport"]
+        ordering = ["type_sport", "rang"]
         verbose_name_plural = "Виды спорта"
         verbose_name = "Вид спорта"
 
@@ -180,7 +180,7 @@ class SliderViewsOfSport(models.Model):
         return '{0} :  {1} '.format(self.type_sport, self.title)
 
     class Meta:
-        ordering = ["type_sport"]
+        ordering = ["type_sport", "rang"]
         verbose_name = "Слайд вид спорта"
         verbose_name_plural = "Слайды виды спорта"
 
@@ -267,7 +267,7 @@ class CardsPrices(models.Model):
         return self.title.upper()
 
     class Meta:
-        ordering = ["obj", "title"]
+        ordering = ["obj", "rang"]
         verbose_name = "Стоимость услуги"
         verbose_name_plural = "Прайсы на услуги"
 
@@ -289,7 +289,7 @@ class News(models.Model):
         return self.title
 
     class Meta:
-        ordering = ["publish"]
+        ordering = ["rang", "publish"]
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
 
