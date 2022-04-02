@@ -43,7 +43,8 @@ class PfocView(View):
             for key, value in address_map.items():
                 try:
                     id_address = ObjectAddres.objects.filter(data_map=value).first().id
-                    if TimeListCoach.objects.filter(type_sport=sport.id, address=id_address).values('address').count() > 0:
+                    if TimeListCoach.objects.filter(type_sport=sport.id,
+                                                    address=id_address).values('address').count() > 0:
                         if address_map[key] not in map_key:
                             map_key.append(address_map[key])
                 except AttributeError:
@@ -51,11 +52,28 @@ class PfocView(View):
 
             address_view.append(map_key)
 
+        dict_length = {1: 12, 2: 6, 3: 4}
+        len_card = len(CardsObject.objects.filter(publish=True))
+        list_length = []
+
         for key in CardsObject.objects.filter(publish=True):
+
+            if len_card <= 3 and len(list_length) == 0:
+                k = dict_length[len_card]
+            else:
+                k = 4
+                if len(list_length) < 3:
+                    list_length.append(k)
+                if len(list_length) == 3:
+                    list_length = []
+
+                len_card -= 1
+
             try:
-                card_object.append(
-                    CardsObject.objects.filter(obj=key)
-                )
+                card_object.append({
+                    'obj': CardsObject.objects.filter(obj=key),
+                    'column': k
+                })
                 price_object.append(
                     CardsPrices.objects.filter(obj=CardsObject.objects.filter(obj=key).first().obj.id).order_by('rang')
                 )
@@ -75,5 +93,5 @@ class PfocView(View):
                           'contact': Contact.objects.filter(publish=True),
                           'achieves': Achieves.objects.filter(publish=True),
                           'footer_contact': ObjectAddres.objects.filter(publish=True),
-                        }
+                      }
                       )

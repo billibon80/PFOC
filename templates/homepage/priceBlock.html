@@ -9,56 +9,57 @@
             {% for i in card_object|to_range %}
                 {% get_db card_object i as db %}
                     {% if db %}
-                        {% get_db db 0 as data %}
-                        <section class="col-12 col-lg-6 col-xl-4  card-section">
-              <div class="card">
-                  <div class="flip-card">
-                      <div class="flip-card__container">
-                          <div class="card-front">
-                              <div class="card-front__tp card-front__tp{{ data.color }}">
-                                  <iframe class="card-front__icon" src="{{ data.icons.url }}"></iframe>
-                                      <h2 class="card-front__heading">
-                                             {{ data.front_title }}
-                                      </h2>
-                                      <p class="card-front__text-price">
-                                          {{ data.front_text }}
-                                      </p>
+                        {% get_db db.obj 0 as data %}
+
+                            <section class="col-12 col-lg-6 col-xl-{{db.column}}  card-section">
+                              <div class="card">
+                                  <div class="flip-card">
+                                      <div class="flip-card__container">
+                                          <div class="card-front">
+                                              <div class="card-front__tp card-front__tp{{ data.color }}">
+                                                  <iframe class="card-front__icon" src="{{ data.icons.url }}"></iframe>
+                                                      <h2 class="card-front__heading">
+                                                             {{ data.front_title }}
+                                                      </h2>
+                                                      <p class="card-front__text-price">
+                                                          {{ data.front_text }}
+                                                      </p>
+                                              </div>
+
+                                              <div class="card-front__bt">
+                                                  <p class="card-front__text-view card-front__text-view{{ data.color }}">
+                                                      {% trans 'Узнать больше' %}
+                                                  </p>
+                                              </div>
+                                          </div>
+                                          <div class="card-back">
+                                              <video class="video__container" autoplay muted loop>
+                                                  {% if data.link %}
+                                                     <source class="video__media" src="{{ data.link }}" type="video/mp4">
+                                                  {% else %}
+                                                    <source class="video__media" src="{{ data.imgAdd.url }}" type="video/mp4">
+                                                  {% endif %}
+                                              </video>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="inside-page">
+                                      <div class="inside-page__container">
+                                          <h3 class="inside-page__heading inside-page__heading{{ data.color }}">
+                                              {{ data.inside_title }}
+                                          </h3>
+                                          <p class="inside-page__text">
+                                              {{ data.inside_text }}
+                                          </p>
+                                          <a href="#" class="inside-page__btn inside-page__btn{{ data.color }}">{% trans 'Ещё' %}</a>
+
+                                      </div>
+                                  </div>
+
                               </div>
 
-                              <div class="card-front__bt">
-                                  <p class="card-front__text-view card-front__text-view{{ data.color }}">
-                                      {% trans 'Узнать больше' %}
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="card-back">
-                              <video class="video__container" autoplay muted loop>
-                                  {% if data.link %}
-                                     <source class="video__media" src="{{ data.link }}" type="video/mp4">
-                                  {% else %}
-                                    <source class="video__media" src="{{ data.imgAdd.url }}" type="video/mp4">
-                                  {% endif %}
-                              </video>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="inside-page">
-                      <div class="inside-page__container">
-                          <h3 class="inside-page__heading inside-page__heading{{ data.color }}">
-                              {{ data.inside_title }}
-                          </h3>
-                          <p class="inside-page__text">
-                              {{ data.inside_text }}
-                          </p>
-                          <a href="#" class="inside-page__btn inside-page__btn{{ data.color }}">{% trans 'Ещё' %}</a>
-
-                      </div>
-                  </div>
-
-              </div>
-
-          </section>
+                          </section>
                     {% endif %}
             {% endfor %}
         </div>
@@ -67,7 +68,7 @@
             {% for i in card_object|to_range %}
                 {% get_db card_object i as db %}
                     {% if db %}
-                      {% get_db db 0 as data %}
+                      {% get_db db.obj 0 as data %}
 
                         <div class="card-section__modal">
                             <div class="content">
