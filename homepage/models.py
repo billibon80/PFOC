@@ -113,9 +113,10 @@ class TimeListCoach(models.Model):
         ("3", "Четверг"),
         ("4", "Пятница"),
         ("5", "Суббота"),
-        ("6", "Воскресенье")
+        ("6", "Воскресенье"),
+        ("7", "-")
     )
-    d_week = models.CharField("День недели", max_length=11, choices=DAY_WEEK, default=0)
+    d_week = models.CharField("День недели", max_length=11, choices=DAY_WEEK, default=7)
     type_sport = models.ForeignKey(ViewOfSport, on_delete=models.SET_NULL, null=True, verbose_name="Вид спорта")
     coach = models.ForeignKey(Coach, on_delete=models.CASCADE, null=True, verbose_name="Тренер")
     group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=True)
