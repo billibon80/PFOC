@@ -124,7 +124,6 @@ class TimeListCoach(models.Model):
     address = models.ForeignKey(ObjectAddres, on_delete=models.SET_NULL, null=True, verbose_name="Адрес")
 
     def __str__(self):
-        d_week = {0: "Пн", 1: "Вт", 2: "Ср", 3: "Чт", 4: "Пт", 5: "Сб", 6: "Вс"}
         return str(self.coach)
 
     class Meta:
@@ -145,16 +144,16 @@ class TimeListOrganization(models.Model):
         ("3", "Четверг"),
         ("4", "Пятница"),
         ("5", "Суббота"),
-        ("6", "Воскресенье")
+        ("6", "Воскресенье"),
+        ("7", "-")
     )
-    d_week = models.CharField("День недели", max_length=11, choices=DAY_WEEK, default=0)
+    d_week = models.CharField("День недели", max_length=11, choices=DAY_WEEK, default=7)
     type_sport = models.ForeignKey(ViewOfSport, on_delete=models.SET_NULL, null=True, verbose_name="Вид спорта")
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, verbose_name="Организация")
     time_list = models.TextField("Расписание", max_length=200, blank=True)
     address = models.ForeignKey(ObjectAddres, on_delete=models.SET_NULL, null=True, verbose_name="Адрес")
 
     def __str__(self):
-        d_week = {0: "Пн", 1: "Вт", 2: "Ср", 3: "Чт", 4: "Пт", 5: "Сб", 6: "Вс"}
         return str(self.organization)
 
     class Meta:
