@@ -131,6 +131,8 @@
             border-left: 1px solid #b3aaaa;
             border-right: none;
             align-items: flex-start;
+            max-height: 250px;
+            overflow: auto;
         }
     }
 }
