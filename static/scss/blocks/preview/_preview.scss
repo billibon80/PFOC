@@ -51,14 +51,17 @@
 .tabcontent {
     position: relative;
     img {
-        width: 105%;
+        width: 46rem;
         height: 105%;
-        object-fit: cover;
+        object-fit: contain;
+        top: calc(50% + 8rem);
+        left: calc(50% - 20rem);
+        max-height: 4800px;
     }
     &__descr {
         position: absolute;
-        top: 66%;
-        right: -177px;
+        top: 26rem;
+        right: -150px;
         width: 26rem;
         height: 22.4rem;
         background: rgba(149, 209, 204, 0.8);
@@ -81,6 +84,7 @@
         img {
             width: 100%;
             height: 100%;
+            position: unset;
         }
     }
     @media(max-width: 992px) {
@@ -107,6 +111,8 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        max-height: 36rem;
+        overflow: auto;
     }
     &__item {
         font-weight: 700;
