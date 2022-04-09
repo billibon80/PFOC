@@ -52,11 +52,11 @@
     position: relative;
     img {
         width: 46rem;
-        height: 105%;
         object-fit: contain;
         top: calc(50% + 8rem);
-        left: calc(50% - 20rem);
-        max-height: 4800px;
+        left: calc(50% - 23rem);
+        max-height: 480px;
+        position: absolute;
     }
     &__descr {
         position: absolute;
