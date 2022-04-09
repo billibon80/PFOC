@@ -24,7 +24,7 @@ def to_range(db):
 
 @register.filter
 def set_d_week(value):
-    d_week = {0: "Пн", 1: "Вт", 2: "Ср", 3: "Чт", 4: "Пт", 5: "Сб", 6: "Вс"}
+    d_week = {0: "Пн", 1: "Вт", 2: "Ср", 3: "Чт", 4: "Пт", 5: "Сб", 6: "Вс", 7: "-"}
     return d_week[int(value)]
 
 
