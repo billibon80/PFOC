@@ -2,9 +2,7 @@
     padding: 28px 0 100px 0;
     position: relative;
     height: 670px;
-    @media (max-width: 576px) {
-        height: 540px; 
-    }
+    
     .container {
         background-color:#fff;
     }
@@ -100,6 +98,7 @@
     padding: 35px 30px;
     background-color: #fff;
     height: 100%;
+    min-height: 560px;
     h3 {
         font-weight: 700;
         font-size: 16px;
