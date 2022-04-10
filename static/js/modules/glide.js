@@ -178,7 +178,7 @@ function glideSlide() {
         });
     });
 
-    document.querySelector('.container__video').playbackRate = 2;
+    // document.querySelector('.container__video').playbackRate = 2;
 }
 
 export default glideSlide;
