@@ -44,7 +44,7 @@ function glideSlide() {
     function transformLR(deg){
         return `scale(0.5) perspective(1000px) rotateY(${deg}deg)`;
     }
-    console.log(transformLR(40));
+    
     addSmoke(0);
     transformFrame(1);
     bullet(0);
