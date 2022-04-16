@@ -83,10 +83,10 @@ class PfocView(View):
         return render(request, "homepage/index.html",
                       context={
                           'views_sport': viewOfSport,
-                          'coach_view': coach_view,
-                          'org_view': org_view,
-                          'slider_view': slider_view,
-                          'address_view': address_view,
+                          # 'coach_view': coach_view,
+                          # 'org_view': org_view,
+                          # 'slider_view': slider_view,
+                          # 'address_view': address_view,
                           'card_object': card_object,
                           'price_object': price_object,
                           'news': News.objects.filter(publish=True).order_by('rang')[:5],
@@ -95,3 +95,53 @@ class PfocView(View):
                           'footer_contact': ObjectAddres.objects.filter(publish=True),
                       }
                       )
+
+
+class ViewsOfSport(View):
+
+    def get(self, request, num):
+
+        viewOfSport = ViewOfSport.objects.filter(id=num)
+        org_view = []
+        coach_view = []
+        slider_view = []
+        address_view = []
+        address_map = {
+            "пер. Уральский, 9": "uralski",
+            "ул. Ваупшасова, 46": "vaupshasova",
+            "ул. Связистов, 6": "sviazistov",
+            "ул. Столетова, 1": "stoletova",
+        }
+
+        if viewOfSport:
+            org_view.append(
+                TimeListOrganization.objects.filter(type_sport=num)
+            )
+            coach_view.append(
+                TimeListCoach.objects.filter(type_sport=num)
+            )
+            slider_view.append(
+                SliderViewsOfSport.objects.filter(type_sport=num).order_by('rang')
+            )
+        map_key = []
+        for key, value in address_map.items():
+            try:
+                id_address = ObjectAddres.objects.filter(data_map=value).first().id
+                if TimeListCoach.objects.filter(type_sport=num,
+                                                address=id_address).values('address').count() > 0:
+                    if address_map[key] not in map_key:
+                        map_key.append(address_map[key])
+            except AttributeError:
+                pass
+
+            address_view.append(map_key)
+
+        return render(request, 'homepage/viewsOfSport_content.html',
+                      context={
+                          'views_sport': viewOfSport,
+                          'coach_view': coach_view,
+                          'org_view': org_view,
+                          'slider_view': slider_view,
+                          'address_view': address_view,
+                      })
+    

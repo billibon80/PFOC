@@ -1,3 +1,5 @@
+import veloSlider from './velo-slider';
+
 function modalSport() {
     const mapObject = {
         uralski: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.7245528185163!2d27.603444051677933!3d53.90109958000135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbce4c14ec5a01%3A0x57066527f341de31!2z0L_QtdGALiDQo9GA0LDQu9GM0YHQutC40LkgOSwg0JzQuNC90YHQug!5e0!3m2!1sru!2sby!4v1641556354543!5m2!1sru!2sby",
@@ -8,23 +10,67 @@ function modalSport() {
 
     let num = 15;
 
-    const modalBtn = document.querySelectorAll('.tabheader__item'),
-        modalContainer = document.querySelectorAll('.modals'),
+    const 
+        modalBtn = document.querySelectorAll('.tabheader__item'),
         imgTabCont = document.querySelectorAll('.tabcontent img');
         
     modalBtn.forEach((btn, i) => {
-
-        const holdModals = document.createDocumentFragment();
-        for (let i = 0; i < num; i++) {
-            const div = document.createElement('div');
-            div.classList.add('modal-drop');
-            div.style.top = Math.floor((Math.random() * 100)) + 'vh';
-            div.style.left = Math.floor((Math.random() * 100)) + 'vw';
-            div.style.transitionDelay = Math.random() + 's';
-            holdModals.appendChild(div);
-        }
-        const modalsTab = document.querySelectorAll('.tabbed')[i];
+        /// i - index tabs, key ('btn.dataset.sportIndex') = id view_of_sport 
         btn.addEventListener('click',function(){
+            addContent(i, btn.dataset.sportIndex);
+        
+        });
+
+    });
+
+    /// content
+    function addContent(i, key) {
+        
+        fetch(`/views_of_sport/${key}`)
+        .then(response => response.text())
+        .then(tab => {
+            
+            // response from django page 
+            document.querySelector('#tabs').innerHTML = tab;
+            // create black bubbles
+            const holdModals = document.createDocumentFragment();
+            for (let i = 0; i < num; i++) {
+                const div = document.createElement('div');
+                div.classList.add('modal-drop');
+                div.style.top = Math.floor((Math.random() * 100)) + 'vh';
+                div.style.left = Math.floor((Math.random() * 100)) + 'vw';
+                div.style.transitionDelay = Math.random() + 's';
+                holdModals.appendChild(div);
+            }
+
+            const modalContainer = document.querySelector('.card_modal'), 
+                  modalsWindow = modalContainer.querySelector('.modals'),
+                  modalsTab = modalContainer.querySelector('.tabbed'); 
+
+            // show block modals
+            modalsWindow.appendChild(holdModals);
+            modalsWindow.style.display = 'block';  
+            
+            window.setTimeout(function(){
+                modalsWindow.classList.add('active');
+                document.querySelector('body').style.overflow = 'hidden';
+            },0.4);
+            
+            // create background for modal-content
+            modalContainer.querySelector('.modal-content')
+            .style.cssText =  `background: url(${imgTabCont[i].getAttribute('src')})
+            no-repeat center center fixed; background-size: cover;`;
+            // add button close
+            const closeBtn = modalContainer.querySelector('.close');
+            closeBtn.addEventListener('click',function(){
+
+                modalsWindow.classList.remove('active');
+            // hiddenContent(modalsTab);
+                document.querySelector('body').style.overflow = 'auto'; 
+                window.setTimeout(function(){
+                    modalsWindow.style.display = 'none';
+                },3000);
+            });
             
             showContent(modalsTab);
             modalsTab.querySelectorAll('label').forEach((item, k) => {
@@ -67,33 +113,10 @@ function modalSport() {
                     //
                 });
             });
-              
-
-            modalContainer[i].appendChild(holdModals);
-            modalContainer[i].style.display = 'block';  
-            
-            window.setTimeout(function(){
-                modalContainer[i].classList.add('active');
-                document.querySelector('body').style.overflow = 'hidden';
-            },0.4);
-            modalContainer[i].querySelector('.modal-content')
-            .style.cssText =  `background: url(${imgTabCont[i].getAttribute('src')})
-            no-repeat center center fixed; background-size: cover;`;
-
-            const closeBtn = modalContainer[i].querySelector('.close');
-            closeBtn.addEventListener('click',function(){
-
-                modalContainer[i].classList.remove('active');
-                hiddenContent(modalsTab);
-                document.querySelector('body').style.overflow = 'auto'; 
-                window.setTimeout(function(){
-                    modalContainer[i].style.display = 'none';
-                },3000);
-            });
-        });
-
-
-    });
+            veloSlider();
+        })
+         
+    }
 
     /// modal
     function showContent(parentSelector) {

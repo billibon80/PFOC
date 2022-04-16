@@ -1,6 +1,5 @@
 import tabs from './modules/tabs';
 import calc from './modules/calc';
-import veloSlider from './modules/velo-slider';
 import modalSport from './modules/modal_sport';
 import glideSlide from './modules/glide';
 import timetable from './modules/timetable';
@@ -11,7 +10,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     tabs();
     calc();
-    veloSlider();
     modalSport();
     glideSlide();
     timetable();

@@ -1,4 +1,4 @@
-
+import modalSport from './modal_sport';
 
 function hideTabContent(blockContent, blockTab, selector) {
     blockContent.forEach(item => {
@@ -20,20 +20,18 @@ function showTabContent(blockContent, blockTab, selector, i = 0) {
     }
 }
 
-
 function tabs() {
     const tabsParent = document.querySelector('.tabheader__items'),
           tabs = document.querySelectorAll('.tabheader__item'),
           tabsContent = document.querySelectorAll('.tabcontent'),
           selector = 'tabheader__item_active';
 
-
     hideTabContent(tabsContent, tabs, selector);
     showTabContent(tabsContent, tabs, selector);
-
+    
     tabsParent.addEventListener('click', (e) => {
         const target = e.target;
-
+        
         if (target && target.classList.contains('tabheader__item')) {
             tabs.forEach((item, i) => {
                 

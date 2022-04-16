@@ -1,185 +1,48 @@
 {% block viewsOfSport %}
     {% load custom_filter_tags i18n%}
-     <div class="preview">
-        <div class="bgc_blue"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-8">
-                    <!-- Block Content for Tab (blockContent) Content for Type of Sports    -->
-                    {% for sport in views_sport %}
-                        <div class="tabcontent hide">
-                            <img src="{{ sport.imgAdd.url }}" alt="{{ sport.type_sport}}">
-                            <div class="tabcontent__descr">
-                                {{ sport.content }}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="tabheader">
-                        <h3>{% trans 'Выберите вид спорта/услуги' %}</h3>
-                        <!-- Block Tabs (blockTab) name Tab for Type of Sports-->
-                        <div class="tabheader__items">
-                            {% for sport in views_sport %}
-                                <div class="tabheader__item">{{sport.type_sport}}</div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="preview__life">{% trans 'Живи здоровой жизнью!' %}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Tabs (content type of sport)-->
-    {% for i in views_sport|to_range %}
-        {% at_db views_sport i as view_sport %}
-        <div class="card_modal">
-        <div class="modals">
-            <div class="modal-content">
-                <div class="modal-wrap">
-                    <div class="typesport">
-                        <div class="container">
-                            <div class="tabbed">
-                                <input type="radio" name="tabs" class="tab-nav-1" >
-                                <label class="row col-4 col-sm-2" for=" tab-nav-1">{% trans 'Группы' %}</label>
-                                <input type="radio" name="tabs" class="tab-nav-2">
-                                <label class="col-6 col-sm-3" for=" tab-nav-2">{% trans 'Организации' %}</label>
-                                <input type="radio" name="tabs" class="tab-nav-3" checked>
-                                <label class="col-4 col-sm-2" for="tab-nav-3">{% trans 'Фото' %}</label>
-                                <input type="radio" name="tabs" class="tab-nav-4">
-                                <label class="col-6 col-sm-3" for="tab-nav-4">{% trans 'Как доехать' %}</label>
-                                <button class="close"><i class="fas fa-times"></i></button>
-                                <div class="tabs">
-                                    <!--Group-->
-                                    <div>
-                                        <h2>{% trans 'Расписание групп' %} {{ view_sport }}</h2>
-                                        <div class="row p-1">
-                                          <div class="col-12 col-sm-4">
-                                            <input class="form-control" type="text" data-coach placeholder="{% trans 'Поиск тренера' %}">
-                                          </div>
-                                          <div class="col-6 col-sm-4">
-                                            <input class="col-2 form-control" type="text" data-group placeholder="{% trans 'Поиск группы' %}">
-                                          </div>
-                                          <div class="col-6 col-sm-4">
-                                            <input class="col-5 form-control" type="text" data-address-group placeholder="{% trans 'Поиск адреса' %}">
-                                          </div>
-                                        </div>
-                                            <ul class="responsive-table">
-                                              <li class="table-header">
-                                                <div class="col col-1 ">#</div>
-                                                <div class="col col-3 ">{% trans 'Тренер' %}</div>
-                                                <div class="col col-3 ">{% trans 'Время' %}</div>
-                                                <div class="col col-2 ">{% trans 'Группа' %}</div>
-                                                <div class="col col-3 ">{% trans 'Адрес' %}</div>
-                                              </li>
-                                               {% get_db coach_view i as db %}
-                                                  {% for row in db|to_range %}
-                                                    <li class="table-row">
+    <div class="preview">
+      <div class="bgc_blue"></div>
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-md-8">
+                  <!-- Block Content for Tab (blockContent) Content for Type of Sports    -->
+                  {% for sport in views_sport %}
+                      <div class="tabcontent hide">
+                          <img src="{{ sport.imgAdd.url }}" alt="{{ sport.type_sport}}">
+                          <div class="tabcontent__descr">
+                              {{ sport.content }}
+                          </div>
+                      </div>
+                  {% endfor %}
+              </div>
+              <div class="col-12 col-md-4">
+                  <div class="tabheader">
+                      <h3>{% trans 'Выберите вид спорта/услуги' %}</h3>
+                      <!-- Block Tabs (blockTab) name Tab for Type of Sports-->
+                      <div class="tabheader__items">
+                          {% for sport in views_sport %}
+                              <div data-sport-index="{{sport.id }}" class="tabheader__item">{{sport.type_sport}}</div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12">
+                  <div class="preview__life">{% trans 'Живи здоровой жизнью!' %}</div>
+              </div>
+          </div>
+      </div>
+  </div>
 
-                                                        {% get_db db row as data %}
-                                                        <div class="row col  col-sm-1" data-label="День: ">{{ data.d_week|set_d_week }}</div>
-                                                        <div class="row col  col-sm-4" data-label="Тренер: "><div class="img" style="background-image:url({{ data.coach.imgAdd.url }})"></div>{{ data.coach}}</div>
-                                                        <div class="row col col-sm-3" data-label="Время: "><div class="col col-sm-12">{{ data.time_list }}</div></div>
-                                                        <div class="row col col-sm-1" data-label="Группа: "><div class="col col-sm-12">{{ data.group }}</div></div>
-                                                        <div class="row col col-sm-3" data-label="Адрес: "><div class="col col-sm-12">{{ data.address }}</div></div>
-                                                    </li>
-                                                  {% endfor %}
-                                            </ul>
-                                    </div>
-                                    <!--List of Time-->
-                                    <div>
-                                        <h2>{% trans 'Расписание организации' %} {{ view_sport }}</h2>
-                                        <div class="row p-1">
-                                          <div class="col-6 col-sm-6">
-                                            <input class="form-control" type="text" data-organization placeholder="{% trans 'Поиск организации' %}">
-                                          </div>
-                                          <div class="col-6 col-sm-6">
-                                            <input class="col-5 form-control" type="text" data-address-org placeholder="{% trans 'Поиск адреса' %}">
-                                          </div>
-                                        </div>
-                                        <ul class="responsive-table">
-                                            <li class="table-header">
-                                              <div class="col col-1 ">#</div>
-                                              <div class="col col-3 ">{% trans 'Организация' %}</div>
-                                              <div class="col col-5 ">{% trans 'Расписание' %}</div>
-                                              <div class="col col-3 ">{% trans 'Адрес' %}</div>
-                                            </li>
-                                            {% get_db org_view i as db %}
-                                              {% for row in db|to_range %}
-                                               <li class="table-row">
-                                                 {% get_db db row as data  %}
-                                                        <div class="row col  col-sm-1" data-label="День: ">{{ data.d_week|set_d_week }}</div>
-                                                  <div class="row col  col-sm-3" data-label="Организация: "><div class="img" style="background-image:url({{ data.organization.imgAdd.url }})"></div>{{ data.organization }}</div>
-                                                  <div class="row col col-sm-3" data-label="Расписание: "><div class="col col-sm-12">{{ data.time_list }}</div></div>
-                                                  <div class="row col col-sm-3" data-label="Адрес объекта: "><div class="col col-sm-12">{{ data.address }}</div></div>
-                                               </li>
-                                              {% endfor %}
-                                        </ul>
-                                    </div>
-                                    <!-- Sliders -->
-                                        <div class="container p-0 m-0">
-                                            <main role="main">
-                                                <!-- Slider -->
-                                                <section id='section-{{ i }}' class="velo-slides" data-velo-slider="on" data-velo-theme="light">
-                                                  {% get_db slider_view i as db %}
-                                                      {% for row in db|to_range %}
-                                                        {% get_db db row as data %}
-                                                       <!-- Slide -->
-                                                        <section class="velo-slide">
-                                                            <!-- Pretitle Hint -->
-                                                            <span class="velo-slider__hint"><span><span>{{ data.left_block }}</span></span></span>
-                                                              <!-- Slide BG -->
-                                                            <div class="velo-slide__bg">
-                                                              <!-- Borders -->
-                                                              <span class="border"><span></span></span>
-                                                                <!-- Img -->
-                                                              <figure class="velo-slide__figure" style="background-image: url({{ data.imgAdd.url }})"></figure>
-                                                            </div>
-                                                            <!-- Header -->
-                                                            <header class="velo-slide__header">
-                                                              <h3 class="velo-slide__title"><span class="oh"><span>{{ data.title }}</span></span><span class="oh coach"><span>{{ data.sign }}</span></span></h3>
-                                                              <p class="velo-slide__text"><span class="oh"><span>{{ data.content }}</span></span></p>
-                                                              <span class="velo-slide__btn"><a class="btn-draw btn--white" href="#"><span class="btn-draw__text"><span>{{ data.bottom_block }}</span></span></a></span>
-                                                            </header>
-                                                        </section>
-
-                                                      {% endfor %}
-                                                  <!-- Slides Nav -->
-                                                  <nav class="velo-slides-nav">
-                                                    <ul class="velo-slides-nav__list">
-                                                      <li>
-                                                        <a class="js-velo-slides-prev velo-slides-nav__prev inactive" href="#0"><i class="icon-up-arrow"></i></a>
-                                                      </li>
-                                                      <li>
-                                                        <a class="js-velo-slides-next velo-slides-nav__next" href="#0"><i class="icon-down-arrow"></i></a>
-                                                      </li>
-                                                    </ul>
-                                                  </nav>
-                                                </section>
-                                              </main>
-                                        </div>
-                                    <!-- Map -->
-                                    <div>
-                                        <h2>{% trans 'Как доехать' %}</h2>
-                                        {% get_db address_view i as db %}
-                                          {% for row in db|to_range %}
-                                            <div class="col " data-map="{% at_db db row %}"></div>
-                                          {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+  <div class="card_modal">
+    <div class="modals">
+        <div class="modal-content">
+            <div class="modal-wrap">
+                <div id="tabs"></div>    
             </div>
-
-        </div>
+        </div> 
     </div>
+  </div>
 
-    {% endfor %}
-
+  
 {% endblock %}

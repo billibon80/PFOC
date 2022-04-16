@@ -83,7 +83,6 @@ function calc() {
                     localStorage.setItem('ratio', ratio);
                 } else {
                     sex = e.target.getAttribute('id');
-                    console.log(sex);
                     localStorage.setItem('sex', sex);
                 }
 
