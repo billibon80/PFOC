@@ -4,8 +4,8 @@
 
     <div class="price">
       <h2 class="title">{% trans 'Объекты и услуги' %}</h2>
-        {% for i in card_object|to_range %}
             <div class="row" >
+                {% for i in card_object|to_range %}
               <!-- Cards Object -->
                 {% get_db card_object i as db %}
                     {% if db %}
@@ -60,9 +60,9 @@
 
                           </section>
                     {% endif %}
+                {% endfor %}
             </div>
-        {% endfor %}
-        <!-- Price Object-->
+            <!-- Price Object-->
            <div id="priceGroup"></div>
     </div>
 
