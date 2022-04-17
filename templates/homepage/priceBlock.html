@@ -4,14 +4,13 @@
 
     <div class="price">
       <h2 class="title">{% trans 'Объекты и услуги' %}</h2>
-        <div class="row" >
-          <!-- Cards Object -->
-            {% for i in card_object|to_range %}
+        {% for i in card_object|to_range %}
+            <div class="row" >
+              <!-- Cards Object -->
                 {% get_db card_object i as db %}
                     {% if db %}
                         {% get_db db.obj 0 as data %}
-
-                            <section class="col-12 col-lg-6 col-xl-{{db.column}}  card-section">
+                            <section  class="col-12 col-lg-6 col-xl-{{db.column}}  card-section">
                               <div class="card">
                                   <div class="flip-card">
                                       <div class="flip-card__container">
@@ -52,7 +51,7 @@
                                           <p class="inside-page__text">
                                               {{ data.inside_text }}
                                           </p>
-                                          <a href="#" class="inside-page__btn inside-page__btn{{ data.color }}">{% trans 'Ещё' %}</a>
+                                          <a href="#" data-price-group="{{data.obj_id}}" class="inside-page__btn inside-page__btn{{ data.color }}">{% trans 'Ещё' %}</a>
 
                                       </div>
                                   </div>
@@ -61,63 +60,10 @@
 
                           </section>
                     {% endif %}
-            {% endfor %}
-        </div>
-
-           <!-- Price Object-->
-            {% for i in card_object|to_range %}
-                {% get_db card_object i as db %}
-                    {% if db %}
-                      {% get_db db.obj 0 as data %}
-
-                        <div class="card-section__modal">
-                            <div class="content">
-                              <div class="text"> <i class="fas fa-exclamation-triangle"></i> {% trans 'Не является публичной офертой, более подробную информацию уточняйте по телефонам или в момент приобретения услуг!' %}</div>
-                              <span class="time-of-work__title">{% trans 'Время работы' %}</span>
-                              <span> {{ data.t_work_wd }}
-                                  <time> {{ data.t_work_wh }} </time>
-                                  <br> {{ data.t_work_hd }}
-                                  <time>{{ data.t_work_hh }}</time>
-                              </span>
-                              <span class="time-of-work__title">{% trans 'Прейскурант' %}</span>
-                              <div class="style_prevu_kit" style="background-color:#faf6f7;">
-                                  {% get_db price_object i as db_price %}
-                                {% for pk in db_price|to_range %}
-                                  {% get_db db_price pk as price %}
-                                    <div class="row wrapper shadow">
-                                    <div class="col-12 col-md-6">
-                                        <div class="img-price" style="background: center center url({{ price.imgAdd.url }});"></div>
-                                        <h2 class="style_prevu_kit__title">{{ price.title }}</h2>
-                                        <span class="description">{{ price.description }}</span>
-                                    </div>
-                                  <div class="col-6 col-md-3">
-                                    <div class="wrapper__price">
-                                      <span class="wrapper__price__u wrapper__price__u--blue">{{ price.price_f }}</span>
-                                      <span class="wrapper__price__d wrapper__price__d--blue">{{ price.price_f_label }}</span>
-                                      <span class="pref">{{ price.price_f_color|default_if_none:"" }}</span>
-                                      <span class="hour-price" data-price="{{ price.price_f_2 }}">{{ price.price_f_label_2 }}</span>
-                                      <span class="hour-price" data-price="{{ price.price_f_3 }}">{{ price.price_f_label_3 }}</span>
-                                      <span class="hour-price" data-price="{{ price.price_f_4 }}">{{ price.price_f_label_4 }}</span>
-                                    </div>
-                                  </div>
-                                  <div class="col-6 col-md-3">
-                                    <div class="wrapper__price">
-                                      <span class="wrapper__price__u wrapper__price__u--orange">{{ price.price_l }}</span>
-                                      <span class="wrapper__price__d wrapper__price__d--orange">{{ price.price_l_label }}</span>
-                                      <span class="pref">{{ price.price_l_color|default_if_none:"" }}</span>
-                                      <span class="hour-price" data-price="{{ price.price_l_2 }}">{{ price.price_l_label_2 }}</span>
-                                      <span class="hour-price" data-price="{{ price.price_l_3 }}">{{ price.price_l_label_3 }}</span>
-                                      <span class="hour-price" data-price="{{ price.price_l_4 }}">{{ price.price_l_label_4 }}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                {% endfor %}
-                              </div>
-                            </div>
-                            <div class="card-section__close"></div>
-                          </div>
-                      {% endif %}
-            {% endfor %}
+            </div>
+        {% endfor %}
+        <!-- Price Object-->
+           <div id="priceGroup"></div>
     </div>
 
 

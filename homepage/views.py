@@ -74,9 +74,10 @@ class PfocView(View):
                     'obj': CardsObject.objects.filter(obj=key),
                     'column': k
                 })
-                price_object.append(
-                    CardsPrices.objects.filter(obj=CardsObject.objects.filter(obj=key).first().obj.id).order_by('rang')
-                )
+                print(CardsObject.objects.filter(obj=key).values())
+                # price_object.append(
+                #     CardsPrices.objects.filter(obj=CardsObject.objects.filter(obj=key).first().obj.id).order_by('rang')
+                # )
             except AttributeError:
                 pass
 
@@ -144,4 +145,26 @@ class ViewsOfSport(View):
                           'slider_view': slider_view,
                           'address_view': address_view,
                       })
-    
+
+
+class PriceBlock(View):
+
+    def get(self, request, num):
+        card_object = []
+        price_object = []
+
+        try:
+            card_object.append({
+                'obj': CardsObject.objects.filter(obj_id=num),
+            })
+            price_object.append(
+                CardsPrices.objects.filter(obj_id=num).order_by('rang')
+            )
+        except AttributeError:
+            pass
+
+        return render(request, 'homepage/priceBlock_content.html',
+                      context={
+                          'card_object': card_object,
+                          'price_object': price_object,
+                      })
