@@ -127,7 +127,7 @@ class TimeListCoach(models.Model):
         return str(self.coach)
 
     class Meta:
-        ordering = ["coach", "group", "d_week", "type_sport", "address"]
+        ordering = ["d_week", "coach", "group", "type_sport", "address"]
         verbose_name = "Расписание тренера"
         verbose_name_plural = "Расписание тренеров"
 
