@@ -227,10 +227,10 @@
     }
     &__text {
         color: #fff;
+        line-height: 1.8;
         @media (max-width: 425px) {
           height: 80%;
           overflow: hidden;
-          line-height: 1.8;
         }
     }
     &__more-btn {
