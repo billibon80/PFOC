@@ -80,7 +80,7 @@ class Coach(models.Model):
 
     def __str__(self):
         coach_s = f' {self.coach_second_name[0].upper()}. ' if self.coach_second_name is not None else ''
-        return f'{self.coach_surname.capitalize()} {self.coach_name[0].upper()}. {coach_s}. '
+        return f'{self.coach_surname.capitalize()} {self.coach_name[0].upper()}. {coach_s}'
 
 
 class Organization(models.Model):
