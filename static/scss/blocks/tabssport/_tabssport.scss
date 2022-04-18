@@ -20,6 +20,9 @@ $bg: #ffffff91;
     margin: 50px auto;
     background: $bg;
     position: relative;
+    .checked {
+      height: 500px;
+    }
   }
     
   .tabbed > input {
