@@ -227,6 +227,10 @@
     }
     &__text {
         color: #fff;
+        @media (max-width: 425px) {
+          height: 80%;
+          overflow: hidden;
+        }
     }
     &__more-btn {
       position: absolute;
