@@ -80,7 +80,7 @@ class Coach(models.Model):
 
     def __str__(self):
         coach_s = f' {self.coach_second_name[0].upper()}. ' if self.coach_second_name is not None else ''
-        return f'{self.coach_surname.capitalize()}{coach_s} {self.coach_name[0].upper()}.'
+        return f'{self.coach_surname.capitalize()}{self.coach_name[0].upper()}.{coach_s} '
 
 
 class Organization(models.Model):
@@ -98,7 +98,7 @@ class Organization(models.Model):
         verbose_name = "Организация"
 
     def __str__(self):
-        return self.short_name.capitalize()
+        return self.short_name
 
 
 class TimeListCoach(models.Model):
@@ -278,11 +278,12 @@ class News(models.Model):
     """
 
     front_title = models.CharField("Фронтальный заголовок", max_length=50, null=True)
-    title = models.CharField("Заголовок", max_length=50, null=True)
-    content = models.TextField("Текст", max_length=765, null=True)
+    title = models.CharField("Заголовок статьи", max_length=50, null=True)
+    content = models.TextField("Релиз", max_length=765, null=True)
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="news/")
+    imgAdd = models.ImageField("Добавить фото обложки", blank=True, upload_to="news/")
     rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция в блоке новости", default=99)
+    description = models.TextField("Статья", blank=True, default='')
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="news/")
 
     def __str__(self):
@@ -296,7 +297,7 @@ class News(models.Model):
 
 class Contact(models.Model):
     """
-    Create  block news
+    Create  block contact
     """
 
     position = models.CharField("Должность", max_length=15, null=True)

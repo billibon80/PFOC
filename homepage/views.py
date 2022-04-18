@@ -168,3 +168,12 @@ class PriceBlock(View):
                           'card_object': card_object,
                           'price_object': price_object,
                       })
+
+
+class NewsContent(View):
+
+    def get(self, request, num):
+        return render(request, 'homepage/news/newsContent.html',
+                      context={
+                          'news': News.objects.filter(id=num).first()
+                      })

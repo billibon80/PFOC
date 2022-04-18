@@ -6,15 +6,6 @@ from django import forms
 from modeltranslation.admin import TranslationAdmin
 
 
-class PostAdminForm(forms.ModelForm):
-    description_ru = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
-    description_en = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
-
-    class Meta:
-        model = ObjectAddres
-        fields = '__all__'
-
-
 @admin.register(CardsPrices)
 class PriceAdmin(TranslationAdmin):
     list_display = ['title', 'obj', 'get_image', 'description', 'price_f', 'price_l', 'rang', 'publish']
@@ -162,6 +153,15 @@ class TimeListOrganizationAdmin(admin.ModelAdmin):
     duplicate_event.short_description = "Копировать расписание"
 
 
+class PostAdminFormNews(forms.ModelForm):
+    description_ru = forms.CharField(label="Статья", widget=CKEditorUploadingWidget())
+    description_en = forms.CharField(label="Статья_en", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = News
+        fields = '__all__'
+
+
 @admin.register(News)
 class NewsAdmin(TranslationAdmin):
     list_display = ['title', 'get_image', 'front_title', 'rang', 'publish']
@@ -171,6 +171,7 @@ class NewsAdmin(TranslationAdmin):
     list_editable = ['rang', 'publish']
     save_as = True
     readonly_fields = ['get_image']
+    form = PostAdminFormNews
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
@@ -186,9 +187,14 @@ class NewsAdmin(TranslationAdmin):
                 'publish',
             )
         }),
-        ('Фото', {
+        ('Фото обложки', {
             'fields': (
                 ('imgAdd', 'get_image'),
+            )
+        }),
+        ('Статья', {
+            'fields': (
+                ('description'),
             )
         }),
     ]
@@ -317,6 +323,15 @@ class AchievesAdmin(TranslationAdmin):
         self.message_user(request, f'Выбранные слайды успешно изъяты')
 
     exclude_publish_event.short_description = "Изъять выбранные слайды"
+
+
+class PostAdminForm(forms.ModelForm):
+    description_ru = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+    description_en = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = ObjectAddres
+        fields = '__all__'
 
 
 @admin.register(ObjectAddres)

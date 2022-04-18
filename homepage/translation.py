@@ -4,7 +4,7 @@ from .models import  *
 
 @register(News)
 class NewsTranslationOption(TranslationOptions):
-    fields = ('front_title', 'title', 'content')
+    fields = ('front_title', 'title', 'content', 'description')
 
 
 @register(Achieves)

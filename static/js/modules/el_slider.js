@@ -1,8 +1,10 @@
+import news from '../../../templates/homepage/news/news';
 
 function el() {
-    const cont = document.querySelector('.cont');
-    const elsArr = document.querySelectorAll('.el');
-    const closeBtnsArr = [].slice.call(document.querySelectorAll('.el__close-btn'));
+    
+    const cont = document.querySelector('.cont'),
+          elsArr = cont.querySelectorAll('.el'),
+          closeBtnsArr = [].slice.call(document.querySelectorAll('.el__close-btn'));
 
     window.addEventListener('scroll', () => {
         const start = Math.round(+document.querySelector('.offer').getBoundingClientRect().y);
@@ -17,9 +19,26 @@ function el() {
             setTimeout(function() {
                 cont.classList.remove('s--inactive');
             }, 200);
-        
+            
             elsArr.forEach(el => {
                 el.addEventListener('click', () => {
+                    // create listenter for button 'more;
+                     const btnMore = el.querySelector('.el__more-btn');
+                     btnMore.addEventListener('click', () => {
+                         // get request from news content
+                        fetch(`/news_content/${btnMore.dataset.newsIndex}`)
+                            .then(response => response.text())
+                            .then(news_text => {
+
+                                document.querySelector('html').style.overflow = 'hidden';
+                                document.querySelector('#news').innerHTML = news_text;
+                                // add event listener from news by default
+                                news();
+                                document.querySelector('#news').classList.remove('invisible');
+                                
+                            })
+                        
+                     });
                      if (!el.classList.contains('s--active')) {
                         el.querySelector('.el__bg').style.right = 0;
                         cont.classList.add('s--el-active');

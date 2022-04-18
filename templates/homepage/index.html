@@ -70,6 +70,8 @@
             <img src="{% static 'icons/facebook.svg' %}" alt="facebook">
         </a>
     </div>
+    <!-- Block badges -->
+    <div id="badges">{% include 'homepage/badges/badges.html' %}</div>
     <!--Block Preview (Type of Sports)-->
     {% include 'homepage/viewsOfSport.html' %}
     
@@ -81,7 +83,8 @@
 
     <!-- Block offer (News) -->
     {% include 'homepage/news.html' %}
-
+    <!--News content -->
+    <div id="news" class="news invisible"></div>
     <div class="divider"></div>
 
     <div class="calculating">
@@ -193,8 +196,8 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/velocity/1.3.0/velocity.ui.js'></script>
 
     <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-
+    <!-- <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/1ce1f5ff05.js" crossorigin="anonymous"></script>
     <!-- Place for JS -->
     <script src="{% static 'js/bundle.js' %}"></script>
 

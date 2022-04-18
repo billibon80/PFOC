@@ -228,6 +228,29 @@
     &__text {
         color: #fff;
     }
+    &__more-btn {
+      position: absolute;
+      right: 45px;
+      bottom: 25px;
+      margin: 5px;
+      display: inline-block;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+      text-decoration: none;
+      vertical-align: middle;
+      cursor: pointer;
+      user-select: none;
+      background-color: transparent;
+      padding: 0.375rem 0.75rem;
+      border: 1px solid;
+      font-size: 1rem;
+      border-radius: 0.25rem;
+      transition: color .15s ease-in-out,
+                  background-color .15s ease-in-out,
+                  border-color .15s ease-in-out,
+                  box-shadow .15s ease-in-out;
+    }
     
     &__close-btn {
       
@@ -240,8 +263,7 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0s $closeBtnAT + $closeBtnLineDelay;
-      cursor: pointer;
-      
+      cursor: pointer; 
       @include elActive {
         z-index: 5;
         opacity: 1;

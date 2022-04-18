@@ -6,6 +6,7 @@ import timetable from './modules/timetable';
 import el from './modules/el_slider';
 import cardArea from './modules/card-area';
 
+
 window.addEventListener("DOMContentLoaded", () => {
 
     tabs();
