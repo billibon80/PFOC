@@ -12,7 +12,7 @@ class ViewOfSport(models.Model):
     """
     type_sport = models.CharField("Вид спорта/услуги", max_length=100)
     content = models.TextField("Описание", max_length=100, blank=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="tabs/")
+    imgAdd = models.ImageField("Добавить фото", default="pfoc.jpg", upload_to="tabs/")
     rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция на странице", default=99)
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="tabs/")
 
@@ -70,7 +70,7 @@ class Coach(models.Model):
     coach_surname = models.CharField("Фамилия", max_length=100)
     coach_name = models.CharField("Имя", max_length=100)
     coach_second_name = models.CharField("Отчество", null=True, blank=True, max_length=100)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="coach_org/")
+    imgAdd = models.ImageField("Добавить фото", default="default.png", upload_to="coach_org/")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="coach_org/")
 
     class Meta:
@@ -89,7 +89,7 @@ class Organization(models.Model):
     """
     short_name = models.CharField("Краткое наименование", max_length=100)
     full_name = models.TextField("Полное наименование", null=True, blank=True, max_length=200)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="coach_org/")
+    imgAdd = models.ImageField("Добавить фото", default="pfoc.jpg", upload_to="coach_org/")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="coach_org/")
 
     class Meta:
@@ -173,7 +173,7 @@ class SliderViewsOfSport(models.Model):
     sign = models.CharField("Подпись", max_length=50, null=True, blank=True, default="")
     content = models.TextField("Текст", max_length=200, null=True, blank=True, default="")
     bottom_block = models.CharField("Нижний блок", max_length=20, null=True, blank=True, default="")
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="object-photo/")
+    imgAdd = models.ImageField("Добавить фото", default="pfoc.jpg", upload_to="object-photo/")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="object-photo/")
 
     def __str__(self):
@@ -202,10 +202,10 @@ class CardsObject(models.Model):
     front_text = models.CharField("Лицевой текст", max_length=30, null=True)
     inside_title = models.CharField("Внутренний заголовок", max_length=35, null=True)
     inside_text = models.TextField("Внутренний текст", max_length=110, null=True)
-    icons = models.FileField("Иконка", blank=True, upload_to="icons/")
+    icons = models.FileField("Иконка", blank=True, default="icons/city.svg", upload_to="icons/")
     color = models.CharField("Цвет", max_length=15, choices=COLOR, default="--city")
     link = models.SlugField("Интернет ссылка", max_length=160, null=True, blank=True, unique=True)
-    imgAdd = models.FileField("Добавить медиа", blank=True, upload_to="video_obj/")
+    imgAdd = models.FileField("Добавить медиа", default="video_obj/Skiing_-_2496.mp4", upload_to="video_obj/")
     # imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="card_obj/")
     t_work_wd = models.CharField("Рабочие дни", max_length=60, null=True)
     t_work_wh = models.CharField("Время работы рабочие дни", max_length=60, null=True)
@@ -259,7 +259,7 @@ class CardsPrices(models.Model):
         exec(f'price_l_label_{i} = models.CharField("Стоим. льгот. {i} ед. изм.", max_length=5, null=True, blank=True, '
              f'help_text="Единица измерения оплачиваемого времени, например: р/ч, р/д")')
 
-    imgAdd = models.ImageField("Добавить медиа", blank=True, upload_to="prices/")
+    imgAdd = models.ImageField("Добавить медиа", default="pfoc.jpg", upload_to="prices/")
     rang = models.IntegerField("Ранг", null=True, blank=True, help_text="Позиция в прайсе", default=99)
     # imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="prices/")
 
@@ -281,7 +281,7 @@ class News(models.Model):
     title = models.CharField("Заголовок статьи", max_length=50, null=True)
     content = models.TextField("Релиз", max_length=765, null=True)
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото обложки", blank=True, upload_to="news/")
+    imgAdd = models.ImageField("Добавить фото обложки", default="pfoc.jpg", upload_to="news/")
     rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция в блоке новости", default=99)
     description = models.TextField("Статья", blank=True, default='')
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="news/")
@@ -308,7 +308,7 @@ class Contact(models.Model):
     email = models.EmailField(max_length=254, blank=True)
     content = models.CharField("Примечания", max_length=100, null=True, blank=True)
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото", blank=True, upload_to="managment/")
+    imgAdd = models.ImageField("Добавить фото", upload_to="managment/", default="default.png")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="managment/")
 
     def __str__(self):
@@ -328,9 +328,9 @@ class Achieves(models.Model):
     title = models.CharField("Заголовок", max_length=35, null=True, default="-")
     description = models.TextField("Описание", max_length=100, null=True, default='-')
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото команды", blank=True, upload_to="cup/")
+    imgAdd = models.ImageField("Добавить фото команды", upload_to="cup/", default="pfoc.jpg")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="cup/")
-    imgAdd_award = models.ImageField("Добавить фото награды", blank=True, upload_to="cup_award/")
+    imgAdd_award = models.ImageField("Добавить фото награды", default="pfoc.jpg", upload_to="cup_award/")
     # imgChoice_award = models.FilePathField("Выбрать фото награды", blank=True, path="cup/")
 
     def __str__(self):

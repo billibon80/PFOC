@@ -22,9 +22,15 @@ function el() {
             
             elsArr.forEach(el => {
                 el.addEventListener('click', () => {
+                    
+                    if (!el.classList.contains('s--active')) {
+                    el.querySelector('.el__bg').style.right = 0;
+                    cont.classList.add('s--el-active');
+                    el.classList.add('s--active');
+
                     // create listenter for button 'more;
-                     const btnMore = el.querySelector('.el__more-btn');
-                     btnMore.addEventListener('click', () => {
+                    const btnMore = el.querySelector('.el__more-btn');
+                    btnMore.addEventListener('click', () => {
                          // get request from news content
                         fetch(`/news_content/${btnMore.dataset.newsIndex}`)
                             .then(response => response.text())
@@ -34,15 +40,9 @@ function el() {
                                 document.querySelector('#news').innerHTML = news_text;
                                 // add event listener from news by default
                                 news();
-                                document.querySelector('#news').classList.remove('invisible');
-                                
-                            })
-                        
+                                document.querySelector('#news').classList.remove('invisible');        
+                        })     
                      });
-                     if (!el.classList.contains('s--active')) {
-                        el.querySelector('.el__bg').style.right = 0;
-                        cont.classList.add('s--el-active');
-                        el.classList.add('s--active');
                         
                      }
                 });
