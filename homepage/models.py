@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.safestring import mark_safe
+from django.core.validators import MaxValueValidator
 from django.conf import settings
 from django.utils import timezone
 from django.urls import reverse
@@ -14,6 +16,7 @@ class ViewOfSport(models.Model):
     content = models.TextField("Описание", max_length=100, blank=True)
     imgAdd = models.ImageField("Добавить фото", default="pfoc.jpg", upload_to="tabs/")
     rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция на странице", default=99)
+
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="tabs/")
 
     class Meta:
@@ -31,7 +34,7 @@ class ObjectAddres(models.Model):
     """
     address = models.CharField("Адрес объекта", max_length=100, default='-')
     data_map = models.CharField("data-map", max_length=40, blank=True, null=True,
-                                help_text= """
+                                help_text="""
                                 пер. Уральский, 9 - uralski, ул. Ваупшасова, 46 - vaupshasova,
                                 ул. Связистов, 6 - sviazistov, ул. Столетова, 1 - stoletova
                                 """)
@@ -71,6 +74,7 @@ class Coach(models.Model):
     coach_name = models.CharField("Имя", max_length=100)
     coach_second_name = models.CharField("Отчество", null=True, blank=True, max_length=100)
     imgAdd = models.ImageField("Добавить фото", default="default.png", upload_to="coach_org/")
+
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="coach_org/")
 
     class Meta:
@@ -90,6 +94,7 @@ class Organization(models.Model):
     short_name = models.CharField("Краткое наименование", max_length=100)
     full_name = models.TextField("Полное наименование", null=True, blank=True, max_length=200)
     imgAdd = models.ImageField("Добавить фото", default="pfoc.jpg", upload_to="coach_org/")
+
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="coach_org/")
 
     class Meta:
@@ -174,6 +179,7 @@ class SliderViewsOfSport(models.Model):
     content = models.TextField("Текст", max_length=200, null=True, blank=True, default="")
     bottom_block = models.CharField("Нижний блок", max_length=20, null=True, blank=True, default="")
     imgAdd = models.ImageField("Добавить фото", default="pfoc.jpg", upload_to="object-photo/")
+
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="object-photo/")
 
     def __str__(self):
@@ -261,6 +267,7 @@ class CardsPrices(models.Model):
 
     imgAdd = models.ImageField("Добавить медиа", default="pfoc.jpg", upload_to="prices/")
     rang = models.IntegerField("Ранг", null=True, blank=True, help_text="Позиция в прайсе", default=99)
+
     # imgChoice = models.FilePathField("Выбрать медиа", blank=True, path="prices/")
 
     def __str__(self):
@@ -284,6 +291,7 @@ class News(models.Model):
     imgAdd = models.ImageField("Добавить фото обложки", default="pfoc.jpg", upload_to="news/")
     rang = models.IntegerField("Позиция", null=True, blank=True, help_text="Позиция в блоке новости", default=99)
     description = models.TextField("Статья", blank=True, default='')
+
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="news/")
 
     def __str__(self):
@@ -309,6 +317,7 @@ class Contact(models.Model):
     content = models.CharField("Примечания", max_length=100, null=True, blank=True)
     publish = models.BooleanField("Опубликовать", default=True)
     imgAdd = models.ImageField("Добавить фото", upload_to="managment/", default="default.png")
+
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="managment/")
 
     def __str__(self):
@@ -331,6 +340,7 @@ class Achieves(models.Model):
     imgAdd = models.ImageField("Добавить фото команды", upload_to="cup/", default="pfoc.jpg")
     # imgChoice = models.FilePathField("Выбрать фото", blank=True, path="cup/")
     imgAdd_award = models.ImageField("Добавить фото награды", default="pfoc.jpg", upload_to="cup_award/")
+
     # imgChoice_award = models.FilePathField("Выбрать фото награды", blank=True, path="cup/")
 
     def __str__(self):
@@ -341,3 +351,113 @@ class Achieves(models.Model):
         verbose_name = "Слайдер достижения"
         verbose_name_plural = "Слайдеры достижения"
 
+
+class BadgesTeamListHeader(models.Model):
+    """
+    Create TeamListHeader
+    """
+    header_name = models.CharField("Имя", max_length=30, blank="")
+    header_color = models.CharField("Цвет", max_length=30, default="#bbaaaa",
+                                    help_text=mark_safe("<a target='_blank' rel='noopener noreferrer'"
+                                                   "href='https://www.w3.org/wiki/CSS/Properties/color/keywords'>"
+                                                   "Выбор CSS цвета</a>")
+                                    )
+    header_number_column = models.CharField("Колонка нумерации", max_length=2, default="#")
+    header_logo_column = models.CharField("Колонка логотипа", max_length=6, default="logo")
+    header_name_column = models.CharField("Колонка имени", max_length=15, default="команда")
+    header_place_columnIcon = models.ImageField("Колонка место (значок)", default="place.png",
+                                                upload_to="icons/",
+                                                help_text=mark_safe(
+                                                    "<div style='display: flex; flex-direction: column; width: 300px;'>"
+                                                    "Для просмотра загрузки картинки нажмите кнопку"
+                                                    '<input type="submit" value="Сохранить и '
+                                                    'продолжить редактирование" name="_continue">'
+                                                    '</div>'))
+    header_place_columnTxt = models.CharField("Колонка место (текст)", max_length=2, blank=True,
+                                              help_text="при вводе текста значок отображаться не будет")
+    header_points_column = models.CharField("Колонка oчки", max_length=6, default="очки")
+
+    def __str__(self):
+        return self.header_name
+
+    class Meta:
+        ordering = ["header_name"]
+        verbose_name = "Шапка турнирной таблицы"
+        verbose_name_plural = "Шапки турнирных таблиц"
+
+
+class Badges(models.Model):
+    """
+    Create block badges main block
+    """
+
+    COLOR = (
+        ("yellow", 'yellow'),
+        ("orange", 'orange'),
+        ("pink", 'pink'),
+        ("red", 'red'),
+        ("purple", 'purple'),
+        ("blue", 'blue'),
+        ("blue-dark", 'blue-dark'),
+        ("green", 'green'),
+        ("green-dark", 'green-dark'),
+        ("silver", 'silver'),
+        ("gold", 'gold')
+    )
+
+    tournament = models.CharField('Турнир', max_length=10, default='-')
+    run_string = models.TextField('Бегущая строка', default="Партизанский ФОЦ")
+    run_time = models.IntegerField('Время прокрутки',  validators=[MaxValueValidator(200)], default=30)
+    publish = models.BooleanField("Опубликовать", default=True)
+    color = models.CharField('Цвет иконки', max_length=12, choices=COLOR, default="gold")
+    fa_icon = models.CharField("Значок иконки", max_length=100,
+                               default='<i class="fas fa-question"></i>',
+                               help_text=mark_safe("<a target='_blank' rel='noopener noreferrer'"
+                                                   "href='https://fontawesome.com/v5/search?m=free'>"
+                                                   "Выбор HTML иконки</a>"))
+    list_header = models.ForeignKey(BadgesTeamListHeader, on_delete=models.SET_NULL,
+                                    null=True, verbose_name="Заголовок таблицы")
+
+    def __str__(self):
+        return self.tournament
+
+    class Meta:
+        ordering = ["-id", "publish"]
+        verbose_name = "Турнир"
+        verbose_name_plural = "Турниры"
+
+
+class BadgesTeamList(models.Model):
+    """
+    Create TeamListHeader
+    """
+    turner = models.ForeignKey(Badges, on_delete=models.SET_NULL, verbose_name="Выбирите турнир для участия",
+                                        null=True)
+    name = models.CharField("Название команды/игрока", max_length=20, default="Player")
+    color = models.CharField("Цвет команды/игрока", max_length=30, default="#bbaaaa",
+                             help_text=mark_safe("<a target='_blank' rel='noopener noreferrer'"
+                                                 "href='https://www.w3.org/wiki/CSS/Properties/color/keywords'>"
+                                                 "Выбор CSS цвета</a>")
+                             )
+    description = models.TextField("Описание команды/игрока", max_length=300, default="Описание отсутствует")
+    position = models.IntegerField("Номер команды", validators=[MaxValueValidator(99)], default="0")
+    logo = models.ImageField("Эмблема команды", default="pfoc.jpg",
+                                                upload_to="icons/",
+                                                help_text=mark_safe(
+                                                    "<div style='display: flex; flex-direction: column; width: 300px;'>"
+                                                    "Для просмотра загрузки картинки нажмите кнопку"
+                                                    '<input type="submit" value="Сохранить и '
+                                                    'продолжить редактирование" name="_continue">'
+                                                    '</div>'))
+    place = models.IntegerField("Место в турнирной таблице", validators=[MaxValueValidator(99)], default=0)
+    points = models.FloatField("Количество очков, время", default=0)
+    link_1 = models.CharField("Ссылка на ресурс 1", max_length=100, default='#')
+    link_2 = models.CharField("Ссылка на ресурс 2", max_length=100, default='#')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["turner", "position"]
+        verbose_name = "Команда (игрок)"
+        verbose_name_plural = "Команды (игроки)"

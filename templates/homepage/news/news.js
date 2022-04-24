@@ -1,15 +1,7 @@
+import {modalClose} from '../../../static/js/services/btn'
 
 function news() {
-    
-    const news = document.querySelector('#news'),
-        btnClose = news.querySelector('.news__close-btn');
-
-        btnClose.addEventListener('click', () => {
-            document.querySelector('html').style.overflow = null;
-            news.classList.add('invisible');
-            news.innerHTML = ""
-        });
-
+    modalClose('#news', '.news__close-btn');  
 }
 
 export default news;

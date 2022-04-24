@@ -1,0 +1,66 @@
+{% block tournamentList %}
+{% load i18n %}
+
+<div class="tl__wrapper">
+    <div class="tl__main" style="background: center / 50% no-repeat url(/static/pfoc-logo.png);">
+         {% include 'homepage/badges/run_string/run_string.html' %}
+        {% with badge.list_header as header %}
+        <div class="tl__main_content">
+            <div class="tl__main_block tl__main_block-header" style="border-color: {{ header.header_color }};
+                box-shadow: 0 .5rem 0.5rem {{ header.header_color }};">
+                <div class="tl__main_block-position"
+                     style="background: unset; border-radius: unset; border: unset;">
+                    {{ header.header_number_column}}
+                </div>
+                <div class="tl__main_block-img">{{ header.header_logo_column }}</div>
+                <div class="tl__main_block-text">{{ header.header_name_column }}</div>
+                {% if header.header_place_columnTxt %}
+                    <div class="tl__main_block-icon">{{ header.header_place_columnTxt }}</div>
+                {% else %}
+                    <div style="background: center / contain no-repeat url({{ header.header_place_columnIcon.url }})"
+                     class="tl__main_block-icon"></div>
+                {% endif %}
+                <div class="tl__main_block-points">{{ header.header_points_column }}</div>
+            </div>
+        {% endwith header %}
+         {% for team in badge_team %}
+            <div class="tl__main_block" style="border-color: {{ team.color }}">
+                <div class="tl__main_block-position">{{ team.position }}</div>
+                <div style="background: {{ team.color }} center / contain no-repeat url({{team.logo.url }});"
+                     class="tl__main_block-img"></div>
+                <div style="background-color: white;" class="tl__main_block-text">{{ team.name }}</div>
+                {% if team.points > 0 %}
+                    {% if team.place > 3 %}
+                        <div class="tl__main_block-icon">{{ team.place }}</div>
+                    {% elif team.place == 1 %}
+                        <div style="background: center / contain no-repeat
+                        url('/media/golden_medal.png')" class="tl__main_block-icon"></div>
+                    {% elif team.place == 2 %}
+                         <div style="background: center / contain no-repeat
+                        url('/media/silver-medal.png')" class="tl__main_block-icon"></div>
+                    {% elif team.place == 3 %}
+                         <div style="background: center / contain no-repeat
+                        url('/media/bronze-medal.png')" class="tl__main_block-icon"></div>
+                    {% else %}
+                         <div class="tl__main_block-icon">-</div>
+                    {% endif %}
+                {% else %}
+                    <div class="tl__main_block-icon">-</div>
+                {% endif %}
+                    <div style="background-color: white;" class="tl__main_block-points number">{{ team.points }}</div>
+
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+    <div class="tl__tabs">
+        {% include 'homepage/badges/skeleton_info.html' %}
+        {% include 'homepage/badges/tournament_info.html' %}
+    </div>
+    
+    <div class="tl__close-btn">  </div>
+   
+</div>
+
+
+{% endblock tournamentList %}

@@ -1,0 +1,5 @@
+{% block runstring %}
+    <div class="marquee">
+        <span style="animation: marquee {{badge.run_time}}s infinite linear;">{{ badge.run_string | safe }}</span>
+    </div>
+{% endblock runstring %}

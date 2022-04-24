@@ -41,9 +41,8 @@ function el() {
                                 // add event listener from news by default
                                 news();
                                 document.querySelector('#news').classList.remove('invisible');        
-                        })     
-                     });
-                        
+                            })     
+                        });   
                      }
                 });
             });

@@ -5,10 +5,13 @@ import glideSlide from './modules/glide';
 import timetable from './modules/timetable';
 import el from './modules/el_slider';
 import cardArea from './modules/card-area';
+import badjes from '../../templates/homepage/badges/badjes'
 
 
 window.addEventListener("DOMContentLoaded", () => {
 
+
+    badjes();
     tabs();
     calc();
     modalSport();

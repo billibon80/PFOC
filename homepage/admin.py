@@ -444,7 +444,7 @@ class ViewOfSportAdmin(TranslationAdmin):
     list_editable = ['rang']
     fieldsets = (
         (None, {
-            "fields": ('rang', ('type_sport', 'content', ),)
+            "fields": ('rang', ('type_sport', 'content',),)
         }),
         ("Изображение", {
             "fields": (('imgAdd', 'get_image',),)
@@ -466,7 +466,7 @@ class SliderViewsOfSportAdmin(TranslationAdmin):
 
     fieldsets = (
         (None, {
-            "fields": ('type_sport', )
+            "fields": ('type_sport',)
         }),
         ("Поля слайдера", {
             "fields": ('rang', ('title', 'left_block', 'sign', 'content', 'bottom_block'),)
@@ -482,7 +482,149 @@ class SliderViewsOfSportAdmin(TranslationAdmin):
     get_image.short_description = "Фото"
 
 
-admin.site.register(Group)
+class UserStaticFiles (admin.ModelAdmin):
 
+    class Media:
+        js = ('admin/user/js/user.js',
+              '//use.fontawesome.com/releases/v5.15.3/js/all.js ', )
+        css = {
+            "all": ('admin/user/css/user.css',)
+        }
+
+
+class BadgesInLine(admin.StackedInline):
+    model = BadgesTeamList
+    extra = 1
+
+
+@admin.register(Badges)
+class BadgesAdmin(UserStaticFiles):
+    list_display = ['tournament', 'color', 'get_icon', 'get_number_participants', 'publish']
+    list_editable = ['color', 'publish']
+    inlines = [BadgesInLine]
+    readonly_fields = ['get_icon', 'get_run_string']
+
+    fieldsets = (
+        ("Бэйдж турника", {
+            "fields": (('tournament', 'color', 'publish'), ('fa_icon', 'get_icon'))
+        }),
+        ("Бегущая строка", {
+            "fields": ('get_run_string', ('run_string', 'run_time',),)
+        }),
+        ("Заголовок Таблицы", {
+            "fields": ('list_header',)
+        })
+    )
+
+    def get_icon(self, obj):
+
+        return mark_safe(f'<div id="change_color_class" style=" padding: 5px; display: flex; justify-content: center;'
+                         f' width: 60px; align-items: center; font-size: 2rem" class="{obj.color}">'
+                         f'<div style="background: white; border-radius: 50%;'
+                         f'width: 50px; height: 50px; display: flex; justify-content: center;'
+                         f' align-items: center;" >{obj.fa_icon}</div>'
+                         f'</div>')
+
+    get_icon.short_description = "Значок турнира"
+
+    def get_number_participants(self, obj):
+
+        return mark_safe(len(BadgesTeamList.objects.filter(turner=obj.id)))
+
+    get_number_participants.short_description = "Кол-во уч."
+
+    def get_run_string(self, obj):
+        return mark_safe(
+               f'<div class="marquee">'
+                f'<span style="animation: marquee {obj.run_time}s infinite linear;">{ obj.run_string }</span>'
+               '</div>'
+        )
+
+
+@admin.register(BadgesTeamListHeader)
+class BadgesTeamListHeaderAdmin(UserStaticFiles):
+    list_display = ['header_name']
+    readonly_fields = ['get_header_tab']
+
+    fieldsets = (
+        ("Шапка таблицы", {
+            "fields": (('header_name', 'get_header_tab'), 'header_color')
+        }),
+        ("Колонки", {
+            "fields": (('header_number_column', 'header_logo_column', 'header_name_column', 'header_points_column'),)
+        }),
+        ("Значок", {
+            "fields": (('header_place_columnIcon', 'header_place_columnTxt'), )
+        })
+    )
+
+    def get_header_tab(self, obj):
+
+        return mark_safe("""
+            <div class="tl__main_block tl__main_block-header" style="border-color: {0};
+            box-shadow: 0 0.5rem 0.5rem {0};">
+                <div class="tl__main_block-position" style="background: unset; 
+                    border-radius: unset; border: unset;">{1}</div>
+                <div class="tl__main_block-img">{2}</div>
+                <div class="tl__main_block-text">{3}</div>
+                <div style="background: center / contain no-repeat url({4})" class="tl__main_block-icon">{5}</div>
+                <div class="tl__main_block-points">{6}</div>
+            </div>
+        """.format(
+                   obj.header_color,
+                   obj.header_number_column,
+                   obj.header_logo_column,
+                   obj.header_name_column,
+                   "" if obj.header_place_columnTxt != "" else obj.header_place_columnIcon.url,
+                   obj.header_place_columnTxt,
+                   obj.header_points_column,
+                   )
+            )
+
+    get_header_tab.short_description = "Заголовок"
+
+
+@admin.register(BadgesTeamList)
+class BadgesTeamListAdmin(UserStaticFiles):
+    list_display = ['name', 'turner', 'get_logo','position',  'points', 'place']
+    list_editable = ['turner', 'position', 'points', 'place']
+    list_filter = ['turner']
+    readonly_fields = ['get_team_position']
+
+    fieldsets = (
+        (None, {
+            "fields": (('turner', 'get_team_position'),)
+        }),
+        ("Данные команды", {
+            "fields": (('name', 'color'), ('description', 'logo',))
+        }),
+        (None, {
+            "fields": (('position', 'place', 'points',),)
+        }),
+        ("Ссылки", {
+            "fields": (('link_1', 'link_2'),)
+        })
+    )
+
+    def get_team_position(self, obj):
+        return mark_safe(
+               f'<div class="tl__main_block" style="border-color: {obj.color}">'
+                f'<div class="tl__main_block-position">{obj.position}</div>'
+                f'<div style="background: {obj.color} center / contain no-repeat url({obj.logo.url});" class="tl__main_block-img"></div>'
+                f'<div style="background-color: white;" class="tl__main_block-text">{obj.name}</div>'
+                f'<div style="color: {obj.color}; background: center / contain no-repeat url()" class="tl__main_block-icon number">{obj.place}</div>'
+                f'<div style="background-color: white;" class="tl__main_block-points number">{obj.points}</div>'
+               '</div>'
+        )
+
+    def get_logo(self, obj):
+        return mark_safe(f'<div style="background: {obj.color}; padding: 5px; display: flex; justify-content: center">'
+                         f'<img style="object-fit: cover;" src={obj.logo.url} width="50" height="50">'
+                         f'</div> ')
+
+    get_logo.short_description = 'logo'
+
+
+admin.site.register(Group)
 admin.site.site_title = "Сайт Партизанский ФОЦ"
 admin.site.site_header = "Сайт Партизанский ФОЦ"

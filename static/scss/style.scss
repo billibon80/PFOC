@@ -13,6 +13,16 @@
         url('../font/Antonella/Antonella.ttf') format('ttf'),
         url('../font/Antonella/Antonella.eot') format('eot');
 }
+@font-face { 
+    font-family: 'SportsWorld';
+    font-style: normal, bold;
+    font-weight: normal, bold;
+    src: local('SportsWorld'),
+        url('../font/SportsWorld/SportsWorld.woff2') format('woff2'),
+        url('../font/SportsWorld/SportsWorld.woff') format('woff'),
+        url('../font/SportsWorld/SportsWorld.ttf') format('ttf'),
+        url('../font/SportsWorld/SportsWorld.eot') format('eot');
+}
 @font-face {
     font-family: 'SpriteGraffitiShadow';
     font-style: normal;
@@ -45,4 +55,8 @@
 @import './blocks/price_card_area/card-area';
 @import './blocks/tranlated_form/translated_form';
 @import '../../templates/homepage/badges/badges';
-@import '../../templates/homepage/news/newsContent'
+@import '../../templates/homepage/news/newsContent';
+@import '../../templates/homepage/badges/tournamentList';
+@import '../../templates/homepage/badges/skeleton_info';
+@import '../../templates/homepage/badges/tournament_info';
+@import '../../templates/homepage/badges/run_string/run_string'

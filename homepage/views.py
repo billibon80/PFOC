@@ -84,6 +84,7 @@ class PfocView(View):
         return render(request, "homepage/index.html",
                       context={
                           'views_sport': viewOfSport,
+                          'badges': Badges.objects.filter(publish=True),
                           # 'coach_view': coach_view,
                           # 'org_view': org_view,
                           # 'slider_view': slider_view,
@@ -177,3 +178,17 @@ class NewsContent(View):
                       context={
                           'news': News.objects.filter(id=num).first()
                       })
+
+
+class BadgesContent(View):
+
+    def get(self, request, num):
+        badge = Badges.objects.filter(id=num).first()
+        return render(request, 'homepage/badges/tournamentList.html',
+                      context={'badge': badge,
+                               'badge_team': self.order(BadgesTeamList.objects.filter(turner=badge))
+                               })
+
+    def order(self, obj):
+        return obj.order_by('place', 'position')
+

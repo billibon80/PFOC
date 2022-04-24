@@ -1,10 +1,13 @@
 {% block badges %}
+    {% load i18n %}
 
     <div class="main-wrapper">
-        <div class="badge yellow">
-            <div class="circle"> <i class="fa fa-bolt"></i></div>
-            <div class="ribbon">Initiator</div>
+        {% for badge in badges %}
+        <div data-index-tournament={{ badge.id }} class="badge {{ badge.color }}">
+            <div class="circle">{{ badge.fa_icon | safe }}</div>
+            <div class="ribbon">{{ badge.tournament }}</div>
         </div>
+        {% endfor badges%}
     </div>
 
 {% endblock badges %}
