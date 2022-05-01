@@ -14,7 +14,7 @@ class PriceAdmin(TranslationAdmin):
     actions = ['duplicate_event']
     save_as = True
     save_on_top = True
-    readonly_fields = ['get_image']
+    readonly_fields = ['get_image', 'get_block_price']
     list_editable = ['publish', 'rang']
 
     def get_image(self, obj):
@@ -22,9 +22,45 @@ class PriceAdmin(TranslationAdmin):
 
     get_image.short_description = "Фото"
 
+    def get_block_price(self, obj):
+        return mark_safe(
+            '<div class ="row wrapper shadow" >'
+                '< div class ="col-12 col-md-6" >'
+                    '< div class ="img-price" style="background: center center url(/media/prices/ski.jpg);" > < / div >'
+                    '< h2 class ="style_prevu_kit__title" > Лыжи < / h2 >'
+                    '< span class ="description" > в стоимость входит лыжи палки и дурилки < / span >'
+                '< /div >'
+                '< div class ="col-6 col-md-3" >'
+                    '< div class ="wrapper__price" >'
+                    '< span class ="wrapper__price__u wrapper__price__u--blue" > 8.00 < / span >'
+                    '< span class ="wrapper__price__d wrapper__price__d--blue" > р / ч < / span >'
+                    '< span class ="pref" > < / span >'
+                    '< span class ="hour-price" data-price="None" > None < / span >'
+                    '< span class ="hour-price" data-price="None" > None < / span >'
+                    '< span class ="hour-price" data-price="None" > None < / span >'
+                    '< / div >'
+                    '< / div >'
+                    '< div class ="col-6 col-md-3" >'
+                    '< div class ="wrapper__price" >'
+                    '< span class ="wrapper__price__u wrapper__price__u--orange" > None < / span >'
+                    '< span class ="wrapper__price__d wrapper__price__d--orange" > р / ч < / span >'
+                   ' < span class ="pref" > льготный < / span >'
+                    '< span class ="hour-price" data-price="None" > None < / span >'
+                    '< span class ="hour-price" data-price="None" > None < / span >'
+                    '< span class ="hour-price" data-price="None" > None < / span >'
+                    '< / div >'
+                 '< / div >'
+            '< / div >'
+    )
+
+    get_block_price.short_description = ''
+
     fieldsets = (
         (None, {
             'fields': ('rang', ('obj', 'title'), 'description')
+        }),
+        (None, {
+            'fields': ('get_block_price',)
         }),
         ('Полная стоимость', {
             'classes': ('collapse',),
