@@ -1,0 +1,14 @@
+{% block team_enemy %}
+    {% if currentId %}
+        <option value="{{ currentId.id }}" selected> {{ currentId.name }}</option>
+        <option value="" >-------------</option>
+    {% else %}
+        <option value="" selected>-------------</option>
+    {% endif %}
+
+    {% if data_list %}
+        {% for data in data_list %}
+            <option value="{{data.id}}">{{data.name}}</option>
+        {% endfor %}
+    {% endif %}
+{% endblock team_enemy %}

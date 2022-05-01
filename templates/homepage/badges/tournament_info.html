@@ -1,48 +1,41 @@
 {% block tournament_info %}
     <div class="ti__info">
             <div class="ti__basics">
-                <img src="/media/place.png" alt="" style="" />
+                <img src="{{team.logo.url}}" alt="{{ team.name}}" />
                 <div>
-                    <div class="ti__info-name">Курдский бурдюк</div>
+                    <div class="ti__info-name">{{ team.name }}</div>
                     <div class="ti__btns">
-                        <a href="#" class="button button__main">
+                        <a href="{{ team.link_1}}" class="button button__main">
                             <div class="inner">homepage</div>
                         </a>
-                        <a href="" class="button button__secondary">
+                        <a href="{{ team.link_2 }}" class="button button__secondary">
                             <div class="inner">Wiki</div>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="ti__descr">
-                описание
+                {{ team.description}}
             </div>
-            <div class="ti__player">Игры:</div>
-            <ul class="ti__player-list">
-                <li data-key="1" class="ti__player-item">
-                   <div class="ti__player-item--play">Казахские волки</div>
-                    <div style="background: center / contain no-repeat url('/media/vs.png')" class="ti__player-item--icon"></div>
-                    <div class="ti__player-item--play">Курдский бурдюк</div>
-                    <div style="background: center / contain no-repeat url('/media/win.png')" class="ti__player-item--icon"></div>
-                    <div class="info">матч состоится 22.01 в 15.30 минск-арена</div>
-                </li>
-                <li data-key="1" class="ti__player-item">
-                    <div class="ti__player-item--play">Казахские волки</div>
-                     <div style="background: center / contain no-repeat url('/media/vs.png')" class="ti__player-item--icon"></div>
-                     <div class="ti__player-item--play">Курдский бурдюк</div>
-                     <div style="background: center / contain no-repeat url('/media/loser.png')" class="ti__player-item--icon"></div>
-                 </li>
-                <li data-key="1" class="ti__player-item">
-                    <div class="ti__player-item--play">Казахские волки</div>
-                     <div style="background: center / contain no-repeat url('/media/vs.png')" class="ti__player-item--icon"></div>
-                     <div class="ti__player-item--play">Курдский бурдюк</div>
-                     <div style="background: center / contain no-repeat url('/media/handshake.png')" class="ti__player-item--icon"></div>
-                 </li>
-                
-            </ul>
+
+            {% if plays %}
+                <div class="ti__player">Игры:</div>
+                <ul id="team_badges" class="ti__player-list">
+                    {% for play in plays %}
+                    <li data-key-team ="1" class="ti__player-item">
+                        <div data-win-badges="{{ play.first_team_win }}" class="ti__player-item--play">{{ play.badgesTeam }}</div>
+                        <div style="background: center / contain no-repeat url('/media/vs.png')" class="ti__player-item--icon"></div>
+                        <div data-win-enemy="{{ play.second_team_win }}" class="ti__player-item--play">{{ play.enemyTeam }}</div>
+                        <div id="img-icon" style="background: center / contain no-repeat url()" class="ti__player-item--icon win_img"></div>
+                        <div class="info">{{ play.description }}</div>
+                    </li> 
+                    {% endfor %}    
+                </ul>
+            {% endif %}
+
             <div class="ti__player">Игроки команды:</div>
-            <ul class="ti__player-list">
-                <li data-key="1" class="ti__player-item" >
+            <ul id="player_badges" class="ti__player-list">
+                <li data-key-player="1" class="ti__player-item" >
                     <div class="ti__player-item--play number" style="background: blue;">1</div>
                     <div style="background: center / cover no-repeat url('/media/default.png')" class="ti__player-item--iconplayer"></div>
                     <div class="ti__player-item--play-teamplayer">Капитонов А.А.</div>

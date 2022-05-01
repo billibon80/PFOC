@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import View
-from django.db.models import Count
+from django.db.models import Q
 import pandas as pd
 
 from django.http import HttpResponseRedirect, Http404
@@ -74,7 +74,7 @@ class PfocView(View):
                     'obj': CardsObject.objects.filter(obj=key),
                     'column': k
                 })
-                print(CardsObject.objects.filter(obj=key).values())
+
                 # price_object.append(
                 #     CardsPrices.objects.filter(obj=CardsObject.objects.filter(obj=key).first().obj.id).order_by('rang')
                 # )
@@ -192,3 +192,66 @@ class BadgesContent(View):
     def order(self, obj):
         return obj.order_by('place', 'position')
 
+
+class TeamInfo(View):
+
+    def get(self, request, num):
+        team = BadgesTeamList.objects.filter(id=num).first()
+        plays = TeamInfoGames.objects.filter(Q(badgesTeam_id=num) | Q(enemyTeam_id=num)).all()
+        return render(request, 'homepage/badges/tournament_info.html',
+                      context={
+                          'team': team,
+                          'plays': plays,
+                      })
+
+
+class TeamInfoGamesList(View):
+    """
+    запрос при изменении турнира в таблице игр admin панели
+    возвращает список команд (Команда (игрок)) участвующих в турнире
+    из таблицы BadgesTeamList (Список турниров)
+    """
+
+    def get(self, request, num):
+
+        currentId = None
+        dict_var = dict(x.split('=') for x in request.get_full_path().split('?')[1].split('&') if x != "")
+        # data request: first_id_select, second_id_select, stage if value doesn't blank
+        dict_value_request = {k: int(v) for k, v in dict_var.items() if v != ""}
+        # teamList - select all team (participant of turner) by id (from request <int:num>) turner
+        team_list = BadgesTeamList.objects.filter(turner_id=num).all()
+        # teamInfo - select all register team to the plays or stage
+        team_info = TeamInfoGames.objects.filter(turner_id=num).all()
+
+
+        def get_currentId(selector):
+            if dict_value_request.get(selector):
+                return team_list.filter(id=dict_value_request.get(selector)).first()
+            return None
+
+        if dict_value_request.get('stage'):
+            currentId = get_currentId('first_id_select')
+            # list participant don't register to the plays or stage
+            list_not_team = [x for x in team_list if not team_info.filter(badgesTeam_id=x.id)]
+            return render(request, 'homepage/badges/team_enemy.html',
+                          context={
+                              'data_list': list_not_team,
+                              'currentId': currentId,
+                          })
+
+        dict_team = {t.id: len(team_info.filter(Q(badgesTeam_id=t.id) | Q(enemyTeam_id=t.id)).all())
+                     for t in team_list if len(team_info.filter(Q(badgesTeam_id=t.id) |
+                                                                Q(enemyTeam_id=t.id)).all()) < len(team_list)}
+
+        if dict_value_request.get('second_id_select'):
+            currentId = get_currentId('second_id_select')
+            dict_team.pop(currentId.id)
+
+        if dict_var.get('first_id_select'):
+            dict_team.pop(int(dict_var.get('first_id_select')))
+
+        return render(request, 'homepage/badges/team_enemy.html',
+                      context={
+                          'data_list': team_list.filter(id__in=dict_team.keys()),  # .exclude(id__in=exclude_list),
+                          'currentId': currentId,
+                      })

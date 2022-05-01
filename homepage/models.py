@@ -1,11 +1,9 @@
 from django.db import models
+from django.forms import ModelForm
 from django.utils.safestring import mark_safe
 from django.core.validators import MaxValueValidator
-from django.conf import settings
-from django.utils import timezone
-from django.urls import reverse
-import uuid
-from django.contrib.auth.models import User
+from django.forms.widgets import Select
+from django import forms
 
 
 class ViewOfSport(models.Model):
@@ -359,20 +357,14 @@ class BadgesTeamListHeader(models.Model):
     header_name = models.CharField("Имя", max_length=30, blank="")
     header_color = models.CharField("Цвет", max_length=30, default="#bbaaaa",
                                     help_text=mark_safe("<a target='_blank' rel='noopener noreferrer'"
-                                                   "href='https://www.w3.org/wiki/CSS/Properties/color/keywords'>"
-                                                   "Выбор CSS цвета</a>")
+                                                        "href='https://www.w3.org/wiki/CSS/Properties/color/keywords'>"
+                                                        "Выбор CSS цвета</a>")
                                     )
     header_number_column = models.CharField("Колонка нумерации", max_length=2, default="#")
     header_logo_column = models.CharField("Колонка логотипа", max_length=6, default="logo")
     header_name_column = models.CharField("Колонка имени", max_length=15, default="команда")
     header_place_columnIcon = models.ImageField("Колонка место (значок)", default="place.png",
-                                                upload_to="icons/",
-                                                help_text=mark_safe(
-                                                    "<div style='display: flex; flex-direction: column; width: 300px;'>"
-                                                    "Для просмотра загрузки картинки нажмите кнопку"
-                                                    '<input type="submit" value="Сохранить и '
-                                                    'продолжить редактирование" name="_continue">'
-                                                    '</div>'))
+                                                upload_to="icons/",)
     header_place_columnTxt = models.CharField("Колонка место (текст)", max_length=2, blank=True,
                                               help_text="при вводе текста значок отображаться не будет")
     header_points_column = models.CharField("Колонка oчки", max_length=6, default="очки")
@@ -407,7 +399,7 @@ class Badges(models.Model):
 
     tournament = models.CharField('Турнир', max_length=10, default='-')
     run_string = models.TextField('Бегущая строка', default="Партизанский ФОЦ")
-    run_time = models.IntegerField('Время прокрутки',  validators=[MaxValueValidator(200)], default=30)
+    run_time = models.IntegerField('Время прокрутки', validators=[MaxValueValidator(200)], default=30)
     publish = models.BooleanField("Опубликовать", default=True)
     color = models.CharField('Цвет иконки', max_length=12, choices=COLOR, default="gold")
     fa_icon = models.CharField("Значок иконки", max_length=100,
@@ -429,10 +421,10 @@ class Badges(models.Model):
 
 class BadgesTeamList(models.Model):
     """
-    Create TeamListHeader
+    Create TeamList
     """
     turner = models.ForeignKey(Badges, on_delete=models.SET_NULL, verbose_name="Выбирите турнир для участия",
-                                        null=True)
+                               null=True)
     name = models.CharField("Название команды/игрока", max_length=20, default="Player")
     color = models.CharField("Цвет команды/игрока", max_length=30, default="#bbaaaa",
                              help_text=mark_safe("<a target='_blank' rel='noopener noreferrer'"
@@ -441,18 +433,11 @@ class BadgesTeamList(models.Model):
                              )
     description = models.TextField("Описание команды/игрока", max_length=300, default="Описание отсутствует")
     position = models.IntegerField("Номер команды", validators=[MaxValueValidator(99)], default="0")
-    logo = models.ImageField("Эмблема команды", default="pfoc.jpg",
-                                                upload_to="icons/",
-                                                help_text=mark_safe(
-                                                    "<div style='display: flex; flex-direction: column; width: 300px;'>"
-                                                    "Для просмотра загрузки картинки нажмите кнопку"
-                                                    '<input type="submit" value="Сохранить и '
-                                                    'продолжить редактирование" name="_continue">'
-                                                    '</div>'))
+    logo = models.ImageField("Эмблема команды", default="pfoc.jpg", upload_to="icons/")
     place = models.IntegerField("Место в турнирной таблице", validators=[MaxValueValidator(99)], default=0)
     points = models.FloatField("Количество очков, время", default=0)
-    link_1 = models.CharField("Ссылка на ресурс 1", max_length=100, default='#')
-    link_2 = models.CharField("Ссылка на ресурс 2", max_length=100, default='#')
+    link_1 = models.CharField("Homepage", max_length=255, default='#')
+    link_2 = models.CharField("Wiki", max_length=255, default='#')
 
     def __str__(self):
         return self.name
@@ -461,3 +446,40 @@ class BadgesTeamList(models.Model):
         ordering = ["turner", "position"]
         verbose_name = "Команда (игрок)"
         verbose_name_plural = "Команды (игроки)"
+
+
+class TeamInfoGameStage(models.Model):
+    name = models.CharField("Этап", max_length=40)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name = "Этап"
+        verbose_name_plural = "Этапы"
+
+
+class TeamInfoGames(models.Model):
+
+    turner = models.ForeignKey(Badges, verbose_name="Турнир", on_delete=models.SET_NULL, null=True, blank=True)
+    badgesTeam = models.ForeignKey(BadgesTeamList, related_name="team", on_delete=models.CASCADE,
+                                   verbose_name="Команда(игрок)")
+    enemyTeam = models.ForeignKey(BadgesTeamList, related_name="enemy_team", on_delete=models.CASCADE,
+                                   verbose_name="Команда(игрок) противник", blank=True, null=True)
+    stage = models.ForeignKey(TeamInfoGameStage, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Этап")
+    description = models.CharField("Примечания (результат)", max_length=55,
+                                   help_text="Например: счет 1:0", default="-")
+    first_team_win = models.BooleanField(verbose_name="Win pl.", default=False)
+    second_team_win = models.BooleanField(verbose_name="Win en.", default=False)
+
+    def __str__(self):
+        return f"Турнир:{self.turner.tournament.upper() if self.turner else '-'} " \
+               f"Соперники: {self.badgesTeam.name.upper() if self.badgesTeam else '-'} vs " \
+               f"{self.enemyTeam.name.upper() if self.enemyTeam else '-'}" \
+               f" Этап: {self.stage.name.upper() if self.stage else '-'}"
+
+    class Meta:
+        ordering = ['turner']
+        verbose_name = "Таблица игры"
+        verbose_name_plural = "Таблицы игр"

@@ -184,6 +184,10 @@
       .content {
         opacity: 0;
         transition: 1.2s opacity ease-out;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
       }
       .text {
         border: white solid 2px;
@@ -194,8 +198,10 @@
         color: white;
         padding: 5px;
         line-height: 1.3;
-        @media (max-height: 535px) {
-          margin-bottom: 0;
+        @media (max-height: 425px) {
+          margin: 0;
+          font-size: .7rem;
+          width: 90%;
         }
       }
     }
@@ -440,7 +446,7 @@
     
     @media (max-height: 760px) {
       // transform: scale(1) translate(-50%, 26%);
-      min-height: 284px;
+      // min-height: 284px;
     }
 
     %display-flex-center {
@@ -482,6 +488,9 @@
         bottom: 11px;
         color: red;
         text-transform: uppercase;
+        @media (max-width: 425px) {
+          bottom: 0;
+        }
       }
       .hour-price {
         position: absolute;
@@ -496,6 +505,9 @@
         padding: 2px;
         cursor: pointer;
         background: white;
+        @media (max-width: 425px) {
+          display: none;
+        }
         &::before {
           display: none;
           content: "";
@@ -541,6 +553,9 @@
         border-radius: 3px;
         box-shadow: $bshGrey;
         position: relative;
+        @media (max-width: 425px) {
+           height: 60px; 
+        }
         @for $i from 1 through 2 {
           span:nth-of-type(#{$i + 4}) {
           top: 22px * $i;
@@ -586,6 +601,7 @@
     }
     .description {
       padding: 5px;
+      line-height: 1;
     }
     
 
@@ -598,7 +614,7 @@
     margin-left: 20px;
     text-shadow: .1em .1em 0 #265973;
     @media (max-width: 425px) {
-      font-size: 40px;
+      font-size: 1.2rem;
     }
     &+span {
       margin-left: 20px;

@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
 from .models import *
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
@@ -482,11 +481,10 @@ class SliderViewsOfSportAdmin(TranslationAdmin):
     get_image.short_description = "Фото"
 
 
-class UserStaticFiles (admin.ModelAdmin):
-
+class UserStaticFiles(admin.ModelAdmin):
     class Media:
         js = ('admin/user/js/user.js',
-              '//use.fontawesome.com/releases/v5.15.3/js/all.js ', )
+              '//use.fontawesome.com/releases/v5.15.3/js/all.js ',)
         css = {
             "all": ('admin/user/css/user.css',)
         }
@@ -494,7 +492,29 @@ class UserStaticFiles (admin.ModelAdmin):
 
 class BadgesInLine(admin.StackedInline):
     model = BadgesTeamList
-    extra = 1
+    extra = 0
+    readonly_fields = ['get_logo']
+
+    fieldsets = (
+        (None, {
+            "fields": (('name',), ('description',), ('logo', 'get_logo', 'color'))
+        }),
+        (None, {
+            "fields": (('position', 'place', 'points',),)
+        }),
+        (None, {
+            "fields": (('link_1', 'link_2'),)
+        })
+    )
+
+    def get_logo(self, obj):
+        return mark_safe(f'<div class="in-line" style="background: {obj.color}; padding: 5px; '
+                         f'display: flex; justify-content: center">'
+                         f'<img id="img-logo-{obj.id}" class="img-logo" style="object-fit: cover;"'
+                         f' src={obj.logo.url} width="50" height="50">'
+                         f'</div> ')
+
+    get_logo.short_description = 'logo'
 
 
 @admin.register(Badges)
@@ -517,7 +537,6 @@ class BadgesAdmin(UserStaticFiles):
     )
 
     def get_icon(self, obj):
-
         return mark_safe(f'<div id="change_color_class" style=" padding: 5px; display: flex; justify-content: center;'
                          f' width: 60px; align-items: center; font-size: 2rem" class="{obj.color}">'
                          f'<div style="background: white; border-radius: 50%;'
@@ -528,16 +547,15 @@ class BadgesAdmin(UserStaticFiles):
     get_icon.short_description = "Значок турнира"
 
     def get_number_participants(self, obj):
-
         return mark_safe(len(BadgesTeamList.objects.filter(turner=obj.id)))
 
     get_number_participants.short_description = "Кол-во уч."
 
     def get_run_string(self, obj):
         return mark_safe(
-               f'<div class="marquee">'
-                f'<span style="animation: marquee {obj.run_time}s infinite linear;">{ obj.run_string }</span>'
-               '</div>'
+            f'<div class="marquee">'
+            f'<span style="animation: marquee {obj.run_time}s infinite linear;">{obj.run_string}</span>'
+            '</div>'
         )
 
 
@@ -554,12 +572,11 @@ class BadgesTeamListHeaderAdmin(UserStaticFiles):
             "fields": (('header_number_column', 'header_logo_column', 'header_name_column', 'header_points_column'),)
         }),
         ("Значок", {
-            "fields": (('header_place_columnIcon', 'header_place_columnTxt'), )
+            "fields": (('header_place_columnIcon', 'header_place_columnTxt'),)
         })
     )
 
     def get_header_tab(self, obj):
-
         return mark_safe("""
             <div class="tl__main_block tl__main_block-header" style="border-color: {0};
             box-shadow: 0 0.5rem 0.5rem {0};">
@@ -571,22 +588,22 @@ class BadgesTeamListHeaderAdmin(UserStaticFiles):
                 <div class="tl__main_block-points">{6}</div>
             </div>
         """.format(
-                   obj.header_color,
-                   obj.header_number_column,
-                   obj.header_logo_column,
-                   obj.header_name_column,
-                   "" if obj.header_place_columnTxt != "" else obj.header_place_columnIcon.url,
-                   obj.header_place_columnTxt,
-                   obj.header_points_column,
-                   )
-            )
+            obj.header_color,
+            obj.header_number_column,
+            obj.header_logo_column,
+            obj.header_name_column,
+            "" if obj.header_place_columnTxt != "" else obj.header_place_columnIcon.url,
+            obj.header_place_columnTxt,
+            obj.header_points_column,
+        )
+        )
 
     get_header_tab.short_description = "Заголовок"
 
 
 @admin.register(BadgesTeamList)
 class BadgesTeamListAdmin(UserStaticFiles):
-    list_display = ['name', 'turner', 'get_logo','position',  'points', 'place']
+    list_display = ['name', 'turner', 'get_logo', 'position', 'points', 'place']
     list_editable = ['turner', 'position', 'points', 'place']
     list_filter = ['turner']
     readonly_fields = ['get_team_position']
@@ -608,13 +625,13 @@ class BadgesTeamListAdmin(UserStaticFiles):
 
     def get_team_position(self, obj):
         return mark_safe(
-               f'<div class="tl__main_block" style="border-color: {obj.color}">'
-                f'<div class="tl__main_block-position">{obj.position}</div>'
-                f'<div style="background: {obj.color} center / contain no-repeat url({obj.logo.url});" class="tl__main_block-img"></div>'
-                f'<div style="background-color: white;" class="tl__main_block-text">{obj.name}</div>'
-                f'<div style="color: {obj.color}; background: center / contain no-repeat url()" class="tl__main_block-icon number">{obj.place}</div>'
-                f'<div style="background-color: white;" class="tl__main_block-points number">{obj.points}</div>'
-               '</div>'
+            f'<div class="tl__main_block" style="border-color: {obj.color}">'
+            f'<div class="tl__main_block-position">{obj.position}</div>'
+            f'<div style="background: {obj.color} center / contain no-repeat url({obj.logo.url});" class="tl__main_block-img"></div>'
+            f'<div style="background-color: white;" class="tl__main_block-text">{obj.name}</div>'
+            f'<div style="color: {obj.color}; background: center / contain no-repeat url()" class="tl__main_block-icon number">{obj.place}</div>'
+            f'<div style="background-color: white;" class="tl__main_block-points number">{obj.points}</div>'
+            '</div>'
         )
 
     def get_logo(self, obj):
@@ -625,6 +642,82 @@ class BadgesTeamListAdmin(UserStaticFiles):
     get_logo.short_description = 'logo'
 
 
+@admin.register(TeamInfoGames)
+class TeamInfoGamesAdmin(UserStaticFiles):
+    list_display = ['turner', 'positionBT', 'badgesTeam', 'first_team_win',
+                    'positionET', 'enemyTeam', 'second_team_win', 'stage', 'description']
+    readonly_fields = ['choice_team', 'block_description', 'positionBT', 'positionET']
+    list_filter = ['turner']
+    list_editable = ['description', 'first_team_win', 'second_team_win']
+    fieldsets = (
+        (None, {
+            "fields": (('turner', 'choice_team',),)
+        }),
+        (None, {
+            "fields": (('badgesTeam', 'first_team_win',), ('enemyTeam', 'second_team_win',))
+        }),
+        (None, {
+            "fields": ('stage', 'description', 'block_description',)
+        }),
+    )
+
+    def choice_team(self, obj):
+
+        img_path = '/media/handshake.png' if obj.first_team_win and obj.second_team_win else '/media/win.png' \
+            if obj.first_team_win or obj.second_team_win else None
+        position = 'left: 85%' if obj.first_team_win else 'left: -85%' if obj.second_team_win else None
+
+        if obj.enemyTeam:
+            text = f' <div class="ti__player-item--play">{obj.badgesTeam.name}</div>' \
+                   f' <div style="background: center / contain no-repeat url(/media/vs.png); max-width:10%;" class="ti__player-item--icon"></div>' \
+                   f'<div class="ti__player-item--play">{obj.enemyTeam.name}</div>' \
+                   f'<div id="img-icon" style="background: center / contain no-repeat url({img_path});' \
+                   f' position: absolute; bottom: 0; height: 65%; {position}" ' \
+                   f'class="ti__player-item--icon"></div>'
+
+        elif obj.stage:
+            text = f' <div class="ti__player-item--play">{obj.stage}</div>'
+        else:
+            text = f' <div class="ti__player-item--play">Новый объект</div>'
+
+        return mark_safe(
+            f'<div id="badges-id" data-index-page="{obj.id}" class="ti__player">Игры (этапы):</div>'
+            '<ul class="ti__player-list">'
+            '<li data-key="1" class="ti__player-item" style="font-size: 1rem; width: 330px; '
+            'position: relative; height: 26px;">'
+            f'<div id="contentEnemy" > {text} </div>'
+            f'<div class=" info">{obj.description}</div>'
+            '</li>'
+            '</ul>'
+        )
+
+    choice_team.short_description = ""
+
+    def block_description(self, obj):
+        return mark_safe(
+            f'<div class="ti__player-item" style="width: 330px; height: 26px; color: white;">'
+            f'<div style="opacity:1;" class="info">{obj.description}</div>'
+            f'</div>'
+        )
+
+    block_description.short_description = ""
+
+    def positionBT(self, obj):
+        return mark_safe(
+            f'<div class="tl__main_block-position">{obj.badgesTeam.position if obj.badgesTeam else "-"}</div>'
+        )
+
+    positionBT.short_description = "#"
+
+    def positionET(self, obj):
+        return mark_safe(
+            f'<div class="tl__main_block-position">{obj.enemyTeam.position if obj.enemyTeam else "-"}</div>'
+        )
+
+    positionET.short_description = "#"
+
+
+admin.site.register(TeamInfoGameStage)
 admin.site.register(Group)
 admin.site.site_title = "Сайт Партизанский ФОЦ"
 admin.site.site_header = "Сайт Партизанский ФОЦ"

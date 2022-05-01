@@ -7,7 +7,7 @@
         {% with badge.list_header as header %}
         <div class="tl__main_content">
             <div class="tl__main_block tl__main_block-header" style="border-color: {{ header.header_color }};
-                box-shadow: 0 .5rem 0.5rem {{ header.header_color }};">
+                box-shadow: 0 .5rem 0.5rem {{ header.header_color }};" >
                 <div class="tl__main_block-position"
                      style="background: unset; border-radius: unset; border: unset;">
                     {{ header.header_number_column}}
@@ -24,7 +24,7 @@
             </div>
         {% endwith header %}
          {% for team in badge_team %}
-            <div class="tl__main_block" style="border-color: {{ team.color }}">
+            <div  class="tl__main_block" style="border-color: {{ team.color }}" data-index-team="{{ team.id }}">
                 <div class="tl__main_block-position">{{ team.position }}</div>
                 <div style="background: {{ team.color }} center / contain no-repeat url({{team.logo.url }});"
                      class="tl__main_block-img"></div>
@@ -53,9 +53,9 @@
           {% endfor %}
         </div>
     </div>
-    <div class="tl__tabs">
+    <div id="info_team" class="tl__tabs">
         {% include 'homepage/badges/skeleton_info.html' %}
-        {% include 'homepage/badges/tournament_info.html' %}
+        <!-- {% include 'homepage/badges/tournament_info.html' %} -->
     </div>
     
     <div class="tl__close-btn">  </div>
