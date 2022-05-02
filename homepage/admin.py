@@ -5,8 +5,17 @@ from django import forms
 from modeltranslation.admin import TranslationAdmin
 
 
+class UserStaticFilesTranslation(TranslationAdmin):
+    class Media:
+        js = ('admin/user/js/user.js',
+              '//use.fontawesome.com/releases/v5.15.3/js/all.js ',)
+        css = {
+            "all": ('admin/user/css/user.css',)
+        }
+
+
 @admin.register(CardsPrices)
-class PriceAdmin(TranslationAdmin):
+class PriceAdmin(UserStaticFilesTranslation):
     list_display = ['title', 'obj', 'get_image', 'description', 'price_f', 'price_l', 'rang', 'publish']
     search_fields = ['^title']
     list_filter = ['title', 'obj']
@@ -24,40 +33,48 @@ class PriceAdmin(TranslationAdmin):
 
     def get_block_price(self, obj):
         return mark_safe(
-            '<div class ="row wrapper shadow" >'
-                '< div class ="col-12 col-md-6" >'
-                    '< div class ="img-price" style="background: center center url(/media/prices/ski.jpg);" > < / div >'
-                    '< h2 class ="style_prevu_kit__title" > Лыжи < / h2 >'
-                    '< span class ="description" > в стоимость входит лыжи палки и дурилки < / span >'
-                '< /div >'
-                '< div class ="col-6 col-md-3" >'
-                    '< div class ="wrapper__price" >'
-                    '< span class ="wrapper__price__u wrapper__price__u--blue" > 8.00 < / span >'
-                    '< span class ="wrapper__price__d wrapper__price__d--blue" > р / ч < / span >'
-                    '< span class ="pref" > < / span >'
-                    '< span class ="hour-price" data-price="None" > None < / span >'
-                    '< span class ="hour-price" data-price="None" > None < / span >'
-                    '< span class ="hour-price" data-price="None" > None < / span >'
-                    '< / div >'
-                    '< / div >'
-                    '< div class ="col-6 col-md-3" >'
-                    '< div class ="wrapper__price" >'
-                    '< span class ="wrapper__price__u wrapper__price__u--orange" > None < / span >'
-                    '< span class ="wrapper__price__d wrapper__price__d--orange" > р / ч < / span >'
-                   ' < span class ="pref" > льготный < / span >'
-                    '< span class ="hour-price" data-price="None" > None < / span >'
-                    '< span class ="hour-price" data-price="None" > None < / span >'
-                    '< span class ="hour-price" data-price="None" > None < / span >'
-                    '< / div >'
-                 '< / div >'
-            '< / div >'
+            '<div class="style_prevu_kit" >'
+            '<div class ="row wrapper shadow">'\
+                '<div class ="col-6" >'\
+                    f'<div id="img_price" class ="img-price" style="background: center center url({obj.imgAdd.url});" > </div >'\
+                    f'<h3 class ="style_prevu_kit__title" > {obj.title} </h3>'\
+                    f'<span class ="description" > {obj.description} </span>'\
+                '</div>'\
+                '<div class ="col-3" >'\
+                    '<div class ="wrapper__price" >'\
+                    f'<span class ="wrapper__price__u wrapper__price__u--blue" data-for-id="id_price_f"> {obj.price_f} </span >'\
+                    f'<span class ="wrapper__price__d wrapper__price__d--blue" data-for-id="id_price_f_label">{obj.price_f_label}</span >'\
+                    f'<span class ="pref" data-for-id="id_price_f_color_ru" data-for-id="id_price_f_color_ru" >{obj.price_f_color} </span >'\
+                    f'<span class ="hour-price" data-price="{obj.price_f_2}"  data-for-id="id_price_f_2" > {obj.price_f_label_2}</span >'\
+                    f'<span class ="hour-price" data-price="{obj.price_f_3}"  data-for-id="id_price_f_3" > {obj.price_f_label_3}</span >'\
+                    f'<span class ="hour-price" data-price="{obj.price_f_4}"  data-for-id="id_price_f_4" >  {obj.price_f_label_4}</span >'\
+                    '</div >'\
+                    '</div >'\
+                    '<div class ="col-3" >'\
+                    '<div class ="wrapper__price" >'\
+                    f'<span class ="wrapper__price__u wrapper__price__u--orange" data-for-id="id_price_l">{obj.price_l} </span >'\
+                    f'<span class ="wrapper__price__d wrapper__price__d--orange" data-for-id="id_price_l_label">{obj.price_l_label}</span  >'\
+                   f' <span class ="pref" data-for-id="id_price_l_color_ru">{obj.price_l_color} </span >'\
+                    f'<span class ="hour-price" data-price="{obj.price_l_2}" data-for-id="id_price_l_2">{obj.price_l_label_2}</span >'\
+                    f'<span class ="hour-price" data-price="{obj.price_l_3}" data-for-id="id_price_l_3">{obj.price_l_label_3}</span >'\
+                    f'<span class ="hour-price" data-price="{obj.price_l_4}" data-for-id="id_price_l_4">{obj.price_l_label_4} </span >'\
+                    '</div >'\
+                 '</div >'\
+            '</div>'\
+            '</div>'
     )
 
     get_block_price.short_description = ''
 
     fieldsets = (
         (None, {
-            'fields': ('rang', ('obj', 'title'), 'description')
+            'fields': (('rang', 'obj',), 'publish')
+        }),
+        (None, {
+            'fields': ('title', )
+        }),
+        (None, {
+            'fields': (('description_ru', 'description_en'),)
         }),
         (None, {
             'fields': ('get_block_price',)
@@ -87,11 +104,7 @@ class PriceAdmin(TranslationAdmin):
                 ('imgAdd', 'get_image'),
             )
         }),
-        ('None', {
-            'fields': (
-                ('publish'),
-            )
-        })
+
     )
 
     def duplicate_event(self, request, queryset):

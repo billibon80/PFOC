@@ -1,13 +1,16 @@
 /// функция предпросмотра загружаемой картинки
 function preloadImg (selectorInput, selectorImg, ...args) {
+    console.log('img start')
     const input = document.querySelector(selectorInput);
     input.addEventListener('input', () => {
+        console.log('input start')
         if(input.files && input.files[0]) {
+            console.log('file load')
             let reader = new FileReader();
             reader.onload = function(e) {
                 let img = document.querySelector(selectorImg); 
+                console.log('img')
                 if(args[0].src){
-                    console.log('src')
                     img.src = e.target.result;
                 } else if (args[0].bcg) {
                     img.style.backgroundImage = `url(${e.target.result})`;
@@ -382,6 +385,62 @@ window.addEventListener("DOMContentLoaded", () => {
     catch (e) {
         console.log("Таблицы игр команд", e)
     }
+
+/// prices block
+try {
+
+    // предпросмотре картинки
+
+    preloadImg ('#id_imgAdd', '#img_price', {src: false, bcg: true});
+
+    const outTxt = (selectorOut, selectorIn) => {
+        if(document.querySelector(selectorOut))
+            document.querySelector(selectorOut).addEventListener('input', (e) => {
+                const innerBlock = document.querySelector(`.style_prevu_kit ${selectorIn.replace('_label', '')}`) 
+                if(innerBlock)
+                innerBlock.innerHTML = e.target.value
+            }) 
+    }
+
+    outTxt('#id_title_ru', '.style_prevu_kit__title');
+    outTxt('#id_description_ru', '.description');
+    ['id_price_f', 'id_price_f_label', 'id_price_f_color_ru', 'id_price_f_label_2', 'id_price_f_label_3', 'id_price_f_label_4', 
+     'id_price_l_color_ru', 'id_price_l', 'id_price_l_label', 'id_price_l_label_2', 'id_price_l_label_3', 'id_price_l_label_4',
+     ].forEach(selector => {
+        outTxt(`#${selector}`, `[data-for-id="${selector}"]`)
+    });
+
+
+    const focusLabel = (selectorInput ) => {
+        const parentInput = document.querySelector(selectorInput);
+        const focuListener = (event, display, input=false ) => {
+            parentInput.addEventListener(event, (e) => {
+                const selector = e.target.id;
+                const price_label = document.querySelector(`[data-for-id="${selector}"]`);
+                price_label.style.setProperty('--display', display); 
+
+                if(input)
+                    parentInput.addEventListener('input', (e) => {
+                        price_label.dataset.price = e.target.value;
+                    })
+            })
+        }
+        focuListener('focus', 'block', true );
+        focuListener('focusout', 'none', true );
+    }
+
+    for (step = 2; step < 5; step++) {
+        focusLabel(`#id_price_f_${step}`);  
+      }
+
+    for (step = 2; step < 5; step++) {
+      focusLabel(`#id_price_l_${step}`);  
+    }
+    
+
+} catch (e) {
+    console.log(`Prices block ${e}`)
+}
 
 /// endDOMcontentLoaded
 })

@@ -243,7 +243,7 @@ class CardsPrices(models.Model):
                                      help_text="Единица измерения оплачиваемого времени, например: р/ч, р/д")
 
     for i in range(2, 5):
-        exec(f'price_f_{i} = models.CharField("Стоимость полн. {i}", max_length=7, null=True, blank=True, '
+        exec(f'price_f_{i} = models.CharField("Стоимость полн. {i}", max_length=12, null=True, blank=True, '
              f'help_text="Полная стоимость услуги за одну единицу, например: за 1,5ч, 2ч, 3ч")')
 
         exec(f'price_f_label_{i} = models.CharField("Стоим. полн. {i} ед. изм.", max_length=5, null=True, blank=True, '
@@ -258,7 +258,7 @@ class CardsPrices(models.Model):
     publish = models.BooleanField("Опубликовать", default=True)
 
     for i in range(2, 5):
-        exec(f'price_l_{i} = models.CharField("Стоимость льгот. {i}", max_length=7, null=True, blank=True, '
+        exec(f'price_l_{i} = models.CharField("Стоимость льгот. {i}", max_length=12, null=True, blank=True, '
              f'help_text="Льготная стоимость услуги за одну единицу, например: за 1,5ч, 2ч, 3ч")')
         exec(f'price_l_label_{i} = models.CharField("Стоим. льгот. {i} ед. изм.", max_length=5, null=True, blank=True, '
              f'help_text="Единица измерения оплачиваемого времени, например: р/ч, р/д")')
