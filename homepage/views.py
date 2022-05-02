@@ -232,10 +232,10 @@ class TeamInfoGamesList(View):
         if dict_value_request.get('stage'):
             currentId = get_currentId('first_id_select')
             # list participant don't register to the plays or stage
-            list_not_team = [x for x in team_list if not team_info.filter(badgesTeam_id=x.id)]
+            # list_not_team = [x for x in team_list if not team_info.filter(badgesTeam_id=x.id)]
             return render(request, 'homepage/badges/team_enemy.html',
                           context={
-                              'data_list': list_not_team,
+                              'data_list': team_list,
                               'currentId': currentId,
                           })
 

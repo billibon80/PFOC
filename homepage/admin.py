@@ -683,7 +683,7 @@ class TeamInfoGamesAdmin(UserStaticFiles):
     list_display = ['turner', 'positionBT', 'badgesTeam', 'first_team_win',
                     'positionET', 'enemyTeam', 'second_team_win', 'stage', 'description']
     readonly_fields = ['choice_team', 'block_description', 'positionBT', 'positionET']
-    list_filter = ['turner']
+    list_filter = ['turner', 'badgesTeam', 'enemyTeam']
     list_editable = ['description', 'first_team_win', 'second_team_win']
     fieldsets = (
         (None, {

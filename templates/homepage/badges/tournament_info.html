@@ -23,11 +23,17 @@
                 <ul id="team_badges" class="ti__player-list">
                     {% for play in plays %}
                     <li data-key-team ="1" class="ti__player-item">
-                        <div data-win-badges="{{ play.first_team_win }}" class="ti__player-item--play">{{ play.badgesTeam }}</div>
-                        <div style="background: center / contain no-repeat url('/media/vs.png')" class="ti__player-item--icon"></div>
-                        <div data-win-enemy="{{ play.second_team_win }}" class="ti__player-item--play">{{ play.enemyTeam }}</div>
-                        <div id="img-icon" style="background: center / contain no-repeat url()" class="ti__player-item--icon win_img"></div>
-                        <div class="info">{{ play.description }}</div>
+                        {% if play.stage %}
+                            <div data-win-badges="{{ play.first_team_win }}" class="ti__player-item--play">{{ play.badgesTeam }}</div>
+                            <div data-win-enemy="False" class="ti__player-item--play">{{ play.description }}</div>
+                            <div id="img-icon" style="background: center / contain no-repeat url()" class="ti__player-item--icon win_img"></div>
+                        {% else %}
+                            <div data-win-badges="{{ play.first_team_win }}" class="ti__player-item--play">{{ play.badgesTeam }}</div>
+                            <div style="background: center / contain no-repeat url('/media/vs.png')" class="ti__player-item--icon"></div>
+                            <div data-win-enemy="{{ play.second_team_win }}" class="ti__player-item--play">{{ play.enemyTeam }}</div>
+                            <div id="img-icon" style="background: center / contain no-repeat url()" class="ti__player-item--icon win_img"></div>
+                            <div class="info">{{ play.description }}</div>
+                        {% endif %}
                     </li> 
                     {% endfor %}    
                 </ul>
