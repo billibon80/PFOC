@@ -9,7 +9,7 @@
                             <div class="inner">homepage</div>
                         </a>
                         <a href="{{ team.link_2 }}" class="button button__secondary">
-                            <div class="inner">Wiki</div>
+                            <div class="inner">SocNet</div>
                         </a>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     {% for play in plays %}
                     <li data-key-team ="1" class="ti__player-item">
                         {% if play.stage %}
-                            <div data-win-badges="{{ play.first_team_win }}" class="ti__player-item--play">{{ play.badgesTeam }}</div>
+                            <div data-win-badges="{{ play.first_team_win }}" class="ti__player-item--play">{{ play.stage }}</div>
                             <div data-win-enemy="False" class="ti__player-item--play">{{ play.description }}</div>
                             <div id="img-icon" style="background: center / contain no-repeat url()" class="ti__player-item--icon win_img"></div>
                         {% else %}

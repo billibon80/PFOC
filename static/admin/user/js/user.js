@@ -247,6 +247,12 @@ window.addEventListener("DOMContentLoaded", () => {
                     {'selector': change_select});
         }
 
+        const blank_field = () => {
+            html_blank = '<option value="" selected>-----------</option>'
+            document.querySelector('#id_badgesTeam').innerHTML = html_blank;
+            document.querySelector('#id_enemyTeam').innerHTML = html_blank;
+        }
+
         if(document.querySelector('#id_turner').value != ''){
             document.querySelector('#id_turner').style.pointerEvents = 'none';  
             if (document.querySelector('#id_stage').value != "") {
@@ -257,20 +263,21 @@ window.addEventListener("DOMContentLoaded", () => {
                 change_select('#id_enemyTeam', '#id_badgesTeam' ); 
             }
         } else {
-            html_blank = '<option value="" selected>-----------</option>'
-            document.querySelector('#id_badgesTeam').innerHTML = html_blank;
-            document.querySelector('#id_enemyTeam').innerHTML = html_blank;
+            blank_field();
         }
 
         /// данные турнир 
         document.querySelector('#id_turner').addEventListener('input', (e) => {
-            if (e.target.value != "")
+            if (e.target.value != ""){
                 change_select('#id_badgesTeam', '#id_enemyTeam' );
                 change_select('#id_enemyTeam', '#id_badgesTeam' );
             
-            if (document.querySelector('#id_stage').value == "")
-                innerText(document.querySelector('#id_badgesTeam').value, 
-                          document.querySelector('#id_enemyTeam').value);
+                if (document.querySelector('#id_stage').value == "")
+                    innerText(document.querySelector('#id_badgesTeam').value, 
+                            document.querySelector('#id_enemyTeam').value);
+            } else {
+                blank_field();
+            }
         })
 
 
@@ -284,16 +291,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
         /// изменение команда
         document.querySelector('#id_badgesTeam').addEventListener('input', (e) => {
-            const et = document.querySelector('#id_enemyTeam').value;
-            change_select('#id_badgesTeam', '#id_enemyTeam');  
-            innerText(e.target.value, et);
+            if (document.querySelector('#id_stage').value != "") {
+                change_select( '#id_badgesTeam', '#id_badgesTeam');
+                document.querySelector('#contentEnemy').innerHTML = 
+                `<div class="ti__player-item--play"> ${document.querySelector(`#id_stage option[value="
+                ${document.querySelector('#id_stage').value}"]`).textContent}</div>`
+            } else {
+                const et = document.querySelector('#id_enemyTeam').value;
+                change_select('#id_badgesTeam', '#id_enemyTeam');  
+                innerText(e.target.value, et);
+            }
         });
 
         /// изменение команда (противник)
         document.querySelector('#id_enemyTeam').addEventListener('input', (e) => {
+            
             const bt = document.querySelector('#id_badgesTeam').value 
             change_select( '#id_enemyTeam', '#id_badgesTeam'); 
             innerText(bt, e.target.value);
+ 
         });
 
         // /// выбор этапа 
@@ -311,7 +327,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 document.querySelector('#contentEnemy').innerHTML = 
                 `<div class="ti__player-item--play">
                 ${document.querySelector(`#id_stage option[value="${e.target.value}"]`).textContent}</div>`
-                
+                change_select( '#id_badgesTeam', '#id_badgesTeam');
             } else {
                 valueEt.value = localStorage.getItem('enemyTeam');
                 localStorage.removeItem('enemyTeam');
