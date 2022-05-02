@@ -473,7 +473,7 @@
         align-content: center;
       }
       @media (max-width: 768px) {
-        height: 12.5em;
+        height: unset;
         margin-bottom: 68px;
       }
       .img-price {
