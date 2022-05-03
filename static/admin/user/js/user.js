@@ -505,22 +505,23 @@ try {
     }
 
     const teamEvent = () => {
-        document.querySelectorAll('.inline-related.has_original.dynamic-teaminfoplayers_set').forEach((div, i) => {
+        document.querySelectorAll('.dynamic-teaminfoplayers_set').forEach((div, i) => {
             addEventInput(i);
             iBlock = i;
         })
 
-        document.querySelector('.add-row').addEventListener('click', () => {
-            iBlock++;
-            addEventInput(iBlock);
+        if(document.querySelector('.add-row'))
+            document.querySelector('.add-row').addEventListener('click', () => {
             
-        })
+                setTimeout(teamEvent, 500);
+            
+            })
+
     }
 
-     setTimeout(teamEvent, 500)
 
-    
-      
+    setTimeout(teamEvent, 500)
+
 
 } catch (e) {
     console.log("Add player in the comand panel", e);
