@@ -650,10 +650,44 @@ class BadgesTeamListHeaderAdmin(UserStaticFiles):
     get_header_tab.short_description = "Заголовок"
 
 
+class TeamInfoPlayersInline(admin.StackedInline):
+    model = TeamInfoPlayers
+    extra = 0
+    readonly_fields = ['get_block_team', ]
+
+    fieldsets = (
+        (None, {
+            "fields": ('get_block_team',)
+        }),
+        (None, {
+            "fields": (('position', 'name', 'description',),)
+        }),
+        (None, {
+            "fields": ('logo',)
+        }),
+    )
+
+    def get_block_team(self, obj):
+        return mark_safe(
+            f'<div  data-key-player="" class ="ti__player-item" style="width: 391px;">'\
+            f'<div class="ti__player-item--play number" '\
+            f'style="background: {obj.team.color if obj.id is not None else "gray"}; '\
+            f'margin-right: 5px;" > {obj.position} </div>'\
+            f'<div style="background: center / cover no-repeat url({obj.logo.url})"'
+            f' class ="ti__player-item--iconplayer" > </div>'\
+            f'<div style="width: 100%; padding: 0 5px;" class ="ti__player-item--play-teamplayer">{obj.name}</div>'\
+            f'<div class="ti__player-item--play-text" >{obj.description}</div>'
+            '</div>'
+        )
+
+    get_block_team.short_description = ""
+
+
 @admin.register(BadgesTeamList)
 class BadgesTeamListAdmin(UserStaticFiles):
     list_display = ['name', 'turner', 'get_logo', 'position', 'points', 'place']
     list_editable = ['turner', 'position', 'points', 'place']
+    inlines = [TeamInfoPlayersInline]
     list_filter = ['turner']
     readonly_fields = ['get_team_position']
 
@@ -764,6 +798,58 @@ class TeamInfoGamesAdmin(UserStaticFiles):
         )
 
     positionET.short_description = "#"
+
+
+@admin.register(TeamInfoPlayers)
+class TeamInfoPlayersAdmin(UserStaticFiles):
+    list_display = ['get_team_turner', 'team', 'get_icon', 'position', 'name', 'description']
+    readonly_fields = ['get_icon', 'get_team_turner', 'get_block_team']
+    list_filter = ['team', ]
+    list_editable = ['position', 'name', 'description', ]
+    list_display_links = ['team']
+    fieldsets = (
+        (None, {
+            "fields": (('team', 'get_team_turner',),)
+        }),
+        (None, {
+            "fields": ('get_block_team', )
+        }),
+        (None, {
+            "fields": (('position', 'name', 'description',),)
+        }),
+        (None, {
+            "fields": ('logo', )
+        }),
+    )
+
+    def get_icon(self, obj):
+        return mark_safe(f'<div id="change_color_class" style=" padding: 5px; display: flex; justify-content: center;'\
+                         f' width: 60px; align-items: center; font-size: 2rem" class="{obj.team.color}">'\
+                         f'<div style="background: white; overflow: hidden;'\
+                         f'width: 50px; height: 50px; display: flex; justify-content: center;'\
+                         f' align-items: center;"><div style="background: center / cover no-repeat url({obj.logo.url});'
+                         f'width: 80%; height: 80%;" class="ti__player-item--iconplayer"></div></div>'
+                         f'</div>')
+    get_icon.short_description = "Фото"
+
+    def get_team_turner(self, obj):
+
+        return mark_safe(f'<div id="label_turner">{ obj.team.turner if obj.id is not None else "Команда не выбрана"}</div>')
+    get_team_turner.short_description = "Турнир"
+
+    def get_block_team(self, obj):
+        return mark_safe(
+            f'<div  data-key-player="" class ="ti__player-item" style="width: 391px;">'\
+                f'<div class="ti__player-item--play number" '\
+                    f'style="background: {obj.team.color if obj.id is not None else "gray"}; '\
+                    f'margin-right: 5px;" > {obj.position} </div>'\
+                f'<div style="background: center / cover no-repeat url({obj.logo.url})"'
+                    f' class ="ti__player-item--iconplayer" > </div>'\
+                f'<div style="width: 100%; padding: 0 5px;" class ="ti__player-item--play-teamplayer">{obj.name}</div>'\
+                f'<div class="ti__player-item--play-text" >{obj.description}</div>'
+            '</div>'
+        )
+    get_block_team.short_description = ""
 
 
 admin.site.register(TeamInfoGameStage)

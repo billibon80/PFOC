@@ -11,6 +11,6 @@ urlpatterns = [
     path('news_content/<int:num>', views.NewsContent.as_view()),
     path('badges/<int:num>', views.BadgesContent.as_view()),
     path('team_info/<int:num>', views.TeamInfo.as_view()),
-    path('team_enemy/<int:num>', views.TeamInfoGamesList.as_view())
-
+    path('team_enemy/<int:num>', views.TeamInfoGamesList.as_view()),
+    path('turner_group/<int:num>', views.TurnerGroup.as_view()),
 ]

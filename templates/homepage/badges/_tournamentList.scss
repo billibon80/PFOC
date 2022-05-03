@@ -50,24 +50,24 @@ $text-color: #363738;
     &__tabs {
         width: 35%;
         padding: 2px;
-        overflow: auto;
+        // overflow: auto;
         margin-top: 65px;
         @media (max-width:425px) {
             display: none;
         }
-        &::-webkit-scrollbar{
-            width: 10px;
-            background-color: #f9f9fd;
-        }
-        &::-webkit-scrollbar-thumb{
-            border-radius: 10px;
-            background-color: #18aaaa;
-        }
-        &::-webkit-scrollbar-track{
-            -webkit-box-shadow: inset 0 0 6px rgba(9,9,0,0.2);
-            border-radius: 10px;
-            background-color: #f9f9fd;
-        }
+        // &::-webkit-scrollbar{
+        //     width: 10px;
+        //     background-color: #f9f9fd;
+        // }
+        // &::-webkit-scrollbar-thumb{
+        //     border-radius: 10px;
+        //     background-color: #18aaaa;
+        // }
+        // &::-webkit-scrollbar-track{
+        //     -webkit-box-shadow: inset 0 0 6px rgba(9,9,0,0.2);
+        //     border-radius: 10px;
+        //     background-color: #f9f9fd;
+        // }
         &_heading {
             width: 100%;
             text-align: center;

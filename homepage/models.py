@@ -364,7 +364,7 @@ class BadgesTeamListHeader(models.Model):
     header_logo_column = models.CharField("Колонка логотипа", max_length=6, default="logo")
     header_name_column = models.CharField("Колонка имени", max_length=15, default="команда")
     header_place_columnIcon = models.ImageField("Колонка место (значок)", default="place.png",
-                                                upload_to="icons/",)
+                                                upload_to="icons/", )
     header_place_columnTxt = models.CharField("Колонка место (текст)", max_length=2, blank=True,
                                               help_text="при вводе текста значок отображаться не будет")
     header_points_column = models.CharField("Колонка oчки", max_length=6, default="очки")
@@ -461,12 +461,11 @@ class TeamInfoGameStage(models.Model):
 
 
 class TeamInfoGames(models.Model):
-
     turner = models.ForeignKey(Badges, verbose_name="Турнир", on_delete=models.SET_NULL, null=True, blank=True)
     badgesTeam = models.ForeignKey(BadgesTeamList, related_name="team", on_delete=models.CASCADE,
                                    verbose_name="Команда(игрок)")
     enemyTeam = models.ForeignKey(BadgesTeamList, related_name="enemy_team", on_delete=models.CASCADE,
-                                   verbose_name="Команда(игрок) противник", blank=True, null=True)
+                                  verbose_name="Команда(игрок) противник", blank=True, null=True)
     stage = models.ForeignKey(TeamInfoGameStage, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Этап")
     description = models.CharField("Примечания (результат)", max_length=55,
                                    help_text="Например: счет 1:0", default="-")
@@ -483,3 +482,23 @@ class TeamInfoGames(models.Model):
         ordering = ['turner']
         verbose_name = "Таблица игры"
         verbose_name_plural = "Таблицы игр"
+
+
+class TeamInfoPlayers(models.Model):
+    """
+    Create member of team
+    """
+
+    team = models.ForeignKey(BadgesTeamList, on_delete=models.CASCADE, verbose_name="Выберите команду участника")
+    name = models.CharField("Имя игрока", max_length=20, default="Иванов И.И.")
+    position = models.IntegerField("Номер игрока", validators=[MaxValueValidator(99)], default="0")
+    description = models.CharField("Буквенный символ", max_length=3, default=" ", blank=True)
+    logo = models.ImageField("Фото игрока", default="default.png", upload_to="coach_org/")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["team", "position"]
+        verbose_name = "Карточка игрока"
+        verbose_name_plural = "Карточки игроков"

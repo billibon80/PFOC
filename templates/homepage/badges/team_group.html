@@ -1,0 +1,20 @@
+{% block team_group %}
+        {% if select_num %}
+            <option value="{{ select_num.id }}" data-turner="{{ select_num.turner}}"
+                    data-color="{{select_num.color}}" selected>
+                {{ select_num.name }}</option>
+            <option value="" >-------------</option>
+        {% else %}
+            <option value="" selected>-------------</option>
+        {% endif %}
+    {% if data_list %}
+        {% for name, teams in data_list.items %}
+            <optgroup label="турнир: {{ name }}" style="color: white; background: #79aec8;">
+            </optgroup>
+            {% for team in teams %}
+                <option value="{{ team.id }}" data-turner="{{ team.turner}}"
+                        data-color="{{team.color}}" data-position="">{{ team.name }}</option>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+{% endblock team_group %}

@@ -1,15 +1,13 @@
 /// функция предпросмотра загружаемой картинки
 function preloadImg (selectorInput, selectorImg, ...args) {
-    console.log('img start')
+    
     const input = document.querySelector(selectorInput);
     input.addEventListener('input', () => {
-        console.log('input start')
         if(input.files && input.files[0]) {
-            console.log('file load')
+            
             let reader = new FileReader();
             reader.onload = function(e) {
                 let img = document.querySelector(selectorImg); 
-                console.log('img')
                 if(args[0].src){
                     img.src = e.target.result;
                 } else if (args[0].bcg) {
@@ -187,6 +185,15 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // Таблицы Игр команд
+    function getSelected(url, ...rest) {
+        fetch(url)
+            .then(response => response.text())
+            .then(textHTML => {
+            rest.forEach(el => {
+                document.querySelector(el.selector).innerHTML = textHTML;      
+            })
+        });
+    }
 
     try {
        
@@ -216,15 +223,7 @@ window.addEventListener("DOMContentLoaded", () => {
             document.querySelector(selectorSelect).value = id;
         };
        
-        function getSelected(url, ...rest) {
-            fetch(url)
-                .then(response => response.text())
-                .then(textHTML => {
-                rest.forEach(el => {
-                    document.querySelector(el.selector).innerHTML = textHTML;      
-                })
-            });
-        }
+       
         
         const bt_id = document.querySelector('#id_badgesTeam'),
               et_id = document.querySelector('#id_enemyTeam');
@@ -442,5 +441,89 @@ try {
     console.log(`Prices block ${e}`)
 }
 
+ /// функция ввода текста и изменения данных блока верстки
+ const outTxt = (selectorOut, selectorIn) => {
+    if(document.querySelector(selectorOut))
+        document.querySelector(selectorOut).addEventListener('input', (e) => {
+            const innerBlock = document.querySelector(`${selectorIn}`) 
+            if(innerBlock)
+            innerBlock.innerHTML = e.target.value
+        }) 
+}
+
+try {
+
+     // предпросмотре картинки
+     preloadImg ('#id_logo', '.ti__player-item--iconplayer', {src: false, bcg: true});
+
+   
+    
+    [
+        ['#id_position', '.ti__player-item--play'], 
+        ['#id_description', '.ti__player-item--play-text'],
+        ['#id_name', '.ti__player-item--play-teamplayer'],
+    ].forEach(selector => {
+        outTxt(selector[0], selector[1]);
+    });
+
+    /// функция для отбора команд по турнирам
+    const parentSelect = document.querySelector('#id_team')
+    getSelected(`/turner_group/${ parentSelect.value !="" ? parentSelect.value : 0 }`, {'selector': '#id_team'});
+
+    parentSelect.addEventListener('input', (e) => {
+            teamId = e.target.value;
+            if (teamId != ''){
+                const data_value =  parentSelect.querySelector(`option[value="${teamId}"]`).dataset;
+                document.querySelector('#label_turner').innerText =data_value.turner;
+                document.querySelector('.ti__player-item--play.number').style.background = data_value.color;
+                console.log(data_value.position);
+            }
+            
+        })
+
+} catch (e) {
+    console.log('Card of team member', e);
+}
+
+
+/// add player in the comand panel
+try {
+
+    let iBlock = 0;
+    const addEventInput = (i) => {
+        // предпросмотре картинки
+      preloadImg (`#id_teaminfoplayers_set-${i}-logo`, `#teaminfoplayers_set-${i} .ti__player-item--iconplayer`, {src: false, bcg: true});
+
+        // список селекторов input
+      [
+        [`#id_teaminfoplayers_set-${i}-position`, `#teaminfoplayers_set-${i} .ti__player-item--play`], 
+        [`#id_teaminfoplayers_set-${i}-description`, `#teaminfoplayers_set-${i} .ti__player-item--play-text`],
+        [`#id_teaminfoplayers_set-${i}-name`, `#teaminfoplayers_set-${i} .ti__player-item--play-teamplayer`],
+      ].forEach(selector => {
+            outTxt(selector[0], selector[1]);
+        });       
+    }
+
+    const teamEvent = () => {
+        document.querySelectorAll('.inline-related.has_original.dynamic-teaminfoplayers_set').forEach((div, i) => {
+            addEventInput(i);
+            iBlock = i;
+        })
+
+        document.querySelector('.add-row').addEventListener('click', () => {
+            iBlock++;
+            addEventInput(iBlock);
+            
+        })
+    }
+
+     setTimeout(teamEvent, 500)
+
+    
+      
+
+} catch (e) {
+    console.log("Add player in the comand panel", e);
+}
 /// endDOMcontentLoaded
 })

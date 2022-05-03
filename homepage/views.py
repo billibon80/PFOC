@@ -198,10 +198,12 @@ class TeamInfo(View):
     def get(self, request, num):
         team = BadgesTeamList.objects.filter(id=num).first()
         plays = TeamInfoGames.objects.filter(Q(badgesTeam_id=num) | Q(enemyTeam_id=num)).all()
+        players = TeamInfoPlayers.objects.filter(team_id=num).all()
         return render(request, 'homepage/badges/tournament_info.html',
                       context={
                           'team': team,
                           'plays': plays,
+                          'players': players,
                       })
 
 
@@ -222,7 +224,6 @@ class TeamInfoGamesList(View):
         team_list = BadgesTeamList.objects.filter(turner_id=num).all()
         # teamInfo - select all register team to the plays or stage
         team_info = TeamInfoGames.objects.filter(turner_id=num).all()
-
 
         def get_currentId(selector):
             if dict_value_request.get(selector):
@@ -254,4 +255,19 @@ class TeamInfoGamesList(View):
                       context={
                           'data_list': team_list.filter(id__in=dict_team.keys()),  # .exclude(id__in=exclude_list),
                           'currentId': currentId,
+                      })
+
+
+class TurnerGroup(View):
+    """
+    Sort command by turner and render html with tags ("optgroup", "option")
+    """
+
+    def get(self, request, num):
+        data = {k.tournament: BadgesTeamList.objects.filter(turner_id=k.id)
+                for k in Badges.objects.all().order_by('-id')}
+        return render(request, 'homepage/badges/team_group.html',
+                      context={
+                          'data_list': data,
+                          'select_num': BadgesTeamList.objects.filter(id=int(num)).first() if num > 0 else None,
                       })

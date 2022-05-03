@@ -39,16 +39,20 @@
                 </ul>
             {% endif %}
 
-            <div class="ti__player">Игроки команды:</div>
-            <ul id="player_badges" class="ti__player-list">
-                <li data-key-player="1" class="ti__player-item" >
-                    <div class="ti__player-item--play number" style="background: blue;">1</div>
-                    <div style="background: center / cover no-repeat url('/media/default.png')" class="ti__player-item--iconplayer"></div>
-                    <div class="ti__player-item--play-teamplayer">Капитонов А.А.</div>
-                    <div class="ti__player-item--play-text">К</div>
-                </li>
-                
-            </ul>
-        </div>
-
+            {% if players %}
+                <div class="ti__player">Игроки команды:</div>
+                    <ul id="player_badges" class="ti__player-list">
+                        {% for player in players %}
+                        <li data-key-player="{{ player.id }}" class="ti__player-item" >
+                            <div class="ti__player-item--play number" style="background: {{ player.team.color }};">
+                                {{ player.position }}</div>
+                            <div style="background: center / cover no-repeat url({{ player.logo.url }})"
+                                 class="ti__player-item--iconplayer"></div>
+                            <div class="ti__player-item--play-teamplayer">{{ player.name }}</div>
+                            <div class="ti__player-item--play-text">{{ player.description }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
 {% endblock tournament_info %}
