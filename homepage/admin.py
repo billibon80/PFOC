@@ -679,7 +679,7 @@ class TeamInfoPlayersInline(admin.StackedInline):
             f'<div style="background: center / cover no-repeat url({obj.logo.url})"'
             f' class ="ti__player-item--iconplayer" > </div>'\
             f'<div style="width: 100%; padding: 0 5px;" class ="ti__player-item--play-teamplayer">{obj.name}</div>'\
-            f'<div class="ti__player-item--play-text" >{obj.description}</div>'
+            f'<div class="ti__player-item--play-text" >{obj.charInfo}</div>'
             '</div>'
         )
 
@@ -849,7 +849,7 @@ class TeamInfoPlayersAdmin(UserStaticFiles):
                 f'<div style="background: center / cover no-repeat url({obj.logo.url})"'
                     f' class ="ti__player-item--iconplayer" > </div>'\
                 f'<div style="width: 100%; padding: 0 5px;" class ="ti__player-item--play-teamplayer">{obj.name}</div>'\
-                f'<div class="ti__player-item--play-text" >{obj.description}</div>'
+                f'<div class="ti__player-item--play-text" >{obj.charInfo}</div>'
             '</div>'
         )
     get_block_team.short_description = ""
