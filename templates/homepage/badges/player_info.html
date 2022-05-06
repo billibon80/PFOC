@@ -1,0 +1,26 @@
+{% block player_info %}
+
+    <div class="ti__basics">
+            <img src="{{player.logo.url}}" alt="{{ player.name}}" />
+        <div>
+            <div class="ti__basics-info">
+                <div class="ti__player-item--play number" style="background: {{ player.team.color }};">
+                    {{ player.position }}</div>
+                <div class="ti__info-name">{{ player.name }}</div>
+                <div class="ti__player-item--play-text">{{ player.charInfo }}</div>
+            </div>
+            
+            <div class="ti__btns">
+                <a href="{{ player.link_1}}" class="button button__main">
+                    <div class="inner">homepage</div>
+                </a>
+                <a href="{{ player.link_2 }}" class="button button__secondary">
+                    <div class="inner">SocNet</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="ti__descr">
+        {{ player.description}}
+    </div>
+{% endblock player_info %}
