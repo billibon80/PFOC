@@ -812,7 +812,7 @@ class TeamInfoPlayersAdmin(UserStaticFiles):
     list_display_links = ['team']
     fieldsets = (
         (None, {
-            "fields": ('get_block_team',)
+            "fields": ('team', 'get_block_team',)
         }),
         (None, {
             "fields": (('position', 'name', 'description', 'charInfo'),)
