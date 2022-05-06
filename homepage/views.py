@@ -271,3 +271,14 @@ class TurnerGroup(View):
                           'data_list': data,
                           'select_num': BadgesTeamList.objects.filter(id=int(num)).first() if num > 0 else None,
                       })
+
+class PlayerInfo(View):
+    """
+    Choice data player
+    """
+
+    def get(self, request, num):
+        return render(request, 'homepage/badges/player_info.html',
+                      context={
+                          'player': TeamInfoPlayers.objects.filter(id=num).first(),
+                      })

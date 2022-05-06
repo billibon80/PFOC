@@ -24,6 +24,7 @@ fieldset.module {
 
 .module textarea {
 	width: unset !important;
+	height: 40px;
 }
 
 .submit-row {

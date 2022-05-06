@@ -460,7 +460,7 @@ try {
     
     [
         ['#id_position', '.ti__player-item--play'], 
-        ['#id_description', '.ti__player-item--play-text'],
+        ['#id_charInfo', '.ti__player-item--play-text'],
         ['#id_name', '.ti__player-item--play-teamplayer'],
     ].forEach(selector => {
         outTxt(selector[0], selector[1]);
@@ -497,7 +497,7 @@ try {
         // список селекторов input
       [
         [`#id_teaminfoplayers_set-${i}-position`, `#teaminfoplayers_set-${i} .ti__player-item--play`], 
-        [`#id_teaminfoplayers_set-${i}-description`, `#teaminfoplayers_set-${i} .ti__player-item--play-text`],
+        [`#id_teaminfoplayers_set-${i}-charInfo`, `#teaminfoplayers_set-${i} .ti__player-item--play-text`],
         [`#id_teaminfoplayers_set-${i}-name`, `#teaminfoplayers_set-${i} .ti__player-item--play-teamplayer`],
       ].forEach(selector => {
             outTxt(selector[0], selector[1]);

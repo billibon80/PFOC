@@ -660,7 +660,10 @@ class TeamInfoPlayersInline(admin.StackedInline):
             "fields": ('get_block_team',)
         }),
         (None, {
-            "fields": (('position', 'name', 'description',),)
+            "fields": (('position', 'name', 'description', 'charInfo'),)
+        }),
+        (None, {
+            "fields": (('link_1', 'link_2', ),)
         }),
         (None, {
             "fields": ('logo',)
@@ -802,23 +805,23 @@ class TeamInfoGamesAdmin(UserStaticFiles):
 
 @admin.register(TeamInfoPlayers)
 class TeamInfoPlayersAdmin(UserStaticFiles):
-    list_display = ['get_team_turner', 'team', 'get_icon', 'position', 'name', 'description']
+    list_display = ['get_team_turner', 'team', 'get_icon', 'position', 'name', 'charInfo']
     readonly_fields = ['get_icon', 'get_team_turner', 'get_block_team']
     list_filter = ['team', ]
-    list_editable = ['position', 'name', 'description', ]
+    list_editable = ['position', 'name', 'charInfo', ]
     list_display_links = ['team']
     fieldsets = (
         (None, {
-            "fields": (('team', 'get_team_turner',),)
+            "fields": ('get_block_team',)
         }),
         (None, {
-            "fields": ('get_block_team', )
+            "fields": (('position', 'name', 'description', 'charInfo'),)
         }),
         (None, {
-            "fields": (('position', 'name', 'description',),)
+            "fields": (('link_1', 'link_2',),)
         }),
         (None, {
-            "fields": ('logo', )
+            "fields": ('logo',)
         }),
     )
 

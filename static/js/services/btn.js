@@ -8,6 +8,7 @@ export function modalClose(parentSelector, btnSelector) {
     btnClose.addEventListener('click', () => {
         document.querySelector('html').style.overflow = null;
         parentBlock.classList.add('invisible');
-        parentBlock.innerHTML = ""
+        parentBlock.innerHTML = "";
+        
     });
 }

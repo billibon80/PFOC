@@ -1,28 +1,33 @@
 {% block tournament_info %}
+
     <div class="ti__info">
-            <div class="ti__basics">
-                <img src="{{team.logo.url}}" alt="{{ team.name}}" />
-                <div>
-                    <div class="ti__info-name">{{ team.name }}</div>
-                    <div class="ti__btns">
-                        <a href="{{ team.link_1}}" class="button button__main">
-                            <div class="inner">homepage</div>
-                        </a>
-                        <a href="{{ team.link_2 }}" class="button button__secondary">
-                            <div class="inner">SocNet</div>
-                        </a>
+        <div class="ti__info-close">x</div>
+        <ul id="team_description" class="ti__info-overflow">
+            <li class="ti__info-sticky">
+                <div class="ti__basics">
+                    <img src="{{team.logo.url}}" alt="{{ team.name}}" />
+                    <div>
+                        <div class="ti__info-name">{{ team.name }}</div>
+                        <div class="ti__btns">
+                            <a href="{{ team.link_1}}" class="button button__main">
+                                <div class="inner">homepage</div>
+                            </a>
+                            <a href="{{ team.link_2 }}" class="button button__secondary">
+                                <div class="inner">SocNet</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ti__descr">
-                {{ team.description}}
-            </div>
-
-            {% if plays %}
+                <div class="ti__descr">
+                    {{ team.description}}
+                </div>
+            </li>
+            <li>
+                {% if plays %}
                 <div class="ti__player">Игры:</div>
                 <ul id="team_badges" class="ti__player-list">
                     {% for play in plays %}
-                    <li data-key-team ="1" class="ti__player-item">
+                    <li data-key-team ="{{ play.id }}" class="ti__player-item">
                         {% if play.stage %}
                             <div data-win-badges="{{ play.first_team_win }}" class="ti__player-item--play">{{ play.stage }}</div>
                             <div data-win-enemy="False" class="ti__player-item--play">{{ play.description }}</div>
@@ -43,16 +48,23 @@
                 <div class="ti__player">Игроки команды:</div>
                     <ul id="player_badges" class="ti__player-list">
                         {% for player in players %}
-                        <li data-key-player="{{ player.id }}" class="ti__player-item" >
+                        <li data-key-player="{{ player.id }}" class="ti__player-item player" >
                             <div class="ti__player-item--play number" style="background: {{ player.team.color }};">
                                 {{ player.position }}</div>
                             <div style="background: center / cover no-repeat url({{ player.logo.url }})"
                                  class="ti__player-item--iconplayer"></div>
                             <div class="ti__player-item--play-teamplayer">{{ player.name }}</div>
-                            <div class="ti__player-item--play-text">{{ player.description }}</div>
+                            <div class="ti__player-item--play-text">{{ player.charInfo }}</div>
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}
+
+            </li>
+        </ul>
+            
+
+           
+
 {% endblock tournament_info %}

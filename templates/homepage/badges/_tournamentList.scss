@@ -25,6 +25,59 @@ $text-color: #363738;
     justify-content: center;
 }
 
+@keyframes openBlock {
+    0% {
+        clip-path: polygon(0 0, 0 0, 0 0, 0 0);   
+    }
+    10% {
+        clip-path: polygon(0 0, 0 20%, 20% 20%, 20% 0);
+    }
+    20% {
+        clip-path: polygon(0 0, 0 20%, 40% 20%, 40% 0);
+    }
+    30% {
+        clip-path: polygon(0 0, 0 20%, 60% 20%, 60% 0);
+    }
+    40% {
+        clip-path: polygon(0 0, 0 20%, 80% 20%, 80% 0);
+    }
+    50% {
+        clip-path: polygon(0 0, 0% 20%, 100% 20%, 100% 0);
+    }
+    60% {
+        clip-path: polygon(0 0, 0 40%, 100% 40%, 100% 0)
+    }
+    70% {
+        clip-path: polygon(0 0, 0 60%, 100% 60%, 100% 0);
+    }
+    80% {
+        clip-path: polygon(0 0, 0 80%, 100% 80%, 100% 0);
+    }
+    90% {
+        clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+    }
+    100% {
+        clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+    }
+}
+
+@keyframes closeBlock {
+    from {
+        clip-path: inset(0 0 0 0);;
+    }
+
+    25% {
+        clip-path: inset(30% 0 30% 0);
+    }
+
+    75% {
+        clip-path: inset(30% 30% 30% 30%);
+    }
+   
+    to {
+        clip-path: inset(50% 50% 50% 50%);
+    }
+}
 
 .tl {
     position: fixed;
@@ -52,8 +105,12 @@ $text-color: #363738;
         padding: 2px;
         // overflow: auto;
         margin-top: 65px;
-        @media (max-width:425px) {
+        @media (max-width:1200px) {
             display: none;
+            position: absolute;
+            width: 100%;
+            height: 90%;
+            // animation: openBlock 3s ease-in-out ;
         }
         // &::-webkit-scrollbar{
         //     width: 10px;
@@ -158,7 +215,7 @@ $text-color: #363738;
         padding: 50px 10px;
         padding-top: 120px;
         position: relative;
-        @media (max-width: 425px) {
+        @media (max-width: 768px) {
             width: 100%;
             font-size: 10px;
         }

@@ -492,8 +492,11 @@ class TeamInfoPlayers(models.Model):
     team = models.ForeignKey(BadgesTeamList, on_delete=models.CASCADE, verbose_name="Выберите команду участника")
     name = models.CharField("Имя игрока", max_length=20, default="Иванов И.И.")
     position = models.IntegerField("Номер игрока", validators=[MaxValueValidator(99)], default="0")
-    description = models.CharField("Буквенный символ", max_length=3, default=" ", blank=True)
+    charInfo = models.CharField("Буквенный символ", max_length=3, default=" ", blank=True)
     logo = models.ImageField("Фото игрока", default="default.png", upload_to="coach_org/")
+    description = models.TextField("Информация об игроке", max_length=300, default="информация отсутствует")
+    link_1 = models.CharField("Homepage", max_length=255, default='#')
+    link_2 = models.CharField("Wiki", max_length=255, default='#')
 
     def __str__(self):
         return self.name
