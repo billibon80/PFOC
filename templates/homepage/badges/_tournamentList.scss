@@ -105,12 +105,15 @@ $text-color: #363738;
         padding: 2px;
         // overflow: auto;
         margin-top: 65px;
+        height: 100%;
         @media (max-width:1200px) {
             display: none;
             position: absolute;
             width: 100%;
-            height: 90%;
+            // height: 90%;
             // animation: openBlock 3s ease-in-out ;
+            margin: 0;
+            z-index: 12;
         }
         // &::-webkit-scrollbar{
         //     width: 10px;
