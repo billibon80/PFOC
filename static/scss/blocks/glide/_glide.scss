@@ -43,6 +43,20 @@ $fns: 50;
     
 }
 
+@mixin opacity {
+    opacity: 0;
+    // transition: opacity 3s;
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .glide {
     position: relative;
     z-index: 1;
@@ -74,6 +88,53 @@ $fns: 50;
             }
         }
     }
+    .opacity-1 {
+        animation: opacity 2s ease-in-out forwards; 
+    }
+    .counter {
+        position: absolute;
+        right: 0;
+        padding: 30px;
+        font-size: 1.5rem;
+        color: white;
+        opacity: 0.5;
+    }
+    .r_rotate {
+        transform: scale(0.5) perspective(1000px) rotateY(-40deg);
+    }
+    .l_rotate {
+        transform: scale(0.5) perspective(1000px) rotateY(40deg);
+    }
+    .active_scale {
+        transform: scale(2) translate(33px, 5px); 
+        @media (max-width: 425px) {
+            transform: scale(1.5) translate(-16px, 0px);
+        }
+    }
+    .text_block {
+        width: 30%;
+        height: 30%;
+        position: absolute;
+        background: #22577eab;
+        bottom: 0;
+        left: 5%;
+        padding: 5px;
+        color: #ffffffb5;
+        @media (max-width: 425px) {
+            width: 75%;
+            left: 5%;
+            top: 2%;
+        }
+        h3 {
+            line-height: 1;
+            @include opacity;
+        }
+        p {
+            overflow: hidden;
+            height: 50%;
+            @include opacity;
+        }
+    }
     &__arrow {
         background-color: #12121238;
         width: 67px;
@@ -90,7 +151,7 @@ $fns: 50;
     &__bullet {
         background-color: white;
         border-radius: 0;
-        width: 41px;
+        // width: 41px;
         box-shadow: 0 0.25em 0.5em 0 #00000042;
         opacity: .5;
 
@@ -172,15 +233,15 @@ $fns: 50;
             top: 80px;
             right: 3px;
             opacity: 1;
-            transform: scale(1) translate(0);
+            // transform: scale(1) translate(0);
             transition: transform 2s ease-out;
-            &.show {
-                transform: scale(2) translate(33px, 5px);
-                @media (max-width: 425px) {
-                    transform: scale(1.5) translate(-16px, 0px);;
-                }
+            // &.show {
+            //     transform: scale(2) translate(33px, 5px);
+            //     @media (max-width: 425px) {
+            //         transform: scale(1.5) translate(-16px, 0px);;
+            //     }
 
-            }
+            // }
         }
     }
 

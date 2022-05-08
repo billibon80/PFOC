@@ -2,183 +2,94 @@
 
 function glideSlide() {
 
-    const slider = document.querySelector('.glide__slides'),
+    const  text_block = document.querySelector('.glide .text_block'),
+          rgh_arrow = document.querySelector('.glide .glide__arrow--right'),
+          lft_arrow = document.querySelector('.glide .glide__arrow--left'),
+          slider = document.querySelector('.glide__slides'),
           slideItems = slider.querySelectorAll('.glide__slide'),
           bullets = document.querySelectorAll('.glide .glide__bullet'),
-          bgc = slider.querySelectorAll('.glide__bgc'),
-          style = slideItems[0].currentStyle || window.getComputedStyle(slideItems[0]),
-          widthSlide = slideItems[0].offsetWidth;
-
-    slideItems.forEach((span, i) => {
-        span.querySelectorAll('.oh').forEach(text => {
-            text.remove();
-            text.textContent.split(/(?!$)/u).forEach(char => {
-                const span = document.createElement('span');
-                span.classList.add('oh');
-                span.classList.add('fw-bold');
-                span.innerText = char;
-                bgc[i].append(span);
-
-            });
-        });
-    });
-
-    let curSlider = 0,
-        marg = parseInt(style.marginLeft) + parseInt(style.marginRight),
-        totalWidth = marg + widthSlide,
-        start=0,
-        correctSlide = 0;
-        
-
-        
-       if (window.innerWidth <= 768) {
-            correctSlide = totalWidth;
-        }else {
-            start = totalWidth;
-        }
-
-    slider.style.cssText = `transform: translateX(${start}px)`;
-    curSlider = totalWidth;
-
+          bgc = slider.querySelectorAll('.glide__bg'),
+          prize = slider.querySelectorAll('.prize');
     
-    function transformLR(deg){
-        return `scale(0.5) perspective(1000px) rotateY(${deg}deg)`;
-    }
+    let text_h3 = text_block.querySelector('h3'),
+        text_p = text_block.querySelector('p');
     
-    addSmoke(0);
-    transformFrame(1);
-    bullet(0);
-    
-
-    function bullet(id) {
-        
-        bullets.forEach(bullet => {
-            bullet.style.opacity = 0.5;
-        });
-        if(bullets[id]) {
-            bullets[id].style.opacity = 1;
-        }
-        
-
-    }
-
-    function cleanTransform(id) {
-        if(slideItems[id]){
-          slideItems[id].querySelector('.glide__bg').style
-          .transform = ``;  
-        }
-        
-    }
-
-    function transformFrame(id) {
-        for (let i=0; i < slideItems.length; i++) {
-            cleanTransform(i);
-        }
-
-        if(id - 1 >= 0) { 
-            cleanTransform(id - 1);
-        }
-
-        if(curSlider < totalWidth && slideItems[id]) {
-            slideItems[id].querySelector('.glide__bg').style
-            .transform = transformLR(40);
-        } else if (curSlider >= totalWidth && slideItems[id]) {
-            slideItems[id].querySelector('.glide__bg').style
-            .transform = transformLR(-40);
-        }
-        
-        
-        if(id + 1 < slideItems.length - 1) {
-            cleanTransform(id + 1);
-        }
-
-        if(id + 2 <= slideItems.length - 1) {
-            slideItems[id + 2].querySelector('.glide__bg').style
-            .transform = transformLR(-40);
-        }else if (id + 2 <= slideItems.length){
-            cleanTransform(slideItems.length - 1);
-        }
-        
-    }
-
-
-    function addSmoke(id) {
-        
-        slideItems.forEach(li => {
-            li.classList.add('smoke');
-            li.querySelector('.caption').classList.remove('show');
-            const img = li.querySelector('.prize');
-            img.classList.remove('show');
-        });
-
-        if(slideItems[id]) {
-            slideItems[id].classList.remove('smoke');
-            slideItems[id].querySelector('.caption').classList.add('show');
-            slideItems[id].querySelector('.prize').classList.add('show');
-        }
-        
-    }
    
-    document.querySelectorAll('.glide__arrow').forEach(but => {
-        but.addEventListener('click', () => {
+    /// функция слайдера bullet 
+    const glideStart = (i) => {
+        const text_span = slideItems[i].querySelectorAll('span');
 
-            marg = parseInt(style.marginLeft) + parseInt(style.marginRight);
-            totalWidth = marg + widthSlide;
+            text_h3.classList.remove('opacity-1');
+            text_p.classList.remove('opacity-1');
             
+            bullets.forEach(li => {
+                li.style.opacity = 0.5;
+            })
+
+            slideItems.forEach((li, row) => {
+                li.classList.remove('active');
+                prize[row].classList.remove('active_scale');
+                
+                if (row != i-1 && row != i+1)
+                    bgc[row].classList.remove('l_rotate', 'r_rotate')
+            });
+
+            bullets[i].style.opacity = 1;
             
-            if(but.classList.contains('glide__arrow--right')) {
-                curSlider -= totalWidth;
-                
-                if(Math.abs(curSlider)  >= (slideItems.length - 1) * totalWidth ) {
-                    curSlider = totalWidth;
-                    addSmoke(0);
-                    bullet(0);
-                    slideItems[1].querySelector('.glide__bg').style
-                    .transform = transformLR(-40);
-                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
-                    cleanTransform(0);
-                    
-                } else {
-                    const curId = Math.abs(curSlider) / totalWidth;
-
-                    addSmoke(curId + 1);
-                    bullet(curId + 1);
-                    transformFrame (curId);
-
-                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
-                }
-
-                
-               
+            let widthLi = 392;
+            if (window.innerWidth <= 768) {
+                widthLi = window.innerWidth;
+                slider.style.transform = `translateX(${(-i*widthLi)}px)`
             } else {
-                curSlider += totalWidth;
-                
-                if(curSlider  > totalWidth ) {
-                    curSlider = -1 * (slideItems.length - 2) * totalWidth;
-                    addSmoke(slideItems.length - 1);
-                    bullet(slideItems.length - 1);
-                    slideItems[slideItems.length - 2].querySelector('.glide__bg').style
-                    .transform = transformLR(40);
-                    cleanTransform(slideItems.length - 1);
-                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
-                } else {
-                    let curId = Math.abs(curSlider) / totalWidth;
-                    transformFrame (curId); 
-                    slider.style.cssText = `transform: translateX(${curSlider - correctSlide}px)`;
-                    
-                    if(curSlider < totalWidth) {
-                        curId += 1;
-                    } else {
-                        curId = 0;
-                    }
-                    addSmoke(curId);
-                    bullet(curId);   
-                }  
+                slider.style.transform = `translateX(${(-i*widthLi)+widthLi}px)`
             }
-        });
+                
+            document.querySelector('.glide .counter').innerText = `${i+1}/${slideItems.length}`
+            
+            text_h3.innerText = text_span[0].outerText;
+            text_p.innerHTML = text_span[1].outerText;
+
+            slideItems[i].classList.add('active');
+            prize[i].classList.add('active_scale');
+            text_h3.classList.add('opacity-1');
+            text_p.classList.add('opacity-1');
+
+            if(bgc[i-1])
+                bgc[i-1].classList.add('l_rotate');
+            
+            if(slideItems[i+1])
+                bgc[i+1].classList.add('r_rotate');
+    }
+
+    glideStart(0);
+
+    bullets.forEach((bullet, i) => {
+        bullet.addEventListener('click', () => {
+            glideStart(i);
+        })
     });
 
-    // document.querySelector('.container__video').playbackRate = 2;
+    const indexRow = () => {
+        let ik = null;
+        slideItems.forEach((li, i) => {
+            if (li.classList.contains('active')) ik = i;
+        }) 
+        return ik;
+    }
+
+    rgh_arrow.addEventListener('click', () => {
+        if (indexRow() != null) {
+            let i = indexRow();
+            glideStart(i + 1 < slideItems.length ?  i + 1 : 0) }
+        
+    })
+
+    lft_arrow.addEventListener('click', () => {
+        if (indexRow() != null) {
+            let i = indexRow();
+            glideStart(i - 1 >= 0 ?  i - 1 : slideItems.length - 1) }
+        
+    })
 }
 
 export default glideSlide;

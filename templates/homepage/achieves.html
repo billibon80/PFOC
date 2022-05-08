@@ -7,6 +7,7 @@
         <div class="container">
             <div class="glide">
                 <div class="glide__track" data-glide-el="track">
+                    <div class="counter">1/{{ achieves|length }}</div>
                     <ul class="glide__slides">
                         {% for slide in achieves %}
                             <li class="glide__slide smoke">
@@ -32,8 +33,12 @@
 
                 <div class="glide__bullets" data-glide-el="controls[nav]">
                     {% for slide in achieves %}
-                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                        <button class="glide__bullet" data-glide-dir="{{ slide.id}}"></button>
                     {% endfor %}
+                </div>
+                <div class="text_block">
+                    <h3>#</h3>
+                    <p>#</p>
                 </div>
             </div>
             <!-- <video class="container__video" src="https://elasticbeanstalk-us-east-2-152074614622.s3.us-east-2.amazonaws.com/smoke-background.mp4" autoplay loop muted></video> -->

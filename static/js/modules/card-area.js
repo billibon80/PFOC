@@ -66,10 +66,10 @@ function addContent(btn, key) {
                 `;
                 modals.querySelector('.card-section__close').style = '';  
                 document.querySelector('body').style.overflow = 'auto';
-                setTimeout(() => {
-                    cards.classList.remove('card__hover');
-                    flips.classList.remove('flip-card__container__hover');
-                }, 1000);
+                // setTimeout(() => {
+                //     // cards.classList.remove('card__hover');
+                //     flips.classList.remove('flip-card__container__hover');
+                // }, 1000);
                 
             }, 500);
         });
