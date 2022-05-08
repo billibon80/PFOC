@@ -68,15 +68,15 @@ window.addEventListener("DOMContentLoaded", () => {
     
     
 
-    window.addEventListener('resize', () => {
-        try {
-            glideSlide();
-        }
-        catch (e) {
-            console.log('glideSlide window resize error', e)
-        }
+    // window.addEventListener('resize', () => {
+    try {
+        glideSlide();
+    }
+    catch (e) {
+        console.log('glideSlide window resize error', e)
+    }
         
-    });
+    // });
 
  
 
