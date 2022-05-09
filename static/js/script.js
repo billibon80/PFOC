@@ -66,17 +66,6 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log('cardArea error', e)
     }
     
-    
-
-    // window.addEventListener('resize', () => {
-    try {
-        glideSlide();
-    }
-    catch (e) {
-        console.log('glideSlide window resize error', e)
-    }
-        
-    // });
 
  
 

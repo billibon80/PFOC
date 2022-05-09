@@ -1,7 +1,7 @@
 
 
 function glideSlide() {
-
+    
     const  text_block = document.querySelector('.glide .text_block'),
           rgh_arrow = document.querySelector('.glide .glide__arrow--right'),
           lft_arrow = document.querySelector('.glide .glide__arrow--left'),
@@ -77,14 +77,16 @@ function glideSlide() {
         return ik;
     }
 
-    rgh_arrow.addEventListener('click', () => {
-        if (indexRow() != null) {
+    rgh_arrow.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (indexRow() != null && e.target) {
             let i = indexRow();
             glideStart(i + 1 < slideItems.length ?  i + 1 : 0) }
         
     })
 
-    lft_arrow.addEventListener('click', () => {
+    lft_arrow.addEventListener('click', (e) => {
+        e.preventDefault();
         if (indexRow() != null) {
             let i = indexRow();
             glideStart(i - 1 >= 0 ?  i - 1 : slideItems.length - 1) }
