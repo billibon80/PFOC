@@ -132,6 +132,8 @@ $fns: 50;
         p {
             overflow: hidden;
             height: 50%;
+            line-height: 1;
+            font-size: 15px;
             @include opacity;
         }
     }
