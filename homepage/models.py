@@ -505,3 +505,26 @@ class TeamInfoPlayers(models.Model):
         ordering = ["team", "position"]
         verbose_name = "Карточка игрока"
         verbose_name_plural = "Карточки игроков"
+
+
+class Banners (models.Model):
+    """
+    Create banners
+    """
+
+    name = models.CharField("Имя баннера", max_length=20, default="img banners")
+    link_1 = models.CharField("Ссылка на страницу баннера", max_length=255, default='#')
+    position = models.IntegerField("Позиция в ленте", validators=[MaxValueValidator(99)], default="0")
+    publish = models.BooleanField("Опубликовать", default=True)
+    imgAdd = models.ImageField("Добавить фото", upload_to="banners/", default="pfoc.jpg", blank=True)
+    imgLink = models.CharField("Ссылка на банер", max_length=255, blank=True, null=True)
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['position']
+        verbose_name = "Банер"
+        verbose_name_plural = "Банеры"
+

@@ -1,0 +1,19 @@
+{% block banners %}
+
+<div class="banners">
+    {% for banner in banners %}
+    <div class="banners__block shadow-lg">
+        <a href={{banner.link_1}}>
+            <img src=
+                {% if banner.imgLink %}
+                 {{ banner.imgLink }}
+                 {% else %}
+                 {{ banner.imgAdd.url }}
+                 {% endif %}
+                 alt={{banner.name}}>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock banners %}

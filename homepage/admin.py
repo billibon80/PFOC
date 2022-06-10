@@ -857,5 +857,6 @@ class TeamInfoPlayersAdmin(UserStaticFiles):
 
 admin.site.register(TeamInfoGameStage)
 admin.site.register(Group)
+admin.site.register(Banners)
 admin.site.site_title = "Сайт Партизанский ФОЦ"
 admin.site.site_header = "Сайт Партизанский ФОЦ"

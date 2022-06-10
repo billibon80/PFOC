@@ -71,6 +71,8 @@
             <img src="{% static 'icons/facebook.svg' %}" alt="facebook">
         </a>
     </div>
+    <!-- block banners -->
+    {% include 'homepage/banners/banners.html' %}
     <!-- Block badges & TournamentList-->
     <div id="badges">{% include 'homepage/badges/badges.html' %}</div>
     <div id="tournamentList" class="tl invisible">{% include 'homepage/badges/tournamentList.html' %}</div>

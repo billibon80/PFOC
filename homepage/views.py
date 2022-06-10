@@ -84,6 +84,7 @@ class PfocView(View):
         return render(request, "homepage/index.html",
                       context={
                           'views_sport': viewOfSport,
+                          'banners': Banners.objects.filter(publish=True)[:5],
                           'badges': Badges.objects.filter(publish=True),
                           # 'coach_view': coach_view,
                           # 'org_view': org_view,
@@ -272,6 +273,7 @@ class TurnerGroup(View):
                           'select_num': BadgesTeamList.objects.filter(id=int(num)).first() if num > 0 else None,
                       })
 
+
 class PlayerInfo(View):
     """
     Choice data player
@@ -282,3 +284,5 @@ class PlayerInfo(View):
                       context={
                           'player': TeamInfoPlayers.objects.filter(id=num).first(),
                       })
+
+

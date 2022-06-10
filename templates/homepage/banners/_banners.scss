@@ -1,0 +1,28 @@
+.banners {
+    width: 70%;
+    max-width: 740px;
+    height: 105px;
+    position: absolute;
+    display: flex;
+    right: 0;
+    top: 100px;
+    padding: 10px;
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 405px;
+        right: unset;
+        left: 0;
+        top: unset;
+        height: 55px;
+    }
+    &__block {
+        width: 20%;
+        height: 100%;
+        margin: 0 5px;
+    }
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
