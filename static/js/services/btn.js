@@ -5,10 +5,13 @@ export function modalClose(parentSelector, btnSelector) {
     
     btnClose = parentBlock.querySelector(btnSelector);// btnSelector (id, class ..) of btnClose
 
-    btnClose.addEventListener('click', () => {
+    if (btnClose) {
+        btnClose.addEventListener('click', () => {
         document.querySelector('html').style.overflow = null;
         parentBlock.classList.add('invisible');
         parentBlock.innerHTML = "";
-        
-    });
+
+        });
+    }
+
 }

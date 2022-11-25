@@ -16,6 +16,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    function addStyle (item) {
+        item.querySelector('.news__tabs_bgc').style.opacity = 0;
+        item.classList.add('news__tabs_content_active');
+    }
+
     let allDiv = document.querySelectorAll('#rules .news__tabs_content')
     allDiv.forEach(div => {
         div.addEventListener('click', () => {
@@ -24,11 +29,11 @@ window.addEventListener("DOMContentLoaded", () => {
                     item.querySelector('.news__tabs_bgc').style.opacity = '';
                     })
             addRule(div.dataset.index);
-            div.querySelector('.news__tabs_bgc').style.opacity = 0;
-            div.classList.add('news__tabs_content_active')
+            addStyle(div);
         })
     })
 
     addRule(0)
+    addStyle(document.querySelector('#rules .news__tabs_content'))
 
 })
