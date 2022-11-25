@@ -286,3 +286,26 @@ class PlayerInfo(View):
                       })
 
 
+class RulesInfoAll(View):
+
+    def get(self, request):
+        return render(request, 'homepage/rules/rulesContent.html',
+                      context={
+                          'rules': Rules.objects.filter(publish=True).all().order_by('position')
+                      })
+
+
+class RulesInfo(View):
+
+    def get(self, request, num):
+
+        if num > 0:
+            rule = Rules.objects.filter(id=num).first()
+        else:
+            rule = Rules.objects.filter(position=1).first()
+
+        return render(request, 'homepage/rules/ruleText.html',
+                      context={
+                          'rule': rule
+                      })
+

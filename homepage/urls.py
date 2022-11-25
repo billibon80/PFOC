@@ -14,4 +14,6 @@ urlpatterns = [
     path('team_enemy/<int:num>', views.TeamInfoGamesList.as_view()),
     path('turner_group/<int:num>', views.TurnerGroup.as_view()),
     path('player_info/<int:num>', views.PlayerInfo.as_view()),
+    path('rules', views.RulesInfoAll.as_view()),
+    path('rules/<int:num>', views.RulesInfo.as_view()),
 ]

@@ -507,7 +507,7 @@ class TeamInfoPlayers(models.Model):
         verbose_name_plural = "Карточки игроков"
 
 
-class Banners (models.Model):
+class Banners(models.Model):
     """
     Create banners
     """
@@ -516,9 +516,8 @@ class Banners (models.Model):
     link_1 = models.CharField("Ссылка на страницу баннера", max_length=255, default='#')
     position = models.IntegerField("Позиция в ленте", validators=[MaxValueValidator(99)], default="0")
     publish = models.BooleanField("Опубликовать", default=True)
-    imgAdd = models.ImageField("Добавить фото", upload_to="banners/", default="pfoc.jpg", blank=True)
+    imgAdd = models.ImageField("Добавить фото", upload_to="banner_img/", default="pfoc.jpg", blank=True)
     imgLink = models.CharField("Ссылка на банер", max_length=255, blank=True, null=True)
-
 
     def __str__(self):
         return self.name
@@ -528,3 +527,22 @@ class Banners (models.Model):
         verbose_name = "Банер"
         verbose_name_plural = "Банеры"
 
+
+class Rules(models.Model):
+    """
+    Create page rules
+    """
+    name = models.CharField("Короткое имя", max_length=40, default="Правило")
+    title = models.CharField("Описание правила", max_length=250, null=True)
+    description = models.TextField("Содержание правила", null=True, default="")
+    publish = models.BooleanField("Опубликовать", default=True)
+    imgAdd = models.ImageField("Добавить фото", upload_to="banner_img/", default="pfoc.jpg", blank=True)
+    position = models.IntegerField("Позиция правила", validators=[MaxValueValidator(99)], default="99")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = "Правило"
+        verbose_name_plural = "Правила"

@@ -855,6 +855,50 @@ class TeamInfoPlayersAdmin(UserStaticFiles):
     get_block_team.short_description = ""
 
 
+class PostAdminFormRules(forms.ModelForm):
+    description = forms.CharField(label="Статья", widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Rules
+        fields = '__all__'
+
+
+@admin.register(Rules)
+class RulesAdmin(admin.ModelAdmin):
+    list_display = ['name', 'title','position', 'publish']
+    list_filter = ['publish']
+    ordering = ['position']
+    list_editable = ['publish', 'position']
+    save_as = True
+    readonly_fields = ['get_image']
+    form = PostAdminFormRules
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.imgAdd.url} width="50" height="50" ')
+
+    get_image.short_description = "Фото"
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                'name',
+                ('title','position', 'publish'),
+            )
+        }),
+        ('Фото обложки', {
+            'fields': (
+                ('imgAdd', 'get_image'),
+            )
+        }),
+        ('Статья', {
+            'fields': (
+                ('description'),
+            )
+        }),
+    ]
+
+
+
 admin.site.register(TeamInfoGameStage)
 admin.site.register(Group)
 admin.site.register(Banners)
