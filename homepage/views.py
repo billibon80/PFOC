@@ -177,9 +177,31 @@ class NewsContent(View):
     def get(self, request, num):
         return render(request, 'homepage/news/newsContent.html',
                       context={
-                          'news': News.objects.filter(id=num).first()
+                          'news': News.objects.filter(id=num).first(),
+                          'newsAll': News.objects.filter(publish=True).order_by('rang')[:5],
                       })
 
+
+class NewsTab(View):
+
+    def get(self, request, num):
+        lenNews = len(News.objects.filter(publish=True))
+        if num > lenNews:
+            num = lenNews
+
+        return render(request, 'homepage/news/newsTab.html',
+                      context={
+                          'newsAll': News.objects.filter(publish=True).order_by('rang')[:num],
+                      })
+
+
+class NewsTxt(View):
+
+    def get(self, request, num):
+        return render(request, 'homepage/news/newsText.html',
+                      context={
+                          'news': News.objects.filter(id=num).first(),
+                      })
 
 class BadgesContent(View):
 

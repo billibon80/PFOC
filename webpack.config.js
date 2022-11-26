@@ -8,7 +8,7 @@ module.exports = {
     entry: './static/js/script.js',
     output: {
         filename: 'bundle.js',
-        path: __dirname + '/static/js'
+        path:  __dirname + '/static/js'
     },
     watch: true,
 
@@ -29,11 +29,19 @@ module.exports = {
                   }]]
                 }
               }
+            },
+            {
+              test: /\.(jpeg|jpg|png|gif)$/i, 
+              loader: 'file-loader',
+              options: {
+                name: '[path][name].[ext]'
+              }
             }
+            
           ]
     },
 
     plugins: [
-      new NodePolyfillPlugin()
+      new NodePolyfillPlugin(),
     ]
 };

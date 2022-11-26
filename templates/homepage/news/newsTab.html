@@ -1,0 +1,14 @@
+
+{% block newsTab %}
+{% load i18n%}
+    {% for news in newsAll %}
+        <div
+            data-news-index="{{ news.id }}"
+            class="news__tabs_content"
+            style="background: url({{ news.imgAdd.url }}) center / cover no-repeat;">
+            <h4 class="news__tabs_heading">{{ news.front_title }}</h4>
+            <div class="news__tabs_bgc"></div>
+        </div>
+    {% endfor %}
+        <div id="spinnerNews"></div>
+{% endblock newsTab %}

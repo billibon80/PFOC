@@ -2,22 +2,22 @@
 {% load i18n%}
 
 <div class="news__wrapper">
-    <div class="news__tabs">
-        <div 
-            data-news-index="{{ news.id }}" 
-            class="news__tabs_content" 
-            style="background: url({{ news.imgAdd.url }}) center / cover no-repeat;">
-            <h4 class="news__tabs_heading">{{ news.front_title }}</h4>
-            <div class="news__tabs_bgc"></div>
-        </div>
-
+     <div class="news__tabs">
+         <div class="news__tabs_block">
+              {% include './newsTab.html' %}
+         </div>
         <div class="news__btn news__btn_icon">
             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
             ЕЩЕ
         </div> 
+     </div>
+     <div class="news__main" >
+         <div class="news__main_txt">
+            {% include './newsText.html' %}
+         </div>
+         <div class="news__close-btn"></div>
     </div>
 
-     {% include './newsText.html' %}
 
     
 </div>  

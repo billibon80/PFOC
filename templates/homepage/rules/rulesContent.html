@@ -24,26 +24,19 @@
     <link rel="stylesheet" href="{% static '/css/style.min.css' %}">
     <!-- Script jivochat -->
     <script src="//code.jivosite.com/widget/IoAGCYsvce" async></script>
-    <style>
-        .news__tabs_content_active {
-            -webkit-box-shadow: 1px 2px 5px 2px #e71010bf !important;
-            box-shadow: 1px 2px 5px 2px #e71010bf !important;
-            -webkit-transform: translateY(-5px) !important;
-            transform: translateY(-5px) !important;
-        }
-    </style>
+
 </head>
 
 <body>
 
-   <div id="rules" class="news__wrapper" style="margin: 50px; max-width: unset">
+   <div id="rules" class="news__wrapper" >
 
         <div class="news__tabs" style="height: 80vh">
             {% for rule in rules %}
                 <div
                     data-index="{{ rule.id }}"
                     class="news__tabs_content"
-                    style="background: url({{ rule.imgAdd.url }}) center / cover no-repeat; margin-bottom: 30px" >
+                    style="background: url({{ rule.imgAdd.url }}) center / cover no-repeat;" >
                     <h4 class="news__tabs_heading">{{ rule.title }}</h4>
                     <div class="news__tabs_bgc"></div>
                 </div>
