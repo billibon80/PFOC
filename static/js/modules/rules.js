@@ -7,10 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 document.querySelector('#textRule').innerHTML = tab;
             })
             .then(() => {
-//                if(document.querySelector('#storyList .comics__grid').dataset.btfade == "True") {
-//                    document.querySelector('#addStories').setAttribute('disabled','disabled')
-//                }
-//                storyCard();
+                btnClose ();
             })
         }
 
@@ -21,19 +18,38 @@ window.addEventListener("DOMContentLoaded", () => {
         item.classList.add('news__tabs_content_active');
     }
 
+    function delStyle (item) {
+        item.forEach(item => {
+            item.classList.remove('news__tabs_content_active');
+            item.querySelector('.news__tabs_bgc').style.opacity = '';
+            })
+    }
+
     let allDiv = document.querySelectorAll('#rules .news__tabs_content')
     allDiv.forEach(div => {
         div.addEventListener('click', () => {
-            allDiv.forEach(item => {
-                    item.classList.remove('news__tabs_content_active');
-                    item.querySelector('.news__tabs_bgc').style.opacity = '';
-                    })
+            delStyle (allDiv);
             addRule(div.dataset.index);
             addStyle(div);
         })
     })
 
-    addRule(0)
-    addStyle(document.querySelector('#rules .news__tabs_content'))
+    function btnClose () {
+            
+            let btn_close =  document.querySelector('#rules .news__close-btn');
+            
+            if (btn_close) {
+                btn_close.addEventListener('click', () => {
+                    document.querySelector('#rules .news__main').style.display = 'none';
+                    delStyle (allDiv);
+                })
+            }
+         
+    }
+   
+
+    addRule(0);
+    addStyle(document.querySelector('#rules .news__tabs_content'));
+   
 
 })

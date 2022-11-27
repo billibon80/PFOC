@@ -58,7 +58,8 @@ $text-color: #363738;
             }    
         }
         @media (max-width:425px) {
-            display: none;
+            position: absolute;
+            width: 90vw;
         }
         &::-webkit-scrollbar{
             width: 5px;
@@ -196,7 +197,8 @@ $text-color: #363738;
         }
        
         @media (max-width: 425px) {
-            width: 100%;
+            width: 95vw;
+            z-index: 6;
         }
         &_heading {
             font-weight: bold;
